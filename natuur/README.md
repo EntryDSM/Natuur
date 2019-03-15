@@ -7,7 +7,7 @@
 ## 배포
 
 ```powershell
-yarn run build
+yarn build
 
 yarn start
 ```
