@@ -1,7 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
 
-const Info = () => {
+import { updateAppContainer } from "../../core/redux/actions/default";
+
+const Info = ({ configContainer }) => {
+  // componentDidmount
+  useEffect(() => {
+    configContainer("info-summary");
+  }, []);
+
   return <div>a</div>;
 };
 
-export default Info;
+const mapDispatchToProps = dispatch => ({
+  configContainer: container => dispatch(updateAppContainer(container))
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Info);
