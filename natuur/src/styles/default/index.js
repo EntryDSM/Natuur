@@ -1,10 +1,19 @@
 import styled, { createGlobalStyle } from "styled-components";
 
+import MainBackground from "../../assets/MainPage/main_background.svg";
+
 export const GlobalStyle = createGlobalStyle`
   @import 'https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css';
   @import './style/input.scss';
   @import './style/setting.scss';
   @import './style/form.scss';
+
+  /* View Container */
+  .main-page {
+    background-image: url(${MainBackground});
+    background-size: cover;
+    background-position: center center;
+  }
 
   /* css initialize */
   html, body {
@@ -56,5 +65,25 @@ export const GlobalStyle = createGlobalStyle`
   q:before, q:after {
     content: '';
     content: none;
+  }
+
+  a {
+    &:link{
+      color: #000;
+      text-decoration: none;
+    }
+    &:visited{
+      color: #000;
+      text-decoration: none;
+    }
+  }
+
+  .rotate{
+    transform: rotate(180deg);
+  }
+  
+  .btn{
+    display: inline-block;
+    transition: 0.5s;
   }
 `;
