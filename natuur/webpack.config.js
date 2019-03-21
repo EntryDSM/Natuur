@@ -34,11 +34,11 @@ module.exports = {
         test: /\.(png|svg|jpg|jpeg|gif)$/,
         use: [
           {
-            loader: "use-loader",
+            loader: "url-loader",
             options: {
               name: "[name].[ext]?[hash]",
               publicPath: "/dist",
-              limit: 20000
+              limit: 200000
             }
           }
         ]

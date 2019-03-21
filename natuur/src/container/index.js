@@ -8,6 +8,8 @@ import Main from "./Main/Main";
 import MyPage from "./MyPage/Mypage";
 import PersonalInformation from "./PersonalInformation/PersonalInformation";
 import Preview from "./Preview/Preview";
+import Header from "./default/header/Header";
+import Footer from "./default/footer/footer";
 
 export {
   SignUp,
@@ -19,5 +21,7 @@ export {
   Main,
   MyPage,
   PersonalInformation,
-  Preview
+  Preview,
+  Header,
+  Footer
 };
