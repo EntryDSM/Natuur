@@ -11,7 +11,7 @@ const LinkList = ({
   isLogin = false
 }) => (
   /* contentListLink의 isLogin은 Styled-component에 해당. */
-  <ContentListLink isLogin={isLogin ? true : false}>
+  <ContentListLink isLogin={isLogin}>
     {isLogin /* 로그인이 되어있다면 span태그 */ ? (
       <span>{content}</span>
     ) : external /* 로그인이 아니라면 a태그 */ ? (
