@@ -8,6 +8,7 @@ import {
   ContentsLogo,
   ContentList
 } from "../../../styles/Header";
+import { QUESTION_ANSWER_PAGE_LINK, NOTICE_PAGE_LINK } from "../../constance";
 import LinkList from "./LinkList";
 
 const Navigation = () => {
@@ -25,13 +26,13 @@ const Navigation = () => {
         </ContentsLogo>
         <ContentList>
           <LinkList
-            path="http://dsmhs.djsch.kr/boardCnts/list.do?boardID=54814&m=0602&s=dsmhs"
+            path={NOTICE_PAGE_LINK}
             target="_blank"
             content="공지사항"
             external={true}
           />
           <LinkList
-            path="http://dsmhs.djsch.kr/boardCnts/list.do?boardID=76196&m=0605&s=dsmhs"
+            path={QUESTION_ANSWER_PAGE_LINK}
             target="_blank"
             content="Q&A"
             external={true}
@@ -40,7 +41,6 @@ const Navigation = () => {
           <LinkList path="/" content="모집일정" />
           <LinkList isLogin={true} content={"코드봐야함ㅎ"} />
         </ContentList>
-        {/* <user-modal :onUserModal="onUserModal" v-if="onUserModal"/> */}
       </WrapperContants>
     </NavWrapper>
   );
