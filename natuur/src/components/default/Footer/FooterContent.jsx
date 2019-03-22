@@ -9,41 +9,47 @@ import {
   FooterCoverIcons
 } from "../../../styles/Footer";
 import FooterLink from "./FooterLink";
-import { Logo, FaceBook, Github } from "../../../assets/Footer";
+import { logo, faceBook, github } from "../../../assets/Footer";
+import {
+  FOOTER_ADDRESS,
+  FOOTER_ADMINISTRATIVE,
+  FOOTER_COPYLIGHT,
+  FOOTER_OFFICE,
+  FOOTER_REGISTRATION,
+  FOOTER_TITLE,
+  FACEBOOK_LINK,
+  GITHUB_LINK
+} from "../../constance";
 
 const FooterContent = () => {
   return (
-    <FooterCover class="footer-cover">
-      <FooterLogo src={Logo} alt="푸터 로고" class="footer-cover__logo" />
+    <FooterCover>
+      <FooterLogo src={logo} alt="푸터 로고" />
 
-      <FooterCopyright class="footer-cover__copyright">
-        ⓒ 2018 Entry
-      </FooterCopyright>
+      <FooterCopyright>{FOOTER_COPYLIGHT}</FooterCopyright>
 
-      <FooterExplain class="footer-cover__explain">
-        개인정보 처리방침 | 이용약관
+      <FooterExplain>
+        {FOOTER_TITLE}
         <br />
-        (34111)대전광역시 유성구 가정북로 76(장동 23-9)
+        {FOOTER_ADDRESS}
         <br />
-        교무실 : 042-866-8822 / Fax : 042-867-9900
-        <span class="footer-cover__explain--admin">
-          행정실 : 042-866-8885 / Fax : 042-863-4308
-        </span>
+        {FOOTER_OFFICE /* 교무실 */}
+        <span>{FOOTER_ADMINISTRATIVE /* 행정실 */}</span>
         <br />
-        사업자 등록 번호 314-83-01600
+        {FOOTER_REGISTRATION}
       </FooterExplain>
 
-      <FooterCoverNav class="footer-cover__navigation">
-        <FooterCoverIcons class="footer-cover__icon">
+      <FooterCoverNav>
+        <FooterCoverIcons>
           <FooterLink
-            path="https://www.facebook.com/entrydsm"
-            imgPath={FaceBook}
+            path={FACEBOOK_LINK}
+            imgPath={faceBook}
             imgAlt="페이스북 이동 링크"
             position="45px"
           />
           <FooterLink
-            path="https://github.com/Jaws-bar/Entry3.0-EntrySystem"
-            imgPath={Github}
+            path={GITHUB_LINK}
+            imgPath={github}
             imgAlt="깃허브 이동 링크"
             position="1px"
           />
