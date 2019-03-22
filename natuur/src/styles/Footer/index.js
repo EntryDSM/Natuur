@@ -51,11 +51,11 @@ export const FooterCoverNav = styled.div`
 
 export const FooterCoverIcons = styled.div`
   position: absolute;
-  bottom: 0px;
+  bottom: 0;
   right: 0;
 `;
 
-export const LinkIcons = styled.img`
+export const LinkIcon = styled.img`
   position: absolute;
   width: 30px;
   margin-top: -25px;
