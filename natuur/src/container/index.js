@@ -9,7 +9,7 @@ import MyPage from "./MyPage/Mypage";
 import PersonalInformation from "./PersonalInformation/PersonalInformation";
 import Preview from "./Preview/Preview";
 import Header from "./default/header/Header";
-import Footer from "./default/footer/footer";
+import Footer from "./default/footer/Footer";
 
 export {
   SignUp,
