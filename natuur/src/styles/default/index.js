@@ -10,6 +10,10 @@ export const GlobalStyle = createGlobalStyle`
     background-image: url(${MainBackground});
     background-size: cover;
     background-position: center center;
+
+    & > div:first-child {
+      box-shadow: none;
+    }
   }
 
   /* css initialize */
