@@ -1,4 +1,5 @@
-import React from "react";
+import React, { SFC } from "react";
+import { hot } from "react-hot-loader/root";
 import { Route, BrowserRouter, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 
@@ -18,10 +19,14 @@ import {
   Footer
 } from "./container";
 
-const App = ({ containerName }) => {
+interface Props {
+  containerName: string;
+}
+
+const App: SFC<Props> = props => {
   return (
     <BrowserRouter>
-      <div className={containerName}>
+      <div className={props.containerName}>
         <GlobalStyle />
         <Header />
         <Switch>
@@ -53,4 +58,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   null
-)(App);
+)(hot(App));
