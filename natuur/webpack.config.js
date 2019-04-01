@@ -1,9 +1,8 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const { CheckerPlugin } = require("awesome-typescript-loader");
 
 module.exports = {
-  entry: ["@babel/polyfill", __dirname + "/src/index.js"],
+  entry: ["@babel/polyfill", __dirname + "/src/index.tsx"],
   output: {
     path: __dirname + "/dist",
     publicPath: "/",
@@ -20,9 +19,7 @@ module.exports = {
       },
       {
         test: /\.(ts|tsx)$/,
-        use: {
-          loader: "awesome-typescript-loader"
-        }
+        loader: "ts-loader"
       },
       {
         test: /\.html$/,
@@ -53,7 +50,10 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ["*", ".js", ".jsx", ".ts", ".tsx"]
+    extensions: ["*", ".js", ".jsx", ".ts", ".tsx"],
+    alias: {
+      "react-dom": "@hot-loader/react-dom"
+    }
   },
   plugins: [
     new HtmlWebPackPlugin({
@@ -64,8 +64,7 @@ module.exports = {
     new MiniCssExtractPlugin({
       template: "[name].css",
       chunkFilename: "[id].css"
-    }),
-    new CheckerPlugin()
+    })
   ],
   devtool: "inline-source-map" // 코드의 오류를 상세하게함. ( 배포 후 'none' 으로 )
 };
