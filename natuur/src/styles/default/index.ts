@@ -1,13 +1,13 @@
-import styled, { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from "styled-components";
 
-import MainBackground from "../../assets/MainPage/main_background.svg";
+// import MainBackground from "../../assets/MainPage/main_background.svg";
 
-export const GlobalStyle = createGlobalStyle`
+export const GlobalStyle: any = createGlobalStyle`
   @import 'https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css';
 
   /* View Container */
   .main-page {
-    background-image: url(${MainBackground});
+    /* background-image: url($}{MainBackground}); */
     background-size: cover;
     background-position: center center;
 
