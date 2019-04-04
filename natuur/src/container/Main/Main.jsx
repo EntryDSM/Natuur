@@ -21,7 +21,7 @@ const Main = ({ configContainer }) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  configContainer: container => dispatch(updateAppContainer(container))
+  configContainer: payload => dispatch(updateAppContainer(payload))
 });
 
 export default connect(

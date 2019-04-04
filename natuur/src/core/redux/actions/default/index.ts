@@ -1,5 +1,5 @@
 // reducerState
-export interface DefaultState {
+export interface RootState {
   container: string;
 }
 
@@ -7,14 +7,14 @@ export interface DefaultState {
 export const UPDATE_APP_CONTAINER = "UPDATE_APP_CONTAINER";
 
 interface UpdateAppContainer {
-  type: typeof UPDATE_APP_CONTAINER;
-  container: DefaultState;
+  type: string;
+  payload: object;
 }
 
 export type DefaultActionTypes = UpdateAppContainer | null; // 이런식으로 다중으로 넣음.
 
 // Actions
-export const updateAppContainer = (container: DefaultState) => ({
+export const updateAppContainer = (payload: RootState) => ({
   type: UPDATE_APP_CONTAINER,
-  container
+  payload
 });
