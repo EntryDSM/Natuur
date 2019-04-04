@@ -1,4 +1,4 @@
-import React, { SFC } from "react";
+import React, { FC } from "react";
 import { hot } from "react-hot-loader/root";
 import { Route, BrowserRouter, Switch } from "react-router-dom";
 import { connect } from "react-redux";
@@ -23,7 +23,7 @@ interface Props {
   containerName: string;
 }
 
-const App: SFC<Props> = props => {
+const App: FC<Props> = props => {
   return (
     <BrowserRouter>
       <div className={props.containerName}>
