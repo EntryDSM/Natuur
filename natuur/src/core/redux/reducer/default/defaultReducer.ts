@@ -1,22 +1,22 @@
 import {
   UPDATE_APP_CONTAINER,
-  DefaultState,
+  RootState,
   DefaultActionTypes
 } from "../../actions/default";
 
-const initialState: DefaultState = {
+const initialState: RootState = {
   container: ""
 };
 
 const defaultReducer = (
   state = initialState,
   action: DefaultActionTypes
-): DefaultState => {
+): RootState => {
   switch (action.type) {
     case UPDATE_APP_CONTAINER: {
       return {
         ...state,
-        ...action.container
+        ...action.payload
       };
     }
     default:
