@@ -1,8 +1,15 @@
-import { createGlobalStyle } from "styled-components";
+import {
+  createGlobalStyle,
+  GlobalStyleComponent,
+  DefaultTheme
+} from "styled-components";
 
 // import MainBackground from "../../assets/MainPage/main_background.svg";
 
-export const GlobalStyle: any = createGlobalStyle`
+export const GlobalStyle: GlobalStyleComponent<
+  {},
+  DefaultTheme
+> = createGlobalStyle`
   @import 'https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css';
 
   /* View Container */
