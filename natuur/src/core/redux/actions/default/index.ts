@@ -8,7 +8,7 @@ export const UPDATE_APP_CONTAINER = "UPDATE_APP_CONTAINER";
 
 interface UpdateAppContainer {
   type: string;
-  payload: object;
+  payload: string;
 }
 
 export type DefaultActionTypes = UpdateAppContainer | null; // 이런식으로 다중으로 넣음.

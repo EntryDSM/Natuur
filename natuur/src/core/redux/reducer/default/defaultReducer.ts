@@ -16,7 +16,7 @@ const defaultReducer = (
     case UPDATE_APP_CONTAINER: {
       return {
         ...state,
-        ...action.payload
+        container: action.payload
       };
     }
     default:
