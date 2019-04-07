@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 
 import {
   FooterCover,
@@ -8,8 +8,6 @@ import {
   FooterCoverNav,
   FooterCoverIcons
 } from "../../../styles/Footer";
-import FooterLink from "./FooterLink";
-import { logo, faceBook, github } from "../../../assets/Footer";
 import {
   FOOTER_ADDRESS,
   FOOTER_ADMINISTRATIVE,
@@ -20,8 +18,10 @@ import {
   FACEBOOK_LINK,
   GITHUB_LINK
 } from "../../constance";
+import FooterLink from "./FooterLink";
+import { logo, faceBook, github } from "../../../assets/Footer";
 
-const FooterContent = () => {
+const FooterContent: FC = () => {
   return (
     <FooterCover>
       <FooterLogo src={logo} alt="푸터 로고" />
