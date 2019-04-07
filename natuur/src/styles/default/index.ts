@@ -4,7 +4,7 @@ import {
   DefaultTheme
 } from "styled-components";
 
-// import MainBackground from "../../assets/MainPage/main_background.svg";
+import MainBackground from "../../assets/MainPage/main_background.svg";
 
 export const GlobalStyle: GlobalStyleComponent<
   {},
@@ -14,7 +14,7 @@ export const GlobalStyle: GlobalStyleComponent<
 
   /* View Container */
   .main-page {
-    /* background-image: url($}{MainBackground}); */
+    background-image: url(${MainBackground});
     background-size: cover;
     background-position: center center;
 
