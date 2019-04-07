@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { ThemedStyledFunction } from "styled-components";
 
 export const FooterContainer = styled.footer`
   position: relative;
@@ -55,14 +55,14 @@ export const FooterCoverIcons = styled.div`
   right: 0;
 `;
 
-export const LinkIcon = styled.img`
+export const LinkIcon: any = styled.img`
   position: absolute;
   width: 30px;
   margin-top: -25px;
   opacity: 0.75;
   transition: 0.5s;
 
-  right: ${props => props.position};
+  right: ${(props: any) => props.position};
   &:hover {
     opacity: 1;
   }

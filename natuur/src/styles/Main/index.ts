@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Mainhider = styled.div`
   overflow-x: hidden;
@@ -18,8 +18,8 @@ export const MainPageCover = styled.div`
   align-items: center;
   position: absolute;
   top: 0;
-  right: ${props => props.page1 && 0};
-  left: ${props => props.page2 && 0};
+  right: ${(props: any) => props.page1 && 0};
+  left: ${(props: any) => props.page2 && 0};
 `;
 
 export const MainContent = styled.div`
