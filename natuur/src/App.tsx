@@ -18,15 +18,16 @@ import {
   Header,
   Footer
 } from "./container";
+import { AppState } from "./core/redux/store/store";
 
 interface Props {
   containerName: string;
 }
 
-const App: FC<Props> = props => {
+const App: FC<Props> = ({ containerName }) => {
   return (
     <BrowserRouter>
-      <div className={props.containerName}>
+      <div className={containerName}>
         <GlobalStyle />
         <Header />
         <Switch>
@@ -51,7 +52,7 @@ const App: FC<Props> = props => {
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: AppState) => ({
   containerName: state.defaultReducer.container
 });
 
