@@ -1,9 +1,13 @@
-import React, { useEffect } from "react";
+import React, { FC, useEffect } from "react";
 import { connect } from "react-redux";
 
 import { updateAppContainer } from "../../core/redux/actions/default";
 
-const Main = ({ configContainer }) => {
+interface Props {
+  configContainer: typeof updateAppContainer;
+}
+
+const Main: FC<Props> = ({ configContainer }) => {
   const didMountRef = React.useRef(false);
 
   // componentDidmount()
@@ -11,7 +15,7 @@ const Main = ({ configContainer }) => {
     if (!didMountRef.current) {
       didMountRef.current = true;
       // input did mount logic.
-      configContainer("main-page");
+      configContainer({ container: "main-page" });
 
       return;
     }

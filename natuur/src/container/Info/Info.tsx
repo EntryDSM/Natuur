@@ -1,9 +1,13 @@
-import React, { useEffect } from "react";
+import React, { FC, useEffect } from "react";
 import { connect } from "react-redux";
 
 import { updateAppContainer } from "../../core/redux/actions/default";
 
-const Info = ({ configContainer }) => {
+interface Props {
+  configContainer: typeof updateAppContainer;
+}
+
+const Info: FC<Props> = ({ configContainer }) => {
   const didMountRef = React.useRef(false);
 
   // componentDidmount
@@ -12,7 +16,7 @@ const Info = ({ configContainer }) => {
       didMountRef.current = true;
 
       // input did mount logic.
-      configContainer("info-summary");
+      configContainer({ container: "info-summary" });
     }
   });
 
