@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import { Link } from "react-router-dom";
 
 import EntryLogo from "../../../assets/entry_logo.png";
@@ -11,7 +11,7 @@ import {
 import { QUESTION_ANSWER_PAGE_LINK, NOTICE_PAGE_LINK } from "../../constance";
 import LinkList from "./LinkList";
 
-const Navigation = () => {
+const Navigation: FC = () => {
   return (
     <NavWrapper>
       <WrapperContants>

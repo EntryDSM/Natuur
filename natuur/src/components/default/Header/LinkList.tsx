@@ -1,9 +1,17 @@
-import React from "react";
+import React, { FC } from "react";
 import { Link } from "react-router-dom";
 
 import { ContentListLink } from "../../../styles/Header";
 
-const LinkList = ({
+interface Props {
+  path?: string;
+  target?: string;
+  content: string;
+  external?: boolean;
+  isLogin?: boolean;
+}
+
+const LinkList: FC<Props> = ({
   path,
   target,
   content,

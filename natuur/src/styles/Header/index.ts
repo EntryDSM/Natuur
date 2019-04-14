@@ -41,13 +41,13 @@ export const ContentList = styled.ul`
   right: 0;
 `;
 
-export const ContentListLink = styled.li`
+export const ContentListLink: any = styled.li`
   line-height: 60px;
   height: 100%;
   padding: 0 15px;
   margin-left: 15px;
   display: inline-block;
-  margin-left: ${props => (props.isLogin ? "67px" : "none")};
+  margin-left: ${(props: any) => (props.isLogin ? "67px" : "none")};
 
   & > span {
     background-color: #65bbb7;

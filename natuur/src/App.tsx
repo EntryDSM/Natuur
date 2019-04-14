@@ -1,4 +1,5 @@
-import React from "react";
+import React, { FC } from "react";
+import { hot } from "react-hot-loader/root";
 import { Route, BrowserRouter, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 
@@ -17,8 +18,13 @@ import {
   Header,
   Footer
 } from "./container";
+import { AppState } from "./core/redux/store/store";
 
-const App = ({ containerName }) => {
+interface Props {
+  containerName: string;
+}
+
+const App: FC<Props> = ({ containerName }) => {
   return (
     <BrowserRouter>
       <div className={containerName}>
@@ -46,11 +52,11 @@ const App = ({ containerName }) => {
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: AppState) => ({
   containerName: state.defaultReducer.container
 });
 
 export default connect(
   mapStateToProps,
   null
-)(App);
+)(hot(App));

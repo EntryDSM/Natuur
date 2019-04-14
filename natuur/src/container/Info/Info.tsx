@@ -1,19 +1,22 @@
-import React, { useEffect } from "react";
+import React, { FC, useEffect } from "react";
 import { connect } from "react-redux";
 
 import { updateAppContainer } from "../../core/redux/actions/default";
 
-const Main = ({ configContainer }) => {
+interface Props {
+  configContainer: typeof updateAppContainer;
+}
+
+const Info: FC<Props> = ({ configContainer }) => {
   const didMountRef = React.useRef(false);
 
-  // componentDidmount()
+  // componentDidmount
   useEffect(() => {
     if (!didMountRef.current) {
       didMountRef.current = true;
-      // input did mount logic.
-      configContainer("main-page");
 
-      return;
+      // input did mount logic.
+      configContainer({ container: "info-summary" });
     }
   });
 
@@ -27,4 +30,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   null,
   mapDispatchToProps
-)(Main);
+)(Info);

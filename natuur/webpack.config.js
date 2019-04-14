@@ -2,7 +2,7 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-  entry: ["@babel/polyfill", __dirname + "/src/index.js"],
+  entry: ["@babel/polyfill", __dirname + "/src/index.tsx"],
   output: {
     path: __dirname + "/dist",
     publicPath: "/",
@@ -16,6 +16,10 @@ module.exports = {
         use: {
           loader: "babel-loader"
         }
+      },
+      {
+        test: /\.(ts|tsx)$/,
+        loader: "ts-loader"
       },
       {
         test: /\.html$/,
@@ -46,7 +50,10 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ["*", ".js", ".jsx"]
+    extensions: ["*", ".js", ".jsx", ".ts", ".tsx"],
+    alias: {
+      "react-dom": "@hot-loader/react-dom"
+    }
   },
   plugins: [
     new HtmlWebPackPlugin({
@@ -59,5 +66,5 @@ module.exports = {
       chunkFilename: "[id].css"
     })
   ],
-  devtool: "inline-source-map"
+  devtool: "inline-source-map" // 코드의 오류를 상세하게함. ( 배포 후 'none' 으로 )
 };
