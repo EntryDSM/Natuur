@@ -1,7 +1,6 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { hot } from "react-hot-loader/root";
 import { Route, BrowserRouter, Switch } from "react-router-dom";
-import { connect } from "react-redux";
 
 import { GlobalStyle } from "./styles/default";
 import {
@@ -18,23 +17,32 @@ import {
   Header,
   Footer
 } from "./container";
-import { AppState } from "./core/redux/store/store";
 
-interface Props {
-  containerName: string;
-}
+const App: FC = () => {
+  const [appClass, setAppClass] = useState("");
 
-const App: FC<Props> = ({ containerName }) => {
+  const updateAppClass = (text: string): void => {
+    setAppClass(text);
+  };
+
   return (
     <BrowserRouter>
-      <div className={containerName}>
+      <div className={appClass}>
         <GlobalStyle />
         <Header />
         <Switch>
-          <Route path="/" component={() => <Main />} exact />
+          <Route
+            path="/"
+            component={() => <Main updateAppClass={updateAppClass} />}
+            exact
+          />
           <Route path="/auth" component={() => <SignUp />} exact />
           <Route path="/confirm/:code" component={() => <Login />} exact />
-          <Route path="/info-summary" component={() => <Info />} exact />
+          <Route
+            path="/info-summary"
+            component={() => <Info updateAppClass={updateAppClass} />}
+            exact
+          />
           <Route path="/classify" component={() => <Classification />} exact />
           <Route
             path="/personal"
@@ -52,11 +60,4 @@ const App: FC<Props> = ({ containerName }) => {
   );
 };
 
-const mapStateToProps = (state: AppState) => ({
-  containerName: state.defaultReducer.container
-});
-
-export default connect(
-  mapStateToProps,
-  null
-)(hot(App));
+export default hot(App);
