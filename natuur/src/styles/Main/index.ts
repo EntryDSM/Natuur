@@ -32,6 +32,20 @@ export const MainContent = styled.div`
   border-bottom: solid 6px #6ab7b7;
 `;
 
+export const MainSubTitle = styled.h4`
+  height: 50px;
+  width: 100%;
+  font-size: 28px;
+`;
+
+export const MainTitle = styled.h1`
+  height: 50px;
+  line-height: 50px;
+  font-size: 54px;
+  flex: 1;
+  margin-bottom: 51px;
+`;
+
 //   @include e('hider') {
 //   }
 //   @include e('cover') {
@@ -39,20 +53,8 @@ export const MainContent = styled.div`
 //   @include e('content') {
 //   }
 //   @include e('sub-text') {
-//     height: 50px;
-//     width: 100%;
-//     font-size: 28px;
-//     font-weight: normal;
 //   }
 //   @include e('title') {
-//     height: 50px;
-//     line-height: 50px;
-//     font-size: 54px;
-//     font-weight: normal;
-//     flex: 1;
-//     margin: {
-//       bottom: 51px;
-//     }
 //   }
 //   @include e('link-box') {
 //     font-size: 0;
