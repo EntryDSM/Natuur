@@ -2,7 +2,7 @@ import React, { FC, useState } from "react";
 import { hot } from "react-hot-loader/root";
 import { Route, BrowserRouter, Switch } from "react-router-dom";
 
-import { GlobalStyle } from "./styles/default";
+import GlobalStyle from "./styles/GlobalStyle";
 import {
   SignUp,
   Login,
@@ -36,7 +36,11 @@ const App: FC = () => {
             component={() => <Main updateAppClass={updateAppClass} />}
             exact
           />
-          <Route path="/auth" component={() => <SignUp />} exact />
+          <Route
+            path="/auth"
+            component={() => <SignUp updateAppClass={updateAppClass} />}
+            exact
+          />
           <Route path="/confirm/:code" component={() => <Login />} exact />
           <Route
             path="/info-summary"
