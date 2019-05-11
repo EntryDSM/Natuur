@@ -38,7 +38,7 @@ const Navigation: FC = () => {
             external={true}
           />
           <LinkList path="/info-summary" content="전형요강" />
-          <LinkList path="/" content="모집일정" />
+          <LinkList path="/auth" content="모집일정" />
           <LinkList isLogin={true} content={"코드봐야함ㅎ"} />
         </ContentList>
       </WrapperContants>
