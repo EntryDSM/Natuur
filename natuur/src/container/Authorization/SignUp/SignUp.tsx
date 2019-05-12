@@ -5,7 +5,7 @@ import {
   AuthorizationWrapper
 } from "../../../styles/Authorization";
 import { HeadLine } from "../../../components/default/Common";
-import AcceptTerms from "../../../components/Authorization/AcceptTerms";
+import { AcceptTerms, InformationInputBox, InformationDisableInputBox } from "../../../components/Authorization";
 
 interface Props {
   updateAppClass(text): void;
@@ -32,9 +32,9 @@ const SignUp: FC<Props> = ({ updateAppClass }) => {
   return (
     <Authorization>
       <AuthorizationWrapper>
-        <HeadLine title="2019 지원자 본인인증" />
+        <HeadLine title="2020 지원자 본인인증" />
         <AcceptTerms isAccept={isAccept} checkedState={checked} />
-        {/* <info-input /> */}
+        {checked ? <InformationInputBox /> : <InformationDisableInputBox /> }
       </AuthorizationWrapper>
     </Authorization>
   );
