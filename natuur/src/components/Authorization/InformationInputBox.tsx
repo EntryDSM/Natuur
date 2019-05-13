@@ -1,64 +1,83 @@
-import react from 'react';
+import React from "react";
 
-import AcceptButton from './AcceptButton';
+import AcceptButton from "./AcceptButton";
+import {
+  InfomationInputBoxCover,
+  InfomationInputBoxCoverWapper,
+  InfomationInputBoxWapperTitle,
+  InfomationInputBoxWapperInputSpace,
+  InformationInputSpaceArea,
+  InformationInputSpaceCheckMark,
+  InformationInputSpaceWrong,
+  InformationInputSpaceWarning
+} from "../../styles/Authorization";
 
 const InformationInputBox = () => (
-  <div class="InfoInput" v-else={true}>
+  <InfomationInputBoxCover>
     <div>
-      <div class="InfoInput__wapper">
-        <div class="InfoInput__wapper__title">이메일</div>
-        <div class="InfoInput__wapper__inputBox">
-          <input
+      {/* 이메일 입력란 */}
+      <InfomationInputBoxCoverWapper>
+        <InfomationInputBoxWapperTitle>이메일</InfomationInputBoxWapperTitle>
+        <InfomationInputBoxWapperInputSpace>
+          <InformationInputSpaceArea
             type="text"
-            class="InfoInput__wapper__inputBox__input"
             placeholder="example@dsmhs.kr"
-            v-model="email"
+            // v-model="email"
           />
-        </div>
-        <div class="InfoInput__wapper__inputBox__check" v-if="verify[0]">
+        </InfomationInputBoxWapperInputSpace>
+        <InformationInputSpaceCheckMark
+        // v-if="verify[0]"
+        >
           ✓
-        </div>
-      </div>
-      <div class="InfoInput__wapper">
-        <div class="InfoInput__wapper__title">비밀번호</div>
-        <div class="InfoInput__wapper__inputBox">
-          <input
+        </InformationInputSpaceCheckMark>
+      </InfomationInputBoxCoverWapper>
+
+      {/* 비밀번호 입력란 */}
+      <InfomationInputBoxCoverWapper>
+        <InfomationInputBoxWapperTitle>비밀번호</InfomationInputBoxWapperTitle>
+        <InfomationInputBoxWapperInputSpace>
+          <InformationInputSpaceArea
             type="password"
-            class="InfoInput__wapper__inputBox__input"
             placeholder="••••••••"
-            v-model="pw"
+            // v-model="pw"
           />
-          <div class="InfoInput__wapper__inputBox__check" v-if="verify[1]">
-            ✓
-          </div>
-        </div>
-        <span class="InfoInput__wapper__inputBox__warning">
+        </InfomationInputBoxWapperInputSpace>
+        <InformationInputSpaceCheckMark
+        // v-if="verify[1]"
+        >
+          ✓
+        </InformationInputSpaceCheckMark>
+        <InformationInputSpaceWarning>
           * 영문, 숫자 포함 8자리 이상 16자리 이하
-        </span>
-      </div>
-      <div class="InfoInput__wapper pwcheck">
-        <div class="InfoInput__wapper__title">비밀번호 확인</div>
-        <div class="InfoInput__wapper__inputBox">
-          <input
+        </InformationInputSpaceWarning>
+      </InfomationInputBoxCoverWapper>
+
+      {/* 비밀번호 (확인) 입력란 */}
+      <InfomationInputBoxCoverWapper>
+        <InfomationInputBoxWapperTitle>
+          비밀번호 확인
+        </InfomationInputBoxWapperTitle>
+        <InfomationInputBoxWapperInputSpace>
+          <InformationInputSpaceArea
             type="password"
-            class="InfoInput__wapper__inputBox__input"
             placeholder="••••••••"
-            v-model="pwcheck"
+            // v-model="pwcheck"
           />
-          <div class="InfoInput__wapper__inputBox__check " v-if="verify[2]">
+          <InformationInputSpaceCheckMark
+          // v-if="verify[2]"
+          >
             ✓
-          </div>
-          <div
-            class="InfoInput__wapper__inputBox--wrong"
-            v-if="(pw !== pwcheck)"
+          </InformationInputSpaceCheckMark>
+          <InformationInputSpaceWrong
+          // v-if="(pw !== pwcheck)"
           >
             비밀번호를 정확히 입력해주세요
-          </div>
-        </div>
-      </div>
+          </InformationInputSpaceWrong>
+        </InfomationInputBoxWapperInputSpace>
+      </InfomationInputBoxCoverWapper>
     </div>
     <AcceptButton />
-  </div>
+  </InfomationInputBoxCover>
 );
 
 export default InformationInputBox;

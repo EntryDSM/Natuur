@@ -1,52 +1,71 @@
-import react from 'react';
+import React from "react";
 
-import AcceptDisableButton from './AcceptDisableButton';
+import AcceptDisableButton from "./AcceptDisableButton";
+import {
+  InfomationInputBoxCover,
+  InfomationInputBoxCoverWapper,
+  InfomationInputBoxWapperTitle,
+  InfomationInputBoxWapperInputSpace,
+  InformationInputSpaceArea,
+  InformationInputSpaceWarning
+} from "../../styles/Authorization";
 
 const InformationDisableInputBox = () => (
-  <div class="InfoInput --false">
+  <InfomationInputBoxCover false>
     <div>
-      <div class="InfoInput__wapper --false">
-        <div class="InfoInput__wapper__title --false">이메일</div>
-        <div class="InfoInput__wapper__inputBox --false">
-          <input
+      {/* 이메일 입력란 */}
+      <InfomationInputBoxCoverWapper false>
+        <InfomationInputBoxWapperTitle false>
+          이메일
+        </InfomationInputBoxWapperTitle>
+        <InfomationInputBoxWapperInputSpace>
+          <InformationInputSpaceArea
+            false
             type="text"
-            class="InfoInput__wapper__inputBox__input --false"
             placeholder="example@dsmhs.kr"
-            v-model="email"
-            readonly={true}
+            // v-model="email"
+            readOnly
           />
-        </div>
-      </div>
-      <div class="InfoInput__wapper --false">
-        <div class="InfoInput__wapper__title --false">비밀번호</div>
-        <div class="InfoInput__wapper__inputBox --false">
-          <input
+        </InfomationInputBoxWapperInputSpace>
+      </InfomationInputBoxCoverWapper>
+
+      {/* 비밀번호 입력란 */}
+      <InfomationInputBoxCoverWapper false>
+        <InfomationInputBoxWapperTitle false>
+          비밀번호
+        </InfomationInputBoxWapperTitle>
+        <InfomationInputBoxWapperInputSpace>
+          <InformationInputSpaceArea
+            false
             type="password"
-            class="InfoInput__wapper__inputBox__input --false"
             placeholder="••••••••"
-            v-model="pw"
-            readonly={true}
+            // v-model="pw"
+            readOnly
           />
-        </div>
-        <span class="InfoInput__wapper__inputBox__warning --false">
+        </InfomationInputBoxWapperInputSpace>
+        <InformationInputSpaceWarning>
           * 영문, 숫자 포함 8자리 이상 16자리 이하
-        </span>
-      </div>
-      <div class="InfoInput__wapper pwcheck --false">
-        <div class="InfoInput__wapper__title --false">비밀번호 확인</div>
-        <div class="InfoInput__wapper__inputBox --false">
-          <input
+        </InformationInputSpaceWarning>
+      </InfomationInputBoxCoverWapper>
+
+      {/* 비밀번호 (확인) 입력란 */}
+      <InfomationInputBoxCoverWapper false>
+        <InfomationInputBoxWapperTitle false>
+          비밀번호 확인
+        </InfomationInputBoxWapperTitle>
+        <InfomationInputBoxWapperInputSpace>
+          <InformationInputSpaceArea
+            false
             type="password"
-            class="InfoInput__wapper__inputBox__input --false"
             placeholder="••••••••"
-            v-model="pwcheck"
-            readonly={true}
+            // v-model="pwcheck"
+            readOnly
           />
-        </div>
-      </div>
+        </InfomationInputBoxWapperInputSpace>
+      </InfomationInputBoxCoverWapper>
     </div>
     <AcceptDisableButton />
-  </div>
+  </InfomationInputBoxCover>
 );
 
 export default InformationDisableInputBox;
