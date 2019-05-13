@@ -34,7 +34,7 @@ const SignUp: FC<Props> = ({ updateAppClass }) => {
       <AuthorizationWrapper>
         <HeadLine title="2020 지원자 본인인증" />
         <AcceptTerms isAccept={isAccept} checkedState={checked} />
-        {checked ? <InformationInputBox /> : <InformationDisableInputBox /> }
+        {checked ? <InformationInputBox /> : <InformationDisableInputBox />}
       </AuthorizationWrapper>
     </Authorization>
   );
