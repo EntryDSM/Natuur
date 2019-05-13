@@ -1,16 +1,24 @@
-import React from 'react';
+import React from "react";
+
+import {
+  AcceptButtonComponent,
+  ButtonComponentCover,
+  ButtonComponentArrow,
+  ButtonComponentText
+} from "../../styles/default";
 
 const AcceptButton = () => (
-  <div class="btn">
-    <button type="button"
-          class="input-btn input-btn--next"
-          v-if="(isAccept && verify[0] && verify[1] && verify[2])"
-          @click="moveToNextPage"
+  <AcceptButtonComponent>
+    <ButtonComponentCover
+      as="button"
+      next
+      // v-if="(isAccept && verify[0] && verify[1] && verify[2])"
+      // @click="moveToNextPage"
     >
-      <span class="input-btn__arrow input-btn__arrow--right">〉</span>
-      <span class="input-btn__text input-btn__text--next">인증하기</span>
-    </button>
-  </div>
+      <ButtonComponentArrow next>〉</ButtonComponentArrow>
+      <ButtonComponentText next>인증하기</ButtonComponentText>
+    </ButtonComponentCover>
+  </AcceptButtonComponent>
 );
 
 export default AcceptButton;
