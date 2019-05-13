@@ -90,7 +90,8 @@ const AcceptTerms: FC<Props> = ({ isAccept, checkedState }) => (
       <AcceptTermsCheckBoxInput
         type="checkbox"
         id="Accept-checkbox"
-        onClick={() => (checkedState ? isAccept("") : isAccept("checked"))} // checkState에 string값이 없으면 checked로 변경.
+        // checkState에 string값이 없으면 checked로 변경.
+        onClick={() => (checkedState ? isAccept("") : isAccept("checked"))}
         className={checkedState}
       />
       <AcceptTermsCheckBoxLabel
