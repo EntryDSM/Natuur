@@ -1,4 +1,4 @@
-import styledComponents from 'styled-components';
+import styled from 'styled-components';
 
 // Authorization
 export const Authorization = styled.div``;
