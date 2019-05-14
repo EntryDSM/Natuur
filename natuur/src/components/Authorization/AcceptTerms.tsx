@@ -23,11 +23,20 @@ import {
 } from "./Constance";
 
 interface Props {
-  isAccept(text: string): void;
   checkedState: string;
+  userEmail: string;
+  userPassword: string;
+  userPasswordCheck: string;
+  isAccept(text: string): void;
 }
 
-const AcceptTerms: FC<Props> = ({ isAccept, checkedState }) => (
+const AcceptTerms: FC<Props> = ({
+  isAccept,
+  checkedState,
+  userEmail,
+  userPassword,
+  userPasswordCheck
+}) => (
   <AcceptTermsComponent>
     <AcceptTermsBox>
       <AcceptTermsBoxWapper>
@@ -91,7 +100,12 @@ const AcceptTerms: FC<Props> = ({ isAccept, checkedState }) => (
         type="checkbox"
         id="Accept-checkbox"
         // checkState에 string값이 없으면 checked로 변경.
-        onClick={() => (checkedState ? isAccept("") : isAccept("checked"))}
+        onClick={() =>
+          !userEmail &&
+          !userPassword &&
+          !userPasswordCheck &&
+          (checkedState ? isAccept("") : isAccept("checked"))
+        }
         className={checkedState}
       />
       <AcceptTermsCheckBoxLabel
