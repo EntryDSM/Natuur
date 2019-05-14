@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 
 import AcceptDisableButton from "./AcceptDisableButton";
 import {
@@ -10,7 +10,7 @@ import {
   InformationInputSpaceWarning
 } from "../../styles/Authorization";
 
-const InformationDisableInputBox = () => (
+const InformationDisableInputBox: FC = () => (
   <InfomationInputBoxCover false>
     <div>
       {/* 이메일 입력란 */}

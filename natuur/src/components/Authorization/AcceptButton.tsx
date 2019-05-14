@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 
 import {
   AcceptButtonComponent,
@@ -7,7 +7,7 @@ import {
   ButtonComponentText
 } from "../../styles/default";
 
-const AcceptButton = () => (
+const AcceptButton: FC = () => (
   <AcceptButtonComponent>
     <ButtonComponentCover
       as="button"
