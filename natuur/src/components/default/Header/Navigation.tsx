@@ -8,7 +8,7 @@ import {
   ContentsLogo,
   ContentList
 } from "../../../styles/Header";
-import { QUESTION_ANSWER_PAGE_LINK, NOTICE_PAGE_LINK } from "../../constance";
+import { QUESTION_ANSWER_PAGE_LINK, NOTICE_PAGE_LINK } from "../Constance";
 import LinkList from "./LinkList";
 
 const Navigation: FC = () => {
