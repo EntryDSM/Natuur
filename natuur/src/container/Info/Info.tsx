@@ -1,14 +1,11 @@
-import React, { FC, useEffect } from "react";
-import { connect } from "react-redux";
-
-import { updateAppContainer } from "../../core/redux/actions/default";
+import React, { FC, useEffect, useRef } from "react";
 
 interface Props {
-  configContainer: typeof updateAppContainer;
+  updateAppClass(text: string): void;
 }
 
-const Info: FC<Props> = ({ configContainer }) => {
-  const didMountRef = React.useRef(false);
+const Info: FC<Props> = ({ updateAppClass }) => {
+  const didMountRef = useRef(false);
 
   // componentDidmount
   useEffect(() => {
@@ -16,18 +13,11 @@ const Info: FC<Props> = ({ configContainer }) => {
       didMountRef.current = true;
 
       // input did mount logic.
-      configContainer({ container: "info-summary" });
+      updateAppClass("info-summary");
     }
   });
 
   return <div>a</div>;
 };
 
-const mapDispatchToProps = dispatch => ({
-  configContainer: container => dispatch(updateAppContainer(container))
-});
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(Info);
+export default Info;
