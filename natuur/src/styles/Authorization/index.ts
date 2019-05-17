@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 // Authorization
 export const Authorization = styled.div``;
@@ -67,7 +67,7 @@ export const AcceptTermsContentsTitle = styled.span`
 
 export const AcceptTermsCheckBox = styled.div`
   height: 36px;
-  margin-top: 25px;
+  margin-top: 18px;
   margin-right: 20px;
   float: right;
   display: flex;
@@ -82,7 +82,7 @@ export const AcceptTermsCheckBoxLabel: any = styled.label`
   width: 22px;
   height: 22px;
   background-color: ${(props: any) =>
-    props.checkedState ? '#799da1' : '#b9b9b9'};
+    props.checkedState ? "#799da1" : "#b9b9b9"};
   border-radius: 50px;
   position: relative;
   margin-right: 5px;
@@ -105,26 +105,24 @@ export const InfomationInputBoxCover: any = styled.div`
   height: 226px;
   border-top: 1px solid #5f8a90;
   border-bottom: 1px solid #5f8a90;
-  border-color: ${(props: any) => props.false && '#a7a7a7'};
+  border-color: ${(props: any) => props.isDisable && "#a7a7a7"};
 `;
 
-export const InfomationInputBoxCoverWapper: any = styled.div`
+export const InfomationInputBoxCoverWapper = styled.div`
   position: relative;
+  height: 75px;
+  display: flex;
+  align-items: center;
+`;
 
-  &:nth-of-type(2) {
-    &::before,
-    &::after {
-      content: "";
-      display: block;
-      width: 1140px;
-      height: 1px;
-      position: absolute;
-      background: ${(props: any) =>
-        props.false
-          ? '-webkit-linear-gradient(left, transparent 0%, #a7a7a7 50%, transparent 100%)'
-          : '-webkit-linear-gradient(left, transparent 0%, #5f8a90 50%, transparent 100%)'};
-    }
-  }
+export const GradationHorizon: any = styled.div`
+  display: block;
+  width: 1140px;
+  height: 1px;
+  background: ${(props: any) =>
+    props.isDisable
+      ? "-webkit-linear-gradient(left, transparent 0%, #a7a7a7 50%, transparent 100%)"
+      : "-webkit-linear-gradient(left, transparent 0%, #5f8a90 50%, transparent 100%)"};
 `;
 
 export const InfomationInputBoxWapperTitle: any = styled.div`
@@ -133,45 +131,47 @@ export const InfomationInputBoxWapperTitle: any = styled.div`
   width: 148px;
   height: 100%;
   font-size: 20px;
-  color: ${(props: any) => (props.false ? '#939393' : '#000')};
+  color: ${(props: any) => (props.isDisable ? "#939393" : "#000")};
   text-align: center;
   line-height: 75px;
   float: left;
 `;
 
-export const InfomationInputBoxWapperInputSpace = styled.div`
+export const InfomationInputBoxWapperInputSpace: any = styled.div`
+  display: inline-flex;
   position: relative;
-  display: block;
-  width: 990px;
-  height: 75px;
+  align-items: center;
+  height: 40px;
+  border-radius: 5px;
+  border: solid 0.5px
+    ${(props: any) => (props.isDisable ? "#959595" : "#5f8a90")};
+  overflow: hidden;
 `;
 
 export const InformationInputSpaceArea: any = styled.input`
-  width: 382px;
+  width: ${(props: any) => (props.width ? `${props.width}px` : "366px")};
   height: 40px;
-  border-radius: 5px;
-  background-color: ${(props: any) => (props.false ? '#fcfcfc' : '#fafdfe')};
-  border: solid 0.5px ${(props: any) => (props.false ? '#959595' : '#5f8a90')};
   font-size: 18px;
-  padding-left: 16px;
-  margin-top: 17px;
+  padding: 0 16px;
   color: #26484c;
+  display: inline-block;
+  border: 0;
+  background-color: ${(props: any) =>
+    props.isDisable ? "#fcfcfc" : "#fafdfe"};
 
   &::placeholder {
-    color: ${(props: any) => (props.false ? '#e2e2e2' : '#acbec1')};
+    color: ${(props: any) => (props.isDisable ? "#e2e2e2" : "#acbec1")};
     font-weight: 300;
   }
 `;
 
 export const InformationInputSpaceCheckMark = styled.div`
   position: absolute;
-  display: inline-block;
+  right: 10px;
   font-size: 18px;
   color: #799da1;
   height: 40px;
   line-height: 40px;
-  left: 525px;
-  top: 20px;
 `;
 
 export const InformationInputSpaceWrong = styled.div`
