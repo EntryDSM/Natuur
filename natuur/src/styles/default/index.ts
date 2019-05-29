@@ -1,97 +1,84 @@
-import {
-  createGlobalStyle,
-  GlobalStyleComponent,
-  DefaultTheme
-} from "styled-components";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
 
-import MainBackground from "../../assets/MainPage/main_background.svg";
+// HeadLine
+export const HeadLineCover = styled.div`
+  width: 1140px;
+  margin: 0 auto;
+  height: 260px;
+`;
 
-export const GlobalStyle: GlobalStyleComponent<
-  {},
-  DefaultTheme
-> = createGlobalStyle`
-  @import 'https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css';
+export const HeadLineCoverSubText = styled.h4`
+  padding-top: 125px;
+  font-weight: 500;
+  font-size: 20px;
+  height: 21px;
+  line-height: 21px;
+  color: #000000;
+`;
 
-  /* View Container */
-  .main-page {
-    background-image: url(${MainBackground});
-    background-size: cover;
-    background-position: center center;
+export const HeadLineCoverTitle = styled.h1`
+  font-weight: 500;
+  font-size: 36px;
+  height: 64.5px;
+  line-height: 37px;
+  color: #000000;
+  padding: 10px 0 15px;
+  border-bottom: 2.5px solid #70b1ba;
+  box-sizing: border-box;
+  letter-spacing: -2px;
+  padding-right: 50px;
+  width: fit-content;
+`;
 
-    & > div:first-child {
-      box-shadow: none;
-    }
+// CommonButtons
+export const ButtonComponent = styled.div`
+  width: 1140px;
+  height: 25vh;
+  margin: 0 auto;
+  position: relative;
+`;
+
+export const AcceptButtonComponent = styled.div`
+  width: 100%;
+  position: relative;
+`;
+
+export const ButtonComponentCover: any = styled(Link)`
+  position: absolute;
+  top: 25px;
+  width: 150px;
+  height: 50px;
+  color: ${(props: any) => (props.false ? "#979797" : "#296169")};
+  border-radius: 5px;
+  background-color: ${(props: any) => (props.false ? "#f7fbfc" : " #f7fbfc")};
+  border: 1px solid #5f8a90;
+  border-color: ${(props: any) => props.false && "#a7a7a7"};
+  outline: none;
+  cursor: pointer;
+  transition: 0.5s;
+
+  &:active {
+    background-color: #d8e6e9;
   }
 
-  /* css initialize */
-  html, body {
-    width: 100%;
-    height: 100%;
-    min-width: 1180px;
-    font-family: 'NanumSquareRound', sans-serif;
-  }
+  left: ${(props: any) => props.prev && 0};
+  right: ${(props: any) => props.next && 0};
+`;
 
-  input[type=password] {
-    font-family: sans-serif;
-  }
-  input:focus{
-    outline: none;
-  }
+export const ButtonComponentArrow: any = styled.span`
+  font-size: 19px;
+  color: ${(props: any) => props.false && "#979797"};
+  float: ${(props: any) => (props.prev ? "left" : "right")};
+  margin-left: ${(props: any) => props.prev && "13px"};
+  margin-right: ${(props: any) => props.next && "13px"};
+`;
 
-  html, body, div, span, applet, object, iframe,
-  h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-  a, abbr, acronym, address, big, cite, code,
-  del, dfn, em, img, ins, kbd, q, s, samp,
-  small, strike, strong, sub, sup, tt, var,
-  b, u, i, center,
-  dl, dt, dd, ol, ul, li,
-  fieldset, form, label, legend,
-  table, caption, tbody, tfoot, thead, tr, th, td,
-  article, aside, canvas, details, embed,
-  figure, figcaption, footer, header, hgroup,
-  menu, nav, output, ruby, section, summary,
-  time, mark, audio, video {
-    margin: 0;
-    padding: 0;
-    border: 0;
-  }
-
-  article, aside, details, figcaption, figure,
-  footer, header, hgroup, menu, nav, section {
-    display: block;
-  }
-
-  ol, ul {
-    list-style: none;
-  }
-
-  blockquote, q {
-    quotes: none;
-  }
-
-  blockquote:before, blockquote:after,
-  q:before, q:after {
-    content: '';
-    content: none;
-  }
-
-  a {
-    &:link{
-      color: #000;
-      text-decoration: none;
-    }
-    &:visited{
-      color: #000;
-      text-decoration: none;
-    }
-  }
-
-  .rotate{
-    transform: rotate(180deg);
-  }
-  
-  .btn{
-    display: inline-block;
-    transition: 0.5s;
-  }
+export const ButtonComponentText: any = styled.span`
+  font-size: 18px;
+  color: ${(props: any) => props.false && "#979797"};
+  float: ${(props: any) => (props.prev ? "right" : "left")};
+  margin-top: 2px;
+  margin-right: ${(props: any) => props.prev && "14px"};
+  margin-left: ${(props: any) => props.next && "14px"};
 `;

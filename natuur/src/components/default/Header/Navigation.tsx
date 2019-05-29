@@ -8,7 +8,7 @@ import {
   ContentsLogo,
   ContentList
 } from "../../../styles/Header";
-import { QUESTION_ANSWER_PAGE_LINK, NOTICE_PAGE_LINK } from "../../constance";
+import { QUESTION_ANSWER_PAGE_LINK, NOTICE_PAGE_LINK } from "../Constance";
 import LinkList from "./LinkList";
 
 const Navigation: FC = () => {
@@ -38,7 +38,7 @@ const Navigation: FC = () => {
             external={true}
           />
           <LinkList path="/info-summary" content="전형요강" />
-          <LinkList path="/" content="모집일정" />
+          <LinkList path="/auth" content="모집일정" />
           <LinkList isLogin={true} content={"코드봐야함ㅎ"} />
         </ContentList>
       </WrapperContants>

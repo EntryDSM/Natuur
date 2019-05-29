@@ -1,0 +1,222 @@
+import styled from "styled-components";
+
+// Authorization
+export const Authorization = styled.div``;
+
+export const AuthorizationWrapper = styled.div`
+  width: 1140px;
+  height: 1065px;
+  margin: 0 auto;
+`;
+
+// AcceptTerms
+export const AcceptTermsComponent = styled.div`
+  height: 369px;
+`;
+
+export const AcceptTermsBox = styled.div`
+  position: relative;
+  height: 300px;
+  background: #eff7f8;
+  background: -webkit-linear-gradient(
+    left,
+    transparent 0%,
+    #eff7f8 50%,
+    transparent 100%
+  );
+
+  &::before,
+  &::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 1px;
+    position: absolute;
+    background: -webkit-linear-gradient(
+      left,
+      transparent 0%,
+      #5f8a90 50%,
+      transparent 100%
+    );
+  }
+  &::after {
+    bottom: 0;
+  }
+`;
+
+export const AcceptTermsBoxWapper = styled.div`
+  position: relative;
+  top: 20px;
+  padding: 21px 18px 19px 22px;
+  background-color: #fff;
+`;
+
+export const AcceptTermsWapperContents = styled.div`
+  width: 1100px;
+  height: 220px;
+  font-size: 17px;
+  line-height: 21px;
+  letter-spacing: 0.1px;
+  overflow-y: scroll;
+`;
+
+export const AcceptTermsContentsTitle = styled.span`
+  font-size: 19px;
+  color: #328086;
+`;
+
+export const AcceptTermsCheckBox = styled.div`
+  height: 36px;
+  margin-top: 18px;
+  margin-right: 20px;
+  float: right;
+  display: flex;
+  align-items: center;
+`;
+
+export const AcceptTermsCheckBoxInput = styled.input`
+  display: none;
+`;
+
+export const AcceptTermsCheckBoxLabel: any = styled.label`
+  width: 22px;
+  height: 22px;
+  background-color: ${(props: any) =>
+    props.checkedState ? "#799da1" : "#b9b9b9"};
+  border-radius: 50px;
+  position: relative;
+  margin-right: 5px;
+  display: inline-block;
+  box-sizing: border-box;
+  cursor: pointer;
+  color: #fff;
+  line-height: 22px;
+  text-align: center;
+`;
+
+export const AcceptTermsCheckBoxText = styled.label`
+  cursor: pointer;
+`;
+
+// InformationInputBox
+export const InfomationInputBoxCover: any = styled.div`
+  position: relative;
+  width: 1140px;
+  height: 226px;
+  border-top: 1px solid #5f8a90;
+  border-bottom: 1px solid #5f8a90;
+  border-color: ${(props: any) => props.isDisable && "#a7a7a7"};
+`;
+
+export const InfomationInputBoxCoverWapper = styled.div`
+  position: relative;
+  height: 75px;
+  display: flex;
+  align-items: center;
+`;
+
+export const GradationHorizon: any = styled.div`
+  display: block;
+  width: 1140px;
+  height: 1px;
+  background: ${(props: any) =>
+    props.isDisable
+      ? "-webkit-linear-gradient(left, transparent 0%, #a7a7a7 50%, transparent 100%)"
+      : "-webkit-linear-gradient(left, transparent 0%, #5f8a90 50%, transparent 100%)"};
+`;
+
+export const InfomationInputBoxWapperTitle: any = styled.div`
+  position: relative;
+  display: inline-block;
+  width: 148px;
+  height: 100%;
+  font-size: 20px;
+  color: ${(props: any) => (props.isDisable ? "#939393" : "#000")};
+  text-align: center;
+  line-height: 75px;
+  float: left;
+`;
+
+export const InfomationInputBoxWapperInputSpace: any = styled.div`
+  display: inline-flex;
+  position: relative;
+  align-items: center;
+  height: 40px;
+  border-radius: 5px;
+  border: solid 0.5px
+    ${(props: any) => (props.isDisable ? "#959595" : "#5f8a90")};
+  overflow: hidden;
+`;
+
+export const InformationInputSpaceArea: any = styled.input`
+  width: ${(props: any) => (props.width ? `${props.width}px` : "366px")};
+  height: 40px;
+  font-size: 18px;
+  padding: 0 16px;
+  color: #26484c;
+  display: inline-block;
+  border: 0;
+  background-color: ${(props: any) =>
+    props.isDisable ? "#fcfcfc" : "#fafdfe"};
+
+  &::placeholder {
+    color: ${(props: any) => (props.isDisable ? "#e2e2e2" : "#acbec1")};
+    font-weight: 300;
+  }
+`;
+
+export const InformationInputSpaceCheckMark = styled.div`
+  position: absolute;
+  right: 10px;
+  font-size: 18px;
+  color: #799da1;
+  height: 40px;
+  line-height: 40px;
+`;
+
+export const InformationInputSpaceWrong = styled.div`
+  display: inline-block;
+  position: relative;
+  top: -2px;
+  left: 10px;
+  width: 148px;
+  height: 25px;
+  padding: 0 12px;
+  background: #ffffff;
+  border-radius: 3px;
+  border: #799da1 solid 1px;
+  font-size: 10px;
+  line-height: 25px;
+  color: #26484c;
+  &::after {
+    content: "";
+    position: absolute;
+    border-style: solid;
+    border-width: 5px 4px 5px 0;
+    border-color: transparent #ffffff;
+    display: block;
+    width: 0;
+    z-index: 1;
+    left: -4px;
+    top: 7px;
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    border-style: solid;
+    border-width: 5px 4px 5px 0;
+    border-color: transparent #799da1;
+    width: 0;
+    z-index: 0;
+    left: -5px;
+    top: 7px;
+  }
+`;
+
+export const InformationInputSpaceWarning = styled.span`
+  position: absolute;
+  font-size: 14px;
+  top: 30.5px;
+  right: 23px;
+  color: #939393;
+`;

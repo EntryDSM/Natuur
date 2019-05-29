@@ -17,7 +17,7 @@ import {
   FOOTER_TITLE,
   FACEBOOK_LINK,
   GITHUB_LINK
-} from "../../constance";
+} from "../Constance";
 import FooterLink from "./FooterLink";
 import { logo, faceBook, github } from "../../../assets/Footer";
 
