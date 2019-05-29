@@ -7,7 +7,6 @@ interface Props {
 const Info: FC<Props> = ({ updateAppClass }) => {
   const didMountRef = useRef(false);
 
-  // componentDidmount
   useEffect(() => {
     if (!didMountRef.current) {
       didMountRef.current = true;
