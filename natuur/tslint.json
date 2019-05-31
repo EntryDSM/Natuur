@@ -64,6 +64,7 @@
       { "styled-components": "styled" }
     ],
     "quotemark": false,
-    "ordered-imports": false
+    "ordered-imports": false,
+    "jsx-boolean-value": false
   }
 }
