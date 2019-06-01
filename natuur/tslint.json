@@ -52,6 +52,7 @@
     "import-name": false,
     "quotemark": false,
     "ordered-imports": false,
-    "jsx-boolean-value": false
+    "jsx-boolean-value": false,
+    "ter-arrow-parens": false
   }
 }
