@@ -17,13 +17,10 @@ import {
   SignUp
 } from "./container";
 import GlobalStyle from "./styles/GlobalStyle";
+import ToastrBar from "./components/default/Common/ToastrBarCover";
 
 const App: FC = () => {
   const [appClass, setAppClass] = useState("");
-
-  const updateAppClass = (text: string): void => {
-    setAppClass(text);
-  };
 
   return (
     <BrowserRouter>
@@ -33,40 +30,33 @@ const App: FC = () => {
         <Switch>
           <Route
             path="/"
-            component={() => <Main updateAppClass={updateAppClass} />}
-            exact={true}
+            render={() => <Main updateAppClass={setAppClass} />}
+            exact
           />
           <Route
             path="/auth"
-            component={() => <SignUp updateAppClass={updateAppClass} />}
-            exact={true}
+            render={() => <SignUp updateAppClass={setAppClass} />}
+            exact
           />
-          <Route
-            path="/confirm/:code"
-            component={() => <Login />}
-            exact={true}
-          />
+          <Route path="/confirm/:code" render={() => <Login />} exact />
           <Route
             path="/info-summary"
-            component={() => <Info updateAppClass={updateAppClass} />}
-            exact={true}
+            render={() => <Info updateAppClass={setAppClass} />}
+            exact
           />
-          <Route
-            path="/classify"
-            component={() => <Classification />}
-            exact={true}
-          />
+          <Route path="/classify" render={() => <Classification />} exact />
           <Route
             path="/personal"
-            component={() => <PersonalInformation />}
-            exact={true}
+            render={() => <PersonalInformation />}
+            exact
           />
-          <Route path="/intro" component={() => <Introduce />} exact={true} />
-          <Route path="/preview" component={() => <Preview />} exact={true} />
-          <Route path="/grade" component={() => <Grade />} exact={true} />
-          <Route path="/mypage" component={() => <MyPage />} exact={true} />
+          <Route path="/intro" render={() => <Introduce />} exact />
+          <Route path="/preview" render={() => <Preview />} exact />
+          <Route path="/grade" render={() => <Grade />} exact />
+          <Route path="/mypage" render={() => <MyPage />} exact />
         </Switch>
         <Footer />
+        <ToastrBar />
       </div>
     </BrowserRouter>
   );
