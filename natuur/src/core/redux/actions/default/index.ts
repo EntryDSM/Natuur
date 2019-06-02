@@ -6,7 +6,6 @@ export interface RootState {
 // Types
 export const UPDATE_TOASTR = "UPDATE_TOASTR";
 export const REMOVE_TOASTR = "REMOVE_TOASTR";
-export const TURN_OFF_TOASTR = "TURN_OFF_TOASTR";
 
 export interface PayloadType {
   toastrState?: string;
@@ -26,16 +25,7 @@ interface RemoveToastr {
   payload: PayloadType;
 }
 
-interface TurnOffToastr {
-  type: string;
-  payload: PayloadType;
-}
-
-export type DefaultActionTypes =
-  | UpdateToastr
-  | RemoveToastr
-  | TurnOffToastr
-  | null;
+export type DefaultActionTypes = UpdateToastr | RemoveToastr | null;
 
 // Actions
 export const updateToastr = (payload: RootState) => ({
@@ -43,11 +33,7 @@ export const updateToastr = (payload: RootState) => ({
   type: UPDATE_TOASTR
 });
 
-export const removeToastr = () => ({
-  type: REMOVE_TOASTR
-});
-
-export const turnOffToastr = (payload: number) => ({
+export const removeToastr = (payload: number) => ({
   payload,
-  type: TURN_OFF_TOASTR
+  type: REMOVE_TOASTR
 });
