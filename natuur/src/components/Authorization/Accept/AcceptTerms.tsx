@@ -5,12 +5,8 @@ import {
   AcceptTermsBox,
   AcceptTermsBoxWapper,
   AcceptTermsWapperContents,
-  AcceptTermsContentsTitle,
-  AcceptTermsCheckBox,
-  AcceptTermsCheckBoxInput,
-  AcceptTermsCheckBoxLabel,
-  AcceptTermsCheckBoxText
-} from "../../styles/Authorization";
+  AcceptTermsContentsTitle
+} from "../../../styles/Authorization";
 import {
   ACCEPT_TERMS_CONTENTS_PART_1,
   ACCEPT_TERMS_CONTENTS_PART_2,
@@ -20,23 +16,9 @@ import {
   ACCEPT_TERMS_CONTENTS_PART_6,
   ACCEPT_TERMS_CONTENTS_PART_7,
   ACCEPT_TERMS_CONTENTS_PART_8
-} from "./Constance";
+} from "../Constance";
 
-interface Props {
-  checkedState: string;
-  userEmail: string;
-  userPassword: string;
-  userPasswordCheck: string;
-  isAccept(text: string): void;
-}
-
-const AcceptTerms: FC<Props> = ({
-  isAccept,
-  checkedState,
-  userEmail,
-  userPassword,
-  userPasswordCheck
-}) => (
+const AcceptTerms: FC = () => (
   <AcceptTermsComponent>
     <AcceptTermsBox>
       <AcceptTermsBoxWapper>
@@ -95,29 +77,6 @@ const AcceptTerms: FC<Props> = ({
         </AcceptTermsWapperContents>
       </AcceptTermsBoxWapper>
     </AcceptTermsBox>
-    <AcceptTermsCheckBox>
-      <AcceptTermsCheckBoxInput
-        type="checkbox"
-        id="Accept-checkbox"
-        // checkState에 string값이 없으면 checked로 변경.
-        onClick={() =>
-          !userEmail &&
-          !userPassword &&
-          !userPasswordCheck &&
-          (checkedState ? isAccept("") : isAccept("checked"))
-        }
-        className={checkedState}
-      />
-      <AcceptTermsCheckBoxLabel
-        checkedState={checkedState ? 1 : 0}
-        htmlFor="Accept-checkbox"
-      >
-        ✔
-      </AcceptTermsCheckBoxLabel>
-      <AcceptTermsCheckBoxText htmlFor="Accept-checkbox">
-        개인정보 이용약관에 동의합니다
-      </AcceptTermsCheckBoxText>
-    </AcceptTermsCheckBox>
   </AcceptTermsComponent>
 );
 
