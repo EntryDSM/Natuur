@@ -58,12 +58,10 @@
     ],
     "no-submodule-imports": false,
     "no-implicit-dependencies": false,
-    "import-name": [
-      true,
-      { "react": "React" },
-      { "styled-components": "styled" }
-    ],
+    "import-name": false,
     "quotemark": false,
-    "ordered-imports": false
+    "ordered-imports": false,
+    "jsx-boolean-value": false,
+    "ter-arrow-parens": false
   }
 }
