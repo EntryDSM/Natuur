@@ -28,11 +28,20 @@ const GlobalStyle: GlobalStyleComponent<{}, DefaultTheme> = createGlobalStyle`
     font-family: 'NanumSquareRound', sans-serif;
   }
 
-  input[type=password] {
+  input {
+    &:-webkit-autofill {
+      box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.8) inset;
+    }
+    border: solid 1px rgba(121, 194, 202, 0.5);
+    border-radius: 5px;
+
+    &[type=password] {
     font-family: sans-serif;
-  }
-  input:focus{
-    outline: none;
+    }
+
+    &:focus {
+      outline: none;
+    }
   }
 
   html, body, div, span, applet, object, iframe,

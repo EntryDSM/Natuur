@@ -6,7 +6,9 @@ import {
   FooterCopyright,
   FooterExplain,
   FooterCoverNav,
-  FooterCoverIcons
+  FooterCoverIcons,
+  FooterFooterNavigationCover,
+  FooterNavigation
 } from "../../../styles/Footer";
 import {
   FOOTER_ADDRESS,
@@ -21,7 +23,11 @@ import {
 import FooterLink from "./FooterLink";
 import { logo, faceBook, github } from "../../../assets/Footer";
 
-const FooterContent: FC = () => {
+interface Props {
+  footerNavigationIsActive: number[];
+}
+
+const FooterContent: FC<Props> = ({ footerNavigationIsActive }) => {
   return (
     <FooterCover>
       <FooterLogo src={logo} alt="푸터 로고" />
@@ -33,13 +39,32 @@ const FooterContent: FC = () => {
         <br />
         {FOOTER_ADDRESS}
         <br />
-        {FOOTER_OFFICE /* 교무실 */}
-        <span>{FOOTER_ADMINISTRATIVE /* 행정실 */}</span>
+        {FOOTER_OFFICE/* 교무실 */}
+        <span>{FOOTER_ADMINISTRATIVE/* 행정실 */}</span>
         <br />
         {FOOTER_REGISTRATION}
       </FooterExplain>
 
       <FooterCoverNav>
+        <FooterFooterNavigationCover>
+          <FooterNavigation to="/" isActive={footerNavigationIsActive[0]}>
+            Entry 소개
+          </FooterNavigation>
+          <FooterNavigation
+            to="/"
+            marginTop="14px"
+            isActive={footerNavigationIsActive[1]}
+          >
+            시스템 소개
+          </FooterNavigation>
+          <FooterNavigation
+            to="/"
+            marginTop="14px"
+            isActive={footerNavigationIsActive[2]}
+          >
+            개발자 소개
+          </FooterNavigation>
+        </FooterFooterNavigationCover>
         <FooterCoverIcons>
           <FooterLink
             path={FACEBOOK_LINK}

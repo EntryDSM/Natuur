@@ -14,7 +14,6 @@ interface Props {
   name?: string;
   type?: string;
   isCheckMark?: boolean;
-  isDisable?: boolean;
   isWarning?: boolean;
   warningMessage?: string;
   isReadOnly?: boolean;
@@ -28,7 +27,6 @@ const InputRow: FC<Props> = ({
   name,
   handleChanger,
   isCheckMark,
-  isDisable,
   type,
   isWarning,
   warningMessage,
@@ -37,12 +35,9 @@ const InputRow: FC<Props> = ({
 }) => {
   return (
     <InfomationInputBoxCoverWapper>
-      <InfomationInputBoxWapperTitle isDisable={isDisable}>
-        {title}
-      </InfomationInputBoxWapperTitle>
+      <InfomationInputBoxWapperTitle>{title}</InfomationInputBoxWapperTitle>
       <TextInput
         type={type}
-        isDisable={isDisable}
         placeHolder={placeHolder}
         name={name}
         handleChanger={handleChanger}

@@ -10,7 +10,11 @@ export const Mainhider = styled.div`
   position: relative;
 `;
 
-export const MainPageCover = styled.div`
+interface MainPageCoverProps {
+  readonly page1?: boolean;
+  readonly page2?: boolean;
+}
+export const MainPageCover = styled.div<MainPageCoverProps>`
   width: 100%;
   height: 100%;
   display: flex;
@@ -18,8 +22,8 @@ export const MainPageCover = styled.div`
   align-items: center;
   position: absolute;
   top: 0;
-  right: ${(props: any) => props.page1 && 0};
-  left: ${(props: any) => props.page2 && 0};
+  right: ${props => props.page1 && 0};
+  left: ${props => props.page2 && 0};
 `;
 
 export const MainContent = styled.div`

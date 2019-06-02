@@ -6,16 +6,15 @@ export const HeaderNav = styled.div`
 
 export const NavWrapper = styled.nav`
   height: 60px;
-  padding: 0 auto;
+  margin: 0 auto;
 `;
 
 export const WrapperContants = styled.div`
   position: relative;
-  width: 1160px;
+  width: 1140px;
   height: 100%;
   margin: 0 auto;
   display: flex;
-  flex-direction: row;
 `;
 
 export const ContentsLogo = styled.div`
@@ -33,26 +32,21 @@ export const ContentsLogo = styled.div`
   }
 `;
 
-export const ContentList = styled.ul`
-  position: absolute;
+export const ContentsUser = styled.div`
   display: flex;
   align-items: center;
   height: 100%;
-  right: 0;
+  margin-left: auto;
 `;
 
-export const ContentListLink: any = styled.li`
-  line-height: 60px;
-  height: 100%;
-  padding: 0 15px;
-  margin-left: 15px;
-  display: inline-block;
-  margin-left: ${(props: any) => (props.isLogin ? "67px" : "none")};
+export const UserName = styled.p`
+  font-size: 14px;
+  color: #000000;
+  margin-right: 3px;
+`;
 
-  & > span {
-    background-color: #65bbb7;
-    padding: 7px 18px;
-    border-radius: 30px;
-    color: #fff;
-  }
+export const SlideBar = styled.img`
+  width: 10px;
+  height: 6px;
+  object-fit: contain;
 `;

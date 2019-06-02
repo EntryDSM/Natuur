@@ -6,7 +6,7 @@ import { HeaderNav } from "../../../styles/Header";
 const Header: FC = () => {
   return (
     <HeaderNav>
-      <Navigation />
+      <Navigation isActive />
     </HeaderNav>
   );
 };

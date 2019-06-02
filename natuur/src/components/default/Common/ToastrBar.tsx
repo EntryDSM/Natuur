@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef } from "react";
+import React, { FC, useEffect, useRef, useCallback } from "react";
 import {
   ToastrBarContents,
   ToastrBarMessage,
@@ -12,12 +12,10 @@ interface Props {
   toastrMessage?: string;
   timer?: number;
   id: number;
-  turnOffToastr(id: number): void;
-  removeToastr(): void;
+  removeToastr(id: number): void;
 }
 
 const ToastrBar: FC<Props> = ({
-  turnOffToastr,
   removeToastr,
   toastrState,
   toastrTitle,
@@ -26,23 +24,24 @@ const ToastrBar: FC<Props> = ({
   id
 }) => {
   const didMountRef = useRef(false);
+  let timeChecker;
+
+  const StopToTimeChecker = useCallback(() => {
+    clearTimeout(timeChecker);
+    removeToastr(id);
+  },                                    []);
 
   useEffect(() => {
     if (!didMountRef.current) {
       didMountRef.current = true;
 
       // timer의 시간에 맞춰서 component를 지움
-      setTimeout(() => {
-        removeToastr();
-      },         timer * 1000);
+      timeChecker = setTimeout(() => removeToastr(id), timer * 1000);
     }
   },        []);
 
   return (
-    <ToastrBarContents
-      toastrState={toastrState}
-      onClick={() => turnOffToastr(id)}
-    >
+    <ToastrBarContents toastrState={toastrState} onClick={StopToTimeChecker}>
       <ToastrBarProgress timer={timer} />
       <ToastrBarTitle>{toastrTitle}</ToastrBarTitle>
       <ToastrBarMessage>{toastrMessage}</ToastrBarMessage>

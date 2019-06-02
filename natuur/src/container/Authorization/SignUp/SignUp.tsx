@@ -1,12 +1,13 @@
 import React, { FC, useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
 
+import { HeadLine } from "../../../components/default/Common";
 import {
   AcceptTerms,
   InformationDisableInputBox,
-  InformationInputBox
+  InformationInputBox,
+  PrivacyCheckBox
 } from "../../../components/Authorization";
-import { HeadLine } from "../../../components/default/Common";
 import {
   Authorization,
   AuthorizationWrapper
@@ -16,6 +17,7 @@ import {
   updateUserPassword,
   updateUserPasswordCheck
 } from "../../../core/redux/actions/Authorization";
+import { updateToastr, PayloadType } from "../../../core/redux/actions/default";
 
 interface Props {
   userEmail: string;
@@ -25,6 +27,7 @@ interface Props {
   updateUserEmail(targetValue: string): any;
   updateUserPassword(targetValue: string): void;
   updateUserPasswordCheck(targetValue: string): void;
+  updateToastr(toastrData: PayloadType): void;
 }
 
 const SignUp: FC<Props> = ({
@@ -34,7 +37,8 @@ const SignUp: FC<Props> = ({
   updateAppClass,
   updateUserEmail,
   updateUserPassword,
-  updateUserPasswordCheck
+  updateUserPasswordCheck,
+  updateToastr
 }) => {
   const didMountRef = useRef(false);
   useEffect(() => {
@@ -48,36 +52,13 @@ const SignUp: FC<Props> = ({
   // check 박스 class이름을 저장.
   const [checked, setChecked] = useState("");
 
-  // 체크 박스 클릭 동작
-  const isAccept = (state: string): void => {
-    setChecked(state);
-  };
-
-  // Id, Pw, PwCheck를 store에 dispatch
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    const { name, value } = event.target;
-
-    switch (name) {
-      case "updateUserEmail":
-        updateUserEmail(value);
-        break;
-      case "updateUserPassword":
-        updateUserPassword(value);
-        break;
-      case "updateUserPasswordCheck":
-        updateUserPasswordCheck(value);
-        break;
-      default:
-        return;
-    }
-  };
-
   return (
     <Authorization>
       <AuthorizationWrapper>
-        <HeadLine title="2020 지원자 본인인증" />
-        <AcceptTerms
-          isAccept={isAccept}
+        <HeadLine title="2020 지원자 계정 생성하기" />
+        <AcceptTerms />
+        <PrivacyCheckBox
+          isAccept={setChecked}
           checkedState={checked}
           userEmail={userEmail}
           userPassword={userPassword}
@@ -88,10 +69,12 @@ const SignUp: FC<Props> = ({
             userEmail={userEmail}
             userPassword={userPassword}
             userPasswordCheck={userPasswordCheck}
-            handleChange={handleChange}
+            updateUserEmail={updateUserEmail}
+            updateUserPassword={updateUserPassword}
+            updateUserPasswordCheck={updateUserPasswordCheck}
           />
         ) : (
-          <InformationDisableInputBox />
+          <InformationDisableInputBox updateToastr={updateToastr} />
         )}
       </AuthorizationWrapper>
     </Authorization>
@@ -105,6 +88,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+  updateToastr: toastrData => dispatch(updateToastr(toastrData)),
   updateUserEmail: targetValue => dispatch(updateUserEmail(targetValue)),
   updateUserPassword: targetValue => dispatch(updateUserPassword(targetValue)),
   updateUserPasswordCheck: targetValue =>

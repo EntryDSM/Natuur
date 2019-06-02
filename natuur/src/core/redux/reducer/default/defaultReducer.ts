@@ -2,8 +2,7 @@ import {
   UPDATE_TOASTR,
   RootState,
   DefaultActionTypes,
-  REMOVE_TOASTR,
-  TURN_OFF_TOASTR
+  REMOVE_TOASTR
 } from "../../actions/default";
 
 const initialState: RootState = {
@@ -16,31 +15,26 @@ const defaultReducer = (
 ): RootState => {
   switch (action.type) {
     case UPDATE_TOASTR: {
-      const { toastrInformations } = state;
       const { toastrMessage, toastrTitle, toastrState, timer } = action.payload;
 
       return {
         ...state,
-        toastrInformations: toastrInformations.concat({
-          timer,
-          toastrMessage,
-          toastrState,
-          toastrTitle
-        })
+        toastrInformations: [
+          {
+            timer,
+            toastrMessage,
+            toastrState,
+            toastrTitle
+          }
+        ]
       };
     }
     case REMOVE_TOASTR: {
-      return {
-        ...state,
-        toastrInformations: []
-      };
-    }
-    case TURN_OFF_TOASTR: {
       const { toastrInformations } = state;
       return {
         ...state,
         toastrInformations: toastrInformations.filter(
-          (value, id) => id !== action.payload
+          (_, id) => id !== action.payload
         )
       };
     }

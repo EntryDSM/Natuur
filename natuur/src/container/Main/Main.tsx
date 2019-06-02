@@ -1,4 +1,5 @@
 import React, { FC, useRef, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 interface Props {
   updateAppClass(text: string): void;
@@ -14,8 +15,8 @@ const Main: FC<Props> = ({ updateAppClass }) => {
       updateAppClass("main-page");
       return;
     }
-  }, []);
-  return <div>a</div>;
+  },        []);
+  return <Link to="/auth">ff</Link>;
 };
 
 export default Main;

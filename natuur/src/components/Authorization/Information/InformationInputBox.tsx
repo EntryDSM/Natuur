@@ -3,9 +3,9 @@ import React, { FC, useCallback } from "react";
 import {
   InfomationInputBoxCover,
   GradationHorizon
-} from "../../styles/Authorization";
-import AcceptButton from "./AcceptButton";
-import InputRow from "../default/Common/InputRow";
+} from "../../../styles/Authorization";
+import AcceptButton from "../Accept/AcceptButton";
+import InputRow from "../../default/Common/InputRow";
 
 interface Props {
   userEmail: string;
@@ -69,7 +69,7 @@ const InformationInputBox: FC<Props> = ({
           placeHolder="••••••••"
           name="passwordInput"
           type="password"
-          isWarning={true}
+          isWarning
           warningMessage="* 영문, 숫자 포함 8자리 이상 16자리 이하"
           isCheckMark={passwordReg.test(userPassword)}
           handleChanger={handlePassword}
