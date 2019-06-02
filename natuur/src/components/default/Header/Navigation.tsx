@@ -1,17 +1,23 @@
 import React, { FC } from "react";
 import { Link } from "react-router-dom";
+import buttonDropdown from "../../../assets/Header/buttonDropdown.png";
 
 import EntryLogo from "../../../assets/entry_logo.png";
 import {
   NavWrapper,
   WrapperContants,
   ContentsLogo,
-  ContentList
+  ContentsUser,
+  UserName,
+  SlideBar
 } from "../../../styles/Header";
-import { QUESTION_ANSWER_PAGE_LINK, NOTICE_PAGE_LINK } from "../Constance";
-import LinkList from "./LinkList";
 
-const Navigation: FC = () => {
+interface Props {
+  userName?: string;
+  isActive: boolean;
+}
+
+const Navigation: FC<Props> = ({ userName, isActive }) => {
   return (
     <NavWrapper>
       <WrapperContants>
@@ -24,23 +30,12 @@ const Navigation: FC = () => {
             />
           </Link>
         </ContentsLogo>
-        <ContentList>
-          <LinkList
-            path={NOTICE_PAGE_LINK}
-            target="_blank"
-            content="공지사항"
-            external={true}
-          />
-          <LinkList
-            path={QUESTION_ANSWER_PAGE_LINK}
-            target="_blank"
-            content="Q&A"
-            external={true}
-          />
-          <LinkList path="/info-summary" content="전형요강" />
-          <LinkList path="/auth" content="모집일정" />
-          <LinkList isLogin={true} content={"코드봐야함ㅎ"} />
-        </ContentList>
+        {isActive && (
+          <ContentsUser>
+            <UserName>{`${userName} 님`}</UserName>
+            <SlideBar src={buttonDropdown} alt="슬라이더" />
+          </ContentsUser>
+        )}
       </WrapperContants>
     </NavWrapper>
   );
