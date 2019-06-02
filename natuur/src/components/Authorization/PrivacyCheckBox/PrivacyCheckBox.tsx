@@ -37,7 +37,7 @@ const PrivacyCheckBox: FC<Props> = ({
         className={checkedState}
       />
       <PrivacyCheckBoxLabel
-        checkedState={checkedState ? 1 : 0}
+        checkedState={checkedState ? true : false}
         htmlFor="Accept-checkbox"
       >
         ✔
