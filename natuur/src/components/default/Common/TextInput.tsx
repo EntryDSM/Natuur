@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { checkIcon } from "../../../assets/common";
 
 import {
   InfomationInputBoxWapperInputSpace,
@@ -12,7 +13,6 @@ interface Props {
   name: string;
   type?: string;
   isCheckMark?: boolean;
-  isDisable?: boolean;
   isReadOnly: boolean;
   handleChanger(event: React.ChangeEvent<HTMLInputElement>): void;
 }
@@ -23,14 +23,12 @@ const TextInput: FC<Props> = ({
   name,
   handleChanger,
   isCheckMark,
-  isDisable,
   type,
   isReadOnly
 }) => {
   return (
-    <InfomationInputBoxWapperInputSpace isDisable={isDisable}>
+    <InfomationInputBoxWapperInputSpace>
       <InformationInputSpaceArea
-        isDisable={isDisable}
         width={width}
         type={type}
         placeholder={placeHolder}
@@ -38,9 +36,7 @@ const TextInput: FC<Props> = ({
         onChange={event => handleChanger(event)}
         readOnly={isReadOnly}
       />
-      {isCheckMark && (
-        <InformationInputSpaceCheckMark>✓</InformationInputSpaceCheckMark>
-      )}
+      {isCheckMark && <InformationInputSpaceCheckMark src={checkIcon} />}
     </InfomationInputBoxWapperInputSpace>
   );
 };
