@@ -53,6 +53,7 @@
     "quotemark": false,
     "ordered-imports": false,
     "jsx-boolean-value": false,
-    "ter-arrow-parens": false
+    "ter-arrow-parens": false,
+    "prefer-array-literal": false
   }
 }
