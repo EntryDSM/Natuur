@@ -58,13 +58,13 @@ export const FooterFooterNavigationCover = styled.div`
 `;
 
 export const FooterNavigation = styled(Link)<{
-  marginTop?: string;
-  isActive?: number;
+  margintop?: string;
+  isactive?: number;
 }>`
   font-size: 14px;
   color: #ffffff;
-  margin-top: ${props => props.marginTop};
-  opacity: ${props => (props.isActive ? "1" : "0.6")};
+  margin-top: ${props => props.margintop};
+  opacity: ${props => (props.isactive ? "1" : "0.6")};
 
   &:link {
     color: #ffffff;
