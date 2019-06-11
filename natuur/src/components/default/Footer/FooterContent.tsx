@@ -47,20 +47,20 @@ const FooterContent: FC<Props> = ({ footerNavigationIsActive }) => {
 
       <FooterCoverNav>
         <FooterFooterNavigationCover>
-          <FooterNavigation to="/" isActive={footerNavigationIsActive[0]}>
+          <FooterNavigation to="/" isactive={footerNavigationIsActive[0]}>
             Entry 소개
           </FooterNavigation>
           <FooterNavigation
             to="/"
-            marginTop="14px"
-            isActive={footerNavigationIsActive[1]}
+            margintop="14px"
+            isactive={footerNavigationIsActive[1]}
           >
             시스템 소개
           </FooterNavigation>
           <FooterNavigation
-            to="/"
-            marginTop="14px"
-            isActive={footerNavigationIsActive[2]}
+            to="/auth"
+            margintop="14px"
+            isactive={footerNavigationIsActive[2]}
           >
             개발자 소개
           </FooterNavigation>
