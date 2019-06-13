@@ -6,30 +6,30 @@ interface Props {
   periodList: Array<{ title: string; date: string }>;
 }
 
+const setDate = (): { month: number; day: number } => {
+  const newDate = new Date();
+
+  const month = newDate.getMonth() + 1;
+  const day = newDate.getDate();
+
+  return { month, day };
+};
+
+const formatDate = ({
+  month,
+  day
+}: {
+  month: number;
+  day: number;
+}): { toDayYear: string; toDayMonth: string; toDayDate: string } => {
+  const toDayYear = `${new Date().getFullYear()}`.slice(2);
+  const toDayMonth = month < 10 ? `0${month}` : `${month}`;
+  const toDayDate = day < 10 ? `0${day}` : `${day}`;
+
+  return { toDayYear, toDayMonth, toDayDate };
+};
+
 const MainTitles: FC<Props> = ({ periodList }) => {
-  const setDate = (): { month: number; day: number } => {
-    const newDate = new Date();
-
-    const month = newDate.getMonth() + 1;
-    const day = newDate.getDate();
-
-    return { month, day };
-  };
-
-  const formatDate = ({
-    month,
-    day
-  }: {
-    month: number;
-    day: number;
-  }): { toDayYear: string; toDayMonth: string; toDayDate: string } => {
-    const toDayYear = `${new Date().getFullYear()}`.slice(2);
-    const toDayMonth = month < 10 ? `0${month}` : `${month}`;
-    const toDayDate = day < 10 ? `0${day}` : `${day}`;
-
-    return { toDayYear, toDayMonth, toDayDate };
-  };
-
   const { toDayYear, toDayMonth, toDayDate } = formatDate(setDate());
 
   const toDay = `${toDayYear}년 ${toDayMonth}월 ${toDayDate}일`;
