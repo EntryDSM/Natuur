@@ -14,6 +14,8 @@ const GlobalStyle: GlobalStyleComponent<{}, DefaultTheme> = createGlobalStyle`
     background-image: url(${MainBackground});
     background-size: cover;
     background-position: center center;
+    display: flex;
+    flex-direction: column;
 
     & > div:first-child {
       box-shadow: none;
@@ -60,6 +62,8 @@ const GlobalStyle: GlobalStyleComponent<{}, DefaultTheme> = createGlobalStyle`
     margin: 0;
     padding: 0;
     border: 0;
+    font-size: 0;
+    font-weight: normal;
   }
 
   article, aside, details, figcaption, figure,

@@ -1,134 +1,72 @@
 import styled from "styled-components";
 
 export const Mainhider = styled.div`
-  overflow-x: hidden;
   width: 100%;
-
-  /* 네비게이션, 푸터 제외 */
   height: calc(100vh - 60px);
-  min-height: 750px;
-  position: relative;
+  min-height: 780px;
 `;
 
-interface MainPageCoverProps {
-  readonly page1?: boolean;
-  readonly page2?: boolean;
-}
-export const MainPageCover = styled.div<MainPageCoverProps>`
+export const MainPageCover = styled.div`
+  width: 1140px;
+  margin: 80px auto 0;
+  display: flex;
+  flex-direction: column;
+`;
+
+export const MainHeadLineCover = styled.div<{ marginBottom: string }>`
   width: 100%;
-  height: 100%;
+  margin-bottom: ${props => props.marginBottom};
+`;
+
+export const MainHeadLineCoverSubText = styled.h4`
+  font-size: 28px;
+  color: #000000;
+  margin-bottom: 16px;
+`;
+
+export const MainHeadLineCoverTitle = styled.h1`
+  font-size: 54px;
+  letter-spacing: -2.7px;
+  color: #000000;
+`;
+
+export const MainContents = styled.div`
+  width: 1147px;
+  height: 561px;
+  background-color: #ffffff;
+  border-top: 8px solid #65bbb7;
+  border-bottom: 8px solid #65bbb7;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
-  top: 0;
-  right: ${props => props.page1 && 0};
-  left: ${props => props.page2 && 0};
 `;
 
-export const MainContent = styled.div`
-  width: 1140px;
-  font-size: 0;
+export const ContentsSorter = styled.div`
+  width: 924px;
+  height: 383px;
   display: flex;
-  flex-wrap: wrap;
-  align-content: flex-start;
-  margin-bottom: 100px;
-  border-bottom: solid 6px #6ab7b7;
+  flex-direction: column;
+  align-items: center;
 `;
 
-export const MainSubTitle = styled.h4`
-  height: 50px;
-  width: 100%;
-  font-size: 28px;
+interface ContentsTextProps {
+  fontSize?: string;
+  textMargin?: string;
+  imfactSize?: string;
+  imfactColor?: string;
+  imfactMargin?: string;
+}
+
+export const ContentsText = styled.p<ContentsTextProps>`
+  font-weight: bold;
+  font-size: ${props => `${props.fontSize}`};
+  color: #000000;
+  margin-bottom: ${props => `${props.textMargin}`};
 `;
 
-export const MainTitle = styled.h1`
-  height: 50px;
-  line-height: 50px;
-  font-size: 54px;
-  flex: 1;
-  margin-bottom: 51px;
+export const ContentsImfactText = styled.span<ContentsTextProps>`
+  font-weight: bold;
+  font-size: ${props => `${props.imfactSize}`};
+  color: ${props => props.imfactColor};
+  margin: 0 ${props => `${props.imfactMargin}`};
 `;
-
-//   @include e('hider') {
-//   }
-//   @include e('cover') {
-//   }
-//   @include e('content') {
-//   }
-//   @include e('sub-text') {
-//   }
-//   @include e('title') {
-//   }
-//   @include e('link-box') {
-//     font-size: 0;
-//   }
-//   @include e('link') {
-//     height: 50px;
-//     display: inline-block;
-//     width: 175px;
-//     border-radius: 30px;
-//     background: -webkit-linear-gradient(left, #82cdca, #5db3b6);
-//     box-shadow: 1px 25px 20px -15px #9ff0eb;
-//     font-size: 22px;
-//     color: #fff;
-//     border: none;
-//     cursor: pointer;
-//     line-height: 50px;
-//     text-align: center;
-//     margin-left: 25px;
-//     text-decoration: none;
-//   }
-// }
-
-// // animation
-
-// .page1 {
-//   &-enter {
-//     right: 100%;
-//   }
-
-//   &-enter-to, &-leave {
-//     right: 0;
-//   }
-
-//   &-leave-to {
-//     right: 100%;
-//   }
-
-//   &-enter-active, &-leave-active {
-//     transition: right 1s cubic-bezier(0.8, 0, 0.4, 1);
-//   }
-// }
-
-// .page2 {
-//   &-enter {
-//     left: 100%;
-//   }
-
-//   &-enter-to, &-leave {
-//     left: 0;
-//   }
-
-//   &-leave-to {
-//     left: 100%;
-//   }
-
-//   &-enter-active, &-leave-active {
-//     transition: left 1s cubic-bezier(0.8, 0, 0.4, 1);
-//   }
-// }
-
-// .appear {
-//   &-enter {
-//     opacity: 0;
-//   }
-
-//   &-enter-to {
-//     opacity: 1;
-//   }
-
-//   &-enter-active {
-//     transition: opacity .5s;
-//   }
-// }
