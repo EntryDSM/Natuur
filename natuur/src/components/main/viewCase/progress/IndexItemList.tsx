@@ -12,7 +12,7 @@ interface Props {
   setTimeStempChecker(timeStempNumber: number): void;
 }
 
-const IndexItemsBox: FC<Props> = ({
+const IndexItemList: FC<Props> = ({
   periodList,
   checkImgList,
   setTimeStempChecker
@@ -30,4 +30,4 @@ const IndexItemsBox: FC<Props> = ({
   </>
 );
 
-export default IndexItemsBox;
+export default IndexItemList;
