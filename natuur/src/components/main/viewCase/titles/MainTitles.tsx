@@ -2,10 +2,6 @@ import React, { FC } from "react";
 
 import MainContentsTitle from "./MainContentsTitle";
 
-interface Props {
-  periodList: Array<{ title: string; date: string }>;
-}
-
 const setDate = (): { month: number; day: number } => {
   const newDate = new Date();
 
@@ -15,7 +11,7 @@ const setDate = (): { month: number; day: number } => {
   return { month, day };
 };
 
-const formatDate = ({
+const getFormatDate = ({
   month,
   day
 }: {
@@ -29,13 +25,29 @@ const formatDate = ({
   return { toDayYear, toDayMonth, toDayDate };
 };
 
-const MainTitles: FC<Props> = ({ periodList }) => {
-  const { toDayYear, toDayMonth, toDayDate } = formatDate(setDate());
+interface Props {
+  periodList: Array<{ title: string; date: number }>;
+  periodListFactor: number;
+  remainingPeriod: string;
+}
+
+const MainTitles: FC<Props> = ({
+  periodList,
+  periodListFactor,
+  remainingPeriod
+}) => {
+  const { toDayYear, toDayMonth, toDayDate } = getFormatDate(setDate());
 
   const toDay = `${toDayYear}년 ${toDayMonth}월 ${toDayDate}일`;
 
-  const title1 = ["지금은", periodList[0].title, "기간입니다."];
-  const title2 = ["오늘은 ", toDay, "이며 마감일까지 ", "00일", " 남았습니다."];
+  const title1 = ["지금은", periodList[periodListFactor].title, "기간입니다."];
+  const title2 = [
+    "오늘은 ",
+    toDay,
+    "이며 마감일까지 ",
+    remainingPeriod,
+    " 남았습니다."
+  ];
 
   return (
     <>
