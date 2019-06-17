@@ -14,11 +14,15 @@ const IndexItem: FC<Props> = ({
   image,
   timeStempNumber,
   setTimeStempChecker
-}) => (
-  <IndexCover onClick={() => setTimeStempChecker(timeStempNumber)}>
-    <IndexTitle>{title}</IndexTitle>
-    <IndexIcon src={image} alt={image} />
-  </IndexCover>
-);
+}) => {
+  const boundSetTimeStempChecker = setTimeStempChecker.bind(timeStempNumber);
+
+  return (
+    <IndexCover onClick={boundSetTimeStempChecker}>
+      <IndexTitle>{title}</IndexTitle>
+      <IndexIcon src={image} alt={image} />
+    </IndexCover>
+  );
+};
 
 export default IndexItem;
