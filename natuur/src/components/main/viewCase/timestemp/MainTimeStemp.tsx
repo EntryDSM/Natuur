@@ -7,9 +7,9 @@ interface Props {
 }
 
 const MainTimeStemp: FC<Props> = ({ content }) => (
-  <div>
+  <>
     <TimeStempContent>{content}</TimeStempContent>
-  </div>
+  </>
 );
 
 export default MainTimeStemp;
