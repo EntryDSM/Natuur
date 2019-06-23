@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 
 import { ContentsSorter } from "../../../styles/Main";
+import { getCookie } from "../../../lib";
 import {
   MainProgress,
   MainTitles,
@@ -11,7 +12,7 @@ import {
 interface Props {
   checkImgList: boolean[];
   timeStempChecker: number;
-  periodList: Array<{ title: string; date: number }>;
+  periodList: Array<{ title: string; startDate: Date; endDate: Date }>;
   periodListFactor: number;
   timeStempDate: string[];
   formatPeriod: string;
@@ -40,12 +41,17 @@ const ViewOpen: FC<Props> = ({
       checkImgList={checkImgList}
       progressWidth={progressWidth}
       setTimeStempChecker={setTimeStempChecker}
+      timeStempChecker={timeStempChecker}
     />
-    <MainTimeStemp content={timeStempDate[timeStempChecker]} />
-    <MainButton
+    <MainTimeStemp
       content={
-        sessionStorage.getItem("token") ? "원서작성 하러가기" : "로그인 하기"
+        timeStempChecker >= 0
+          ? timeStempDate[timeStempChecker]
+          : "이용기간이 아닙니다."
       }
+    />
+    <MainButton
+      content={getCookie ? "원서작성 하러가기" : "로그인 하기"}
       clickEvent={() => {
         return 0;
       }}
