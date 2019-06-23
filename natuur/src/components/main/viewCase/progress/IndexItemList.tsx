@@ -7,14 +7,16 @@ import {
 import IndexItem from "./IndexItem";
 
 interface Props {
-  periodList: Array<{ title: string; date: number }>;
+  periodList: Array<{ title: string; startDate: Date; endDate: Date }>;
   checkImgList: boolean[];
+  timeStempChecker: number;
   setTimeStempChecker(timeStempNumber: number): void;
 }
 
 const IndexItemList: FC<Props> = ({
   periodList,
   checkImgList,
+  timeStempChecker,
   setTimeStempChecker
 }) => (
   <>
@@ -25,6 +27,7 @@ const IndexItemList: FC<Props> = ({
         timeStempNumber={index}
         setTimeStempChecker={setTimeStempChecker}
         key={value.title}
+        timeStempChecker={timeStempChecker}
       />
     ))}
   </>
