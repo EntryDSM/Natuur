@@ -62,7 +62,8 @@
     "react-hot-loader": "^4.8.2",
     "tslint-config-airbnb": "^5.11.1",
     "tslint-config-prettier": "^1.18.0",
-    "tslint-react": "^4.0.0"
+    "tslint-react": "^4.0.0",
+    "tslint-react-hooks": "^2.1.1"
   },
   "scripts": {
     "start": "webpack-dev-server --content-base dist/ --mode development --open --hot",
