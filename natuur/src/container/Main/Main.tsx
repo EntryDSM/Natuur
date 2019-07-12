@@ -1,16 +1,10 @@
-import React, {
-  FC,
-  useState,
-  useRef,
-  useEffect,
-  useCallback,
-  useMemo
-} from "react";
+import React, { FC, useState, useRef, useEffect, useCallback } from "react";
 
 import { Mainhider, MainPageCover, MainContents } from "../../styles/Main";
 import {
   setDateComtrolStatements,
-  isDateControlStatements
+  isDateControlStatements,
+  getTimeStempDate
 } from "../../lib/utils/main";
 import {
   timeChangeChecker,
@@ -20,17 +14,17 @@ import {
 } from "../../lib/utils/main/progress";
 import { MainHeadLine } from "../../components/default/Common";
 import { ViewOpen, ViewClose } from "../../components/main";
-import { PERIOD_LIST, TIME_STEMP_DATE } from "../../components/main/constance";
-
-interface Props {
-  updateAppClass(text: string): void;
-}
+import { PERIOD_LIST } from "../../components/main/constance";
 
 const newDate = new Date();
 const todayYear = newDate.getFullYear();
 const todayMonth = newDate.getMonth();
 const todayDate = newDate.getDate();
 const todayHours = newDate.getHours();
+
+interface Props {
+  updateAppClass(text: string): void;
+}
 
 const Main: FC<Props> = ({ updateAppClass }) => {
   const didMountRef = useRef(false);
@@ -50,8 +44,15 @@ const Main: FC<Props> = ({ updateAppClass }) => {
   const [progressWidth, setProgressWidth] = useState(0);
   const [isOpenView, setIsOpenView] = useState(false);
   const [timeStempChecker, setTimeStempChecker] = useState(timeStempDateFactor);
-  const [periodListFactor, setPeriodListFactor] = useState(timeStempDateFactor);
+  const [checkImgList, setCheckImgList] = useState([
+    false,
+    false,
+    false,
+    false,
+    false
+  ]);
 
+  const periodListFactor = timeStempDateFactor();
   const remainingPeriodFactor = getRemainingPeriod(
     todayYear,
     todayMonth,
@@ -60,21 +61,8 @@ const Main: FC<Props> = ({ updateAppClass }) => {
     periodListFactor,
     PERIOD_LIST
   );
-
-  const [formatPeriod, setFormatPeriod] = useState(
-    getFormatDate(remainingPeriodFactor)
-  );
-  const [checkImgList, setCheckImgList] = useState([
-    false,
-    false,
-    false,
-    false,
-    false
-  ]);
-  const [remainingPeriod, setRemainingPeriod] = useState(remainingPeriodFactor);
-  const [isPresentEndPoint, setIsFirstPresentEndPoint] = useState(
-    setDateComtrolStatements(PERIOD_LIST)
-  );
+  const formatPeriod = getFormatDate(remainingPeriodFactor);
+  const isPresentEndPoint = setDateComtrolStatements(PERIOD_LIST);
 
   useEffect(() => {
     if (!didMountRef.current) {
@@ -88,7 +76,7 @@ const Main: FC<Props> = ({ updateAppClass }) => {
         PERIOD_LIST
       );
 
-      if (remainingPeriod) {
+      if (remainingPeriodFactor) {
         if (isDateControlStatements(PERIOD_LIST, isPresentEndPoint)) {
           setIsOpenView(true);
         } else {
@@ -110,7 +98,7 @@ const Main: FC<Props> = ({ updateAppClass }) => {
               setTimeStempChecker={setTimeStempChecker}
               periodList={PERIOD_LIST}
               periodListFactor={periodListFactor}
-              timeStempDate={TIME_STEMP_DATE}
+              timeStempDate={getTimeStempDate(PERIOD_LIST)}
               formatPeriod={formatPeriod}
               progressWidth={progressWidth}
             />

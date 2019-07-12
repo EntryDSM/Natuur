@@ -27,6 +27,7 @@ function checkHandler(
       return false;
     });
   }
+  return checkImgList;
 }
 
 export default function timeChangeChecker(
@@ -48,24 +49,28 @@ export default function timeChangeChecker(
   const stopProgressPlace = Math.floor(stopIncrementProgressStandard);
   const increaseOfDay = stopProgressPlace * pastTime;
 
-  const checkImgList = [false, false, false, false, false];
+  let checkImgList = [false, false, false, false, false];
 
   if (
     +new Date() >
     +PERIOD_LIST[periodListFactor >= 0 ? periodListFactor : 0].startDate
   ) {
     const incrementProgressWidth = setInterval(() => {
-      setCheckImgList(
-        checkHandler(progressWidth, stopProgressPlace, checkImgList)
+      checkImgList = checkHandler(
+        progressWidth,
+        stopProgressPlace,
+        checkImgList
       );
 
-      if (progressWidth >= increaseOfDay) {
+      setCheckImgList(checkImgList);
+
+      if (progressWidth >= increaseOfDay || progressWidth === 100) {
         clearInterval(incrementProgressWidth);
         return;
       }
 
       progressWidth += 1;
       setProgressWidth(progressWidth);
-    },                                         20);
+    },                                         25);
   }
 }

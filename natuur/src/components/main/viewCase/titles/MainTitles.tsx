@@ -4,7 +4,7 @@ import MainContentsTitle from "./MainContentsTitle";
 import { setDate, formatDate } from "../../../../lib/utils/main/titles";
 
 interface Props {
-  periodList: Array<{ title: string; date: number }>;
+  periodList: Array<{ title: string; startDate: Date; endDate: Date }>;
   periodListFactor: number;
   remainingPeriod: string;
 }
@@ -15,14 +15,24 @@ const MainTitles: FC<Props> = ({
   remainingPeriod
 }) => {
   const { todayYear, todayMonth, todayDate } = formatDate(setDate());
+  const isCheckRemainingDate =
+    +new Date(
+      new Date().getFullYear(),
+      new Date().getMonth(),
+      new Date().getDate(),
+      new Date().getHours()
+    ) < +periodList[0].startDate;
 
   const today = `${todayYear}년 ${todayMonth}월 ${todayDate}일`;
-
-  const title = ["지금은", periodList[periodListFactor].title, "기간입니다."];
+  const title = [
+    "지금은",
+    isCheckRemainingDate ? "대기" : periodList[periodListFactor].title,
+    "기간입니다."
+  ];
   const subTitle = [
     "오늘은 ",
     today,
-    "이며 마감일까지 ",
+    `이며 ${isCheckRemainingDate ? "작성일" : "마감일"}까지 `,
     remainingPeriod,
     " 남았습니다."
   ];

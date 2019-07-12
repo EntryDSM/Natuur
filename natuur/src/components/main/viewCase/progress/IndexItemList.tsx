@@ -18,19 +18,26 @@ const IndexItemList: FC<Props> = ({
   checkImgList,
   timeStempChecker,
   setTimeStempChecker
-}) => (
-  <>
-    {periodList.map((value, index) => (
-      <IndexItem
-        title={value.title}
-        image={checkImgList[index] ? mainCheckIconActive : mainCheckIconDisable}
-        timeStempNumber={index}
-        setTimeStempChecker={setTimeStempChecker}
-        key={value.title}
-        timeStempChecker={timeStempChecker}
-      />
-    ))}
-  </>
-);
+}) => {
+  console.log(checkImgList);
+  return (
+    <>
+      {periodList.map((value, index) => {
+        return (
+          <IndexItem
+            title={value.title}
+            image={
+              checkImgList[index] ? mainCheckIconActive : mainCheckIconDisable
+            }
+            timeStempNumber={index}
+            setTimeStempChecker={setTimeStempChecker}
+            key={value.title}
+            timeStempChecker={timeStempChecker}
+          />
+        );
+      })}
+    </>
+  );
+};
 
 export default IndexItemList;
