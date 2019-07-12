@@ -6,7 +6,7 @@ import { HeaderNav } from "../../../styles/Header";
 const Header: FC = () => {
   return (
     <HeaderNav>
-      <Navigation isActive />
+      <Navigation isActive={sessionStorage.getItem("token") ? true : false} />
     </HeaderNav>
   );
 };
