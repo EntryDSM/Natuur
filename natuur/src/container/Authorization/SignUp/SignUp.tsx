@@ -17,18 +17,30 @@ import {
   updateUserPassword,
   updateUserPasswordCheck
 } from "../../../core/redux/actions/Authorization";
-import { updateToastr, PayloadType } from "../../../core/redux/actions/default";
+import { updateToastr } from "../../../core/redux/actions/default";
+import { AppState } from "../../../core/redux/store/store";
 
-interface Props {
-  userEmail: string;
-  userPassword: string;
-  userPasswordCheck: string;
-  updateAppClass(text: string): void;
-  updateUserEmail(targetValue: string): any;
-  updateUserPassword(targetValue: string): void;
-  updateUserPasswordCheck(targetValue: string): void;
-  updateToastr(toastrData: PayloadType): void;
+const mapStateToProps = (state: AppState) => ({
+  userEmail: state.AuthorizationReducer.userEmail,
+  userPassword: state.AuthorizationReducer.userPassword,
+  userPasswordCheck: state.AuthorizationReducer.userPasswordCheck
+});
+
+const mapDispatchToProps = dispatch => ({
+  updateToastr: toastrData => dispatch(updateToastr(toastrData)),
+  updateUserEmail: targetValue => dispatch(updateUserEmail(targetValue)),
+  updateUserPassword: targetValue => dispatch(updateUserPassword(targetValue)),
+  updateUserPasswordCheck: targetValue =>
+    dispatch(updateUserPasswordCheck(targetValue))
+});
+
+interface OwnProps {
+  updateAppClass(className: string): void;
 }
+
+type Props = ReturnType<typeof mapStateToProps> &
+  ReturnType<typeof mapDispatchToProps> &
+  OwnProps;
 
 const SignUp: FC<Props> = ({
   userEmail,
@@ -80,20 +92,6 @@ const SignUp: FC<Props> = ({
     </Authorization>
   );
 };
-
-const mapStateToProps = state => ({
-  userEmail: state.AuthorizationReducer.userEmail,
-  userPassword: state.AuthorizationReducer.userPassword,
-  userPasswordCheck: state.AuthorizationReducer.userPasswordCheck
-});
-
-const mapDispatchToProps = dispatch => ({
-  updateToastr: toastrData => dispatch(updateToastr(toastrData)),
-  updateUserEmail: targetValue => dispatch(updateUserEmail(targetValue)),
-  updateUserPassword: targetValue => dispatch(updateUserPassword(targetValue)),
-  updateUserPasswordCheck: targetValue =>
-    dispatch(updateUserPasswordCheck(targetValue))
-});
 
 export default connect(
   mapStateToProps,
