@@ -19,7 +19,6 @@ const IndexItemList: FC<Props> = ({
   timeStempChecker,
   setTimeStempChecker
 }) => {
-  console.log(checkImgList);
   return (
     <>
       {periodList.map((value, index) => {
