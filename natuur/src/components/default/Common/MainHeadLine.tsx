@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, memo } from "react";
 
 import {
   MainHeadLineCover,
@@ -12,15 +12,17 @@ interface Props {
   title: string;
 }
 
-const MainHeadLine: FC<Props> = ({
-  subText = "대덕소프트웨어마이스터고등학교",
-  title,
-  marginBottom = "50px"
-}) => (
-  <MainHeadLineCover marginBottom={marginBottom}>
-    <MainHeadLineCoverSubText>{subText}</MainHeadLineCoverSubText>
-    <MainHeadLineCoverTitle>{title}</MainHeadLineCoverTitle>
-  </MainHeadLineCover>
+const MainHeadLine: FC<Props> = memo(
+  ({
+    subText = "대덕소프트웨어마이스터고등학교",
+    title,
+    marginBottom = "50px"
+  }) => (
+    <MainHeadLineCover marginBottom={marginBottom}>
+      <MainHeadLineCoverSubText>{subText}</MainHeadLineCoverSubText>
+      <MainHeadLineCoverTitle>{title}</MainHeadLineCoverTitle>
+    </MainHeadLineCover>
+  )
 );
 
 export default MainHeadLine;

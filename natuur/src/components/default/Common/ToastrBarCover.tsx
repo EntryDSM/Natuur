@@ -1,14 +1,21 @@
-import React, { FC } from "react";
+import React, { FC, Dispatch } from "react";
 import { connect } from "react-redux";
 
 import { ToastrBarContainer } from "../../../styles/default";
 import { ToastrBar } from ".";
-import { PayloadType, removeToastr } from "../../../core/redux/actions/default";
+import { removeToastr } from "../../../core/redux/actions/default";
+import { AppState } from "../../../core/redux/store/store";
 
-interface Props {
-  toastrInformations: PayloadType[];
-  removeToastr(): void;
-}
+const mapStateToProps = (State: AppState) => ({
+  toastrInformations: State.defaultReducer.toastrInformations
+});
+
+const mapDispatchToProps = dispatch => ({
+  removeToastr: id => dispatch(removeToastr(id))
+});
+
+type Props = ReturnType<typeof mapStateToProps> &
+  ReturnType<typeof mapDispatchToProps>;
 
 const ToastrBarCover: FC<Props> = ({ toastrInformations, removeToastr }) => {
   return (
@@ -30,14 +37,6 @@ const ToastrBarCover: FC<Props> = ({ toastrInformations, removeToastr }) => {
     </ToastrBarContainer>
   );
 };
-
-const mapStateToProps = State => ({
-  toastrInformations: State.defaultReducer.toastrInformations
-});
-
-const mapDispatchToProps = dispatch => ({
-  removeToastr: id => dispatch(removeToastr(id))
-});
 
 export default connect(
   mapStateToProps,

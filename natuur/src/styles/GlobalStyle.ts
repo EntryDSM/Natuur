@@ -7,7 +7,7 @@ import {
 import MainBackground from "../assets/MainPage/main_background.svg";
 
 const GlobalStyle: GlobalStyleComponent<{}, DefaultTheme> = createGlobalStyle`
-  @import 'https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css';
+  @import 'https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css';
 
   /* View Container */
   .main-page {
@@ -27,7 +27,7 @@ const GlobalStyle: GlobalStyleComponent<{}, DefaultTheme> = createGlobalStyle`
     width: 100%;
     height: 100%;
     min-width: 1180px;
-    font-family: 'NanumSquareRound', sans-serif;
+    font-family: 'NanumSquare', sans-serif;
   }
 
   input {
@@ -62,8 +62,6 @@ const GlobalStyle: GlobalStyleComponent<{}, DefaultTheme> = createGlobalStyle`
     margin: 0;
     padding: 0;
     border: 0;
-    font-size: 0;
-    font-weight: normal;
   }
 
   article, aside, details, figcaption, figure,

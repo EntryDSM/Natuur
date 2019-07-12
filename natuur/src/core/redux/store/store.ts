@@ -1,4 +1,5 @@
 import { createStore, applyMiddleware } from "redux";
+import { composeWithDevTools } from "redux-devtools-extension";
 import reduxSaga from "redux-saga";
 
 import reducer from "../reducer";
@@ -10,14 +11,9 @@ const sagaMiddleWare = reduxSaga();
 // redux mapState type
 export type AppState = ReturnType<typeof reducer>;
 
-const devtools =
-  (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
-  (window as any).__REDUX_DEVTOOLS_EXTENSION__();
-
 export const store = createStore(
   reducer,
-  devtools,
-  applyMiddleware(sagaMiddleWare)
+  composeWithDevTools(applyMiddleware(sagaMiddleWare))
 );
 
 sagaMiddleWare.run(sagas);
