@@ -68,27 +68,9 @@ export function getTimeStempDate(
   const successfulCandidate = periodList[4].title;
 
   function getKoreanDayData(dayDate: number): string {
-    if (dayDate === 0) {
-      return "일";
-    }
-    if (dayDate === 1) {
-      return "월";
-    }
-    if (dayDate === 2) {
-      return "화";
-    }
-    if (dayDate === 3) {
-      return "수";
-    }
-    if (dayDate === 4) {
-      return "목";
-    }
-    if (dayDate === 5) {
-      return "금";
-    }
-    if (dayDate === 6) {
-      return "토";
-    }
+    const koreanDate = ["일", "월", "화", "수", "목", "금", "토"];
+
+    return koreanDate[dayDate];
   }
 
   const result = periodList.map((value, index) => {
