@@ -60,3 +60,62 @@ export const isDateControlStatements = (
 
   return true;
 };
+
+export function getTimeStempDate(
+  periodList: Array<{ endDate: Date; startDate: Date; title: string }>
+): string[] {
+  const application = periodList[0].title;
+  const successfulCandidate = periodList[4].title;
+
+  function getKoreanDayData(dayDate: number): string {
+    if (dayDate === 0) {
+      return "일";
+    }
+    if (dayDate === 1) {
+      return "월";
+    }
+    if (dayDate === 2) {
+      return "화";
+    }
+    if (dayDate === 3) {
+      return "수";
+    }
+    if (dayDate === 4) {
+      return "목";
+    }
+    if (dayDate === 5) {
+      return "금";
+    }
+    if (dayDate === 6) {
+      return "토";
+    }
+  }
+
+  const result = periodList.map((value, index) => {
+    const { startDate, endDate, title } = value;
+
+    const yearDate = startDate.getFullYear();
+    const startMonthDate = startDate.getMonth() + 1;
+    const startDateDate = startDate.getDate();
+    const startDayDate = startDate.getDay();
+    const startHourDate = startDate.getHours();
+    const endMonthDate = endDate.getMonth() + 1;
+    const endDateDate = endDate.getDate();
+    const endDayDate = endDate.getDay();
+    const endHourDate = endDate.getHours();
+
+    if (title === application || title === successfulCandidate) {
+      return `${yearDate}.${startMonthDate}.${startDateDate} (${getKoreanDayData(
+        startDayDate
+      )}) 0${startHourDate}:00 ~ ${yearDate}.${endMonthDate}.${endDateDate} (${getKoreanDayData(
+        endDayDate
+      )}) ${endHourDate}:00`;
+    }
+
+    return `${yearDate}.${startMonthDate}.${startDateDate} (${getKoreanDayData(
+      startDayDate
+    )})`;
+  });
+
+  return result;
+}
