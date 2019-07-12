@@ -1,41 +1,41 @@
 import React, { FC } from "react";
 
 import MainContentsTitle from "./MainContentsTitle";
+import { setDate, formatDate } from "../../../../lib/utils/main/titles";
 
 interface Props {
-  periodList: Array<{ title: string; date: string }>;
+  periodList: Array<{ title: string; startDate: Date; endDate: Date }>;
+  periodListFactor: number;
+  remainingPeriod: string;
 }
 
-const setDate = (): { month: number; day: number } => {
-  const newDate = new Date();
+const MainTitles: FC<Props> = ({
+  periodList,
+  periodListFactor,
+  remainingPeriod
+}) => {
+  const { todayYear, todayMonth, todayDate } = formatDate(setDate());
+  const isCheckRemainingDate =
+    +new Date(
+      new Date().getFullYear(),
+      new Date().getMonth(),
+      new Date().getDate(),
+      new Date().getHours()
+    ) < +periodList[0].startDate;
 
-  const month = newDate.getMonth() + 1;
-  const day = newDate.getDate();
-
-  return { month, day };
-};
-
-const formatDate = ({
-  month,
-  day
-}: {
-  month: number;
-  day: number;
-}): { toDayYear: string; toDayMonth: string; toDayDate: string } => {
-  const toDayYear = `${new Date().getFullYear()}`.slice(2);
-  const toDayMonth = month < 10 ? `0${month}` : `${month}`;
-  const toDayDate = day < 10 ? `0${day}` : `${day}`;
-
-  return { toDayYear, toDayMonth, toDayDate };
-};
-
-const MainTitles: FC<Props> = ({ periodList }) => {
-  const { toDayYear, toDayMonth, toDayDate } = formatDate(setDate());
-
-  const toDay = `${toDayYear}년 ${toDayMonth}월 ${toDayDate}일`;
-
-  const title1 = ["지금은", periodList[0].title, "기간입니다."];
-  const title2 = ["오늘은 ", toDay, "이며 마감일까지 ", "00일", " 남았습니다."];
+  const today = `${todayYear}년 ${todayMonth}월 ${todayDate}일`;
+  const title = [
+    "지금은",
+    isCheckRemainingDate ? "대기" : periodList[periodListFactor].title,
+    "기간입니다."
+  ];
+  const subTitle = [
+    "오늘은 ",
+    today,
+    `이며 ${isCheckRemainingDate ? "작성일" : "마감일"}까지 `,
+    remainingPeriod,
+    " 남았습니다."
+  ];
 
   return (
     <>
@@ -45,20 +45,20 @@ const MainTitles: FC<Props> = ({ periodList }) => {
         imfactSize="30px"
         imfactColor="#005c4f"
         imfactMargin="6px"
-        noticeText1={title1[0]}
-        noticeText2={title1[1]}
-        noticeTextLast={title1[2]}
+        noticeText1={title[0]}
+        noticeText2={title[1]}
+        noticeTextLast={title[2]}
       />
       <MainContentsTitle
         isSubTitle
         fontSize="24px"
         imfactSize="22px"
         imfactColor="#41beb8"
-        noticeText1={title2[0]}
-        noticeText2={title2[1]}
-        noticeText3={title2[2]}
-        noticeText4={title2[3]}
-        noticeTextLast={title2[4]}
+        noticeText1={subTitle[0]}
+        noticeText2={subTitle[1]}
+        noticeText3={subTitle[2]}
+        noticeText4={subTitle[3]}
+        noticeTextLast={subTitle[4]}
       />
     </>
   );
