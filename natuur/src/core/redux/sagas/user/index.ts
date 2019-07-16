@@ -2,13 +2,16 @@ import { all, fork, takeLatest, put, call } from "redux-saga/effects";
 
 import { LOG_IN, LOG_IN_SUCCESS, LOG_IN_FAILURE } from "../../actions/user";
 import { getLoginApi } from "../../../../lib/api";
+import { LogIn } from "../../actions/user/index";
 
-function* getLogin() {
+function* getLogin(action: LogIn) {
   try {
-    const response = yield call(getLoginApi);
+    const response: { access: string; refresh: string } = yield call(
+      getLoginApi,
+      action.payload
+    );
     yield put({ type: LOG_IN_SUCCESS, payload: response });
   } catch (e) {
-    console.log(e);
     yield put({ type: LOG_IN_FAILURE, payload: e });
   }
 }
