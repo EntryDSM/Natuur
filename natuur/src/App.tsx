@@ -1,6 +1,7 @@
 import React, { FC, useState } from "react";
 import { hot } from "react-hot-loader/root";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { connect } from "react-redux";
 
 import {
   Classification,
@@ -9,7 +10,6 @@ import {
   Header,
   Info,
   Introduce,
-  Login,
   Main,
   MyPage,
   PersonalInformation,
@@ -18,19 +18,29 @@ import {
 } from "./container";
 import GlobalStyle from "./styles/GlobalStyle";
 import ToastrBar from "./components/default/Common/ToastrBarCover";
+import { AppState } from "./core/redux/store/store";
 
-const App: FC = () => {
+const mapStaetToProps = (state: AppState) => ({
+  accessToken: state.userReducer.accessToken,
+  refreshToken: state.userReducer.refreshToken
+});
+
+type Props = ReturnType<typeof mapStaetToProps>;
+
+const App: FC<Props> = ({ accessToken, refreshToken }) => {
   const [appClass, setAppClass] = useState("");
 
   return (
     <BrowserRouter>
       <div className={appClass}>
         <GlobalStyle />
-        <Header />
+        <Header accessToken={accessToken} />
         <Switch>
           <Route
             path="/"
-            render={() => <Main updateAppClass={setAppClass} />}
+            render={() => (
+              <Main accessToken={accessToken} updateAppClass={setAppClass} />
+            )}
             exact
           />
           <Route
@@ -38,7 +48,6 @@ const App: FC = () => {
             render={() => <SignUp updateAppClass={setAppClass} />}
             exact
           />
-          <Route path="/confirm/:code" render={() => <Login />} exact />
           <Route
             path="/info-summary"
             render={() => <Info updateAppClass={setAppClass} />}
@@ -62,4 +71,9 @@ const App: FC = () => {
   );
 };
 
-export default hot(App);
+export default hot(
+  connect(
+    mapStaetToProps,
+    null
+  )(App)
+);

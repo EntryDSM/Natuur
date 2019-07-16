@@ -1,7 +1,4 @@
-// reducerState
-export interface RootState {
-  toastrInformations: PayloadType[];
-}
+import { RootState } from "../../reducer/default/defaultReducer";
 
 // Types
 export const UPDATE_TOASTR = "UPDATE_TOASTR";
