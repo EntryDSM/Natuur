@@ -2,13 +2,18 @@ import React, { FC } from "react";
 
 import Navigation from "../../../components/default/Header/Navigation";
 import { HeaderNav } from "../../../styles/Header";
-import { getCookie } from "../../../lib";
 
-const Header: FC = () => {
+interface OwnProps {
+  accessToken: string;
+}
+
+const Header: FC<OwnProps> = ({ accessToken }) => {
   return (
     <HeaderNav>
       <Navigation
-        isActive={getCookie !== "" && getCookie !== null ? true : false}
+        isActive={
+          accessToken !== "" && accessToken !== undefined ? true : false
+        }
       />
     </HeaderNav>
   );

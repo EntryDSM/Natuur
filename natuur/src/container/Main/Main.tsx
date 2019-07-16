@@ -1,10 +1,12 @@
 import React, { FC, useState, useRef, useEffect, useCallback } from "react";
+import { connect } from "react-redux";
 
-import { Mainhider, MainPageCover, MainContents } from "../../styles/Main";
+import * as S from "../../styles/Main";
 import {
   setDateComtrolStatements,
   isDateControlStatements,
-  getTimeStempDate
+  getTimeStempDate,
+  decideViewFirstEnter
 } from "../../lib/utils/main";
 import {
   timeChangeChecker,
@@ -15,6 +17,24 @@ import {
 import { MainHeadLine } from "../../components/default/Common";
 import { ViewOpen, ViewClose } from "../../components/main";
 import { PERIOD_LIST } from "../../components/main/constance";
+import {
+  getIsUpdatePopUp,
+  updatePopUpCase
+} from "../../core/redux/actions/popup";
+import PopUp from "../default/popup/PopUp";
+
+const mapDispatchToProps = dispatch => ({
+  getIsUpdatePopUp: () => dispatch(getIsUpdatePopUp()),
+  updatePopUpCase: (popUpCase: "default" | "login" | "set" | "check") =>
+    dispatch(updatePopUpCase(popUpCase))
+});
+
+interface OwnProps {
+  accessToken: string;
+  updateAppClass(text: string): void;
+}
+
+type Props = ReturnType<typeof mapDispatchToProps> & OwnProps;
 
 const newDate = new Date();
 const todayYear = newDate.getFullYear();
@@ -22,11 +42,12 @@ const todayMonth = newDate.getMonth();
 const todayDate = newDate.getDate();
 const todayHours = newDate.getHours();
 
-interface Props {
-  updateAppClass(text: string): void;
-}
-
-const Main: FC<Props> = ({ updateAppClass }) => {
+const Main: FC<Props> = ({
+  updateAppClass,
+  getIsUpdatePopUp,
+  updatePopUpCase,
+  accessToken
+}) => {
   const didMountRef = useRef(false);
 
   const timeStempDateFactor = useCallback(
@@ -41,17 +62,6 @@ const Main: FC<Props> = ({ updateAppClass }) => {
     []
   );
 
-  const [progressWidth, setProgressWidth] = useState(0);
-  const [isOpenView, setIsOpenView] = useState(false);
-  const [timeStempChecker, setTimeStempChecker] = useState(timeStempDateFactor);
-  const [checkImgList, setCheckImgList] = useState([
-    false,
-    false,
-    false,
-    false,
-    false
-  ]);
-
   const periodListFactor = timeStempDateFactor();
   const remainingPeriodFactor = getRemainingPeriod(
     todayYear,
@@ -64,6 +74,22 @@ const Main: FC<Props> = ({ updateAppClass }) => {
   const formatPeriod = getFormatDate(remainingPeriodFactor);
   const isPresentEndPoint = setDateComtrolStatements(PERIOD_LIST);
 
+  const [progressWidth, setProgressWidth] = useState(0);
+  const [timeStempChecker, setTimeStempChecker] = useState(timeStempDateFactor);
+  const [checkImgList, setCheckImgList] = useState([
+    false,
+    false,
+    false,
+    false,
+    false
+  ]);
+  const [isOpenView, setIsOpenView] = useState(
+    decideViewFirstEnter(
+      remainingPeriodFactor,
+      isDateControlStatements(PERIOD_LIST, isPresentEndPoint)
+    )
+  );
+
   useEffect(() => {
     if (!didMountRef.current) {
       didMountRef.current = true;
@@ -75,40 +101,49 @@ const Main: FC<Props> = ({ updateAppClass }) => {
         setCheckImgList,
         PERIOD_LIST
       );
-
-      if (remainingPeriodFactor) {
-        if (isDateControlStatements(PERIOD_LIST, isPresentEndPoint)) {
-          setIsOpenView(true);
-        } else {
-          setIsOpenView(false);
-        }
-      }
     }
   },        []);
 
   return (
-    <Mainhider>
-      <MainPageCover>
-        <MainHeadLine title="2020 신입생 모집" />
-        <MainContents>
-          {isOpenView ? (
-            <ViewOpen
-              checkImgList={checkImgList}
-              timeStempChecker={timeStempChecker}
-              setTimeStempChecker={setTimeStempChecker}
-              periodList={PERIOD_LIST}
-              periodListFactor={periodListFactor}
-              timeStempDate={getTimeStempDate(PERIOD_LIST)}
-              formatPeriod={formatPeriod}
-              progressWidth={progressWidth}
-            />
-          ) : (
-            <ViewClose />
-          )}
-        </MainContents>
-      </MainPageCover>
-    </Mainhider>
+    <>
+      <PopUp
+        getIsUpdatePopUp={getIsUpdatePopUp}
+        updatePopUpCase={updatePopUpCase}
+      />
+      <S.Mainhider>
+        <S.MainPageCover>
+          <MainHeadLine title="2020 신입생 모집" />
+          <S.MainContents>
+            {isOpenView ? (
+              <ViewOpen
+                checkImgList={checkImgList}
+                timeStempChecker={timeStempChecker}
+                setTimeStempChecker={setTimeStempChecker}
+                periodList={PERIOD_LIST}
+                periodListFactor={periodListFactor}
+                timeStempDate={getTimeStempDate(PERIOD_LIST)}
+                formatPeriod={formatPeriod}
+                progressWidth={progressWidth}
+                getIsUpdatePopUp={getIsUpdatePopUp}
+                updatePopUpCase={updatePopUpCase}
+                accessToken={accessToken}
+              />
+            ) : (
+              <ViewClose
+                setIsOpenView={setIsOpenView}
+                getIsUpdatePopUp={getIsUpdatePopUp}
+                updatePopUpCase={updatePopUpCase}
+                accessToken={accessToken}
+              />
+            )}
+          </S.MainContents>
+        </S.MainPageCover>
+      </S.Mainhider>
+    </>
   );
 };
 
-export default Main;
+export default connect(
+  null,
+  mapDispatchToProps
+)(Main);
