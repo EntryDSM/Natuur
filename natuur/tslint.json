@@ -38,6 +38,7 @@
     "switch-default": true,
 
     "trailing-comma": [false],
+    "ban-comma-operator": false,
 
     "triple-equals": [true, "allow-null-check"],
     "typedef": [true, "parameter", "property-declaration"],
