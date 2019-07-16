@@ -49,6 +49,31 @@ export const ContentsSorter = styled.div`
   align-items: center;
 `;
 
+interface ViewCloseTextProps {
+  isColor?: boolean;
+  isSmall?: boolean;
+  isSmallMargin?: boolean;
+  isTitle?: boolean;
+  isWaitingPeriod?: boolean;
+}
+export const ViewCloseText = styled.p<ViewCloseTextProps>`
+  font-size: ${props => (props.isSmall ? "18px" : "40px")};
+  color: ${props => (props.isColor ? "#65bbb7" : "#000000")};
+  line-height: ${props => (props.isSmall ? "2" : "80px")};
+  ${props => props.isSmallMargin && "margin-top: 82px"};
+  ${props => !props.isWaitingPeriod && "margin-top: 45px"};
+  ${props => props.isTitle && "margin-top: 55px"};
+
+  img {
+    display: inline;
+    margin-right: 4px;
+  }
+`;
+
+export const ViewCloseStressText = styled.span`
+  color: #005c4f;
+`;
+
 // Titles
 interface ContentsTextProps {
   fontSize?: string;
@@ -99,10 +124,11 @@ export const IndexCover = styled.div`
 `;
 
 export const IndexTitle = styled.p`
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.83;
   text-align: center;
   color: #005c4f;
+  letter-spacing: -1.9px;
 `;
 
 export const IndexIcon = styled.img`
@@ -136,13 +162,20 @@ export const TimeStempContent = styled.p`
 `;
 
 // button
-export const ButtonCover = styled.div`
+export const ButtonCover = styled.div<{ isWaitingPeriod: boolean }>`
   width: 300px;
   height: 52px;
+  margin-top: auto;
   border-radius: 30px;
-  box-shadow: 0 3px 25px 0 rgba(101, 187, 183, 0.5);
-  background-color: #65bbb7;
+  box-shadow: ${props =>
+    props.isWaitingPeriod
+      ? "0 3px 25px 0 rgba(191, 191, 191, 0.5)"
+      : "0 3px 25px 0 rgba(101, 187, 183, 0.5)"};
+  background-color: ${props => (props.isWaitingPeriod ? "#a2a2a2" : "#65bbb7")};
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
 `;
 
