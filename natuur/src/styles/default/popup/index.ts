@@ -45,7 +45,7 @@ export const LodingGifCover = styled.img`
   height: 48px;
 `;
 
-export const InputBox = styled.input<{ center?: boolean }>`
+export const InputBox = styled.input<{ isCenter?: boolean }>`
   width: 250px;
   height: 40px;
   color: #acc6c9;
@@ -53,7 +53,7 @@ export const InputBox = styled.input<{ center?: boolean }>`
   box-sizing: border-box;
   padding: 12px 20px;
   font-size: 14px;
-  text-align: ${props => (props.center ? "center" : "left")};
+  text-align: ${props => (props.isCenter ? "center" : "left")};
   margin-bottom: 10px;
   border: none;
   border-radius: 0px;
@@ -88,16 +88,16 @@ export const Title = styled.p`
 `;
 
 interface TextProps {
-  question?: boolean;
-  titleText?: boolean;
-  logoText?: boolean;
+  isQuestion?: boolean;
+  isTitleText?: boolean;
+  isLogoText?: boolean;
 }
 export const Text = styled.p<TextProps>`
   font-size: ${props =>
-    props.question ? "8px" : props.titleText ? "12px" : "14px"};
-  color: ${props => (props.question ? "#acc6c9" : "#000000")};
-  margin: ${props => props.titleText && "18px 0"};
-  margin: ${props => props.logoText && "20px 0"};
+    props.isQuestion ? "8px" : props.isTitleText ? "12px" : "14px"};
+  color: ${props => (props.isQuestion ? "#acc6c9" : "#000000")};
+  margin: ${props => props.isTitleText && "18px 0"};
+  margin: ${props => props.isLogoText && "20px 0"};
 `;
 
 export const PeculiarText = styled.p`
@@ -108,15 +108,15 @@ export const PeculiarText = styled.p`
 
 export const PeculiarLink = styled(Link)`
   font-size: 12px;
-  color: #acc6c9 !important;
+  color: #acc6c9;
   cursor: pointer;
 `;
 
-export const QuestionBox = styled.div<{ smallBox?: boolean }>`
+export const QuestionBox = styled.div<{ isSmallBox?: boolean }>`
   position: absolute;
   bottom: 58px;
   width: 250px;
-  height: ${props => (props.smallBox ? "29px" : "40px")};
+  height: ${props => (props.isSmallBox ? "29px" : "40px")};
   border: solid 1px #b8ced1;
   line-height: 1.5;
   display: flex;
@@ -131,36 +131,36 @@ export const TitleHorizon = styled.div`
   border: solid 1px #91c2ca;
 `;
 
-export const ElementCover = styled.div<{ check?: boolean }>`
+export const ElementCover = styled.div<{ isCheck?: boolean }>`
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: ${props => (props.check ? "40px" : "0px")};
+  margin-bottom: ${props => (props.isCheck ? "40px" : "0px")};
 `;
 
 interface LogoCoverProps {
-  popUpTitle?: boolean;
-  compleate?: boolean;
+  isPopUpTitle?: boolean;
+  isCompleate?: boolean;
 }
 export const InputCover = styled(ElementCover)`
   flex-direction: column;
 `;
 export const LogoCover = styled(ElementCover)<LogoCoverProps>`
   margin-bottom: ${props =>
-    props.popUpTitle ? "8px" : props.compleate ? "24px" : "20px"};
+    props.isPopUpTitle ? "8px" : props.isCompleate ? "24px" : "20px"};
 `;
-export const PeculiarCover = styled(ElementCover)<{ question?: boolean }>`
+export const PeculiarCover = styled(ElementCover)<{ isQuestion?: boolean }>`
   height: 38px;
   flex-direction: column;
   justify-content: space-between;
-  position: ${props => props.question && "absolute"};
-  bottom: ${props => props.question && "90px"};
+  position: ${props => props.isQuestion && "absolute"};
+  bottom: ${props => props.isQuestion && "90px"};
 `;
 export const TitleCover = styled(ElementCover)`
   height: 65px;
 `;
-export const ButtonCover = styled(ElementCover)<{ loginButton?: boolean }>`
-  margin-bottom: ${props => (props.loginButton ? "25px" : "0px")};
+export const ButtonCover = styled(ElementCover)<{ isLoginButton?: boolean }>`
+  margin-bottom: ${props => (props.isLoginButton ? "25px" : "0px")};
   justify-content: space-between;
 `;
