@@ -12,7 +12,7 @@ const Header: FC<OwnProps> = ({ accessToken }) => {
     <HeaderNav>
       <Navigation
         isActive={
-          accessToken !== "" && accessToken !== undefined ? true : false
+          accessToken !== "" ? true : false
         }
       />
     </HeaderNav>

@@ -61,12 +61,12 @@ const ViewOpen: FC<Props> = ({
         content={
           timeStempChecker < 0
             ? "대기"
-            : accessToken !== "" && accessToken !== undefined
+            : accessToken !== ""
             ? "원서작성 하러가기"
             : "로그인 하기"
         }
         clickEvent={
-          accessToken !== "" && accessToken !== undefined
+          accessToken !== ""
             ? () => console.log(1)
             : () => loginEvent(getIsUpdatePopUp, updatePopUpCase, "login")
         }
