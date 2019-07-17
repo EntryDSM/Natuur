@@ -6,7 +6,7 @@ interface Props {
   userEmail: string;
   setUserEmail: (userEmail: string) => void;
   changeSetNextPasswordModal: () => void;
-  actionPressEnter: (
+  handleKeyPress: (
     { key }: React.KeyboardEvent<HTMLInputElement>,
     handleEvent: () => void
   ) => void;
@@ -16,11 +16,11 @@ const EmailChecker = ({
   userEmail,
   setUserEmail,
   changeSetNextPasswordModal,
-  actionPressEnter
+  handleKeyPress
 }) => (
   <>
     <S.ElementCover>
-      <S.Text titleText>
+      <S.Text isTitleText>
         본인인증 시 인증했던 이메일 주소를 입력해주세요.
       </S.Text>
     </S.ElementCover>
@@ -29,7 +29,7 @@ const EmailChecker = ({
       <S.InputBox
         value={userEmail}
         onKeyPress={e =>
-          actionPressEnter(
+          handleKeyPress(
             e,
             () => userEmail.trim() && changeSetNextPasswordModal()
           )

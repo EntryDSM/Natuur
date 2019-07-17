@@ -5,7 +5,15 @@ import { mapStateToProps } from "../../container/default/popup/PopUp";
 import { CheckPopUp, SetPasswordPopUp } from ".";
 import Login from "../../container/Authorization/Login/Login";
 import { loginEvent } from "../../lib/utils/modal/login";
-import { actionPressEnter } from "../../lib/utils/common";
+
+const handleKeyPress = (
+  { key }: React.KeyboardEvent<HTMLInputElement>,
+  handleEvent: () => void
+) => {
+  if (key === "Enter") {
+    handleEvent();
+  }
+};
 
 interface OwnProps {
   updatePopUpCase(popUpCase: "default" | "login" | "set" | "check"): void;
@@ -29,14 +37,14 @@ const PopUpModal: FC<Props> = ({
           <S.ContentCover>
             {itIsUpdatePopUpCase === "login" && (
               <Login
-                actionPressEnter={actionPressEnter}
+                handleKeyPress={handleKeyPress}
                 updatePopUpCase={updatePopUpCase}
                 getIsUpdatePopUp={getIsUpdatePopUp}
               />
             )}
             {itIsUpdatePopUpCase === "set" && (
               <SetPasswordPopUp
-                actionPressEnter={actionPressEnter}
+                handleKeyPress={handleKeyPress}
                 updatePopUpCase={updatePopUpCase}
               />
             )}

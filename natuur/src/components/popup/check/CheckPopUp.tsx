@@ -9,18 +9,18 @@ interface OwnProps {
 
 const CheckPopUp: FC<OwnProps> = ({ updatePopUpCase }) => (
   <>
-    <S.LogoCover compleate>
+    <S.LogoCover isCompleate>
       <S.PopUpStateLogo src={CompleateCheckIcon} alt="성공 아이콘" />
     </S.LogoCover>
 
-    <S.LogoCover popUpTitle>
+    <S.LogoCover isPopUpTitle>
       <S.Title>비밀번호 재설정</S.Title>
     </S.LogoCover>
 
     <S.TitleHorizon />
 
-    <S.ElementCover check>
-      <S.Text titleText>비밀번호 설정이 완료되었습니다.</S.Text>
+    <S.ElementCover isCheck>
+      <S.Text isTitleText>비밀번호 설정이 완료되었습니다.</S.Text>
     </S.ElementCover>
 
     <S.ButtonCover>

@@ -9,7 +9,7 @@ import { passwordRegular } from "../../../lib/regularExpressions";
 
 interface OwnProps {
   userVerify: string;
-  actionPressEnter: (
+  handleKeyPress: (
     { key }: React.KeyboardEvent<HTMLInputElement>,
     handleEvent: () => void
   ) => void;
@@ -27,7 +27,7 @@ const WriteNewPassword: FC<Props> = ({
   userVerify,
   resetApplicantPassword,
   updatePopUpCase,
-  actionPressEnter,
+  handleKeyPress,
   resetState
 }) => {
   const [isReWritePassword, setIsReWritePassword] = useState(false);
@@ -57,13 +57,13 @@ const WriteNewPassword: FC<Props> = ({
     <>
       <S.ElementCover>
         {isReWritePassword ? (
-          <S.Text titleText>
+          <S.Text isTitleText>
             {isCheckRegular
               ? "비밀번호가 정확하지 않습니다."
               : "변경 할 비밀번호를 한번 더 입력해주세요"}
           </S.Text>
         ) : (
-          <S.Text titleText>
+          <S.Text isTitleText>
             {isCheckRegular
               ? "비밀번호 생성규칙을 확인해주세요"
               : "변경 할 비밀번호를 입력해주세요"}
@@ -75,8 +75,8 @@ const WriteNewPassword: FC<Props> = ({
         <S.InputBox
           onKeyPress={
             passwordRegular.test(newPassword)
-              ? e => actionPressEnter(e, checkWritingPasswordCase)
-              : e => actionPressEnter(e, () => setIsCheckRegular(true))
+              ? e => handleKeyPress(e, checkWritingPasswordCase)
+              : e => handleKeyPress(e, () => setIsCheckRegular(true))
           }
           onChange={({ target: { value } }) =>
             isReWritePassword ? setNewRePassword(value) : setNewPassword(value)
@@ -99,15 +99,15 @@ const WriteNewPassword: FC<Props> = ({
         </S.Button>
       </S.ButtonCover>
 
-      <S.PeculiarCover question>
+      <S.PeculiarCover isQuestion>
         <S.PeculiarText onClick={() => setIsQuestionBox(!isQuestionBox)}>
           변경 할 비밀번호를 입력해주세요
         </S.PeculiarText>
       </S.PeculiarCover>
 
       {isQuestionBox && (
-        <S.QuestionBox smallBox>
-          <S.Text question>
+        <S.QuestionBox isSmallBox>
+          <S.Text isQuestion>
             영문(대소문자 구분), 숫자 포함 8자리 이상 특수기호 가능
           </S.Text>
         </S.QuestionBox>

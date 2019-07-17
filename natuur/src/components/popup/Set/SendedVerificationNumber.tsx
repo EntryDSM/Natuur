@@ -35,7 +35,7 @@ const SendedVerificationNumber: FC<Props> = ({
   return (
     <>
       <S.ElementCover>
-        <S.Text titleText>
+        <S.Text isTitleText>
           {isError
             ? "인증번호를 전송하는데 실패하였습니다."
             : "아래의 이메일로 인증번호를 전송합니다"}
@@ -43,7 +43,7 @@ const SendedVerificationNumber: FC<Props> = ({
       </S.ElementCover>
 
       <S.InputCover>
-        <S.InputBox center type="text" value={userEmail} readOnly />
+        <S.InputBox isCenter type="text" value={userEmail} readOnly />
       </S.InputCover>
 
       <S.ButtonCover>
