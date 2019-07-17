@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 
 import { ContentsSorter } from "../../../styles/Main";
-import { getCookie } from "../../../lib";
+import { loginEvent } from "../../../lib/utils/modal/login";
 import {
   MainProgress,
   MainTitles,
@@ -17,7 +17,10 @@ interface Props {
   timeStempDate: string[];
   formatPeriod: string;
   progressWidth: number;
+  getIsUpdatePopUp: () => void;
+  accessToken: string;
   setTimeStempChecker(timeStempNumber: number): void;
+  updatePopUpCase(popUpCase: string): void;
 }
 
 const ViewOpen: FC<Props> = ({
@@ -28,7 +31,10 @@ const ViewOpen: FC<Props> = ({
   periodListFactor,
   timeStempDate,
   formatPeriod,
-  progressWidth
+  progressWidth,
+  getIsUpdatePopUp,
+  updatePopUpCase,
+  accessToken
 }) => (
   <ContentsSorter>
     <MainTitles
@@ -50,12 +56,22 @@ const ViewOpen: FC<Props> = ({
           : "이용기간이 아닙니다."
       }
     />
-    <MainButton
-      content={getCookie ? "원서작성 하러가기" : "로그인 하기"}
-      clickEvent={() => {
-        return 0;
-      }}
-    />
+    {new Date() < periodList[0].endDate && (
+      <MainButton
+        content={
+          timeStempChecker < 0
+            ? "대기"
+            : accessToken !== "" && accessToken !== undefined
+            ? "원서작성 하러가기"
+            : "로그인 하기"
+        }
+        clickEvent={
+          accessToken !== "" && accessToken !== undefined
+            ? () => console.log(1)
+            : () => loginEvent(getIsUpdatePopUp, updatePopUpCase, "login")
+        }
+      />
+    )}
   </ContentsSorter>
 );
 

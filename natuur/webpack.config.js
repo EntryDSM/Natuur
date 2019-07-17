@@ -72,5 +72,8 @@ module.exports = {
       chunkFilename: "[id].css"
     })
   ],
+  devServer: {
+    historyApiFallback: true
+  },
   devtool: "inline-source-map" // 코드의 오류를 상세하게함. ( 배포 후 'none' 으로 )
 };
