@@ -1,9 +1,13 @@
+import { PayloadType } from "../../actions/default/index";
 import {
   UPDATE_TOASTR,
-  RootState,
   DefaultActionTypes,
   REMOVE_TOASTR
 } from "../../actions/default";
+
+export interface RootState {
+  toastrInformations: PayloadType[];
+}
 
 const initialState: RootState = {
   toastrInformations: []
