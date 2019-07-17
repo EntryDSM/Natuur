@@ -13,7 +13,7 @@ import WriteApplicantNumberContainer from "../../../container/default/popup/writ
 import { EmailChecker } from ".";
 
 interface OwnProps {
-  actionPressEnter: (
+  handleKeyPress: (
     { key }: React.KeyboardEvent<HTMLInputElement>,
     handleEvent: () => void
   ) => void;
@@ -21,7 +21,7 @@ interface OwnProps {
 }
 
 const SetPasswordPopUp: FC<OwnProps> = ({
-  actionPressEnter,
+  handleKeyPress,
   updatePopUpCase
 }) => {
   const [userEmail, setUserEmail] = useState("");
@@ -47,7 +47,7 @@ const SetPasswordPopUp: FC<OwnProps> = ({
 
   return (
     <>
-      <S.LogoCover popUpTitle>
+      <S.LogoCover isPopUpTitle>
         <S.Title>비밀번호 재설정</S.Title>
       </S.LogoCover>
 
@@ -55,7 +55,7 @@ const SetPasswordPopUp: FC<OwnProps> = ({
 
       {selectSetPasswordModal(modalCase) === "EmailChecker" && (
         <EmailChecker
-          actionPressEnter={actionPressEnter}
+          handleKeyPress={handleKeyPress}
           userEmail={userEmail}
           setUserEmail={setUserEmail}
           changeSetNextPasswordModal={() =>
@@ -91,7 +91,7 @@ const SetPasswordPopUp: FC<OwnProps> = ({
         <WriteNewPasswordContainer
           userVerify={userVerify}
           updatePopUpCase={updatePopUpCase}
-          actionPressEnter={actionPressEnter}
+          handleKeyPress={handleKeyPress}
         />
       )}
     </>

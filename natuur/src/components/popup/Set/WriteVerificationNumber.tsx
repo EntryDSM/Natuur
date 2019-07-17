@@ -48,7 +48,7 @@ const WriteVerificationNumber: FC<Props> = ({
         {isAppliWaiting ? (
           <S.LodingGifCover src={lodingGif} alt="로딩" />
         ) : (
-          <S.Text titleText>
+          <S.Text isTitleText>
             {isVerifyError
               ? "실패하였습니다."
               : isVerifySuccess
@@ -62,7 +62,7 @@ const WriteVerificationNumber: FC<Props> = ({
         <S.InputBox
           onChange={({ target: { value } }) => setUserVerify(value)}
           value={userVerify}
-          center
+          isCenter
           type="text"
           maxLength={6}
           placeholder="* * * * * *"
@@ -81,7 +81,7 @@ const WriteVerificationNumber: FC<Props> = ({
         </S.Button>
       </S.ButtonCover>
 
-      <S.PeculiarCover question>
+      <S.PeculiarCover isQuestion>
         <S.PeculiarText onClick={() => setIsQuestionBox(!isQuestionBox)}>
           이메일이 오지않습니다.
         </S.PeculiarText>
@@ -89,8 +89,8 @@ const WriteVerificationNumber: FC<Props> = ({
 
       {isQuestionBox && (
         <S.QuestionBox>
-          <S.Text question>메일이 {userEmail}인지 확인하시고,</S.Text>
-          <S.Text question>스팸 메일함도 확인해주세요</S.Text>
+          <S.Text isQuestion>메일이 {userEmail}인지 확인하시고,</S.Text>
+          <S.Text isQuestion>스팸 메일함도 확인해주세요</S.Text>
         </S.QuestionBox>
       )}
     </>

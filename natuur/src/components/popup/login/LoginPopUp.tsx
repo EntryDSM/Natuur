@@ -3,6 +3,7 @@ import React, { FC, useState, useEffect } from "react";
 import * as S from "../../../styles/default/popup";
 import EntryLogo from "../../../assets/entry_logo.png";
 import { changeComponent } from "../../../lib/utils/modal/login";
+import withPressEvent from "../../common/withPressEvent";
 import {
   mapDispatchToProps,
   mapStateToProps
@@ -11,7 +12,7 @@ import {
 interface OwnProps {
   updatePopUpCase(popUpCase: "default" | "login" | "set" | "check"): void;
   getIsUpdatePopUp(): void;
-  actionPressEnter(
+  handleKeyPress(
     { key }: React.KeyboardEvent<HTMLInputElement>,
     handleEvent: () => void
   ): void;
@@ -26,11 +27,11 @@ const LoginPopUp: FC<Props> = ({
   getIsUpdatePopUp,
   getJWTcredential,
   resetState,
-  actionPressEnter,
   isError,
   isSuccess,
   accessToken,
-  refreshToken
+  refreshToken,
+  handleKeyPress
 }) => {
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
@@ -45,7 +46,7 @@ const LoginPopUp: FC<Props> = ({
     <>
       <S.LogoCover>
         {isError ? (
-          <S.Text logoText>입력한 정보를 다시 확인해주세요</S.Text>
+          <S.Text isLogoText>입력한 정보를 다시 확인해주세요</S.Text>
         ) : (
           <S.EntryLogo src={EntryLogo} alt="Entry로고" />
         )}
@@ -55,7 +56,7 @@ const LoginPopUp: FC<Props> = ({
         <S.InputBox
           value={userEmail}
           onKeyPress={e =>
-            actionPressEnter(e, () =>
+            handleKeyPress(e, () =>
               getJWTcredential({ email: userEmail, password: userPassword })
             )
           }
@@ -66,7 +67,7 @@ const LoginPopUp: FC<Props> = ({
         <S.InputBox
           value={userPassword}
           onKeyPress={e =>
-            actionPressEnter(e, () =>
+            handleKeyPress(e, () =>
               getJWTcredential({ email: userEmail, password: userPassword })
             )
           }
@@ -76,7 +77,7 @@ const LoginPopUp: FC<Props> = ({
         />
       </S.InputCover>
 
-      <S.ButtonCover loginButton>
+      <S.ButtonCover isLoginButton>
         <S.Button
           onClick={() =>
             getJWTcredential({ email: userEmail, password: userPassword })
