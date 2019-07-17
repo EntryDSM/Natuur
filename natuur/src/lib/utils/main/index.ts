@@ -97,3 +97,15 @@ export function getTimeStempDate(
 
   return result;
 }
+
+export function decideViewFirstEnter(
+  remainingPeriodFactor: number,
+  isDateControlStatements: boolean
+): boolean {
+  if (remainingPeriodFactor) {
+    if (isDateControlStatements) {
+      return true;
+    }
+    return false;
+  }
+}
