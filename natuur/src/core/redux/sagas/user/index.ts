@@ -1,8 +1,12 @@
 import { all, fork, takeLatest, put, call } from "redux-saga/effects";
 
-import { LOG_IN, LOG_IN_SUCCESS, LOG_IN_FAILURE } from "../../actions/user";
+import {
+  LOG_IN,
+  LOG_IN_SUCCESS,
+  LOG_IN_FAILURE,
+  LogIn
+} from "../../actions/user";
 import { getLoginApi } from "../../../../lib/api";
-import { LogIn } from "../../actions/user/index";
 
 function* getLogin(action: LogIn) {
   try {
