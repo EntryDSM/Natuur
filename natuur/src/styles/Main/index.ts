@@ -176,7 +176,7 @@ export const ButtonCover = styled.div<{ isWaitingPeriod: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
+  cursor: ${props => (props.isWaitingPeriod ? "default" : "pointer")};
 `;
 
 export const ButtonContent = styled.p`
