@@ -7,7 +7,7 @@ import popUpReducer from "./popup/popupReducer";
 import verificationReducer from "./User/verificationReducer";
 import writeNewPasswordReducer from "./User/writeNewPasswordReducer";
 import sendApplicantPasswordReducer from "./User/sendApplicantPasswordReducer";
-import mainReducer from 'main/mainReducer';
+import mainReducer from "./main/mainReducer";
 
 export default combineReducers({
   AuthorizationReducer,
