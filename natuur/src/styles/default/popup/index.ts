@@ -110,6 +110,14 @@ export const PeculiarLink = styled(Link)`
   font-size: 12px;
   color: #acc6c9;
   cursor: pointer;
+
+  &:visited {
+    color: #acc6c9;
+  }
+
+  &:link {
+    color: #acc6c9;
+  }
 `;
 
 export const QuestionBox = styled.div<{ isSmallBox?: boolean }>`
