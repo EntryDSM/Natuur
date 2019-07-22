@@ -15,7 +15,8 @@ import {
   formatTimeStempDateFactor
 } from "../../lib/utils/main/progress";
 import { MainHeadLine } from "../../components/default/Common";
-import { ViewOpen, ViewClose } from "../../components/main";
+import { ViewOpen } from "../../components/main";
+import ConnectViewClose from "./ConnectViewClose";
 import { PERIOD_LIST } from "../../components/main/constance";
 import {
   getIsUpdatePopUp,
@@ -129,11 +130,12 @@ const Main: FC<Props> = ({
                 accessToken={accessToken}
               />
             ) : (
-              <ViewClose
+              <ConnectViewClose
                 setIsOpenView={setIsOpenView}
                 getIsUpdatePopUp={getIsUpdatePopUp}
                 updatePopUpCase={updatePopUpCase}
                 accessToken={accessToken}
+                timeStempChecker={timeStempChecker}
               />
             )}
           </S.MainContents>

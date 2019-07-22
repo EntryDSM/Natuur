@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 
 import * as S from "../../../styles/Main";
 import MainButton from "../viewCase/button/MainButton";
@@ -8,28 +8,52 @@ import {
   getIsWaitingPeriod,
   getWaitingPeriodConfirmedLetter
 } from "../../../lib/utils/main/viewClose";
+import {
+  mapStateToProps,
+  mapDispatchToProps
+} from "../../../container/Main/ConnectViewClose";
 
 const isSettingCookie = (accessToken: string): boolean =>
   accessToken !== "" && accessToken !== null ? true : false;
 
-interface Props {
+interface OwnProps {
   setIsOpenView: (isOpenView: boolean) => void;
   getIsUpdatePopUp: () => void;
   accessToken: string;
+  timeStempChecker: number;
   updatePopUpCase(popUpCase: string): void;
 }
+type Props = ReturnType<typeof mapStateToProps> &
+  ReturnType<typeof mapDispatchToProps> &
+  OwnProps;
 
 const ViewClose: FC<Props> = ({
   setIsOpenView,
   getIsUpdatePopUp,
   updatePopUpCase,
-  accessToken
+  accessToken,
+  isPassedFirstApply,
+  isPassedFinalApply,
+  isSuccess,
+  isWaiting,
+  getUserApplicantStatus,
+  timeStempChecker
 }) => {
+  useEffect(() => {
+    getUserApplicantStatus({ accessToken });
+  },        []);
+
   const isWaitingPeriod: boolean = getIsWaitingPeriod();
   return (
     <S.ContentsSorter>
       {isSettingCookie(accessToken) ? (
-        <ViewCloseContentCover />
+        <ViewCloseContentCover
+          timeStempChecker={timeStempChecker}
+          isPassedFirstApply={isPassedFirstApply}
+          isPassedFinalApply={isPassedFinalApply}
+          isSuccess={isSuccess}
+          isWaiting={isWaiting}
+        />
       ) : (
         <>
           <S.ViewCloseText isWaitingPeriod={isWaitingPeriod}>
