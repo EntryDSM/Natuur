@@ -1,5 +1,6 @@
 import axios from "axios";
 import { connectionUrl } from "./endpoint";
+import { UserApplicantStatusType } from "../../core/redux/actions/main/index";
 
 export const getLoginApi = async (payload: {
   email: string;
@@ -31,8 +32,17 @@ export const sendVerificationEmailApi = (payload: string) => {
   return axios.post(`${connectionUrl}/password/reset?email=${payload}`);
 };
 
-export const getUserApplicationStatusApi = (accessToken: string) => {
-  return axios.get(`${connectionUrl}/applicant/me/status`, {
-    headers: { Authorization: `Bearer ${accessToken}` }
-  });
+export const getUserApplicationStatusApi = async ({
+  accessToken
+}: {
+  accessToken: string;
+}) => {
+  const response = await axios.get<UserApplicantStatusType>(
+    `${connectionUrl}/applicant/me/status`,
+    {
+      headers: { Authorization: `Bearer ${accessToken}` }
+    }
+  );
+
+  return response.data;
 };
