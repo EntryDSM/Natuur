@@ -61,7 +61,7 @@ const ViewOpen: FC<Props> = ({
         timeStempChecker < 0 || periodListFactor >= 1 ? true : false
       }
       content={
-        timeStempChecker < 0 || periodListFactor >= 1
+        timeStempChecker < 0
           ? "대기"
           : accessToken !== ""
           ? "원서작성 하러가기"
