@@ -56,22 +56,25 @@ const ViewOpen: FC<Props> = ({
           : "이용기간이 아닙니다."
       }
     />
-    {new Date() < periodList[0].endDate && (
-      <MainButton
-        content={
-          timeStempChecker < 0
-            ? "대기"
-            : accessToken !== ""
-            ? "원서작성 하러가기"
-            : "로그인 하기"
-        }
-        clickEvent={
-          accessToken !== ""
-            ? () => console.log(1)
-            : () => loginEvent(getIsUpdatePopUp, updatePopUpCase, "login")
-        }
-      />
-    )}
+    <MainButton
+      isWaitingPeriod={
+        timeStempChecker < 0 || periodListFactor >= 1 ? true : false
+      }
+      content={
+        timeStempChecker < 0 || periodListFactor >= 1
+          ? "대기"
+          : accessToken !== ""
+          ? "원서작성 하러가기"
+          : "로그인 하기"
+      }
+      clickEvent={
+        timeStempChecker < 0 || periodListFactor >= 1
+          ? null
+          : accessToken !== ""
+          ? () => console.log(1)
+          : () => loginEvent(getIsUpdatePopUp, updatePopUpCase, "login")
+      }
+    />
   </ContentsSorter>
 );
 
