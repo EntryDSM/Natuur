@@ -20,7 +20,7 @@ interface OwnProps {
   setIsOpenView: (isOpenView: boolean) => void;
   getIsUpdatePopUp: () => void;
   accessToken: string;
-  timeStempChecker: number;
+  periodList: Array<{ title: string; startDate: Date; endDate: Date }>;
   updatePopUpCase(popUpCase: string): void;
 }
 type Props = ReturnType<typeof mapStateToProps> &
@@ -37,7 +37,7 @@ const ViewClose: FC<Props> = ({
   isSuccess,
   isWaiting,
   getUserApplicantStatus,
-  timeStempChecker
+  periodList
 }) => {
   useEffect(() => {
     getUserApplicantStatus({ accessToken });
@@ -48,7 +48,7 @@ const ViewClose: FC<Props> = ({
     <S.ContentsSorter>
       {isSettingCookie(accessToken) ? (
         <ViewCloseContentCover
-          timeStempChecker={timeStempChecker}
+          periodList={periodList}
           isPassedFirstApply={isPassedFirstApply}
           isPassedFinalApply={isPassedFinalApply}
           isSuccess={isSuccess}
