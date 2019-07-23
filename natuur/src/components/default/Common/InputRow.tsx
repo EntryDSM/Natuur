@@ -1,12 +1,7 @@
 import React, { FC } from "react";
 
-import {
-  InfomationInputBoxCoverWapper,
-  InfomationInputBoxWapperTitle,
-  InformationInputSpaceWarning,
-  InformationInputSpaceWrong
-} from "../../../styles/Authorization";
-import { TextInput } from ".";
+import * as S from "../../../styles/Authorization";
+import { TextInput, EventButton } from ".";
 
 interface Props {
   title?: string;
@@ -18,6 +13,12 @@ interface Props {
   warningMessage?: string;
   isReadOnly?: boolean;
   isWrong?: boolean;
+  isCheckAuthorization?: boolean;
+  isButtonRow?: boolean;
+  buttonWidth?: number;
+  buttonContent?: string;
+  buttonEvnet?: () => void;
+  buttonMargin?: number;
   handleChanger?(event: React.ChangeEvent<HTMLInputElement>): void;
 }
 
@@ -31,11 +32,17 @@ const InputRow: FC<Props> = ({
   isWarning,
   warningMessage,
   isReadOnly,
-  isWrong
+  isWrong,
+  isButtonRow,
+  isCheckAuthorization,
+  buttonWidth,
+  buttonContent,
+  buttonEvnet,
+  buttonMargin
 }) => {
   return (
-    <InfomationInputBoxCoverWapper>
-      <InfomationInputBoxWapperTitle>{title}</InfomationInputBoxWapperTitle>
+    <S.InfomationInputBoxCoverWapper>
+      <S.InfomationInputBoxWapperTitle>{title}</S.InfomationInputBoxWapperTitle>
       <TextInput
         type={type}
         placeHolder={placeHolder}
@@ -44,17 +51,26 @@ const InputRow: FC<Props> = ({
         isCheckMark={isCheckMark}
         isReadOnly={isReadOnly}
       />
+      {isButtonRow && (
+        <EventButton
+          isButtonDisable={!isCheckAuthorization}
+          buttonWidth={buttonWidth}
+          buttonContent={buttonContent}
+          buttonEvnet={buttonEvnet}
+          buttonMargin={buttonMargin}
+        />
+      )}
       {isWarning && (
-        <InformationInputSpaceWarning>
+        <S.InformationInputSpaceWarning>
           {warningMessage}
-        </InformationInputSpaceWarning>
+        </S.InformationInputSpaceWarning>
       )}
       {isWrong && (
-        <InformationInputSpaceWrong>
+        <S.InformationInputSpaceWrong>
           비밀번호를 정확히 입력해주세요
-        </InformationInputSpaceWrong>
+        </S.InformationInputSpaceWrong>
       )}
-    </InfomationInputBoxCoverWapper>
+    </S.InfomationInputBoxCoverWapper>
   );
 };
 

@@ -59,6 +59,15 @@ const InformationInputBox: FC<Props> = ({
           type="text"
           isCheckMark={emailReg.test(userEmail)}
           handleChanger={handleEmail}
+          isButtonRow
+          isCheckAuthorization={
+            emailReg.test(userEmail) &&
+            passwordReg.test(userPassword) &&
+            !!(userPassword === userPasswordCheck && userPasswordCheck)
+          }
+          buttonContent="완료"
+          buttonWidth={78}
+          buttonMargin={12}
         />
 
         <GradationHorizon />
@@ -70,7 +79,7 @@ const InformationInputBox: FC<Props> = ({
           name="passwordInput"
           type="password"
           isWarning
-          warningMessage="* 영문, 숫자 포함 8자리 이상 16자리 이하"
+          warningMessage="*영문(대소문자 구분),숫자 포함 8자리 이상 특수기호 가능"
           isCheckMark={passwordReg.test(userPassword)}
           handleChanger={handlePassword}
         />

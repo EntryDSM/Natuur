@@ -21,6 +21,11 @@ const InformationDisableInputBox: FC<Props> = ({ updateToastr }) => (
         name="emailInput"
         type="text"
         isReadOnly
+        isButtonRow
+        isCheckAuthorization={false}
+        buttonContent="완료"
+        buttonWidth={78}
+        buttonMargin={12}
       />
 
       <GradationHorizon />
@@ -33,7 +38,7 @@ const InformationDisableInputBox: FC<Props> = ({ updateToastr }) => (
         type="password"
         isWarning
         isReadOnly
-        warningMessage="* 영문, 숫자 포함 8자리 이상 16자리 이하"
+        warningMessage="*영문(대소문자 구분),숫자 포함 8자리 이상 특수기호 가능"
       />
 
       <GradationHorizon />
