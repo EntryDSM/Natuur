@@ -3,7 +3,6 @@ import React, { FC, useState, useEffect } from "react";
 import * as S from "../../../styles/default/popup";
 import EntryLogo from "../../../assets/entry_logo.png";
 import { changeComponent } from "../../../lib/utils/modal/login";
-import withPressEvent from "../../common/withPressEvent";
 import {
   mapDispatchToProps,
   mapStateToProps
