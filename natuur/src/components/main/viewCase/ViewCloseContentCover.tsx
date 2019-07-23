@@ -75,7 +75,7 @@ const ViewCloseContentCover: FC<Props> = ({
         )}
       </>
     ) : (
-      <div>서버와의 연결이 끊겻습니다.</div>
+      <div>서버와의 연결이 끊겼습니다.</div>
     )}
   </>
 );
