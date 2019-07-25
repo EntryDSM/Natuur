@@ -14,6 +14,7 @@ interface Props {
   type?: string;
   isCheckMark?: boolean;
   isReadOnly: boolean;
+  isCertification: boolean;
   handleChanger(event: React.ChangeEvent<HTMLInputElement>): void;
 }
 
@@ -24,11 +25,14 @@ const TextInput: FC<Props> = ({
   handleChanger,
   isCheckMark,
   type,
-  isReadOnly
+  isReadOnly,
+  isCertification
 }) => {
   return (
     <InfomationInputBoxWapperInputSpace>
       <InformationInputSpaceArea
+        maxLength={name === "certification" ? 6 : null}
+        isCertification={isCertification}
         width={width}
         type={type}
         placeholder={placeHolder}
