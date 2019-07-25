@@ -71,7 +71,6 @@ export const ButtonCover: AnyStyledComponent = styled(Link)<ButtonCoverProps>`
   color: ${props => (props.isDisable ? "#979797" : "#296169")};
   background-color: ${props => (props.isDisable ? "#f7fbfc" : " #f7fbfc")};
   border: 1px solid ${props => (props.isDisable ? "#a7a7a7" : "#5f8a90")};
-  border-color: ${props => props.isDisable && "#a7a7a7"};
 
   &:active {
     background-color: #d8e6e9;
