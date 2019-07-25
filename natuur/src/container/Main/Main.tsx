@@ -135,7 +135,7 @@ const Main: FC<Props> = ({
                 getIsUpdatePopUp={getIsUpdatePopUp}
                 updatePopUpCase={updatePopUpCase}
                 accessToken={accessToken}
-                timeStempChecker={timeStempChecker}
+                periodList={PERIOD_LIST}
               />
             )}
           </S.MainContents>
