@@ -17,7 +17,7 @@ interface Props {
   isButtonRow?: boolean;
   buttonWidth?: number;
   buttonContent?: string;
-  buttonEvnet?: () => void;
+  buttonEvent?: () => void;
   buttonMargin?: number;
   handleChanger?(event: React.ChangeEvent<HTMLInputElement>): void;
 }
@@ -37,7 +37,7 @@ const InputRow: FC<Props> = ({
   isCheckAuthorization,
   buttonWidth,
   buttonContent,
-  buttonEvnet,
+  buttonEvent,
   buttonMargin
 }) => {
   return (
@@ -56,7 +56,7 @@ const InputRow: FC<Props> = ({
           isButtonDisable={!isCheckAuthorization}
           buttonWidth={buttonWidth}
           buttonContent={buttonContent}
-          buttonEvnet={buttonEvnet}
+          buttonEvent={buttonEvent}
           buttonMargin={buttonMargin}
         />
       )}
