@@ -6,7 +6,7 @@ import {
   InformationInputSpaceWarning,
   InformationInputSpaceWrong
 } from "../../../styles/Authorization";
-import { TextInput } from ".";
+import { TextInput } from "../../default/Common";
 
 interface Props {
   title?: string;
