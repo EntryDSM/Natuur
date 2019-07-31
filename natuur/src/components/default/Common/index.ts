@@ -4,6 +4,7 @@ import ToastrBar from "./ToastrBar";
 import InputRow from "./InputRow";
 import TextInput from "./TextInput";
 import MainHeadLine from "./MainHeadLine";
+import EventButton from "./EventButton";
 
 export {
   HeadLine,
@@ -11,5 +12,6 @@ export {
   ToastrBar,
   InputRow,
   TextInput,
-  MainHeadLine
+  MainHeadLine,
+  EventButton
 };

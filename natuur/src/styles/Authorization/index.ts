@@ -1,4 +1,4 @@
-import styled, { StyledProps } from "styled-components";
+import styled from "styled-components";
 
 // Authorization
 export const Authorization = styled.div``;
@@ -52,14 +52,14 @@ export const AcceptTermsBoxWapper = styled.div`
 export const AcceptTermsWapperContents = styled.div`
   width: 1100px;
   height: 220px;
-  font-size: 17px;
+  font-size: 16px;
   line-height: 21px;
   letter-spacing: 0.1px;
   overflow-y: scroll;
 `;
 
 export const AcceptTermsContentsTitle = styled.span`
-  font-size: 19px;
+  font-size: 17px;
   color: #328086;
 `;
 

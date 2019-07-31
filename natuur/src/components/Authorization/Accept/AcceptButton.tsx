@@ -11,7 +11,7 @@ const AcceptButton: FC = () => (
   <AcceptButtonComponent>
     <ButtonCover as="button" next>
       <ButtonArrow>〉</ButtonArrow>
-      <ButtonText>인증하기</ButtonText>
+      <ButtonText>생성하기</ButtonText>
     </ButtonCover>
   </AcceptButtonComponent>
 );
