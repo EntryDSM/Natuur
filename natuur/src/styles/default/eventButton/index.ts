@@ -24,6 +24,7 @@ export const Button = styled.button<ButtonProps>`
   background-color: ${props => (props.isDisable ? "#fcfcfc" : "#f8fcfd")};
   font-size: 16px;
   margin-left: ${props => `${props.marginLeft}px`};
+  cursor: ${props => (props.isDisable ? "default" : "pointer")};
 
   ${ButtonText} {
     color: ${props => (props.isDisable ? "rgba(0,0,0,0.3)" : "#79c2ca")};

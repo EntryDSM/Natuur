@@ -1,4 +1,4 @@
-import React, { FC, useCallback } from "react";
+import React, { FC, useState, useEffect, useCallback } from "react";
 
 import {
   InfomationInputBoxCover,
@@ -6,15 +6,26 @@ import {
 } from "../../../styles/Authorization";
 import AcceptButton from "../Accept/AcceptButton";
 import InputRow from "../../default/Common/InputRow";
+import CertificationInputRaw from "./CertificationInputRaw";
+import {
+  mapStateToProps,
+  mapDispatchToProps
+} from "../../../container/Authorization/SignUp/ConnectToInformationInputBox";
+import { emailRegular, passwordRegular } from "../../../lib/regularExpressions";
 
-interface Props {
+interface OwnProps {
   userEmail: string;
   userPassword: string;
   userPasswordCheck: string;
   updateUserEmail(targetValue: string): any;
   updateUserPassword(targetValue: string): void;
   updateUserPasswordCheck(targetValue: string): void;
+  updateToastr(toastrInformation: object): void;
 }
+
+type Props = ReturnType<typeof mapStateToProps> &
+  ReturnType<typeof mapDispatchToProps> &
+  OwnProps;
 
 const InformationInputBox: FC<Props> = ({
   userEmail,
@@ -22,14 +33,38 @@ const InformationInputBox: FC<Props> = ({
   userPasswordCheck,
   updateUserEmail,
   updateUserPassword,
-  updateUserPasswordCheck
+  updateUserPasswordCheck,
+  isSendSuccess,
+  isGetSuccess,
+  isSendError,
+  isGetError,
+  isSignUpSuccess,
+  isSignUpError,
+  signUp,
+  isSendWaiting,
+  getRegisterVerifyNumber,
+  sendAuthenticationNumberByEmailApi,
+  updateToastr
 }) => {
-  const emailReg = /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-  const passwordReg = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,16}$/;
+  const [isCertification, setIsCertification] = useState(false);
+  const [isPasswordClose, setIsPasswordClose] = useState(true);
+  const [userVerify, setUserVerify] = useState("");
+
+  useEffect(() => {
+    isSendSuccess && setIsCertification(true);
+    isGetSuccess && setIsPasswordClose(false);
+  });
 
   const handleEmail = useCallback(
     ({ target: { value } }: React.ChangeEvent<HTMLInputElement>): void => {
       updateUserEmail(value);
+    },
+    []
+  );
+
+  const handleVerify = useCallback(
+    ({ target: { value } }: React.ChangeEvent<HTMLInputElement>): void => {
+      setUserVerify(value);
     },
     []
   );
@@ -57,20 +92,45 @@ const InformationInputBox: FC<Props> = ({
           placeHolder="example@dsmhs.kr"
           name="emailInput"
           type="text"
-          isCheckMark={emailReg.test(userEmail)}
+          isReadOnly={isSendSuccess}
+          isCheckMark={emailRegular.test(userEmail)}
           handleChanger={handleEmail}
           isButtonRow
-          isCheckAuthorization={
-            emailReg.test(userEmail) &&
-            passwordReg.test(userPassword) &&
-            !!(userPassword === userPasswordCheck && userPasswordCheck)
-          }
-          buttonContent="완료"
+          isCheckAuthorization={emailRegular.test(userEmail)}
+          buttonContent="인증"
           buttonWidth={78}
           buttonMargin={12}
+          buttonEvent={() =>
+            emailRegular.test(userEmail) &&
+            sendAuthenticationNumberByEmailApi({ email: userEmail })
+          }
         />
 
         <GradationHorizon />
+
+        {isCertification && (
+          <>
+            <CertificationInputRaw
+              isReadOnly={isGetSuccess}
+              handleChanger={handleVerify}
+              isCheckAuthorization={!!userVerify}
+              userEmail={userEmail}
+              userVerify={userVerify}
+              isPasswordClose={isPasswordClose}
+              isSendSuccess={isSendSuccess}
+              isGetSuccess={isGetSuccess}
+              isSendError={isSendError}
+              isGetError={isGetError}
+              isSendWaiting={isSendWaiting}
+              getRegisterVerifyNumber={getRegisterVerifyNumber}
+              sendAuthenticationNumberByEmailApi={
+                sendAuthenticationNumberByEmailApi
+              }
+            />
+
+            <GradationHorizon />
+          </>
+        )}
 
         {/* 비밀번호 입력란 */}
         <InputRow
@@ -79,8 +139,10 @@ const InformationInputBox: FC<Props> = ({
           name="passwordInput"
           type="password"
           isWarning
+          isReadOnly={isPasswordClose}
+          isCertification={isPasswordClose}
           warningMessage="*영문(대소문자 구분),숫자 포함 8자리 이상 특수기호 가능"
-          isCheckMark={passwordReg.test(userPassword)}
+          isCheckMark={passwordRegular.test(userPassword)}
           handleChanger={handlePassword}
         />
 
@@ -92,6 +154,8 @@ const InformationInputBox: FC<Props> = ({
           placeHolder="••••••••"
           name="passwordCheckInput"
           type="password"
+          isReadOnly={isPasswordClose}
+          isCertification={isPasswordClose}
           isCheckMark={
             !!(userPassword === userPasswordCheck && userPasswordCheck)
           }
@@ -99,7 +163,19 @@ const InformationInputBox: FC<Props> = ({
           isWrong={!!(userPassword !== userPasswordCheck && userPassword)}
         />
       </div>
-      <AcceptButton />
+      <AcceptButton
+        updateToastr={updateToastr}
+        isSuccess={
+          emailRegular.test(userEmail) &&
+          passwordRegular.test(userPassword) &&
+          !!(userPassword === userPasswordCheck && userPasswordCheck)
+        }
+        signUp={signUp}
+        isSignUpSuccess={isSignUpSuccess}
+        isSignUpError={isSignUpError}
+        userEmail={userEmail}
+        userPassword={userPassword}
+      />
     </InfomationInputBoxCover>
   );
 };

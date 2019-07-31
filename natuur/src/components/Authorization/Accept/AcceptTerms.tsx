@@ -3,8 +3,8 @@ import React, { FC } from "react";
 import {
   AcceptTermsComponent,
   AcceptTermsBox,
-  AcceptTermsBoxWapper,
-  AcceptTermsWapperContents,
+  AcceptTermsBoxWrapper,
+  AcceptTermsWrapperContents,
   AcceptTermsContentsTitle
 } from "../../../styles/Authorization";
 import {
@@ -21,8 +21,8 @@ import {
 const AcceptTerms: FC = () => (
   <AcceptTermsComponent>
     <AcceptTermsBox>
-      <AcceptTermsBoxWapper>
-        <AcceptTermsWapperContents>
+      <AcceptTermsBoxWrapper>
+        <AcceptTermsWrapperContents>
           {ACCEPT_TERMS_CONTENTS_PART_1}
           <br />
           <br />
@@ -74,8 +74,8 @@ const AcceptTerms: FC = () => (
           <br />
           {ACCEPT_TERMS_CONTENTS_PART_8}
           <br />
-        </AcceptTermsWapperContents>
-      </AcceptTermsBoxWapper>
+        </AcceptTermsWrapperContents>
+      </AcceptTermsBoxWrapper>
     </AcceptTermsBox>
   </AcceptTermsComponent>
 );

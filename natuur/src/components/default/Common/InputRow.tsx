@@ -17,7 +17,7 @@ interface Props {
   isButtonRow?: boolean;
   buttonWidth?: number;
   buttonContent?: string;
-  buttonEvnet?: () => void;
+  buttonEvent?: () => void;
   buttonMargin?: number;
   isCertification?: boolean;
   handleChanger?(event: React.ChangeEvent<HTMLInputElement>): void;
@@ -61,7 +61,7 @@ const InputRow: FC<Props> = ({
           isButtonDisable={!isCheckAuthorization}
           buttonWidth={buttonWidth}
           buttonContent={buttonContent}
-          buttonEvnet={buttonEvnet}
+          buttonEvent={buttonEvent}
           buttonMargin={buttonMargin}
         />
       )}
@@ -75,7 +75,7 @@ const InputRow: FC<Props> = ({
           비밀번호를 정확히 입력해주세요
         </S.InformationInputSpaceWrong>
       )}
-    </S.InfomationInputBoxCoverWapper>
+    </S.InfomationInputBoxCoverWrapper>
   );
 };
 

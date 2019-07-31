@@ -15,7 +15,7 @@ const AcceptDisableButton: FC<Props> = ({ updateToastr }) => {
   const createToastr = useCallback(() => {
     updateToastr({
       timer: 5,
-      toastrMessage: "개인정보를 입력해주세요.",
+      toastrMessage: "개인정보 이용약관에 동의해주세요.",
       toastrState: "warning"
     });
   },                               []);

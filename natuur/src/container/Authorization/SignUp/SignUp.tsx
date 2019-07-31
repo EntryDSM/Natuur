@@ -5,9 +5,9 @@ import { HeadLine } from "../../../components/default/Common";
 import {
   AcceptTerms,
   InformationDisableInputBox,
-  InformationInputBox,
   PrivacyCheckBox
 } from "../../../components/Authorization";
+import ConnectToInformationInputBox from "./ConnectToInformationInputBox";
 import {
   Authorization,
   AuthorizationWrapper
@@ -53,13 +53,14 @@ const SignUp: FC<Props> = ({ updateAppClass, updateToastr }) => {
           userPasswordCheck={userPasswordCheck}
         />
         {checked ? (
-          <InformationInputBox
+          <ConnectToInformationInputBox
             userEmail={userEmail}
             userPassword={userPassword}
             userPasswordCheck={userPasswordCheck}
             updateUserEmail={updateUserEmail}
             updateUserPassword={updateUserPassword}
             updateUserPasswordCheck={updateUserPasswordCheck}
+            updateToastr={updateToastr}
           />
         ) : (
           <InformationDisableInputBox updateToastr={updateToastr} />
