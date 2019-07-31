@@ -4,14 +4,22 @@ import {
   GET_USER_APPLICANT_STATUS,
   GET_USER_APPLICANT_STATUS_SUCCESS,
   GET_USER_APPLICANT_STATUS_FAILURE,
+  GET_USER_APPLICANT_INFOMATION,
+  GET_USER_APPLICANT_INFOMATION_SUCCESS,
+  GET_USER_APPLICANT_INFOMATION_FAILURE,
   UserApplicantStatus,
-  UserApplicantStatusType
+  UserApplicantInfo,
+  UserApplicantStatusApiType,
+  UserApplicantInfoApiType
 } from "../../actions/main";
-import { getUserApplicationStatusApi } from "../../../../lib/api";
+import {
+  getUserApplicationStatusApi,
+  getUserApplicantInfoApi
+} from "../../../../lib/api";
 
 function* getUserApplicationStatus(action: UserApplicantStatus) {
   try {
-    const response: UserApplicantStatusType = yield call(
+    const response: UserApplicantStatusApiType = yield call(
       getUserApplicationStatusApi,
       action.payload
     );
@@ -25,6 +33,28 @@ function* watchGetUserApplicantStatus() {
   yield takeLatest(GET_USER_APPLICANT_STATUS, getUserApplicationStatus);
 }
 
+function* getUserApplicantInfo(action: UserApplicantInfo) {
+  try {
+    const response: UserApplicantInfoApiType = yield call(
+      getUserApplicantInfoApi,
+      action.payload
+    );
+    yield put({
+      type: GET_USER_APPLICANT_INFOMATION_SUCCESS,
+      payload: response
+    });
+  } catch (e) {
+    yield put({ type: GET_USER_APPLICANT_INFOMATION_FAILURE });
+  }
+}
+
+function* watchGetUserApplicantInfo() {
+  yield takeLatest(GET_USER_APPLICANT_INFOMATION, getUserApplicantInfo);
+}
+
 export default function* mainSaga() {
-  yield all([fork(watchGetUserApplicantStatus)]);
+  yield all([
+    fork(watchGetUserApplicantStatus),
+    fork(watchGetUserApplicantInfo)
+  ]);
 }

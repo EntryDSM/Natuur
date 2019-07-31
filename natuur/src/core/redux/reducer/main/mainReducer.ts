@@ -1,18 +1,18 @@
 import {
   MainActionTypes,
+  UserApplicantStatusApiType,
+  UserApplicantInfoApiType,
   GET_USER_APPLICANT_STATUS,
   GET_USER_APPLICANT_STATUS_FAILURE,
-  GET_USER_APPLICANT_STATUS_SUCCESS
+  GET_USER_APPLICANT_STATUS_SUCCESS,
+  GET_USER_APPLICANT_INFOMATION,
+  GET_USER_APPLICANT_INFOMATION_SUCCESS,
+  GET_USER_APPLICANT_INFOMATION_FAILURE
 } from "../../actions/main";
 
-export interface RootState {
-  isPaid?: boolean;
-  isPassedFirstApply?: boolean;
-  isPassedFinalApply?: boolean;
-  isPrintedApplicationArrived?: boolean;
-  isFinalSubmit?: boolean;
-  receiptCode?: number;
-  examCode?: number;
+export interface RootState
+  extends UserApplicantStatusApiType,
+    UserApplicantInfoApiType {
   isSuccess?: boolean;
   isError?: boolean;
   isWaiting?: boolean;
@@ -26,6 +26,16 @@ const initialStae: RootState = {
   isFinalSubmit: false,
   receiptCode: 0,
   examCode: 0,
+  email: "",
+  applicantName: "",
+  sex: "",
+  birthDate: "",
+  parentName: "",
+  parentTel: "",
+  applicantTel: "",
+  address: "",
+  postCode: 0,
+  imagePath: "",
   isSuccess: false,
   isError: false,
   isWaiting: false
@@ -70,6 +80,45 @@ const mainReducer = (
         isError: true,
         isSuccess: false,
         isWaiting: false
+      };
+    }
+    case GET_USER_APPLICANT_INFOMATION: {
+      return {
+        ...state
+      };
+    }
+    case GET_USER_APPLICANT_INFOMATION_SUCCESS: {
+      const {
+        email,
+        applicantName,
+        sex,
+        birthDate,
+        parentName,
+        parentTel,
+        applicantTel,
+        address,
+        postCode,
+        imagePath
+      } = action.payload;
+      return {
+        ...state,
+        isWaiting: true,
+        email,
+        applicantName,
+        sex,
+        birthDate,
+        parentName,
+        parentTel,
+        applicantTel,
+        address,
+        postCode,
+        imagePath
+      };
+    }
+    case GET_USER_APPLICANT_INFOMATION_FAILURE: {
+      return {
+        ...state,
+        isWaiting: true
       };
     }
     default:

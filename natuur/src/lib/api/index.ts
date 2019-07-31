@@ -1,6 +1,9 @@
 import axios from "axios";
 import { connectionUrl } from "./endpoint";
-import { UserApplicantStatusType } from "../../core/redux/actions/main/index";
+import {
+  UserApplicantStatusApiType,
+  UserApplicantInfoApiType
+} from "../../core/redux/actions/main/index";
 
 export const getLoginApi = async (payload: {
   email: string;
@@ -37,8 +40,25 @@ export const getUserApplicationStatusApi = async ({
 }: {
   accessToken: string;
 }) => {
-  const response = await axios.get<UserApplicantStatusType>(
+  const response = await axios.get<UserApplicantStatusApiType>(
     `${connectionUrl}/applicant/me/status`,
+    {
+      headers: { Authorization: `Bearer ${accessToken}` }
+    }
+  );
+
+  return response.data;
+};
+
+export const getUserApplicantInfoApi = async ({
+  email,
+  accessToken
+}: {
+  email: string;
+  accessToken: string;
+}) => {
+  const response = await axios.get<UserApplicantInfoApiType>(
+    `${connectionUrl}/applicant/me/${email}`,
     {
       headers: { Authorization: `Bearer ${accessToken}` }
     }
