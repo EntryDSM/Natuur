@@ -1,5 +1,7 @@
 import React, { FC, useEffect, useRef } from "react";
 
+import HeadLine from "../../components/default/Common/HeadLine";
+
 interface Props {
   updateAppClass(text: string): void;
 }
@@ -16,7 +18,7 @@ const Info: FC<Props> = ({ updateAppClass }) => {
     }
   });
 
-  return <div>a</div>;
+  return <div />;
 };
 
 export default Info;

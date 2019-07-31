@@ -5,53 +5,26 @@ import { HeadLine } from "../../../components/default/Common";
 import {
   AcceptTerms,
   InformationDisableInputBox,
-  InformationInputBox,
   PrivacyCheckBox
 } from "../../../components/Authorization";
+import ConnectToInformationInputBox from "./ConnectToInformationInputBox";
 import {
   Authorization,
   AuthorizationWrapper
 } from "../../../styles/Authorization";
-import {
-  updateUserEmail,
-  updateUserPassword,
-  updateUserPasswordCheck
-} from "../../../core/redux/actions/Authorization";
 import { updateToastr } from "../../../core/redux/actions/default";
-import { AppState } from "../../../core/redux/store/store";
-
-const mapStateToProps = (state: AppState) => ({
-  userEmail: state.AuthorizationReducer.userEmail,
-  userPassword: state.AuthorizationReducer.userPassword,
-  userPasswordCheck: state.AuthorizationReducer.userPasswordCheck
-});
 
 const mapDispatchToProps = dispatch => ({
-  updateToastr: toastrData => dispatch(updateToastr(toastrData)),
-  updateUserEmail: targetValue => dispatch(updateUserEmail(targetValue)),
-  updateUserPassword: targetValue => dispatch(updateUserPassword(targetValue)),
-  updateUserPasswordCheck: targetValue =>
-    dispatch(updateUserPasswordCheck(targetValue))
+  updateToastr: toastrData => dispatch(updateToastr(toastrData))
 });
 
 interface OwnProps {
   updateAppClass(className: string): void;
 }
 
-type Props = ReturnType<typeof mapStateToProps> &
-  ReturnType<typeof mapDispatchToProps> &
-  OwnProps;
+type Props = ReturnType<typeof mapDispatchToProps> & OwnProps;
 
-const SignUp: FC<Props> = ({
-  userEmail,
-  userPassword,
-  userPasswordCheck,
-  updateAppClass,
-  updateUserEmail,
-  updateUserPassword,
-  updateUserPasswordCheck,
-  updateToastr
-}) => {
+const SignUp: FC<Props> = ({ updateAppClass, updateToastr }) => {
   const didMountRef = useRef(false);
   useEffect(() => {
     if (!didMountRef.current) {
@@ -63,6 +36,9 @@ const SignUp: FC<Props> = ({
 
   // check 박스 class이름을 저장.
   const [checked, setChecked] = useState("");
+  const [userEmail, updateUserEmail] = useState("");
+  const [userPassword, updateUserPassword] = useState("");
+  const [userPasswordCheck, updateUserPasswordCheck] = useState("");
 
   return (
     <Authorization>
@@ -77,13 +53,14 @@ const SignUp: FC<Props> = ({
           userPasswordCheck={userPasswordCheck}
         />
         {checked ? (
-          <InformationInputBox
+          <ConnectToInformationInputBox
             userEmail={userEmail}
             userPassword={userPassword}
             userPasswordCheck={userPasswordCheck}
             updateUserEmail={updateUserEmail}
             updateUserPassword={updateUserPassword}
             updateUserPasswordCheck={updateUserPasswordCheck}
+            updateToastr={updateToastr}
           />
         ) : (
           <InformationDisableInputBox updateToastr={updateToastr} />
@@ -94,6 +71,6 @@ const SignUp: FC<Props> = ({
 };
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(SignUp);

@@ -15,7 +15,7 @@ const AcceptDisableButton: FC<Props> = ({ updateToastr }) => {
   const createToastr = useCallback(() => {
     updateToastr({
       timer: 5,
-      toastrMessage: "개인정보를 입력해주세요.",
+      toastrMessage: "개인정보 이용약관에 동의해주세요.",
       toastrState: "warning"
     });
   },                               []);
@@ -24,7 +24,7 @@ const AcceptDisableButton: FC<Props> = ({ updateToastr }) => {
     <AcceptButtonComponent>
       <ButtonCover onClick={createToastr} as="button" isDisable next>
         <ButtonArrow>〉</ButtonArrow>
-        <ButtonText>인증하기</ButtonText>
+        <ButtonText>생성하기</ButtonText>
       </ButtonCover>
     </AcceptButtonComponent>
   );

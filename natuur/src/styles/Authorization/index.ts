@@ -1,4 +1,5 @@
-import styled, { StyledProps } from "styled-components";
+import styled from "styled-components";
+import textBox from "../../assets/authorization/Textbox.png";
 
 // Authorization
 export const Authorization = styled.div``;
@@ -42,24 +43,24 @@ export const AcceptTermsBox = styled.div`
   }
 `;
 
-export const AcceptTermsBoxWapper = styled.div`
+export const AcceptTermsBoxWrapper = styled.div`
   position: relative;
   top: 20px;
   padding: 21px 18px 19px 22px;
   background-color: #fff;
 `;
 
-export const AcceptTermsWapperContents = styled.div`
+export const AcceptTermsWrapperContents = styled.div`
   width: 1100px;
   height: 220px;
-  font-size: 17px;
+  font-size: 16px;
   line-height: 21px;
   letter-spacing: 0.1px;
   overflow-y: scroll;
 `;
 
 export const AcceptTermsContentsTitle = styled.span`
-  font-size: 19px;
+  font-size: 17px;
   color: #328086;
 `;
 
@@ -97,7 +98,7 @@ export const PrivacyCheckBoxText = styled.label`
 `;
 
 // InformationInputBox
-export const InfomationInputBoxCoverWapper = styled.div`
+export const InfomationInputBoxCoverWrapper = styled.div`
   position: relative;
   height: 75px;
   display: flex;
@@ -109,7 +110,10 @@ export const GradationHorizon = styled.div`
   height: 1px;
 `;
 
-export const InfomationInputBoxWapperTitle = styled.div`
+export const InfomationInputBoxWapperTitle = styled.div<{
+  isCertification?: boolean;
+}>`
+  color: ${props => (props.isCertification ? "rgba(0, 0, 0, 0.3)" : "#000")};
   position: relative;
   display: inline-block;
   width: 148px;
@@ -120,34 +124,39 @@ export const InfomationInputBoxWapperTitle = styled.div`
   float: left;
 `;
 
-export const InfomationInputBoxWapperInputSpace = styled.div`
+export const InfomationInputBoxWrapperInputSpace = styled.div`
   display: inline-flex;
   position: relative;
   align-items: center;
   height: 40px;
 `;
 
-export const InformationInputSpaceArea = styled.input`
+export const InformationInputSpaceArea = styled.input<{
+  isCertification?: boolean;
+  width?: number;
+}>`
+  width: ${props => (props.width ? `${props.width}px` : "366px")};
   height: 40px;
   font-size: 18px;
   padding: 0 16px;
   color: #26484c;
   display: inline-block;
   overflow: hidden;
+  ${props =>
+    props.isCertification && "border: 1px solid rgba(112, 112, 112, 0.3)"};
+  background-color: ${props => (props.isCertification ? "#fcfcfc" : "#fafdfe")};
 
   &::placeholder {
-    font-weight: 300;
+    color: ${props => (props.isCertification ? "#e2e2e2" : "#acbec1")};
   }
 `;
 
 interface InputBoxCoverProps {
   readonly isDisable?: boolean;
-  readonly width?: string;
 }
 export const InfomationInputBoxCover = styled.div<InputBoxCoverProps>`
   position: relative;
   width: 1140px;
-  height: 226px;
   border-top: 1px solid #5f8a90;
   border-bottom: 1px solid #5f8a90;
   border-color: ${props => props.isDisable && "#a7a7a7"};
@@ -157,20 +166,6 @@ export const InfomationInputBoxCover = styled.div<InputBoxCoverProps>`
       props.isDisable
         ? "-webkit-linear-gradient(left, transparent 0%, #a7a7a7 50%, transparent 100%)"
         : "-webkit-linear-gradient(left, transparent 0%, #5f8a90 50%, transparent 100%)"};
-  }
-
-  ${InfomationInputBoxWapperTitle} {
-    color: ${props => (props.isDisable ? "rgba(0, 0, 0, 0.3)" : "#000")};
-  }
-
-  ${InformationInputSpaceArea} {
-    width: ${props => (props.width ? `${props.width}px` : "366px")};
-    ${props => props.isDisable && "border: 1px solid rgba(112, 112, 112, 0.3)"};
-    background-color: ${props => (props.isDisable ? "#fcfcfc" : "#fafdfe")};
-
-    &::placeholder {
-      color: ${props => (props.isDisable ? "#e2e2e2" : "#acbec1")};
-    }
   }
 `;
 
@@ -218,10 +213,38 @@ export const InformationInputSpaceWrong = styled.div`
   }
 `;
 
-export const InformationInputSpaceWarning = styled.span`
+export const InformationInputSpaceWarning = styled.span<{
+  isCertification: boolean;
+}>`
   position: absolute;
-  font-size: 14px;
+  font-size: 13px;
   top: 30.5px;
   right: 23px;
-  color: #939393;
+  color: ${props => (props.isCertification ? "rgba(0,0,0,0.2)" : "#000000")};
+`;
+
+export const Timer = styled.p`
+  margin-left: 10px;
+  font-size: 16px;
+  line-height: 1.31;
+  letter-spacing: 0.45px;
+  color: #79c2ca;
+`;
+
+export const MiniTextBox = styled.div`
+  width: 281px;
+  height: 30px;
+  background-image: url(${textBox});
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  right: -38px;
+  top: -6px;
+`;
+
+export const MiniTextBoxContent = styled.p`
+  margin-top: 3px;
+  font-size: 10px;
+  line-height: 2.1;
+  color: #000000;
 `;

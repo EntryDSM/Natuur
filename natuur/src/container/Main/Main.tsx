@@ -17,7 +17,7 @@ import {
 import { MainHeadLine } from "../../components/default/Common";
 import { ViewOpen } from "../../components/main";
 import ConnectViewClose from "./ConnectViewClose";
-import { PERIOD_LIST } from "../../components/main/constance";
+import { PERIOD_LIST } from '../../components/main/constance';
 import {
   getIsUpdatePopUp,
   updatePopUpCase
@@ -154,8 +154,8 @@ const Main: FC<Props> = ({
                 setIsOpenView={setIsOpenView}
                 getIsUpdatePopUp={getIsUpdatePopUp}
                 updatePopUpCase={updatePopUpCase}
-                accessToken={accessToken}
                 periodList={PERIOD_LIST}
+                accessToken={accessToken}
               />
             )}
           </S.MainContents>
