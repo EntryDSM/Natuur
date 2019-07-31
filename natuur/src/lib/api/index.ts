@@ -79,3 +79,36 @@ export const sendAuthenticationNumberByEmailApi = (payload: {
 export const getRegisterVerifyNumberApi = (payload: { verify: string }) => {
   return axios.get(`${connectionUrl}/signup/verify?verify=${payload.verify}`);
 };
+
+export const getClassificationInfoApi = async (accessToken: string) => {
+  const response = await axios.get(
+    `${connectionUrl}/applicant/me/classification`,
+    {
+      headers: { Authorization: `Bearer ${accessToken}` }
+    }
+  );
+
+  return response.data;
+};
+
+export const patchClassificationInfoApi = async (
+  accessToken: string,
+  payload: {
+    is_ged: boolean;
+    apply_type: string;
+    social_detail_type?: string;
+    is_daejeon: boolean;
+    is_graduated?: boolean;
+    additional_type?: string;
+  }
+) => {
+  const response = await axios.patch(
+    `${connectionUrl}/applicant/me/classification`,
+    payload,
+    {
+      headers: { Authorization: `Bearer ${accessToken}` }
+    }
+  );
+
+  return response.data;
+};
