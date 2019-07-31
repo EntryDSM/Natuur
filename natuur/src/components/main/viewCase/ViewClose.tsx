@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from "react";
+import React, { FC, useEffect, useRef } from "react";
 
 import * as S from "../../../styles/Main";
 import MainButton from "../viewCase/button/MainButton";
@@ -39,8 +39,13 @@ const ViewClose: FC<Props> = ({
   getUserApplicantStatus,
   periodList
 }) => {
+  const didMountRef = useRef(false);
+
   useEffect(() => {
-    getUserApplicantStatus({ accessToken });
+    if (!didMountRef.current) {
+      didMountRef.current = true;
+      getUserApplicantStatus({ accessToken });
+    }
   },        []);
 
   const isWaitingPeriod: boolean = getIsWaitingPeriod();
