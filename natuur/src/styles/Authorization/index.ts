@@ -49,7 +49,7 @@ export const AcceptTermsBoxWapper = styled.div`
   background-color: #fff;
 `;
 
-export const AcceptTermsWapperContents = styled.div`
+export const AcceptTermsWrapperContents = styled.div`
   width: 1100px;
   height: 220px;
   font-size: 16px;

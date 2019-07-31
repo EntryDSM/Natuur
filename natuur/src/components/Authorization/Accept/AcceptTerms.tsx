@@ -4,7 +4,7 @@ import {
   AcceptTermsComponent,
   AcceptTermsBox,
   AcceptTermsBoxWapper,
-  AcceptTermsWapperContents,
+  AcceptTermsWrapperContents,
   AcceptTermsContentsTitle
 } from "../../../styles/Authorization";
 import {
@@ -22,7 +22,7 @@ const AcceptTerms: FC = () => (
   <AcceptTermsComponent>
     <AcceptTermsBox>
       <AcceptTermsBoxWapper>
-        <AcceptTermsWapperContents>
+        <AcceptTermsWrapperContents>
           {ACCEPT_TERMS_CONTENTS_PART_1}
           <br />
           <br />
@@ -74,7 +74,7 @@ const AcceptTerms: FC = () => (
           <br />
           {ACCEPT_TERMS_CONTENTS_PART_8}
           <br />
-        </AcceptTermsWapperContents>
+        </AcceptTermsWrapperContents>
       </AcceptTermsBoxWapper>
     </AcceptTermsBox>
   </AcceptTermsComponent>
