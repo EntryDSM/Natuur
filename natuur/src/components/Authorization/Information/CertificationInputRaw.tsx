@@ -77,7 +77,7 @@ const CertificationInputRaw: FC<OwnProps> = ({
   });
 
   return (
-    <S.InfomationInputBoxCoverWapper>
+    <S.InfomationInputBoxCoverWrapper>
       <S.InfomationInputBoxWapperTitle>
         인증하기
       </S.InfomationInputBoxWapperTitle>
@@ -94,7 +94,7 @@ const CertificationInputRaw: FC<OwnProps> = ({
         isButtonDisable={!isCheckAuthorization}
         buttonWidth={78}
         buttonContent={isPasswordClose ? "확인" : "인증완료"}
-        buttonEvnet={() =>
+        buttonEvent={() =>
           isCheckAuthorization &&
           getRegisterVerifyNumber({ verify: userVerify })
         }
@@ -104,7 +104,7 @@ const CertificationInputRaw: FC<OwnProps> = ({
       <EventButton
         buttonWidth={78}
         buttonContent="재전송"
-        buttonEvnet={() =>
+        buttonEvent={() =>
           sendAuthenticationNumberByEmailApi({ email: userEmail })
         }
         buttonMargin={14}
@@ -130,7 +130,7 @@ const CertificationInputRaw: FC<OwnProps> = ({
           </S.MiniTextBoxContent>
         </S.MiniTextBox>
       )}
-    </S.InfomationInputBoxCoverWapper>
+    </S.InfomationInputBoxCoverWrapper>
   );
 };
 

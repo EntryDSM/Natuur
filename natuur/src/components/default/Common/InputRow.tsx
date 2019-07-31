@@ -38,12 +38,12 @@ const InputRow: FC<Props> = ({
   isCheckAuthorization,
   buttonWidth,
   buttonContent,
-  buttonEvnet,
+  buttonEvent,
   buttonMargin,
   isCertification
 }) => {
   return (
-    <S.InfomationInputBoxCoverWapper>
+    <S.InfomationInputBoxCoverWrapper>
       <S.InfomationInputBoxWapperTitle isCertification={isCertification}>
         {title}
       </S.InfomationInputBoxWapperTitle>
