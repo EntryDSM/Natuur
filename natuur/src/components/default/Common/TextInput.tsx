@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { checkIcon } from "../../../assets/common";
 
 import {
-  InfomationInputBoxWapperInputSpace,
+  InfomationInputBoxWrapperInputSpace,
   InformationInputSpaceArea,
   InformationInputSpaceCheckMark
 } from "../../../styles/Authorization";
@@ -27,7 +27,7 @@ const TextInput: FC<Props> = ({
   isReadOnly
 }) => {
   return (
-    <InfomationInputBoxWapperInputSpace>
+    <InfomationInputBoxWrapperInputSpace>
       <InformationInputSpaceArea
         width={width}
         type={type}
@@ -37,7 +37,7 @@ const TextInput: FC<Props> = ({
         readOnly={isReadOnly}
       />
       {isCheckMark && <InformationInputSpaceCheckMark src={checkIcon} />}
-    </InfomationInputBoxWapperInputSpace>
+    </InfomationInputBoxWrapperInputSpace>
   );
 };
 

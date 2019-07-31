@@ -41,8 +41,8 @@ const InputRow: FC<Props> = ({
   buttonMargin
 }) => {
   return (
-    <S.InfomationInputBoxCoverWapper>
-      <S.InfomationInputBoxWapperTitle>{title}</S.InfomationInputBoxWapperTitle>
+    <S.InfomationInputBoxCoverWrapper>
+      <S.InfomationInputBoxWrapperTitle>{title}</S.InfomationInputBoxWrapperTitle>
       <TextInput
         type={type}
         placeHolder={placeHolder}
@@ -70,7 +70,7 @@ const InputRow: FC<Props> = ({
           비밀번호를 정확히 입력해주세요
         </S.InformationInputSpaceWrong>
       )}
-    </S.InfomationInputBoxCoverWapper>
+    </S.InfomationInputBoxCoverWrapper>
   );
 };
 
