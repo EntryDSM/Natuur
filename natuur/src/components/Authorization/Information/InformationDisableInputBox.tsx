@@ -16,6 +16,7 @@ const InformationDisableInputBox: FC<Props> = ({ updateToastr }) => (
     <div>
       {/* 이메일 입력란 */}
       <InputRow
+        isCertification
         title="이메일"
         placeHolder="example@dsmhs.kr"
         name="emailInput"
@@ -23,7 +24,7 @@ const InformationDisableInputBox: FC<Props> = ({ updateToastr }) => (
         isReadOnly
         isButtonRow
         isCheckAuthorization={false}
-        buttonContent="완료"
+        buttonContent="인증"
         buttonWidth={78}
         buttonMargin={12}
       />
@@ -32,6 +33,7 @@ const InformationDisableInputBox: FC<Props> = ({ updateToastr }) => (
 
       {/* 비밀번호 입력란 */}
       <InputRow
+        isCertification
         title="비밀번호"
         placeHolder="••••••••"
         name="passwordInput"
@@ -45,6 +47,7 @@ const InformationDisableInputBox: FC<Props> = ({ updateToastr }) => (
 
       {/* 비밀번호 (확인) 입력란 */}
       <InputRow
+        isCertification
         title="비밀번호 확인"
         placeHolder="••••••••"
         name="passwordCheckInput"

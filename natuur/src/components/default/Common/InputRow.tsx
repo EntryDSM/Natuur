@@ -19,6 +19,7 @@ interface Props {
   buttonContent?: string;
   buttonEvent?: () => void;
   buttonMargin?: number;
+  isCertification?: boolean;
   handleChanger?(event: React.ChangeEvent<HTMLInputElement>): void;
 }
 
@@ -37,12 +38,15 @@ const InputRow: FC<Props> = ({
   isCheckAuthorization,
   buttonWidth,
   buttonContent,
-  buttonEvent,
-  buttonMargin
+  buttonEvnet,
+  buttonMargin,
+  isCertification
 }) => {
   return (
-    <S.InfomationInputBoxCoverWrapper>
-      <S.InfomationInputBoxWrapperTitle>{title}</S.InfomationInputBoxWrapperTitle>
+    <S.InfomationInputBoxCoverWapper>
+      <S.InfomationInputBoxWapperTitle isCertification={isCertification}>
+        {title}
+      </S.InfomationInputBoxWapperTitle>
       <TextInput
         type={type}
         placeHolder={placeHolder}
@@ -50,6 +54,7 @@ const InputRow: FC<Props> = ({
         handleChanger={handleChanger}
         isCheckMark={isCheckMark}
         isReadOnly={isReadOnly}
+        isCertification={isCertification}
       />
       {isButtonRow && (
         <EventButton
@@ -61,7 +66,7 @@ const InputRow: FC<Props> = ({
         />
       )}
       {isWarning && (
-        <S.InformationInputSpaceWarning>
+        <S.InformationInputSpaceWarning isCertification={isCertification}>
           {warningMessage}
         </S.InformationInputSpaceWarning>
       )}
