@@ -42,14 +42,14 @@ export const AcceptTermsBox = styled.div`
   }
 `;
 
-export const AcceptTermsBoxWapper = styled.div`
+export const AcceptTermsBoxWrapper = styled.div`
   position: relative;
   top: 20px;
   padding: 21px 18px 19px 22px;
   background-color: #fff;
 `;
 
-export const AcceptTermsWapperContents = styled.div`
+export const AcceptTermsWrapperContents = styled.div`
   width: 1100px;
   height: 220px;
   font-size: 16px;
@@ -97,7 +97,7 @@ export const PrivacyCheckBoxText = styled.label`
 `;
 
 // InformationInputBox
-export const InfomationInputBoxCoverWapper = styled.div`
+export const InfomationInputBoxCoverWrapper = styled.div`
   position: relative;
   height: 75px;
   display: flex;
@@ -109,7 +109,7 @@ export const GradationHorizon = styled.div`
   height: 1px;
 `;
 
-export const InfomationInputBoxWapperTitle = styled.div`
+export const InfomationInputBoxWrapperTitle = styled.div`
   position: relative;
   display: inline-block;
   width: 148px;
@@ -120,7 +120,7 @@ export const InfomationInputBoxWapperTitle = styled.div`
   float: left;
 `;
 
-export const InfomationInputBoxWapperInputSpace = styled.div`
+export const InfomationInputBoxWrapperInputSpace = styled.div`
   display: inline-flex;
   position: relative;
   align-items: center;
@@ -159,7 +159,7 @@ export const InfomationInputBoxCover = styled.div<InputBoxCoverProps>`
         : "-webkit-linear-gradient(left, transparent 0%, #5f8a90 50%, transparent 100%)"};
   }
 
-  ${InfomationInputBoxWapperTitle} {
+  ${InfomationInputBoxWrapperTitle} {
     color: ${props => (props.isDisable ? "rgba(0, 0, 0, 0.3)" : "#000")};
   }
 

@@ -6,7 +6,7 @@ import {
 } from "../../../styles/Authorization";
 import AcceptButton from "../Accept/AcceptButton";
 import InputRow from "../../default/Common/InputRow";
-import CertiificationInputRaw from "./CertiificationInputRaw";
+import CertificationInputRaw from "./CertificationInputRaw";
 import {
   mapStateToProps,
   mapDispatchToProps
@@ -47,12 +47,12 @@ const InformationInputBox: FC<Props> = ({
   updateToastr
 }) => {
   const [isCertification, setIsCertification] = useState(false);
-  const [isPasswordClose, setisPasswordClose] = useState(true);
+  const [isPasswordClose, setIsPasswordClose] = useState(true);
   const [userVerify, setUserVerify] = useState("");
 
   useEffect(() => {
     isSendSuccess && setIsCertification(true);
-    isGetSuccess && setisPasswordClose(false);
+    isGetSuccess && setIsPasswordClose(false);
   });
 
   const handleEmail = useCallback(
@@ -100,7 +100,7 @@ const InformationInputBox: FC<Props> = ({
           buttonContent="인증"
           buttonWidth={78}
           buttonMargin={12}
-          buttonEvnet={() =>
+          buttonEvent={() =>
             emailRegular.test(userEmail) &&
             sendAuthenticationNumberByEmailApi({ email: userEmail })
           }
@@ -110,7 +110,7 @@ const InformationInputBox: FC<Props> = ({
 
         {isCertification && (
           <>
-            <CertiificationInputRaw
+            <CertificationInputRaw
               isReadOnly={isGetSuccess}
               handleChanger={handleVerify}
               isCheckAuthorization={!!userVerify}
