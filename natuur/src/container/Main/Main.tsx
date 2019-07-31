@@ -22,12 +22,25 @@ import {
   getIsUpdatePopUp,
   updatePopUpCase
 } from "../../core/redux/actions/popup";
+import { getUserApplicantInfo } from "../../core/redux/actions/main";
 import PopUp from "../default/popup/PopUp";
+import { AppState } from "../../core/redux/store/store";
+
+const mapStateToProps = (state: AppState) => ({
+  userEmail: state.AuthorizationReducer.userEmail
+});
 
 const mapDispatchToProps = dispatch => ({
   getIsUpdatePopUp: () => dispatch(getIsUpdatePopUp()),
   updatePopUpCase: (popUpCase: "default" | "login" | "set" | "check") =>
-    dispatch(updatePopUpCase(popUpCase))
+    dispatch(updatePopUpCase(popUpCase)),
+  getUserApplicantInfo: ({
+    email,
+    accessToken
+  }: {
+    email: string;
+    accessToken: string;
+  }) => dispatch(getUserApplicantInfo({ email, accessToken }))
 });
 
 interface OwnProps {
@@ -35,7 +48,9 @@ interface OwnProps {
   updateAppClass(text: string): void;
 }
 
-type Props = ReturnType<typeof mapDispatchToProps> & OwnProps;
+type Props = ReturnType<typeof mapStateToProps> &
+  ReturnType<typeof mapDispatchToProps> &
+  OwnProps;
 
 const newDate = new Date();
 const todayYear = newDate.getFullYear();
@@ -47,7 +62,8 @@ const Main: FC<Props> = ({
   updateAppClass,
   getIsUpdatePopUp,
   updatePopUpCase,
-  accessToken
+  accessToken,
+  userEmail
 }) => {
   const didMountRef = useRef(false);
 
@@ -94,6 +110,10 @@ const Main: FC<Props> = ({
   useEffect(() => {
     if (!didMountRef.current) {
       didMountRef.current = true;
+
+      if (accessToken) {
+        getUserApplicantInfo({ email: userEmail, accessToken });
+      }
 
       updateAppClass("main-page");
       timeChangeChecker(
@@ -146,6 +166,6 @@ const Main: FC<Props> = ({
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Main);

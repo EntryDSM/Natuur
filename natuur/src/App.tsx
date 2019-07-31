@@ -22,19 +22,20 @@ import { AppState } from "./core/redux/store/store";
 
 const mapStaetToProps = (state: AppState) => ({
   accessToken: state.userReducer.accessToken,
-  refreshToken: state.userReducer.refreshToken
+  refreshToken: state.userReducer.refreshToken,
+  userName: state.mainReducer.email
 });
 
 type Props = ReturnType<typeof mapStaetToProps>;
 
-const App: FC<Props> = ({ accessToken, refreshToken }) => {
+const App: FC<Props> = ({ accessToken, refreshToken, userName }) => {
   const [appClass, setAppClass] = useState("");
 
   return (
     <BrowserRouter>
       <div className={appClass}>
         <GlobalStyle />
-        <Header accessToken={accessToken} />
+        <Header userName={userName.split("@")[0]} accessToken={accessToken} />
         <Switch>
           <Route
             path="/"
