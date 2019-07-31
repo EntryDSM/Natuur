@@ -1,6 +1,9 @@
 import axios from "axios";
 import { connectionUrl } from "./endpoint";
-import { UserApplicantStatusType } from "../../core/redux/actions/main/index";
+import {
+  UserApplicantStatusApiType,
+  UserApplicantInfoApiType
+} from "../../core/redux/actions/main/index";
 
 const authorizationHeader = (
   accessToken: string
@@ -52,7 +55,7 @@ export const getUserApplicationStatusApi = async ({
 }: {
   accessToken: string;
 }) => {
-  const response = await axios.get<UserApplicantStatusType>(
+  const response = await axios.get<UserApplicantStatusApiType>(
     `${connectionUrl}/applicant/me/status`,
     {
       headers: authorizationHeader(accessToken)
@@ -105,6 +108,23 @@ export const patchClassificationInfoApi = async (
   const response = await axios.patch(
     `${connectionUrl}/applicant/me/classification`,
     payload,
+    {
+      headers: { Authorization: `Bearer ${accessToken}` }
+    }
+  );
+
+  return response.data;
+};
+
+export const getUserApplicantInfoApi = async ({
+  email,
+  accessToken
+}: {
+  email: string;
+  accessToken: string;
+}) => {
+  const response = await axios.get<UserApplicantInfoApiType>(
+    `${connectionUrl}/applicant/me/${email}`,
     {
       headers: { Authorization: `Bearer ${accessToken}` }
     }

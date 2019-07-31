@@ -41,7 +41,7 @@ export default function timeChangeChecker(
   }>
 ): void {
   const stopIncrementProgressStandard =
-    100 / formatOperateDay(+new Date("11/07/2019") - +new Date("10/21/2019"));
+    100 / formatOperateDay(+new Date("11/08/2019") - +new Date("10/21/2019"));
 
   let progressWidth = 0;
   const pastTime = getPastTime(PERIOD_LIST, periodListFactor);

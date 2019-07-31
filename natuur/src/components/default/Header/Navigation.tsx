@@ -13,7 +13,7 @@ import {
 } from "../../../styles/Header";
 
 interface Props {
-  userName?: string;
+  userName: string;
   isActive: boolean;
 }
 

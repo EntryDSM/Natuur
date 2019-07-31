@@ -11,24 +11,25 @@ export const setDateComtrolStatements = (
   const firstStopPoint = PERIOD_LIST[1];
   const secondStopPoint = PERIOD_LIST[3];
   const lastStopPoint = PERIOD_LIST[4];
+  const millisecondDifferenceOfTheNextDay = 86400000;
 
   if (
     +new Date() > +firstStopPoint.startDate &&
-    +new Date() < +new Date("10/28/2019")
+    +new Date() < +firstStopPoint.startDate + millisecondDifferenceOfTheNextDay
   ) {
     return { first: true, second: false, third: false };
   }
 
   if (
     +new Date() > +secondStopPoint.startDate &&
-    +new Date() < +new Date("11/03/2019")
+    +new Date() < +secondStopPoint.startDate + millisecondDifferenceOfTheNextDay
   ) {
     return { first: false, second: true, third: false };
   }
 
   if (
     +new Date() > +lastStopPoint.startDate &&
-    +new Date() < +new Date("11/07/2019")
+    +new Date() < +lastStopPoint.endDate
   ) {
     return { first: false, second: false, third: true };
   }
@@ -67,6 +68,7 @@ export function getTimeStempDate(
   periodList: Array<{ endDate: Date; startDate: Date; title: string }>
 ): string[] {
   const application = periodList[0].title;
+  const registration = periodList[3].title;
   const successfulCandidate = periodList[4].title;
 
   const result = periodList.map(value => {
@@ -82,7 +84,11 @@ export function getTimeStempDate(
     const endDayDate = endDate.getDay();
     const endHourDate = endDate.getHours();
 
-    if (title === application || title === successfulCandidate) {
+    if (
+      title === application ||
+      title === successfulCandidate ||
+      title === registration
+    ) {
       return `${yearDate}.${startMonthDate}.${startDateString} (${
         koreanDate[startDayDate]
       }) 0${startHourDate}:00 ~ ${yearDate}.${endMonthDate}.${endDateString} (${

@@ -5,7 +5,7 @@ import {
   InfomationInputBoxCover,
   GradationHorizon
 } from "../../../styles/Authorization";
-import InputRow from "../../default/Common/InputRow";
+import InputRow from "./InputRow";
 
 interface Props {
   updateToastr(toastrInformation: object): void;

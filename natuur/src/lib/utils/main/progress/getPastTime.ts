@@ -57,15 +57,15 @@ function getDefaultProgressWidth(
       return 0;
     }
     if (getPeriodPartOfToday(periodDateOfStartProgress, 7, 10)) {
-      return 6;
+      return periodDateOfStartProgress >= 10 ? 6 : 7;
     }
-    if (getPeriodPartOfToday(periodDateOfStartProgress, 11, 12)) {
-      return 10;
+    if (getPeriodPartOfToday(periodDateOfStartProgress, 11, 16)) {
+      return periodDateOfStartProgress >= 15 ? 9 : 11;
     }
-    if (getPeriodPartOfToday(periodDateOfStartProgress, 13, 16)) {
-      return 15;
+    if (getPeriodPartOfToday(periodDateOfStartProgress, 17, 18)) {
+      return 17;
     }
-    if (getPeriodPartOfToday(periodDateOfStartProgress, 16, 20)) {
+    if (getPeriodPartOfToday(periodDateOfStartProgress, 18, 20)) {
       return 20;
     }
   } catch (error) {
