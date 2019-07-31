@@ -43,14 +43,14 @@ export const AcceptTermsBox = styled.div`
   }
 `;
 
-export const AcceptTermsBoxWapper = styled.div`
+export const AcceptTermsBoxWrapper = styled.div`
   position: relative;
   top: 20px;
   padding: 21px 18px 19px 22px;
   background-color: #fff;
 `;
 
-export const AcceptTermsWapperContents = styled.div`
+export const AcceptTermsWrapperContents = styled.div`
   width: 1100px;
   height: 220px;
   font-size: 16px;
@@ -98,7 +98,7 @@ export const PrivacyCheckBoxText = styled.label`
 `;
 
 // InformationInputBox
-export const InfomationInputBoxCoverWapper = styled.div`
+export const InfomationInputBoxCoverWrapper = styled.div`
   position: relative;
   height: 75px;
   display: flex;
@@ -124,7 +124,7 @@ export const InfomationInputBoxWapperTitle = styled.div<{
   float: left;
 `;
 
-export const InfomationInputBoxWapperInputSpace = styled.div`
+export const InfomationInputBoxWrapperInputSpace = styled.div`
   display: inline-flex;
   position: relative;
   align-items: center;

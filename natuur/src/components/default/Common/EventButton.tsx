@@ -7,18 +7,18 @@ interface OwnProps {
   buttonWidth: number;
   buttonContent: string;
   buttonMargin: number;
-  buttonEvnet: () => void;
+  buttonEvent: () => void;
 }
 
 const EventButton: FC<OwnProps> = ({
   buttonWidth,
   buttonContent,
-  buttonEvnet,
+  buttonEvent,
   isButtonDisable = false,
   buttonMargin
 }) => (
   <S.Button
-    onClick={buttonEvnet}
+    onClick={buttonEvent}
     width={buttonWidth}
     isDisable={isButtonDisable}
     marginLeft={buttonMargin}
