@@ -20,7 +20,7 @@ interface OwnProps {
   sendAuthenticationNumberByEmailApi({ email }: { email: string }): void;
 }
 
-const timefotmat = (time: number): string => {
+const getTimeFormat = (time: number): string => {
   if (time < 10) {
     return `0${time}`;
   }
@@ -33,7 +33,7 @@ const getTime = (time: number): string => {
   const minute = Math.floor(time / 60);
   const second = Math.floor(time - minute * 60);
 
-  return `${timefotmat(minute)}:${timefotmat(second)}`;
+  return `${getTimeFormat(minute)}:${getTimeFormat(second)}`;
 };
 
 const useTimer = (
@@ -50,7 +50,7 @@ const useTimer = (
   },                        1000);
 };
 
-const CertiificationInputRaw: FC<OwnProps> = ({
+const CertificationInputRaw: FC<OwnProps> = ({
   handleChanger,
   userVerify,
   userEmail,
@@ -134,4 +134,4 @@ const CertiificationInputRaw: FC<OwnProps> = ({
   );
 };
 
-export default CertiificationInputRaw;
+export default CertificationInputRaw;
