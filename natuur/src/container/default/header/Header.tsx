@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 
 import Navigation from "../../../components/default/Header/Navigation";
-import { HeaderNav } from "../../../styles/Header";
+import * as S from "../../../styles/Header";
 
 interface OwnProps {
   accessToken: string;
@@ -10,12 +10,12 @@ interface OwnProps {
 
 const Header: FC<OwnProps> = ({ accessToken, userName }) => {
   return (
-    <HeaderNav>
+    <S.HeaderNav>
       <Navigation
         isActive={accessToken !== "" ? true : false}
         userName={userName}
       />
-    </HeaderNav>
+    </S.HeaderNav>
   );
 };
 
