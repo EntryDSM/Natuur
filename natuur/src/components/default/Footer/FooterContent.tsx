@@ -58,7 +58,7 @@ const FooterContent: FC<Props> = ({ footerNavigationIsActive }) => {
             시스템 소개
           </FooterNavigation>
           <FooterNavigation
-            to="/auth"
+            to="/"
             margintop="14px"
             isactive={footerNavigationIsActive[2]}
           >
