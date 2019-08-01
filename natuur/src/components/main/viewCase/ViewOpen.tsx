@@ -1,4 +1,6 @@
 import React, { FC } from "react";
+import { withRouter, RouteComponentProps } from "react-router-dom";
+import { History } from "history";
 
 import { ContentsSorter } from "../../../styles/Main";
 import { loginEvent } from "../../../lib/utils/modal/login";
@@ -9,7 +11,7 @@ import {
   MainButton
 } from "../../../components/main";
 
-interface Props {
+interface OwnProps {
   checkImgList: boolean[];
   timeStempChecker: number;
   periodList: Array<{ title: string; startDate: Date; endDate: Date }>;
@@ -19,9 +21,12 @@ interface Props {
   progressWidth: number;
   getIsUpdatePopUp: () => void;
   accessToken: string;
+  history: History;
   setTimeStempChecker(timeStempNumber: number): void;
   updatePopUpCase(popUpCase: string): void;
 }
+
+type Props = OwnProps & RouteComponentProps;
 
 const ViewOpen: FC<Props> = ({
   checkImgList,
@@ -34,7 +39,8 @@ const ViewOpen: FC<Props> = ({
   progressWidth,
   getIsUpdatePopUp,
   updatePopUpCase,
-  accessToken
+  accessToken,
+  history
 }) => (
   <ContentsSorter>
     <MainTitles
@@ -71,11 +77,11 @@ const ViewOpen: FC<Props> = ({
         timeStempChecker < 0 || periodListFactor >= 1
           ? null
           : accessToken !== ""
-          ? () => console.log(1)
+          ? () => history.push("/info-summary")
           : () => loginEvent(getIsUpdatePopUp, updatePopUpCase, "login")
       }
     />
   </ContentsSorter>
 );
 
-export default ViewOpen;
+export default withRouter(ViewOpen);
