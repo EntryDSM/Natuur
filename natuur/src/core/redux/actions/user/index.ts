@@ -3,6 +3,7 @@ export const LOG_IN = "LOG_IN";
 export const LOG_IN_SUCCESS = "LOG_IN_SUCCESS";
 export const LOG_IN_FAILURE = "LOG_IN_FAILURE";
 export const RESET_STATE = "RESET_STATE";
+export const GET_USER_EMAIL = "GET_USER_EMAIL";
 
 interface LogInPayload {
   email: string;
@@ -17,9 +18,13 @@ export interface LogIn {
 interface ResetState {
   type: typeof RESET_STATE;
 }
+interface GetUserEmail {
+  type: typeof GET_USER_EMAIL;
+  payload: { userEmail: string };
+}
 
 // Actions
-export type UserActionTypes = LogIn | ResetState | null;
+export type UserActionTypes = LogIn | ResetState | GetUserEmail | null;
 
 export const logIn = (payload: LogInPayload): UserActionTypes => ({
   payload,
@@ -28,4 +33,11 @@ export const logIn = (payload: LogInPayload): UserActionTypes => ({
 
 export const resetState = (): UserActionTypes => ({
   type: RESET_STATE
+});
+
+export const getUserEmail = (payload: {
+  userEmail: string;
+}): UserActionTypes => ({
+  payload,
+  type: GET_USER_EMAIL
 });

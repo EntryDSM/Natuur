@@ -3,7 +3,8 @@ import {
   LOG_IN,
   LOG_IN_SUCCESS,
   LOG_IN_FAILURE,
-  RESET_STATE
+  RESET_STATE,
+  GET_USER_EMAIL
 } from "../../actions/user";
 
 export interface RootState {
@@ -12,6 +13,7 @@ export interface RootState {
   isSuccess?: boolean;
   accessToken?: string;
   refreshToken?: string;
+  userEmail?: string;
 }
 
 const initialState: RootState = {
@@ -19,7 +21,8 @@ const initialState: RootState = {
   isWaiting: false,
   isSuccess: false,
   accessToken: "",
-  refreshToken: ""
+  refreshToken: "",
+  userEmail: ""
 };
 
 const userReducer = (
@@ -62,6 +65,12 @@ const userReducer = (
         isSuccess: false,
         isError: false,
         isWaiting: false
+      };
+    }
+    case GET_USER_EMAIL: {
+      return {
+        ...state,
+        userEmail: action.payload
       };
     }
     default:

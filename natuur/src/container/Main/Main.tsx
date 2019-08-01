@@ -17,7 +17,7 @@ import {
 import { MainHeadLine } from "../../components/default/Common";
 import { ViewOpen } from "../../components/main";
 import ConnectViewClose from "./ConnectViewClose";
-import { PERIOD_LIST } from '../../components/main/constance';
+import { PERIOD_LIST } from "../../components/main/constance";
 import {
   getIsUpdatePopUp,
   updatePopUpCase
@@ -27,7 +27,7 @@ import PopUp from "../default/popup/PopUp";
 import { AppState } from "../../core/redux/store/store";
 
 const mapStateToProps = (state: AppState) => ({
-  userEmail: state.AuthorizationReducer.userEmail
+  userEmail: state.userReducer.userEmail
 });
 
 const mapDispatchToProps = dispatch => ({
