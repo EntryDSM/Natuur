@@ -35,7 +35,10 @@ const App: FC<Props> = ({ accessToken, refreshToken, userName }) => {
     <BrowserRouter>
       <div className={appClass}>
         <GlobalStyle />
-        <Header userName={userName.split("@")[0]} accessToken={accessToken} />
+        <Header
+          userName={`${userName}`.split("@")[0]}
+          accessToken={accessToken}
+        />
         <Switch>
           <Route
             path="/"
