@@ -8,7 +8,6 @@ import {
   Footer,
   Grade,
   Header,
-  Info,
   Introduce,
   Main,
   MyPage,
@@ -19,6 +18,7 @@ import {
 import GlobalStyle from "./styles/GlobalStyle";
 import ToastrBar from "./components/default/Common/ToastrBarCover";
 import { AppState } from "./core/redux/store/store";
+import ConnectSelectCategory from "./container/Info/ConnectSelectCategory";
 
 const mapStaetToProps = (state: AppState) => ({
   accessToken: state.userReducer.accessToken,
@@ -54,7 +54,9 @@ const App: FC<Props> = ({ accessToken, refreshToken, userName }) => {
           />
           <Route
             path="/info-summary"
-            render={() => <Info updateAppClass={setAppClass} />}
+            render={() => (
+              <ConnectSelectCategory updateAppClass={setAppClass} />
+            )}
             exact
           />
           <Route path="/classify" render={() => <Classification />} exact />
