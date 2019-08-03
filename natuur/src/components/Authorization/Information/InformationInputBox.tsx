@@ -5,7 +5,7 @@ import {
   GradationHorizon
 } from "../../../styles/Authorization";
 import AcceptButton from "../Accept/AcceptButton";
-import InputRow from "../../default/Common/InputRow";
+import InputRow from "./InputRow";
 import CertificationInputRaw from "./CertificationInputRaw";
 import {
   mapStateToProps,

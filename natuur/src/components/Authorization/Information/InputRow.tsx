@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 
 import * as S from "../../../styles/Authorization";
-import { TextInput, EventButton } from ".";
+import { TextInput, EventButton } from "../../default/Common";
 
 interface Props {
   title?: string;
