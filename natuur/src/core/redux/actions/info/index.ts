@@ -9,14 +9,14 @@ export const SET_IS_GED = "SET_IS_GED";
 export const SET_APPLY_TYPE = "SET_APPLY_TYPE";
 export const SET_SELECT_REGION = "SET_SELECT_REGION";
 export const SET_GRADUATION_CLASSFICATION = "SET_GRADUATION_CLASSFICATION";
-export const SET_GRADUATION_YEAR = "SET_GRADUATION_YEAR";
+export const SET_GRADUATED_YEAR = "SET_GRADUATED_YEAR";
 export const SET_REMARKS = "SET_REMARKS";
 
 export interface ClassifiationInfoApiType {
   is_ged?: boolean;
   apply_type?: string;
   social_detail_type?: string;
-  graduation_year?: number;
+  graduated_year?: number;
   is_daejeon?: boolean;
   is_graduated?: boolean;
   additional_type?: string;
@@ -60,7 +60,7 @@ export interface SetGraduationClassifcation {
   payload: string;
 }
 export interface SetGraduationYear {
-  type: typeof SET_GRADUATION_YEAR;
+  type: typeof SET_GRADUATED_YEAR;
   payload: number;
 }
 export interface SetRemarks {
@@ -114,7 +114,7 @@ export const setGraduationClassification = (
 });
 export const setGraduationYear = (payload: number): InfoActionTypes => ({
   payload,
-  type: SET_GRADUATION_YEAR
+  type: SET_GRADUATED_YEAR
 });
 export const setRemark = (payload: string): InfoActionTypes => ({
   payload,

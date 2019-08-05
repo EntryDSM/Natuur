@@ -10,7 +10,7 @@ import {
   SET_APPLY_TYPE,
   SET_SELECT_REGION,
   SET_GRADUATION_CLASSFICATION,
-  SET_GRADUATION_YEAR,
+  SET_GRADUATED_YEAR,
   SET_REMARKS
 } from "../../actions/info";
 
@@ -49,7 +49,7 @@ const infoReducer = (
         social_detail_type,
         is_daejeon,
         is_graduated,
-        graduation_year,
+        graduated_year,
         additional_type
       } = action.payload;
 
@@ -63,7 +63,7 @@ const infoReducer = (
         graduationClassification:
           is_graduated !== undefined &&
           `${is_graduated ? "졸업자" : "졸업 예정자"}`,
-        graduationYear: graduation_year,
+        graduationYear: graduated_year,
         remarks: additional_type
       };
     }
@@ -105,7 +105,7 @@ const infoReducer = (
         graduationClassification: action.payload
       };
     }
-    case SET_GRADUATION_YEAR: {
+    case SET_GRADUATED_YEAR: {
       return {
         ...state,
         graduationYear: action.payload
