@@ -4,7 +4,8 @@ import user from "./user";
 import verification from "./verification";
 import main from "./main";
 import authorization from "./authorization";
+import info from "./info";
 
 export default function* rootSaga() {
-  yield all([call(user), call(verification), call(main), call(authorization)]);
+  yield all([call(user), call(verification), call(main), call(authorization), call(info)]);
 }
