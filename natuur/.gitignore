@@ -3,3 +3,8 @@
 
 # bundle files
 /dist
+
+# env
+.env
+
+.history
