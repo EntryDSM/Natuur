@@ -132,3 +132,50 @@ export const getUserApplicantInfoApi = async ({
 
   return response.data;
 };
+
+export const patchUserApplicantInfoApi = async (
+  email: { email: string },
+  accessToken: { accessToken: string },
+  payload: {
+    applicant_name: string;
+    sex: string;
+    birth_date: string;
+    parent_name: string;
+    parent_tel: string;
+    applicant_tel: string;
+    address: string;
+    post_code: number;
+  }
+) => {
+  const response = await axios.patch(
+    `${connectionUrl}/applicant/me/${email.email}`,
+    payload,
+    {
+      headers: { Authorization: `Bearer ${accessToken.accessToken}` }
+    }
+  );
+
+  return response.data;
+};
+
+export const changeUserApplicantPhotoApi = async (
+  email: { email: string },
+  accessToken: { accessToken: string },
+  payload: { file: File }
+) => {
+  const formData = new FormData();
+  formData.append("file", payload.file);
+
+  const response = await axios.put(
+    `${connectionUrl}/applicant/me/photo/${email.email}`,
+    payload,
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken.accessToken}`,
+        "content-type": "multipart/form-data"
+      }
+    }
+  );
+
+  return response.data;
+};
