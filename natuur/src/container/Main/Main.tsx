@@ -63,7 +63,8 @@ const Main: FC<Props> = ({
   getIsUpdatePopUp,
   updatePopUpCase,
   accessToken,
-  userEmail
+  userEmail,
+  getUserApplicantInfo
 }) => {
   const didMountRef = useRef(false);
 
