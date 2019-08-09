@@ -78,7 +78,7 @@ const Info: FC<Props> = ({
             })
           }
           prevRouterPath="/"
-          nextRouterPath=""
+          nextRouterPath="/personal"
           AcceptPagination="info"
         />
       </S.InfoWrapper>
