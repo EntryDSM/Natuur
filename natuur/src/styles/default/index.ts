@@ -184,3 +184,32 @@ export const ToastrBarTitle = styled.div`
 export const ToastrBarMessage = styled.div`
   word-wrap: break-word;
 `;
+
+// textBox
+export const TextBox = styled.div`
+  width: 144px;
+  height: 24px;
+  line-height: 24px;
+  text-align: center;
+  border: solid 1px #bccdd0;
+  border-radius: 4px;
+  font-size: 10px;
+  color: #000000;
+  position: relative;
+  margin-left: 12px;
+
+  &::before {
+    content: "";
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: #ffffff;
+    border: solid 1px #bccdd0;
+    border-right: 0;
+    border-top: 0;
+    top: 50%;
+    margin-top: -2.5px;
+    left: -3.8px;
+    transform: rotate(45deg);
+  }
+`;
