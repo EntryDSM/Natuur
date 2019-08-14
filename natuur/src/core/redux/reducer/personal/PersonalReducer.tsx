@@ -20,9 +20,9 @@ import {
   SET_CLASS,
   SET_STUDENT_ID,
   SET_MIDDLE_SCHOOL,
-  SET_PARANTS_NAME,
+  SET_PARENTS_NAME,
   SET_SCHOOL_CONTACT,
-  SET_PARANTS_CONTACT,
+  SET_PARENTS_CONTACT,
   SET_USER_CONTACT,
   SET_DETAILED_ADDRESS,
   PersonalActionTypes
@@ -48,9 +48,9 @@ interface RootState {
   userClass: string;
   studentID: string;
   middleSchool: string;
-  parantsName: string;
+  parentsName: string;
   schoolContact: string;
-  parantsContact: string;
+  parentsContact: string;
   userContact: string;
   zipCode: string;
   address: string;
@@ -69,9 +69,9 @@ const initialStae: RootState = {
   userClass: "",
   studentID: "",
   middleSchool: "",
-  parantsName: "",
+  parentsName: "",
   schoolContact: "",
-  parantsContact: "",
+  parentsContact: "",
   userContact: "",
   zipCode: "",
   address: "",
@@ -124,9 +124,9 @@ const PersonalReducer = (
         userClass: "",
         studentID: "",
         middleSchool: "",
-        parantsName: parentName,
+        parentsName: parentName,
         schoolContact: "",
-        parantsContact: parentTel,
+        parentsContact: parentTel,
         userContact: applicantTel,
         zipCode: `${postCode}`,
         address: address.split("/")[0],
@@ -209,20 +209,20 @@ const PersonalReducer = (
         ...state,
         middleSchool: action.payload.school
       };
-    case SET_PARANTS_NAME:
+    case SET_PARENTS_NAME:
       return {
         ...state,
-        parantsName: action.payload.name
+        parentsName: action.payload.name
       };
     case SET_SCHOOL_CONTACT:
       return {
         ...state,
         schoolContact: action.payload.contact
       };
-    case SET_PARANTS_CONTACT:
+    case SET_PARENTS_CONTACT:
       return {
         ...state,
-        parantsContact: action.payload.contact
+        parentsContact: action.payload.contact
       };
     case SET_USER_CONTACT:
       return {

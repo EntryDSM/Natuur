@@ -163,18 +163,18 @@ export const GraduationSelecOptionList = styled.div`
   position: relative;
   left: 50%;
   margin-left: -65px;
-  
+
   &::-webkit-scrollbar {
-      width: 6px;
-      background: #8aaaad;
-      overflow: hidden;
-      border-radius: 3px;
-  };
+    width: 6px;
+    background: #8aaaad;
+    overflow: hidden;
+    border-radius: 3px;
+  }
 
   &::-webkit-scrollbar-thumb {
-      border-radius: 3px;
-      background: #6a8184;
-  };​
+    border-radius: 3px;
+    background: #6a8184;
+  }
 `;
 
 export const GraduationSelecOption = styled.div`

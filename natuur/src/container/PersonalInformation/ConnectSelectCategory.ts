@@ -10,9 +10,9 @@ import {
   setBirthDayDate,
   setClass,
   setStudentID,
-  setParantsName,
+  setParentsName,
   setSchoolContact,
-  setParantsContact,
+  setParentsContact,
   setUserContact,
   setDetailedAddress
 } from "../../core/redux/actions/personal";
@@ -31,12 +31,12 @@ export const mapDispatchToProps = dispatch => ({
   setClass: (payload: { class: string }) => dispatch(setClass(payload)),
   setStudentID: (payload: { studentID: string }) =>
     dispatch(setStudentID(payload)),
-  setParantsName: (payload: { name: string }) =>
-    dispatch(setParantsName(payload)),
+  setParentsName: (payload: { name: string }) =>
+    dispatch(setParentsName(payload)),
   setSchoolContact: (payload: { contact: string }) =>
     dispatch(setSchoolContact(payload)),
-  setParantsContact: (payload: { contact: string }) =>
-    dispatch(setParantsContact(payload)),
+  setParentsContact: (payload: { contact: string }) =>
+    dispatch(setParentsContact(payload)),
   setUserContact: (payload: { contact: string }) =>
     dispatch(setUserContact(payload)),
   setDetailedAddress: (payload: { address: string }) =>

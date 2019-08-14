@@ -6,20 +6,20 @@ import * as S from "../../../styles/personallinformation";
 interface OwnProps {
   isGed: boolean;
   schoolContact: string;
-  parantsContact: string;
+  parentsContact: string;
   userContact: string;
   setSchoolContact: (payload: { contact: string }) => void;
-  setParantsContact: (payload: { contact: string }) => void;
+  setParentsContact: (payload: { contact: string }) => void;
   setUserContact: (payload: { contact: string }) => void;
 }
 
 const ContactComponent: FC<OwnProps> = ({
   isGed,
   schoolContact,
-  parantsContact,
+  parentsContact,
   userContact,
   setSchoolContact,
-  setParantsContact,
+  setParentsContact,
   setUserContact
 }) => {
   return (
@@ -34,8 +34,8 @@ const ContactComponent: FC<OwnProps> = ({
 
       <ContactRow
         rowTitle="보호자 연락처"
-        contact={parantsContact}
-        setContact={setParantsContact}
+        contact={parentsContact}
+        setContact={setParentsContact}
       />
       <S.GradationHorizon />
 

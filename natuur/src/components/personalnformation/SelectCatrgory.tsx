@@ -8,7 +8,7 @@ import {
   mapStateToProps,
   mapDispatchToProps
 } from "../../container/PersonalInformation/ConnectSelectCategory";
-import ParantsRow from "./ParantsRow";
+import ParentsRow from "./ParentsRow";
 
 interface OwnProps {
   setIsOpenPopUp: (isOpenPopUp: boolean) => void;
@@ -26,9 +26,9 @@ interface OwnProps {
   userClass: string;
   studentID: string;
   middleSchool: string;
-  parantsName: string;
+  parentsName: string;
   schoolContact: string;
-  parantsContact: string;
+  parentsContact: string;
   userContact: string;
   zipCode: string;
   address: string;
@@ -61,12 +61,12 @@ const SelectCategory: FC<Props> = ({
   studentID,
   setStudentID,
   middleSchool,
-  parantsName,
-  setParantsName,
+  parentsName,
+  setParentsName,
   schoolContact,
   setSchoolContact,
-  parantsContact,
-  setParantsContact,
+  parentsContact,
+  setParentsContact,
   userContact,
   setUserContact,
   detailedAddress,
@@ -104,16 +104,16 @@ const SelectCategory: FC<Props> = ({
       />
       <S.GradationHorizon />
 
-      <ParantsRow name={parantsName} setName={setParantsName} />
+      <ParentsRow name={parentsName} setName={setParentsName} />
       <S.GradationHorizon />
 
       <ContactComponent
         isGed={isGed}
         schoolContact={schoolContact}
-        parantsContact={parantsContact}
+        parentsContact={parentsContact}
         userContact={userContact}
         setSchoolContact={setSchoolContact}
-        setParantsContact={setParantsContact}
+        setParentsContact={setParentsContact}
         setUserContact={setUserContact}
       />
 
