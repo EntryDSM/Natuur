@@ -58,7 +58,7 @@ interface RootState {
   imagePath: string;
 }
 
-const initialStae: RootState = {
+const initialState: RootState = {
   isSuccess: false,
   addressData: [],
   name: "",
@@ -80,7 +80,7 @@ const initialStae: RootState = {
 };
 
 const PersonalReducer = (
-  state = initialStae,
+  state = initialState,
   action: PersonalActionTypes
 ): RootState => {
   switch (action.type) {
@@ -145,7 +145,7 @@ const PersonalReducer = (
       };
     case PATCH_APPLICANT_INFO_SUCCESS:
       return {
-        ...state,
+        ...state
       };
     case PATCH_APPLICANT_INFO_FAILURE:
       return {
