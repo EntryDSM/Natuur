@@ -88,31 +88,11 @@ const mainReducer = (
       };
     }
     case GET_USER_APPLICANT_INFOMATION_SUCCESS: {
-      const {
-        email,
-        applicantName,
-        sex,
-        birthDate,
-        parentName,
-        parentTel,
-        applicantTel,
-        address,
-        postCode,
-        imagePath
-      } = action.payload;
+      const { email } = action.payload;
       return {
         ...state,
         isWaiting: true,
-        email,
-        applicantName,
-        sex,
-        birthDate,
-        parentName,
-        parentTel,
-        applicantTel,
-        address,
-        postCode,
-        imagePath
+        email
       };
     }
     case GET_USER_APPLICANT_INFOMATION_FAILURE: {
