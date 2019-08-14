@@ -20,9 +20,9 @@ export const SET_BIRTH_DATE = "SET_BIRTH_DATE";
 export const SET_CLASS = "SET_CLASS";
 export const SET_STUDENT_ID = "SET_STUDENT_ID";
 export const SET_MIDDLE_SCHOOL = "SET_MIDDLE_SCHOOL";
-export const SET_PARANTS_NAME = "SET_PARANTS_NAME";
+export const SET_PARENTS_NAME = "SET_PARENTS_NAME";
 export const SET_SCHOOL_CONTACT = "SET_SCHOOL_CONTACT";
-export const SET_PARANTS_CONTACT = "SET_PARANTS_CONTACT";
+export const SET_PARENTS_CONTACT = "SET_PARENTS_CONTACT";
 export const SET_USER_CONTACT = "SET_USER_CONTACT";
 export const SET_DETAILED_ADDRESS = "SET_DETAILED_ADDRESS";
 
@@ -144,16 +144,16 @@ export interface SetMiddleSchool {
   type: typeof SET_MIDDLE_SCHOOL;
   payload: { school: string };
 }
-export interface SetParantsName {
-  type: typeof SET_PARANTS_NAME;
+export interface SetParentsName {
+  type: typeof SET_PARENTS_NAME;
   payload: { name: string };
 }
 export interface SetSchoolContact {
   type: typeof SET_SCHOOL_CONTACT;
   payload: { contact: string };
 }
-export interface SetParantsContact {
-  type: typeof SET_PARANTS_CONTACT;
+export interface SetParentsContact {
+  type: typeof SET_PARENTS_CONTACT;
   payload: { contact: string };
 }
 export interface SetUserContact {
@@ -179,9 +179,9 @@ export type PersonalActionTypes =
   | SetClass
   | SetStudentID
   | SetMiddleSchool
-  | SetParantsName
+  | SetParentsName
   | SetSchoolContact
-  | SetParantsContact
+  | SetParentsContact
   | SetUserContact
   | SetDetaildAddress
   | null;
@@ -274,11 +274,11 @@ export const setMiddleSchool = (payload: {
   type: SET_MIDDLE_SCHOOL
 });
 
-export const setParantsName = (payload: {
+export const setParentsName = (payload: {
   name: string;
 }): PersonalActionTypes => ({
   payload,
-  type: SET_PARANTS_NAME
+  type: SET_PARENTS_NAME
 });
 
 export const setSchoolContact = (payload: {
@@ -288,11 +288,11 @@ export const setSchoolContact = (payload: {
   type: SET_SCHOOL_CONTACT
 });
 
-export const setParantsContact = (payload: {
+export const setParentsContact = (payload: {
   contact: string;
 }): PersonalActionTypes => ({
   payload,
-  type: SET_PARANTS_CONTACT
+  type: SET_PARENTS_CONTACT
 });
 
 export const setUserContact = (payload: {

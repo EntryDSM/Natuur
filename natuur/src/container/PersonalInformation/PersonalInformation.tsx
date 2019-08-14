@@ -32,9 +32,9 @@ const mapStateToProps = (state: AppState) => ({
   userClass: state.PersonalReducer.userClass,
   studentID: state.PersonalReducer.studentID,
   middleSchool: state.PersonalReducer.middleSchool,
-  parantsName: state.PersonalReducer.parantsName,
+  parentsName: state.PersonalReducer.parentsName,
   schoolContact: state.PersonalReducer.schoolContact,
-  parantsContact: state.PersonalReducer.parantsContact,
+  parentsContact: state.PersonalReducer.parentsContact,
   userContact: state.PersonalReducer.userContact,
   zipCode: state.PersonalReducer.zipCode,
   address: state.PersonalReducer.address,
@@ -83,9 +83,9 @@ const PersonalInformation: FC<Props> = ({
   userClass,
   studentID,
   middleSchool,
-  parantsName,
+  parentsName,
   schoolContact,
-  parantsContact,
+  parentsContact,
   userContact,
   zipCode,
   address,
@@ -129,9 +129,9 @@ const PersonalInformation: FC<Props> = ({
           userClass={userClass}
           studentID={studentID}
           middleSchool={middleSchool}
-          parantsName={parantsName}
+          parentsName={parentsName}
           schoolContact={schoolContact}
-          parantsContact={parantsContact}
+          parentsContact={parentsContact}
           userContact={userContact}
           zipCode={zipCode}
           address={address}
@@ -149,8 +149,8 @@ const PersonalInformation: FC<Props> = ({
                 applicant_name: name,
                 sex: gender,
                 birth_date: `${birthYear}/${birthMonth}/${birthDate}`,
-                parent_name: parantsName,
-                parent_tel: parantsContact,
+                parent_name: parentsName,
+                parent_tel: parentsContact,
                 applicant_tel: userContact,
                 address: `${address}/${detailedAddress}`,
                 post_code: Number(zipCode)

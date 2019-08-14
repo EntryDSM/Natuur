@@ -235,7 +235,7 @@ interface InputProps {
     | "name"
     | "studentID"
     | "middle"
-    | "parants"
+    | "parents"
     | "contact"
     | "zipcode"
     | "address"
@@ -252,7 +252,7 @@ export const Input = styled.input<InputProps>`
         return "56px";
       case "middle":
         return "251px";
-      case "parants":
+      case "parents":
         return "152px";
       case "contact":
         return "251px";

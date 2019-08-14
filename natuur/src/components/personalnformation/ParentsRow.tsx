@@ -8,17 +8,17 @@ interface OwnProps {
   setName: (payload: { name: string }) => void;
 }
 
-const ParantsRow: FC<OwnProps> = ({ name, setName }) => {
+const ParentsRow: FC<OwnProps> = ({ name, setName }) => {
   return (
     <InputRow rowTitle="보호자명">
       <S.Input
         type="text"
         value={name}
         onChange={({ target: { value } }) => setName({ name: value })}
-        inputCase="parants"
+        inputCase="parents"
       />
     </InputRow>
   );
 };
 
-export default ParantsRow;
+export default ParentsRow;
