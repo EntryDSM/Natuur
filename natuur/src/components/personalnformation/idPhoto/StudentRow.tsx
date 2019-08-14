@@ -2,6 +2,7 @@ import React, { FC } from "react";
 
 import * as S from "../../../styles/personallinformation";
 import InputRow from "../InputRow";
+import { checkOnlyNumber } from "../../../lib/regularExpressions";
 
 interface OwnProps {
   isGed?: boolean;
@@ -29,7 +30,7 @@ const StudentRow: FC<OwnProps> = ({
           type="text"
           value={userClass}
           onChange={({ target: { value } }) =>
-            (/^[0-9]+$/g.test(value) || !value) && setClass({ class: value })
+            checkOnlyNumber(value) && setClass({ class: value })
           }
           readOnly={isGed}
           maxLength={2}
@@ -42,8 +43,7 @@ const StudentRow: FC<OwnProps> = ({
           type="text"
           value={studentID}
           onChange={({ target: { value } }) =>
-            (/^[0-9]+$/g.test(value) || !value) &&
-            setStudentID({ studentID: value })
+            checkOnlyNumber(value) && setStudentID({ studentID: value })
           }
           readOnly={isGed}
           maxLength={2}

@@ -2,6 +2,7 @@ import React, { FC } from "react";
 
 import * as S from "../../../styles/personallinformation";
 import InputRow from "../InputRow";
+import { checkOnlyNumber } from "../../../lib/regularExpressions";
 
 interface OwnProps {
   rowTitle: string;
@@ -28,7 +29,7 @@ const ContactRow: FC<OwnProps> = ({
         inputCase="contact"
         isDisable={isDisable}
       />
-      {!/^[0-9]+$/g.test(contact) && contact && (
+      {!checkOnlyNumber(contact) && (
         <S.TextBox>형식에 맞추어 입력해주세요.</S.TextBox>
       )}
     </InputRow>
