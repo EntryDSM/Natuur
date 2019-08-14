@@ -11,9 +11,9 @@ import {
   Introduce,
   Main,
   MyPage,
-  PersonalInformation,
   Preview,
-  SignUp
+  SignUp,
+  PersonalInformation
 } from "./container";
 import GlobalStyle from "./styles/GlobalStyle";
 import ToastrBar from "./components/default/Common/ToastrBarCover";
