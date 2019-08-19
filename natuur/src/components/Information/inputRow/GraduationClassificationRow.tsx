@@ -20,7 +20,9 @@ const GraduationClassificationRow: FC<OwnProps> = ({
   isGedState
 }) => {
   useEffect(() => {
-    setRadioType(undefined);
+    if (isGedState) {
+      setRadioType(undefined);
+    }
   },        [isGedState]);
 
   return (

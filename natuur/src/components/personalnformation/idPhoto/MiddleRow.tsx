@@ -12,9 +12,15 @@ interface OwnProps {
 const MiddleRow: FC<OwnProps> = ({ middleSchool, setIsOpenPopUp, isGed }) => {
   return (
     <InputRow rowTitle="중학교명" isSmall>
-      <S.Input type="text" value={middleSchool} readOnly inputCase="middle" />
+      <S.Input
+        isDisable={isGed}
+        type="text"
+        value={middleSchool}
+        readOnly
+        inputCase="middle"
+      />
       <S.SearchButton
-        onClick={() => setIsOpenPopUp(true)}
+        onClick={() => isGed || setIsOpenPopUp(true)}
         isSmall
         isDisable={isGed}
       >

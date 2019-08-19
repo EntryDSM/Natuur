@@ -29,7 +29,7 @@ interface OwnProps {
   connectServer: () => void;
   prevRouterPath: string;
   nextRouterPath: string;
-  AcceptPagination: "info" | "personal" | "" | "";
+  AcceptPagination: "info" | "personal" | "grade" | "intro";
 }
 
 const Pagination: FC<OwnProps> = ({
@@ -72,17 +72,25 @@ const Pagination: FC<OwnProps> = ({
         />
         <S.PaginationButton
           onClick={event =>
-            allowedPageCheckers(AcceptPagination === "", connectServer, event)
+            allowedPageCheckers(
+              AcceptPagination === "grade",
+              connectServer,
+              event
+            )
           }
-          to=""
-          actived={AcceptPagination === "" ? "isActive" : null}
+          to="/grade"
+          actived={AcceptPagination === "grade" ? "isActive" : null}
         />
         <S.PaginationButton
           onClick={event =>
-            allowedPageCheckers(AcceptPagination === "", connectServer, event)
+            allowedPageCheckers(
+              AcceptPagination === "intro",
+              connectServer,
+              event
+            )
           }
-          to=""
-          actived={AcceptPagination === "" ? "isActive" : null}
+          to="/intro"
+          actived={AcceptPagination === "intro" ? "isActive" : null}
         />
       </S.PaginationButtonWrapper>
 
