@@ -17,8 +17,9 @@ import {
 } from "./container";
 import GlobalStyle from "./styles/GlobalStyle";
 import ToastrBar from "./components/default/Common/ToastrBarCover";
-import { AppState } from "./core/redux/store/store";
 import ConnectSelectCategory from "./container/Info/ConnectSelectCategory";
+import ScrollToTop from "./components/default/ScrollToTop";
+import { AppState } from "./core/redux/store/store";
 
 const mapStaetToProps = (state: AppState) => ({
   accessToken: state.userReducer.accessToken,
@@ -39,37 +40,39 @@ const App: FC<Props> = ({ accessToken, refreshToken, userName }) => {
           userName={`${userName}`.split("@")[0]}
           accessToken={accessToken}
         />
-        <Switch>
-          <Route
-            path="/"
-            render={() => (
-              <Main accessToken={accessToken} updateAppClass={setAppClass} />
-            )}
-            exact
-          />
-          <Route
-            path="/auth"
-            render={() => <SignUp updateAppClass={setAppClass} />}
-            exact
-          />
-          <Route
-            path="/info-summary"
-            render={() => (
-              <ConnectSelectCategory updateAppClass={setAppClass} />
-            )}
-            exact
-          />
-          <Route path="/classify" render={() => <Classification />} exact />
-          <Route
-            path="/personal"
-            render={() => <PersonalInformation />}
-            exact
-          />
-          <Route path="/intro" render={() => <Introduce />} exact />
-          <Route path="/preview" render={() => <Preview />} exact />
-          <Route path="/grade" render={() => <Grade />} exact />
-          <Route path="/mypage" render={() => <MyPage />} exact />
-        </Switch>
+        <ScrollToTop>
+          <Switch>
+            <Route
+              path="/"
+              render={() => (
+                <Main accessToken={accessToken} updateAppClass={setAppClass} />
+              )}
+              exact
+            />
+            <Route
+              path="/auth"
+              render={() => <SignUp updateAppClass={setAppClass} />}
+              exact
+            />
+            <Route
+              path="/info-summary"
+              render={() => (
+                <ConnectSelectCategory updateAppClass={setAppClass} />
+              )}
+              exact
+            />
+            <Route path="/classify" render={() => <Classification />} exact />
+            <Route
+              path="/personal"
+              render={() => <PersonalInformation />}
+              exact
+            />
+            <Route path="/intro" render={() => <Introduce />} exact />
+            <Route path="/preview" render={() => <Preview />} exact />
+            <Route path="/grade" render={() => <Grade />} exact />
+            <Route path="/mypage" render={() => <MyPage />} exact />
+          </Switch>
+        </ScrollToTop>
         <Footer />
         <ToastrBar />
       </div>
