@@ -158,7 +158,7 @@ const PersonalInformation: FC<Props> = ({
             })
           }
           prevRouterPath="/info-summary"
-          nextRouterPath=""
+          nextRouterPath="/grade"
           AcceptPagination="personal"
         />
       </S.personalWrapper>

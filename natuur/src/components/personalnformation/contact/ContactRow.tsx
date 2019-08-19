@@ -28,6 +28,7 @@ const ContactRow: FC<OwnProps> = ({
         onChange={({ target: { value } }) => setContact({ contact: value })}
         inputCase="contact"
         isDisable={isDisable}
+        readOnly={isDisable}
       />
       {!checkOnlyNumber(contact) && (
         <S.TextBox>형식에 맞추어 입력해주세요.</S.TextBox>
