@@ -15,6 +15,7 @@ import {
   SignUp,
   PersonalInformation
 } from "./container";
+import ErrorPage from "./components/default/ErrorPage";
 import GlobalStyle from "./styles/GlobalStyle";
 import ToastrBar from "./components/default/Common/ToastrBarCover";
 import ConnectSelectCategory from "./container/Info/ConnectSelectCategory";
@@ -71,6 +72,7 @@ const App: FC<Props> = ({ accessToken, refreshToken, userName }) => {
             <Route path="/preview" render={() => <Preview />} exact />
             <Route path="/grade" render={() => <Grade />} exact />
             <Route path="/mypage" render={() => <MyPage />} exact />
+            <Route component={ErrorPage} />
           </Switch>
         </ScrollToTop>
         <Footer />
