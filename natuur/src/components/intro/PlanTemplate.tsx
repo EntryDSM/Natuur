@@ -27,10 +27,10 @@ const Wrapper: FC<OwnProps> = ({
   accessToken,
   patchDocument
 }) => {
-  const debouncedText = useDebounce(value, 3500);
+  const [debouncedText, debounceStatus] = useDebounce(value, 3500);
 
   useEffect(() => {
-    if (debouncedText && value !== debouncedText) {
+    if (debouncedText && debounceStatus) {
       if (title === "자기소개서") {
         patchDocument({ accessToken, self_introduction_text: debouncedText });
       } else {
@@ -46,7 +46,7 @@ const Wrapper: FC<OwnProps> = ({
       <div>
         <PlanInput title={title} value={value} setValue={setValue} />
         <S.ShowTextLengthPlace isAccept={!!value}>
-          <S.TextLength>{`${value.length} / 1600`}</S.TextLength>
+          <S.TextLength>{value.length} / 1600</S.TextLength>
         </S.ShowTextLengthPlace>
       </div>
     </S.WrapperCover>
