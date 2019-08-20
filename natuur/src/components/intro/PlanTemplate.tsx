@@ -27,10 +27,10 @@ const Wrapper: FC<OwnProps> = ({
   accessToken,
   patchDocument
 }) => {
-  const [debouncedText, debounceStatus] = useDebounce(value, 3500);
+  const debouncedText = useDebounce(value, 3500);
 
   useEffect(() => {
-    if (debouncedText && debounceStatus) {
+    if (debouncedText && value !== debouncedText) {
       if (title === "자기소개서") {
         patchDocument({ accessToken, self_introduction_text: debouncedText });
       } else {
