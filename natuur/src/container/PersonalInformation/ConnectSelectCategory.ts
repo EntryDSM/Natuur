@@ -14,12 +14,15 @@ import {
   setSchoolContact,
   setParentsContact,
   setUserContact,
-  setDetailedAddress
+  setDetailedAddress,
+  setFile,
+  setMiddleSchool
 } from "../../core/redux/actions/personal";
 
 export const mapStateToProps = (state: AppState) => ({
   isGed: state.infoReducer.isGed,
-  imagePath: state.PersonalReducer.imagePath
+  imagePath: state.PersonalReducer.imagePath,
+  file: state.PersonalReducer.file
 });
 
 export const mapDispatchToProps = dispatch => ({
@@ -40,7 +43,10 @@ export const mapDispatchToProps = dispatch => ({
   setUserContact: (payload: { contact: string }) =>
     dispatch(setUserContact(payload)),
   setDetailedAddress: (payload: { address: string }) =>
-    dispatch(setDetailedAddress(payload))
+    dispatch(setDetailedAddress(payload)),
+  setMiddleSchool: (payload: { school: string }) =>
+    dispatch(setMiddleSchool(payload)),
+  setFile: (payload: string) => dispatch(setFile(payload))
 });
 
 export default connect(

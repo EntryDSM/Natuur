@@ -28,6 +28,8 @@ interface OwnProps {
   email: string;
   accessToken: string;
   imagePath: string;
+  file: string;
+  setFile: (file: string) => void;
   changeApplicantPhoto: (payload: {
     email: { email: string };
     accessToken: { accessToken: string };
@@ -39,10 +41,11 @@ const IdPhotoWrapper: FC<OwnProps> = ({
   changeApplicantPhoto,
   email,
   accessToken,
-  imagePath
+  imagePath,
+  file,
+  setFile
 }) => {
   const didMountRef = useRef(false);
-  const [file, setFile] = useState("");
 
   useEffect(() => {
     if (!didMountRef.current) {
