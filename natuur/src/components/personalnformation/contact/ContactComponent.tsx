@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 
 import ContactRow from "./ContactRow";
 import * as S from "../../../styles/personallinformation";
@@ -22,6 +22,12 @@ const ContactComponent: FC<OwnProps> = ({
   setParentsContact,
   setUserContact
 }) => {
+  useEffect(() => {
+    if (isGed) {
+      setSchoolContact({ contact: undefined });
+    }
+  },        [isGed]);
+
   return (
     <>
       <ContactRow

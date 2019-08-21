@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 
 import * as S from "../../../styles/personallinformation";
 import InputRow from "../InputRow";
@@ -19,6 +19,13 @@ const StudentRow: FC<OwnProps> = ({
   setClass,
   setStudentID
 }) => {
+  useEffect(() => {
+    if (isGed) {
+      setClass({ class: undefined });
+      setStudentID({ studentID: undefined });
+    }
+  },        [isGed]);
+
   return (
     <InputRow rowTitle="학번" isSmall>
       <S.InputCover isDisable>
