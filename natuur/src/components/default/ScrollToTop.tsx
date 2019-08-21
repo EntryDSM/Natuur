@@ -1,7 +1,7 @@
-import React, { FC, useEffect } from "react";
+import { FC, useEffect, ReactElement } from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 
-const ScrollToTop: FC<RouteComponentProps> = ({
+const ScrollToTop: FC<{children: ReactElement} & RouteComponentProps> = ({
   children,
   location: { pathname }
 }) => {
@@ -9,7 +9,7 @@ const ScrollToTop: FC<RouteComponentProps> = ({
     window.scrollTo(0, 0);
   },        [pathname]);
 
-  return <>{children || null}</>;
+  return children;
 };
 
 export default withRouter(ScrollToTop);
