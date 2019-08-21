@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 
 import * as S from "../../../styles/personallinformation";
 import InputRow from "../InputRow";
@@ -7,9 +7,21 @@ interface OwnProps {
   isGed?: boolean;
   middleSchool: string;
   setIsOpenPopUp: (isOpenPopUp: boolean) => void;
+  setMiddleSchool: (payload: { school: string }) => void;
 }
 
-const MiddleRow: FC<OwnProps> = ({ middleSchool, setIsOpenPopUp, isGed }) => {
+const MiddleRow: FC<OwnProps> = ({
+  middleSchool,
+  setIsOpenPopUp,
+  setMiddleSchool,
+  isGed
+}) => {
+  useEffect(() => {
+    if (isGed) {
+      setMiddleSchool({ school: undefined });
+    }
+  },        [isGed]);
+
   return (
     <InputRow rowTitle="중학교명" isSmall>
       <S.Input
