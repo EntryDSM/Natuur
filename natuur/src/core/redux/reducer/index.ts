@@ -10,6 +10,8 @@ import sendApplicantPasswordReducer from "./User/sendApplicantPasswordReducer";
 import mainReducer from "./main/mainReducer";
 import PersonalReducer from "./personal/personalReducer";
 import infoReducer from "./info/infoReducer";
+import gradeReducer from "./grade/gradeReducer";
+import introReducer from "./intro/introReducer";
 
 export default combineReducers({
   AuthorizationReducer,
@@ -21,6 +23,8 @@ export default combineReducers({
   sendApplicantPasswordReducer,
   mainReducer,
   infoReducer,
-  PersonalReducer
+  PersonalReducer,
+  gradeReducer,
+  introReducer
   // reducers
 });

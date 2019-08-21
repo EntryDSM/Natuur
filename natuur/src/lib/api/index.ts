@@ -3,7 +3,8 @@ import { connectionUrl } from "./endpoint";
 import {
   UserApplicantStatusApiType,
   UserApplicantInfoApiType
-} from "../../core/redux/actions/main/index";
+} from "../../core/redux/actions/main";
+import { DocumentApiType } from "../../core/redux/actions/intro";
 
 const authorizationHeader = (
   accessToken: string
@@ -174,6 +175,37 @@ export const changeUserApplicantPhotoApi = async (
         Authorization: `Bearer ${accessToken.accessToken}`,
         "content-type": "multipart/form-data"
       }
+    }
+  );
+
+  return response.data;
+};
+
+export const getUserDocumentApi = async (payload: { accessToken: string }) => {
+  const response = await axios.get<DocumentApiType>(
+    `${connectionUrl}/applicant/me/document`,
+    {
+      headers: { Authorization: `Bearer ${payload.accessToken}` }
+    }
+  );
+
+  return response.data;
+};
+
+export const patchUserDocumentApi = async ({
+  accessToken,
+  self_introduction_text,
+  study_plan_text
+}: {
+  accessToken: string;
+  self_introduction_text?: string;
+  study_plan_text?: string;
+}) => {
+  const response = await axios.patch(
+    `${connectionUrl}/applicant/me/document`,
+    { self_introduction_text, study_plan_text },
+    {
+      headers: { Authorization: `Bearer ${accessToken}` }
     }
   );
 
