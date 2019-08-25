@@ -18,6 +18,8 @@ interface OwnProps {
     accessToken: { accessToken: string };
     payload: { file: File };
   }) => void;
+  setFile: (file: string) => void;
+  file: string;
   name: string;
   gender: string;
   birthYear: string;
@@ -71,11 +73,14 @@ const SelectCategory: FC<Props> = ({
   setUserContact,
   detailedAddress,
   setDetailedAddress,
+  setMiddleSchool,
   zipCode,
   address,
   email,
   accessToken,
-  imagePath
+  imagePath,
+  file,
+  setFile
 }) => {
   return (
     <S.CategoryList>
@@ -97,10 +102,13 @@ const SelectCategory: FC<Props> = ({
         setClass={setClass}
         setStudentID={setStudentID}
         setIsOpenPopUp={setIsOpenPopUp}
+        setMiddleSchool={setMiddleSchool}
         email={email}
         accessToken={accessToken}
         changeApplicantPhoto={changeApplicantPhoto}
         imagePath={imagePath}
+        file={file}
+        setFile={setFile}
       />
       <S.GradationHorizon />
 

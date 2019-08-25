@@ -25,6 +25,7 @@ export const SET_SCHOOL_CONTACT = "SET_SCHOOL_CONTACT";
 export const SET_PARENTS_CONTACT = "SET_PARENTS_CONTACT";
 export const SET_USER_CONTACT = "SET_USER_CONTACT";
 export const SET_DETAILED_ADDRESS = "SET_DETAILED_ADDRESS";
+export const SET_FILE = "SET_FILE";
 
 export interface SearchAddressApiType {
   documents?: Array<{
@@ -164,6 +165,10 @@ export interface SetDetaildAddress {
   type: typeof SET_DETAILED_ADDRESS;
   payload: { address: string };
 }
+export interface SetFile {
+  type: typeof SET_FILE;
+  payload: string;
+}
 
 export type PersonalActionTypes =
   | PatchApplicantInfo
@@ -184,6 +189,7 @@ export type PersonalActionTypes =
   | SetParentsContact
   | SetUserContact
   | SetDetaildAddress
+  | SetFile
   | null;
 
 export const searchAddress = (
@@ -307,4 +313,9 @@ export const setDetailedAddress = (payload: {
 }): PersonalActionTypes => ({
   payload,
   type: SET_DETAILED_ADDRESS
+});
+
+export const setFile = (payload: string): PersonalActionTypes => ({
+  payload,
+  type: SET_FILE
 });

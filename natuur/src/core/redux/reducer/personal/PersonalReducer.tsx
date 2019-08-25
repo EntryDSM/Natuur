@@ -25,6 +25,7 @@ import {
   SET_PARENTS_CONTACT,
   SET_USER_CONTACT,
   SET_DETAILED_ADDRESS,
+  SET_FILE,
   PersonalActionTypes
 } from "../../actions/personal";
 
@@ -55,6 +56,7 @@ interface RootState {
   zipCode: string;
   address: string;
   detailedAddress: string;
+  file: string;
   imagePath: string;
 }
 
@@ -75,6 +77,7 @@ const initialState: RootState = {
   userContact: "",
   zipCode: "",
   address: "",
+  file: "",
   detailedAddress: "",
   imagePath: ""
 };
@@ -233,6 +236,11 @@ const PersonalReducer = (
       return {
         ...state,
         detailedAddress: action.payload.address
+      };
+    case SET_FILE:
+      return {
+        ...state,
+        file: action.payload
       };
     default:
       return state;

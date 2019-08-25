@@ -17,6 +17,8 @@ interface OwnProps {
   studentID: string;
   middleSchool: string;
   imagePath: string;
+  file: string;
+  setFile: (file: string) => void;
   setName: (payload: { name: string }) => void;
   setGender: (payload: { gender: string }) => void;
   setBirthYear: (year: string) => void;
@@ -25,6 +27,7 @@ interface OwnProps {
   setClass: (payload: { class: string }) => void;
   setStudentID: (payload: { studentID: string }) => void;
   setIsOpenPopUp: (isOpenPopUp: boolean) => void;
+  setMiddleSchool: (payload: { school: string }) => void;
   changeApplicantPhoto: (payload: {
     email: { email: string };
     accessToken: { accessToken: string };
@@ -43,6 +46,8 @@ const IdPhotoComponent: FC<OwnProps> = ({
   studentID,
   middleSchool,
   imagePath,
+  file,
+  setFile,
   setName,
   setGender,
   setBirthYear,
@@ -51,6 +56,7 @@ const IdPhotoComponent: FC<OwnProps> = ({
   setClass,
   setStudentID,
   setIsOpenPopUp,
+  setMiddleSchool,
   email,
   accessToken,
   changeApplicantPhoto
@@ -86,6 +92,7 @@ const IdPhotoComponent: FC<OwnProps> = ({
         <MiddleRow
           isGed={isGed}
           middleSchool={middleSchool}
+          setMiddleSchool={setMiddleSchool}
           setIsOpenPopUp={setIsOpenPopUp}
         />
       </div>
@@ -94,6 +101,8 @@ const IdPhotoComponent: FC<OwnProps> = ({
         email={email}
         accessToken={accessToken}
         imagePath={imagePath}
+        file={file}
+        setFile={setFile}
       />
     </S.idPhotoWrapper>
   );
