@@ -4,9 +4,13 @@ import {
   LOG_IN,
   LOG_IN_SUCCESS,
   LOG_IN_FAILURE,
-  LogIn
+  LOG_OUT,
+  LOG_OUT_SUCCESS,
+  LOG_OUT_FAILURS,
+  LogIn,
+  LogOut
 } from "../../actions/user";
-import { getLoginApi } from "../../../../lib/api";
+import { getLoginApi, userLogOutApi } from "../../../../lib/api";
 
 function* getLogin(action: LogIn) {
   try {
@@ -19,11 +23,23 @@ function* getLogin(action: LogIn) {
     yield put({ type: LOG_IN_FAILURE, payload: e });
   }
 }
+function* logOut(action: LogOut) {
+  try {
+    yield call(userLogOutApi, action.payload);
+    yield put({ type: LOG_OUT_SUCCESS });
+  } catch (e) {
+    console.log(JSON.parse(JSON.stringify(e)));
+    yield put({ type: LOG_OUT_FAILURS });
+  }
+}
 
 function* watchLogin() {
   yield takeLatest(LOG_IN, getLogin);
 }
+function* watchLogOut() {
+  yield takeLatest(LOG_OUT, logOut);
+}
 
 export default function* userSaga() {
-  yield all([fork(watchLogin)]);
+  yield all([fork(watchLogin), fork(watchLogOut)]);
 }
