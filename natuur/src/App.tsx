@@ -18,19 +18,25 @@ import {
 import ErrorPage from "./components/default/ErrorPage";
 import GlobalStyle from "./styles/GlobalStyle";
 import ToastrBar from "./components/default/Common/ToastrBarCover";
-import ConnectSelectCategory from "./container/Info/ConnectSelectCategory";
 import ScrollToTop from "./components/default/ScrollToTop";
 import { AppState } from "./core/redux/store/store";
+import ConnectSelectCategory from "./container/Info/ConnectSelectCategory";
+import { logOut } from "./core/redux/actions/user";
 
 const mapStaetToProps = (state: AppState) => ({
   accessToken: state.userReducer.accessToken,
   refreshToken: state.userReducer.refreshToken,
-  userName: state.mainReducer.email
+  email: state.userReducer.userEmail
 });
 
-type Props = ReturnType<typeof mapStaetToProps>;
+const mapDispatchToProps = dispatch => ({
+  logOut: (payload: { refreshToken: string }) => dispatch(logOut(payload))
+});
 
-const App: FC<Props> = ({ accessToken, refreshToken, userName }) => {
+type Props = ReturnType<typeof mapStaetToProps> &
+  ReturnType<typeof mapDispatchToProps>;
+
+const App: FC<Props> = ({ accessToken, refreshToken, email, logOut }) => {
   const [appClass, setAppClass] = useState("");
 
   return (
@@ -38,8 +44,10 @@ const App: FC<Props> = ({ accessToken, refreshToken, userName }) => {
       <div className={appClass}>
         <GlobalStyle />
         <Header
-          userName={`${userName}`.split("@")[0]}
+          userName={email.split("@")[0]}
           accessToken={accessToken}
+          refreshToken={refreshToken}
+          logOut={logOut}
         />
         <ScrollToTop>
           <Switch>
@@ -85,6 +93,6 @@ const App: FC<Props> = ({ accessToken, refreshToken, userName }) => {
 export default hot(
   connect(
     mapStaetToProps,
-    null
+    mapDispatchToProps
   )(App)
 );
