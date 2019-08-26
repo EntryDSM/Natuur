@@ -74,11 +74,9 @@ const infoReducer = (
       return state;
     }
     case PATCH_CLASSIFICATION_SUCCESS: {
-      console.log("요청 성공");
       return state;
     }
     case PATCH_CLASSIFICATION_FAILURE: {
-      console.log("요청 실패");
       return state;
     }
     case SET_IS_GED: {
