@@ -32,7 +32,9 @@ const PageList: FC = () => {
     userContact,
     zipCode,
     file,
-    address
+    address,
+    selfIntroduction,
+    studyPlan
   } = useSelector<AppState, State>(state => ({
     applyType: state.infoReducer.applyType,
     selectRegion: state.infoReducer.selectRegion,
@@ -47,7 +49,9 @@ const PageList: FC = () => {
     userContact: state.PersonalReducer.userContact,
     zipCode: state.PersonalReducer.zipCode,
     address: state.PersonalReducer.address,
-    file: state.PersonalReducer.file
+    file: state.PersonalReducer.file,
+    selfIntroduction: state.introReducer.selfIntroduction,
+    studyPlan: state.introReducer.studyPlan
   }));
 
   return (
@@ -81,7 +85,10 @@ const PageList: FC = () => {
       <PageItem title="성적입력" isActive={false} />
       <PagenationHorizon />
 
-      <PageItem title="자기소개서" isActive={true} />
+      <PageItem
+        title="자기소개서"
+        isActive={!!(studyPlan && selfIntroduction)}
+      />
     </S.PageListWrapper>
   );
 };

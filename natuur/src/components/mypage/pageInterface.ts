@@ -28,4 +28,7 @@ export interface PersonalInformation {
 
 export interface GradeEntry {}
 
-export interface SelfIntroduction {}
+export interface SelfIntroduction {
+  selfIntroduction: string;
+  studyPlan: string;
+}
