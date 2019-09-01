@@ -16,6 +16,7 @@ import {
   getUserApplicationStatusApi,
   getUserApplicantInfoApi
 } from "../../../../lib/api";
+import { tokenRefresh } from "../token";
 
 function* getUserApplicationStatus(action: UserApplicantStatus) {
   try {
@@ -25,6 +26,14 @@ function* getUserApplicationStatus(action: UserApplicantStatus) {
     );
     yield put({ type: GET_USER_APPLICANT_STATUS_SUCCESS, payload: response });
   } catch (e) {
+    if (e.response.status === 401) {
+      yield tokenRefresh(
+        getUserApplicationStatusApi,
+        action.payload,
+        GET_USER_APPLICANT_STATUS_SUCCESS,
+        GET_USER_APPLICANT_STATUS_FAILURE
+      );
+    }
     yield put({ type: GET_USER_APPLICANT_STATUS_FAILURE });
   }
 }
@@ -44,6 +53,14 @@ function* getUserApplicantInfo(action: UserApplicantInfo) {
       payload: response
     });
   } catch (e) {
+    if (e.response.status === 401) {
+      yield tokenRefresh(
+        getUserApplicantInfoApi,
+        action.payload,
+        GET_USER_APPLICANT_INFOMATION_SUCCESS,
+        GET_USER_APPLICANT_INFOMATION_FAILURE
+      );
+    }
     yield put({ type: GET_USER_APPLICANT_INFOMATION_FAILURE });
   }
 }

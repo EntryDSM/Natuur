@@ -6,49 +6,62 @@ import {
 } from "../../core/redux/actions/main";
 import { DocumentApiType } from "../../core/redux/actions/intro";
 
+const instanceAxios = axios.create({
+  baseURL: "/api/v1",
+
+  headers: { "Content-Type": "application/json" }
+});
+
 const authorizationHeader = (
   accessToken: string
 ): { Authorization: string } => ({
   Authorization: `Bearer ${accessToken}`
 });
-const contentTypeHeader = { "Content-Type": "application/json" };
 
 export const getLoginApi = async (payload: {
   email: string;
   password: string;
 }) => {
-  const response = await axios.post<{ access: string; refresh: string }>(
-    `${connectionUrl}/login`,
-    payload,
-    {
-      headers: contentTypeHeader
-    }
-  );
+  const response = await instanceAxios.post<{
+    access: string;
+    refresh: string;
+  }>("/applicant/login", payload);
+
+  return response.data;
+};
+
+export const userLogOutApi = async (payload: { refreshToken: string }) => {
+  const response = await instanceAxios.delete("/applicant/logout", {
+    headers: authorizationHeader(payload.refreshToken)
+  });
+
+  return response.data;
+};
+
+export const refreshJWTApi = async (payload: { refreshToken: string }) => {
+  const response = await instanceAxios.patch("/applicant/refresh", {
+    headers: authorizationHeader(payload.refreshToken)
+  });
 
   return response.data;
 };
 
 export const sendApplicantPasswordApi = (payload: string) => {
-  return axios.get(`${connectionUrl}/password/reset?verify=${payload}`);
+  return instanceAxios.get(`/applicant/password/reset?verify=${payload}`);
 };
 
 export const setApplicantPasswordApi = (payload: {
   verify: string;
   password: string;
 }) => {
-  return axios.put(
-    `${connectionUrl}/password/reset?verify=${payload.verify}`,
-    payload.password,
-    {
-      headers: contentTypeHeader
-    }
+  return instanceAxios.put(
+    `/applicant/password/reset?verify=${payload.verify}`,
+    payload.password
   );
 };
 
 export const sendVerificationEmailApi = (payload: string) => {
-  return axios.post(`${connectionUrl}/password/reset?email=${payload}`, null, {
-    headers: contentTypeHeader
-  });
+  return instanceAxios.post(`/applicant/password/reset?email=${payload}`);
 };
 
 export const getUserApplicationStatusApi = async ({
@@ -56,8 +69,8 @@ export const getUserApplicationStatusApi = async ({
 }: {
   accessToken: string;
 }) => {
-  const response = await axios.get<UserApplicantStatusApiType>(
-    `${connectionUrl}/applicant/me/status`,
+  const response = await instanceAxios.get<UserApplicantStatusApiType>(
+    "/applicant/me/status",
     {
       headers: authorizationHeader(accessToken)
     }
@@ -67,30 +80,23 @@ export const getUserApplicationStatusApi = async ({
 };
 
 export const signupApi = (payload: { email: string; password: string }) => {
-  return axios.post(`${connectionUrl}/signup`, payload, {
-    headers: contentTypeHeader
-  });
+  return instanceAxios.post("/applicant/signup", payload);
 };
 
 export const sendAuthenticationNumberByEmailApi = (payload: {
   email: string;
 }) => {
-  return axios.post(`${connectionUrl}/signup/verify`, payload, {
-    headers: contentTypeHeader
-  });
+  return instanceAxios.post("/applicant/signup/verify", payload);
 };
 
 export const getRegisterVerifyNumberApi = (payload: { verify: string }) => {
-  return axios.get(`${connectionUrl}/signup/verify?verify=${payload.verify}`);
+  return instanceAxios.get(`/applicant/signup/verify?verify=${payload.verify}`);
 };
 
 export const getClassificationInfoApi = async (accessToken: string) => {
-  const response = await axios.get(
-    `${connectionUrl}/applicant/me/classification`,
-    {
-      headers: { Authorization: `Bearer ${accessToken}` }
-    }
-  );
+  const response = await instanceAxios.get("/applicant/me/classification", {
+    headers: authorizationHeader(accessToken)
+  });
 
   return response.data;
 };
@@ -106,11 +112,11 @@ export const patchClassificationInfoApi = async (
     additional_type?: string;
   }
 ) => {
-  const response = await axios.patch(
-    `${connectionUrl}/applicant/me/classification`,
+  const response = await instanceAxios.patch(
+    "/applicant/me/classification",
     payload,
     {
-      headers: { Authorization: `Bearer ${accessToken}` }
+      headers: authorizationHeader(accessToken)
     }
   );
 
@@ -124,10 +130,10 @@ export const getUserApplicantInfoApi = async ({
   email: string;
   accessToken: string;
 }) => {
-  const response = await axios.get<UserApplicantInfoApiType>(
-    `${connectionUrl}/applicant/me/${email}`,
+  const response = await instanceAxios.get<UserApplicantInfoApiType>(
+    "/applicant/me",
     {
-      headers: { Authorization: `Bearer ${accessToken}` }
+      headers: authorizationHeader(accessToken)
     }
   );
 
@@ -148,13 +154,9 @@ export const patchUserApplicantInfoApi = async (
     post_code: number;
   }
 ) => {
-  const response = await axios.patch(
-    `${connectionUrl}/applicant/me/${email.email}`,
-    payload,
-    {
-      headers: { Authorization: `Bearer ${accessToken.accessToken}` }
-    }
-  );
+  const response = await instanceAxios.patch("/applicant/me", payload, {
+    headers: authorizationHeader(accessToken.accessToken)
+  });
 
   return response.data;
 };
@@ -167,25 +169,21 @@ export const changeUserApplicantPhotoApi = async (
   const formData = new FormData();
   formData.append("file", payload.file);
 
-  const response = await axios.put(
-    `${connectionUrl}/applicant/me/photo/${email.email}`,
-    payload,
-    {
-      headers: {
-        Authorization: `Bearer ${accessToken.accessToken}`,
-        "content-type": "multipart/form-data"
-      }
+  const response = await instanceAxios.put(`/applicant/me/photo`, payload, {
+    headers: {
+      Authorization: `Bearer ${accessToken.accessToken}`,
+      "content-type": "multipart/form-data"
     }
-  );
+  });
 
   return response.data;
 };
 
 export const getUserDocumentApi = async (payload: { accessToken: string }) => {
-  const response = await axios.get<DocumentApiType>(
-    `${connectionUrl}/applicant/me/document`,
+  const response = await instanceAxios.get<DocumentApiType>(
+    "/applicant/me/document",
     {
-      headers: { Authorization: `Bearer ${payload.accessToken}` }
+      headers: authorizationHeader(payload.accessToken)
     }
   );
 
@@ -201,11 +199,11 @@ export const patchUserDocumentApi = async ({
   self_introduction_text?: string;
   study_plan_text?: string;
 }) => {
-  const response = await axios.patch(
-    `${connectionUrl}/applicant/me/document`,
+  const response = await instanceAxios.patch(
+    "/applicant/me/document",
     { self_introduction_text, study_plan_text },
     {
-      headers: { Authorization: `Bearer ${accessToken}` }
+      headers: authorizationHeader(accessToken)
     }
   );
 

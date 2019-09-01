@@ -12,6 +12,7 @@ import {
   DocumentApiType
 } from "../../actions/intro";
 import { getUserDocumentApi, patchUserDocumentApi } from "../../../../lib/api";
+import { tokenRefresh } from "../token";
 
 function* getUserDocument(action: GetDocument) {
   try {
@@ -21,6 +22,14 @@ function* getUserDocument(action: GetDocument) {
     );
     yield put({ type: GET_DOCUMENT_SUCCESS, payload: response });
   } catch (e) {
+    if (e.response.status === 401) {
+      yield tokenRefresh(
+        getUserDocumentApi,
+        action.payload,
+        GET_DOCUMENT_SUCCESS,
+        GET_DOCUMENT_FAILURE
+      );
+    }
     yield put({ type: GET_DOCUMENT_FAILURE });
   }
 }
@@ -34,6 +43,14 @@ function* patchUserDocument(action: PatchDocument) {
     yield call(patchUserDocumentApi, action.payload);
     yield put({ type: PATCH_DOCUMENT_SUCCESS });
   } catch (e) {
+    if (e.response.status === 401) {
+      yield tokenRefresh(
+        patchUserDocumentApi,
+        action.payload,
+        PATCH_DOCUMENT_SUCCESS,
+        PATCH_DOCUMENT_FAILURE
+      );
+    }
     yield put({ type: PATCH_DOCUMENT_FAILURE });
   }
 }

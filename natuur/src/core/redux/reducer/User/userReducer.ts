@@ -3,8 +3,15 @@ import {
   LOG_IN,
   LOG_IN_SUCCESS,
   LOG_IN_FAILURE,
+  LOG_OUT,
+  LOG_OUT_SUCCESS,
+  LOG_OUT_FAILURS,
+  REFRESH_JWT,
+  REFRESH_JWT_SUCCESS,
+  REFRESH_JWT_FAILURS,
   RESET_STATE,
-  GET_USER_EMAIL
+  GET_USER_EMAIL,
+  CHECK_ACCESS_TOKEN
 } from "../../actions/user";
 
 export interface RootState {
@@ -14,6 +21,7 @@ export interface RootState {
   accessToken?: string;
   refreshToken?: string;
   userEmail?: string;
+  isExpirationJWT: boolean;
 }
 
 const initialState: RootState = {
@@ -22,13 +30,13 @@ const initialState: RootState = {
   isSuccess: false,
   accessToken: "",
   refreshToken: "",
-  userEmail: ""
+  userEmail: "",
+  isExpirationJWT: true
 };
 
 const userReducer = (
   state = initialState,
-  // action: UserActionTypes---------------------------------------------------------------------------------------
-  action
+  action: UserActionTypes
 ): RootState => {
   switch (action.type) {
     case LOG_IN: {
@@ -38,17 +46,16 @@ const userReducer = (
       };
     }
     case LOG_IN_SUCCESS: {
-      // const { access, refresh } = action.payload;---------------------------------------------------------------------------------------
-      const { access_token } = action.payload;
+      const { access, refresh } = action.payload;
 
       return {
         ...state,
-        // accessToken: access,---------------------------------------------------------------------------------------
-        // refreshToken: refresh,---------------------------------------------------------------------------------------
-        accessToken: access_token,
+        accessToken: access,
+        refreshToken: refresh,
         isSuccess: true,
         isError: false,
-        isWaiting: false
+        isWaiting: false,
+        isExpirationJWT: false
       };
     }
     case LOG_IN_FAILURE: {
@@ -57,6 +64,40 @@ const userReducer = (
         isError: true,
         isSuccess: false,
         isWaiting: false
+      };
+    }
+    case LOG_OUT: {
+      return {
+        ...state
+      };
+    }
+    case LOG_OUT_SUCCESS: {
+      return {
+        ...state,
+        accessToken: "",
+        refreshToken: ""
+      };
+    }
+    case LOG_OUT_FAILURS: {
+      return {
+        ...state
+      };
+    }
+    case REFRESH_JWT: {
+      return {
+        ...state
+      };
+    }
+    case REFRESH_JWT_SUCCESS: {
+      return {
+        ...state,
+        accessToken: action.payload.accessToken,
+        isExpirationJWT: false
+      };
+    }
+    case REFRESH_JWT_FAILURS: {
+      return {
+        ...state
       };
     }
     case RESET_STATE: {
@@ -70,7 +111,13 @@ const userReducer = (
     case GET_USER_EMAIL: {
       return {
         ...state,
-        userEmail: action.payload
+        userEmail: action.payload.userEmail
+      };
+    }
+    case CHECK_ACCESS_TOKEN: {
+      return {
+        ...state,
+        isExpirationJWT: action.payload.isAccess
       };
     }
     default:

@@ -26,6 +26,7 @@ import {
   patchUserApplicantInfoApi,
   changeUserApplicantPhotoApi
 } from "../../../../lib/api";
+import { tokenRefresh } from "../token";
 
 function* getMapData(action: SearchAddress) {
   try {
@@ -35,6 +36,14 @@ function* getMapData(action: SearchAddress) {
     );
     yield put({ type: SEARCH_ADDRESS_SUCCESS, payload: response });
   } catch (e) {
+    if (e.response.status === 401) {
+      yield tokenRefresh(
+        getMapDataApi,
+        action.payload,
+        SEARCH_ADDRESS_SUCCESS,
+        SEARCH_ADDRESS_FAILURE
+      );
+    }
     yield put({ type: SEARCH_ADDRESS_FAILURE });
   }
 }
@@ -47,6 +56,14 @@ function* getUserApplicantInfo(action: GetApplicantInfo) {
     );
     yield put({ type: GET_APPLICANT_INFO_SUCCESS, payload: response });
   } catch (e) {
+    if (e.response.status === 401) {
+      yield tokenRefresh(
+        getUserApplicantInfoApi,
+        action.payload,
+        GET_APPLICANT_INFO_SUCCESS,
+        GET_APPLICANT_INFO_FAILURE
+      );
+    }
     yield put({ type: GET_APPLICANT_INFO_FAILURE });
   }
 }
@@ -61,6 +78,14 @@ function* patchUserApplicantInfo(action: PatchApplicantInfo) {
     );
     yield put({ type: PATCH_APPLICANT_INFO_SUCCESS });
   } catch (e) {
+    if (e.response.status === 401) {
+      yield tokenRefresh(
+        patchUserApplicantInfoApi,
+        action.payload,
+        PATCH_APPLICANT_INFO_SUCCESS,
+        PATCH_APPLICANT_INFO_FAILURE
+      );
+    }
     yield put({ type: PATCH_APPLICANT_INFO_FAILURE });
   }
 }
@@ -75,6 +100,14 @@ function* changeUserApplicantPhoto(action: ChangeApplicantPhoto) {
     );
     yield put({ type: CHANGE_APPLICANT_PHOTO_SUCCESS });
   } catch (e) {
+    if (e.response.status === 401) {
+      yield tokenRefresh(
+        changeUserApplicantPhotoApi,
+        action.payload,
+        CHANGE_APPLICANT_PHOTO_SUCCESS,
+        CHANGE_APPLICANT_PHOTO_FAILURE
+      );
+    }
     yield put({ type: CHANGE_APPLICANT_PHOTO_FAILURE });
   }
 }

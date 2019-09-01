@@ -15,6 +15,7 @@ import {
   getClassificationInfoApi,
   patchClassificationInfoApi
 } from "../../../../lib/api";
+import { tokenRefresh } from "../token";
 
 function* getClassificationInfo(action: GetClassificationInfo) {
   try {
@@ -24,6 +25,14 @@ function* getClassificationInfo(action: GetClassificationInfo) {
     );
     yield put({ type: GET_CLASSIFICATION_SUCCESS, payload: response });
   } catch (e) {
+    if (e.response.status === 401) {
+      yield tokenRefresh(
+        getClassificationInfoApi,
+        action.payload,
+        GET_CLASSIFICATION_SUCCESS,
+        GET_CLASSIFICATION_FAILURE
+      );
+    }
     yield put({ type: GET_CLASSIFICATION_FAILURE });
   }
 }
@@ -52,6 +61,14 @@ function* patchClassificationInfo(action: PatchClassificationInfo) {
     });
     yield put({ type: PATCH_CLASSIFICATION_SUCCESS });
   } catch (e) {
+    if (e.response.status === 401) {
+      yield tokenRefresh(
+        patchClassificationInfoApi,
+        action.payload,
+        PATCH_CLASSIFICATION_SUCCESS,
+        PATCH_CLASSIFICATION_FAILURE
+      );
+    }
     yield put({ type: PATCH_CLASSIFICATION_FAILURE });
   }
 }
