@@ -76,7 +76,7 @@ module.exports = {
   devServer: {
     historyApiFallback: true,
     proxy: {
-      "*": {
+      "/api/": {
         changeOrigin: true,
         target: "https://api.entrydsm.hs.kr"
       }
