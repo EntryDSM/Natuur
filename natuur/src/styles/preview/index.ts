@@ -43,6 +43,22 @@ export const PdfContents = styled.div`
   width: 100%;
   height: 945px;
   overflow-y: auto;
+  display: flex;
+  justify-content: center;
+`;
+
+export const PdfTarget = styled.div`
+  @media print {
+    zoom: 1.8;
+    overflow-y: visible;
+  }
+
+  & > div {
+    @media print {
+      margin: 10px auto;
+      border: 1px solid black;
+    }
+  }
 `;
 
 export const PdfContent = styled.div<{ isLast?: boolean }>`
