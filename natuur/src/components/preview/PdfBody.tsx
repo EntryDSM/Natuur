@@ -1,9 +1,9 @@
-import React, { FC, useCallback, useEffect } from "react";
+import React, { Component } from "react";
 import html2Canvase from "html2canvas";
 
-import ApplicationForm from "./applicationForm/ApplicationForm";
-import RecommendationLetter from "./recommendationLetter/RecommendationLetter";
-import NonSmokingPledge from "./nonSmokingPledge/NonSmokingPledge";
+// import ApplicationForm from "./applicationForm/ApplicationForm";
+// import RecommendationLetter from "./recommendationLetter/RecommendationLetter";
+// import NonSmokingPledge from "./nonSmokingPledge/NonSmokingPledge";
 import * as S from "../../styles/preview";
 
 interface OwnProps {
@@ -22,41 +22,31 @@ const htmlToImage = async (domId: string) => {
   htmlElement.removeChild(htmlElement.childNodes[0]);
 };
 
-const lastPdfMargin = 20;
-
-const PdfBody: FC<OwnProps> = ({ setPdfPage, pdfPage }) => {
-  useEffect(() => {
-    // htmlToImage("applicationForm");
-  },        []);
-
-  const scrollHandler = useCallback(() => {
-    const pdfBody = document.getElementById("scrollBody");
-    const nextPoint = (pdfBody.clientHeight - lastPdfMargin) * pdfPage;
-    const prevPoint = (pdfBody.clientHeight - lastPdfMargin) * (pdfPage - 1);
-
-    if (pdfBody.scrollTop >= nextPoint) {
-      setPdfPage(pdfPage + 1);
-    }
-    if (pdfBody.scrollTop < prevPoint) {
-      setPdfPage(pdfPage - 1);
-    }
-  },                                [pdfPage]);
-
-  return (
-    <S.PdfContents id="scrollBody" onScroll={scrollHandler}>
-      <S.PdfContent id="applicationForm">
-        <ApplicationForm />
-      </S.PdfContent>
-      <S.PdfContent />
-      <S.PdfContent id="recommendationLetter">
-        <RecommendationLetter />
-      </S.PdfContent>
-      <S.PdfContent id="nonSmokingPledge">
-        <NonSmokingPledge />
-      </S.PdfContent>
-      <S.PdfContent isLast />
-    </S.PdfContents>
-  );
-};
+class PdfBody extends React.Component<OwnProps, {}> {
+  constructor(props: OwnProps) {
+    super(props);
+  }
+  public render() {
+    return (
+      <S.PdfTarget>
+        {/* <S.PdfContent id="applicationForm">
+          <ApplicationForm />
+        </S.PdfContent> */}
+        <S.PdfContent>
+          제발좀 됨녕ㄹ마ㅣㄴㅇ롬ㄴ어ㅏㅣ롬ㅇㄴㄹㅁㄴㅇㄻㄴㅇㄻㄴㅇㄹ
+        </S.PdfContent>
+        {/* <S.PdfContent id="recommendationLetter">
+          <RecommendationLetter />
+        </S.PdfContent> */}
+        {/* <S.PdfContent id="nonSmokingPledge">
+          <NonSmokingPledge />
+        </S.PdfContent> */}
+        <S.PdfContent isLast>
+          제발좀 됨녕ㄹ마ㅣㄴㅇ롬ㄴ어ㅏㅣ롬ㅇㄴㄹㅁㄴㅇㄻㄴㅇㄻㄴㅇㄹ
+        </S.PdfContent>
+      </S.PdfTarget>
+    );
+  }
+}
 
 export default PdfBody;
