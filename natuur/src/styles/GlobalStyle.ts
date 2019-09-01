@@ -10,7 +10,7 @@ const GlobalStyle: GlobalStyleComponent<{}, DefaultTheme> = createGlobalStyle`
   @import 'https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css';
 
   /* View Container */
-  .main-page {
+  #main-page {
     background-image: url(${MainBackground});
     background-size: cover;
     background-position: center center;
@@ -28,6 +28,11 @@ const GlobalStyle: GlobalStyleComponent<{}, DefaultTheme> = createGlobalStyle`
     height: 100%;
     min-width: 1180px;
     font-family: 'NanumSquare', sans-serif;
+  }
+
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
   }
 
   input {
