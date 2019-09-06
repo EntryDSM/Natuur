@@ -1,14 +1,14 @@
-import React, { FC, useState, useRef } from "react";
+import React, { FC, useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import ReactToPrint from "react-to-print";
 
 import * as S from "../../styles/preview";
 import PdfBody from "./PdfBody";
+import FinalSubmitButton from "./FinalSubmitButton";
 import { AppState } from "../../core/redux/store/store";
-import { downloadIcon, printIcon } from "../../assets/preview";
+import { printIcon } from "../../assets/preview";
 import { returnNowToInlineString } from "../../lib/utils/date";
 
-const maxPage = 5;
 const lastPdfMargin = 20;
 
 const scrollHandler = (
@@ -26,28 +26,43 @@ const scrollHandler = (
     setPdfPage(pdfPage - 1);
   }
 };
-
 const PDFcontainer: FC = () => {
   const printArea = useRef();
+  const didMountRef = useRef(false);
 
-  const [pdfPage, setPdfPage] = useState(1);
-  const userName = useSelector<AppState, string>(
+  const name = useSelector<AppState, string>(
     state => state.PersonalReducer.name
   );
+  const applyType = useSelector<AppState, string>(
+    state => state.infoReducer.applyType
+  );
+  const [pdfPage, setPdfPage] = useState(1);
+  const [maxPage, setMaxPage] = useState(5);
+
+  useEffect(() => {
+    if (!didMountRef.current) {
+      didMountRef.current = true;
+
+      if (applyType === "일반전형") {
+        setMaxPage(5);
+      } else {
+        setMaxPage(6);
+      }
+    }
+  },        []);
 
   return (
     <S.PdfWrapper>
       <S.PdfHeader>
         <S.HeaderContentsBox isTitle>
           <p>
-            {returnNowToInlineString()}_{userName} 입학원서
+            {returnNowToInlineString()}_{name} 입학원서
           </p>
         </S.HeaderContentsBox>
         <p>
           {pdfPage} / {maxPage}
         </p>
         <S.HeaderContentsBox>
-          <S.HeaderIcon src={downloadIcon} alt="다운로드" />
           <ReactToPrint
             trigger={() => <S.HeaderIcon src={printIcon} alt="인쇄" />}
             content={() => printArea.current}
@@ -58,8 +73,9 @@ const PDFcontainer: FC = () => {
         id="scrollBody"
         onScroll={() => scrollHandler(pdfPage, setPdfPage)}
       >
-        <PdfBody setPdfPage={setPdfPage} pdfPage={pdfPage} ref={printArea} />
+        <PdfBody applyType={applyType} ref={printArea} />
       </S.PdfContents>
+      <FinalSubmitButton />
     </S.PdfWrapper>
   );
 };
