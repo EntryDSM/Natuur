@@ -2,7 +2,11 @@ import React, { FC } from "react";
 
 import * as S from "../../../styles/preview/applicationForm";
 
-const LetterOfRecommendation: FC = () => (
+interface OwnProps {
+  middleSchool: string;
+}
+
+const LetterOfRecommendation: FC<OwnProps> = ({ middleSchool }) => (
   <S.SealContainer>
     <S.Signature widthSize={60}>
       <span>추</span>
@@ -21,7 +25,9 @@ const LetterOfRecommendation: FC = () => (
         교사 : <span>(서명)</span>
       </S.SignatureItem>
       <S.SignatureItem widthSize={130}>
-        <S.Blank widthSize={60} isUnderLine />
+        <S.Blank widthSize={60} isUnderLine>
+          {middleSchool}
+        </S.Blank>
         중학교장 <span>(직인)</span>
       </S.SignatureItem>
     </S.Signature>

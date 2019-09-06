@@ -37,13 +37,13 @@ export const ApplicationForm = styled.div`
   }
 
   & > div #SubDiv table:nth-child(1) tbody tr:nth-child(1) td:nth-child(1) {
-    width: 12.1%;
+    width: 12.2%;
   }
   & > div #SubDiv table:nth-child(1) tbody tr:nth-child(1) td:nth-child(2) {
-    width: 19.9%;
+    width: 19.7%;
   }
   & > div #SubDiv table:nth-child(1) tbody tr:nth-child(1) td:nth-child(3) {
-    width: 15.1%;
+    width: 15.2%;
   }
   & > div #SubDiv table:nth-child(1) tbody tr:nth-child(1) td:nth-child(4) {
     width: 13%;
@@ -62,7 +62,7 @@ export const ApplicationForm = styled.div`
   }
 
   & > div #SubDiv table:nth-child(2) tbody tr:nth-child(1) td:nth-child(1) {
-    width: 12.1%;
+    width: 12.2%;
   }
   & > div #SubDiv table:nth-child(2) tbody tr:nth-child(1) td:nth-child(2) {
     width: 7.9%;
@@ -96,26 +96,26 @@ export const ApplicationForm = styled.div`
     width: 30%;
   }
   & > div #SubDiv table:nth-child(3) tbody tr:nth-child(1) td:nth-child(4) {
-    width: 10%;
+    width: 9.5%;
   }
   & > div #SubDiv table:nth-child(3) tbody tr:nth-child(1) td:nth-child(5) {
     width: 39%;
   }
 
   & > div #SubDiv table:nth-child(4) tbody tr:nth-child(1) td:nth-child(1) {
-    width: 12%;
+    width: 12.2%;
   }
   & > div #SubDiv table:nth-child(4) tbody tr:nth-child(1) td:nth-child(2) {
     width: 28%;
   }
   & > div #SubDiv table:nth-child(4) tbody tr:nth-child(1) td:nth-child(3) {
-    width: 10%;
+    width: 10.4%;
   }
   & > div #SubDiv table:nth-child(4) tbody tr:nth-child(1) td:nth-child(4) {
     width: 25%;
   }
   & > div #SubDiv table:nth-child(4) tbody tr:nth-child(1) td:nth-child(5) {
-    width: 8%;
+    width: 8.3%;
   }
   & > div #SubDiv table:nth-child(4) tbody tr:nth-child(1) td:nth-child(6) {
     width: 16%;
@@ -156,6 +156,19 @@ export const ApplicationForm = styled.div`
   }
   & > div #SubDiv table:nth-child(6) tbody tr:nth-child(1) td:nth-child(1) {
     width: 18%;
+
+    & > div {
+      width: 96px;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      & img {
+        width: 100%;
+        height: 100%;
+      }
+    }
   }
   & > div #SubDiv table:nth-child(6) tbody tr:nth-child(1) td:nth-child(2) {
     width: 64%;
@@ -206,7 +219,7 @@ export const SchoolText = styled(LeftAlignText)`
 `;
 
 export const SmallFontSizeText = styled.p`
-  font-size: 7px;
+  font-size: 10px;
   text-align: left;
   line-height: 1.5;
 `;
