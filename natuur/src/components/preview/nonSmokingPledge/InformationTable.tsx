@@ -2,7 +2,23 @@ import React, { FC } from "react";
 
 import * as S from "../../../styles/preview/nonSmokingPledge";
 
-const InformationTable: FC = () => (
+interface OwnProps {
+  receiptCode: number;
+  name: string;
+  middleSchool: string;
+  userContact: string;
+  address: string;
+  detailedAddress: string;
+}
+
+const InformationTable: FC<OwnProps> = ({
+  receiptCode,
+  name,
+  middleSchool,
+  userContact,
+  address,
+  detailedAddress
+}) => (
   <S.InformationTable>
     <tbody>
       <tr>
@@ -15,13 +31,13 @@ const InformationTable: FC = () => (
           <p>성명</p>
         </td>
         <td>
-          <p />
+          <p>{name}</p>
         </td>
         <td>
           <p>접수번호</p>
         </td>
         <td>
-          <p />
+          <p>{receiptCode}</p>
         </td>
       </tr>
       <tr>
@@ -29,13 +45,13 @@ const InformationTable: FC = () => (
           <p>연락처</p>
         </td>
         <td>
-          <p />
+          <p>{userContact}</p>
         </td>
         <td>
           <p>출신 중학교</p>
         </td>
         <td>
-          <p />
+          <p>{middleSchool}</p>
         </td>
       </tr>
       <tr>
@@ -43,7 +59,7 @@ const InformationTable: FC = () => (
           <p>주소</p>
         </td>
         <td colSpan={3}>
-          <p />
+          <p>{`${address} ${detailedAddress}`}</p>
         </td>
       </tr>
     </tbody>
