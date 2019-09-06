@@ -4,7 +4,7 @@ import * as S from "../../../styles/preview/recommendationLetter";
 
 interface OwnProps {
   title: string;
-  isMeister?: boolean;
+  isMeister: "true" | "false" | "none" | undefined;
 }
 
 const RecommendedfieldTd: FC<OwnProps> = ({ title, isMeister }) => (
@@ -13,10 +13,13 @@ const RecommendedfieldTd: FC<OwnProps> = ({ title, isMeister }) => (
       <S.BoldText>{title}</S.BoldText>
     </td>
     <S.TdCenter>
-      <div>{isMeister && <div />}</div>
+      <div>{isMeister === "none" || (isMeister === "true" && <div />)}</div>
     </S.TdCenter>
     <S.TdCenter>
-      <div>{!isMeister && isMeister !== undefined && <div />}</div>
+      <div>
+        {isMeister === "none" ||
+          (isMeister === "false" && isMeister !== undefined && <div />)}
+      </div>
     </S.TdCenter>
   </tr>
 );

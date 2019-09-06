@@ -3,7 +3,12 @@ import React, { FC } from "react";
 import * as S from "../../../styles/preview/recommendationLetter";
 import RecommendedfieldTd from "./RecommendedfieldTd";
 
-const RecommendationTable: FC = () => (
+interface OwnProps {
+  applyType: string;
+  selectRegion: string;
+}
+
+const RecommendationTable: FC<OwnProps> = ({ applyType, selectRegion }) => (
   <table>
     <tbody>
       <tr>
@@ -24,8 +29,26 @@ const RecommendationTable: FC = () => (
         </td>
       </tr>
 
-      <RecommendedfieldTd title="대전시 교육청 관내" />
-      <RecommendedfieldTd title="대전시 교육청 관외" />
+      <RecommendedfieldTd
+        isMeister={
+          selectRegion === "전국"
+            ? "none"
+            : applyType === "마이스터 인재전형"
+            ? "true"
+            : "false"
+        }
+        title="대전시 교육청 관내"
+      />
+      <RecommendedfieldTd
+        isMeister={
+          selectRegion === "대전"
+            ? "none"
+            : applyType === "마이스터 인재전형"
+            ? "true"
+            : "false"
+        }
+        title="대전시 교육청 관외"
+      />
     </tbody>
   </table>
 );
