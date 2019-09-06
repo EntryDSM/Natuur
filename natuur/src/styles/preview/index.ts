@@ -45,6 +45,17 @@ export const PdfContents = styled.div`
   overflow-y: auto;
   display: flex;
   justify-content: center;
+
+  &::-webkit-scrollbar {
+    width: 15px;
+    background: #f1f1f1;
+    overflow: hidden;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    width: 15px;
+    background: #c1c1c1;
+  }
 `;
 
 export const PdfTarget = styled.div`
@@ -55,8 +66,7 @@ export const PdfTarget = styled.div`
 
   & > div {
     @media print {
-      margin: 10px auto;
-      border: 1px solid black;
+      box-shadow: none;
     }
   }
 `;
@@ -106,4 +116,35 @@ export const ContentsImg = styled.img`
   margin: 0 auto;
   display: block;
   margin-bottom: 20px;
+`;
+
+export const SubmitButton = styled.div<{ isDisable?: boolean }>`
+  position: relative;
+  float: right;
+  width: 152px;
+  height: 54px;
+  border-radius: 5px;
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  color: ${props => (props.isDisable ? "#979797" : "#79c2ca")};
+  background-color: ${props => (props.isDisable ? "#f7fbfc" : " #f8fcfd")};
+  border: 2px solid
+    ${props => (props.isDisable ? "#a7a7a7" : "rgba(121, 194, 202, 0.5)")};
+  cursor: ${props => !props.isDisable && "pointer"};
+
+  &:hover {
+    &::before {
+      content: "원서를 모두 채워주시기 바랍니다.";
+      position: absolute;
+      left: -300px;
+      padding: 16px;
+      border: 1px solid;
+      border-radius: 6px;
+      background: rgba(121, 194, 202, 0.2);
+      color: #78c2ca;
+    }
+  }
 `;
