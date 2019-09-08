@@ -36,7 +36,7 @@ export const mapDispatchToProps = dispatch => ({
   setSelectRegion: (payload: string) => dispatch(setSelectRegion(payload)),
   setGraduationClassification: (payload: string) =>
     dispatch(setGraduationClassification(payload)),
-  setGraduationYear: (payload: number) => dispatch(setGraduationYear(payload)),
+  setGraduationYear: (payload: string) => dispatch(setGraduationYear(payload)),
   setRemark: (payload: string) => dispatch(setRemark(payload))
 });
 

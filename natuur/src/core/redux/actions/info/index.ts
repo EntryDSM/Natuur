@@ -16,7 +16,7 @@ export interface ClassifiationInfoApiType {
   is_ged?: boolean;
   apply_type?: string;
   social_detail_type?: string;
-  graduated_year?: number;
+  graduated_year?: string;
   is_daejeon?: boolean;
   is_graduated?: boolean;
   additional_type?: string;
@@ -61,7 +61,7 @@ export interface SetGraduationClassifcation {
 }
 export interface SetGraduationYear {
   type: typeof SET_GRADUATED_YEAR;
-  payload: number;
+  payload: string;
 }
 export interface SetRemarks {
   type: typeof SET_REMARKS;
@@ -112,7 +112,7 @@ export const setGraduationClassification = (
   payload,
   type: SET_GRADUATION_CLASSFICATION
 });
-export const setGraduationYear = (payload: number): InfoActionTypes => ({
+export const setGraduationYear = (payload: string): InfoActionTypes => ({
   payload,
   type: SET_GRADUATED_YEAR
 });

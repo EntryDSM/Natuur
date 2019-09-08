@@ -15,7 +15,7 @@ interface OwnProps {
   applyType: string;
   selectRegion: string;
   graduationClassification: string;
-  graduationYear: number;
+  graduationYear: string;
   remarks: string;
   accessToken: string;
   isSuccess: boolean;
@@ -24,7 +24,7 @@ interface OwnProps {
   setApplyType: (payload: string) => void;
   setSelectRegion: (payload: string) => void;
   setGraduationClassification: (payload: string) => void;
-  setGraduationYear: (payload: number) => void;
+  setGraduationYear: (payload: string) => void;
   setRemark: (payload: string) => void;
 }
 

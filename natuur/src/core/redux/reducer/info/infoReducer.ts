@@ -19,7 +19,7 @@ interface RootState {
   applyType: string;
   selectRegion: string;
   graduationClassification?: string;
-  graduationYear?: number;
+  graduationYear?: string;
   remarks?: string;
   isSuccess?: boolean;
 }

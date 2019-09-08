@@ -1,5 +1,4 @@
 import axios from "axios";
-import { connectionUrl } from "./endpoint";
 import {
   UserApplicantStatusApiType,
   UserApplicantInfoApiType
@@ -8,7 +7,6 @@ import { DocumentApiType } from "../../core/redux/actions/intro";
 
 const instanceAxios = axios.create({
   baseURL: "/api/v1",
-
   headers: { "Content-Type": "application/json" }
 });
 
@@ -109,6 +107,7 @@ export const patchClassificationInfoApi = async (
     social_detail_type?: string;
     is_daejeon: boolean;
     is_graduated?: boolean;
+    graduated_year?: string;
     additional_type?: string;
   }
 ) => {
