@@ -7,6 +7,7 @@ import authorization from "./authorization";
 import personal from "./personal";
 import info from "./info";
 import intro from "./intro";
+import grade from "./grade";
 import tokenSaga from "./token";
 
 export default function* rootSaga() {
@@ -18,6 +19,7 @@ export default function* rootSaga() {
     call(personal),
     call(info),
     call(intro),
+    call(grade),
     call(tokenSaga)
   ]);
 }
