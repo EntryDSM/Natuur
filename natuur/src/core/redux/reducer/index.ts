@@ -10,7 +10,7 @@ import sendApplicantPasswordReducer from "./User/sendApplicantPasswordReducer";
 import mainReducer from "./main/mainReducer";
 import PersonalReducer from "./personal/personalReducer";
 import infoReducer from "./info/infoReducer";
-import gradeReducer from "./grade/gradeReducer";
+// import gradeReducer from "./grade/gradeReducer";
 import introReducer from "./intro/introReducer";
 
 export default combineReducers({
@@ -24,7 +24,7 @@ export default combineReducers({
   mainReducer,
   infoReducer,
   PersonalReducer,
-  gradeReducer,
+  // gradeReducer,
   introReducer
   // reducers
 });

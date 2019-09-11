@@ -49,6 +49,7 @@
     "postcss-styled": "^0.34.0",
     "react-favicon": "^0.0.17",
     "react-hot-loader": "^4.12.11",
+    "react-to-print": "^2.4.0",
     "style-loader": "^1.0.0",
     "ts-loader": "^6.0.4",
     "tslib": "^1.10.0",

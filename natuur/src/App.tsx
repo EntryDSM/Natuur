@@ -41,7 +41,7 @@ const App: FC<Props> = ({ accessToken, refreshToken, email, logOut }) => {
 
   return (
     <BrowserRouter>
-      <div className={appClass}>
+      <div id={appClass}>
         <GlobalStyle />
         <Header
           userName={email.split("@")[0]}
@@ -77,7 +77,11 @@ const App: FC<Props> = ({ accessToken, refreshToken, email, logOut }) => {
               exact
             />
             <Route path="/intro" render={() => <Introduce />} exact />
-            <Route path="/preview" render={() => <Preview />} exact />
+            <Route
+              path="/preview"
+              render={() => <Preview updateAppClass={setAppClass} />}
+              exact
+            />
             <Route path="/grade" render={() => <Grade />} exact />
             <Route path="/mypage" render={() => <MyPage />} exact />
             <Route component={ErrorPage} />
