@@ -1,48 +1,41 @@
 import React, { Component } from "react";
-import html2Canvase from "html2canvas";
 
-// import ApplicationForm from "./applicationForm/ApplicationForm";
-// import RecommendationLetter from "./recommendationLetter/RecommendationLetter";
-// import NonSmokingPledge from "./nonSmokingPledge/NonSmokingPledge";
+import ApplicationForm from "./applicationForm/ApplicationForm";
+import RecommendationLetter from "./recommendationLetter/RecommendationLetter";
+import NonSmokingPledge from "./nonSmokingPledge/NonSmokingPledge";
+import SelfIntroduction from "./SelfIntroductionAndSchoolPlan/SelfIntroduction";
+import SchoolPlan from "./SelfIntroductionAndSchoolPlan/SchoolPlan";
+import AdmissionConsent from "./AdmissionConsent/AdmissionConsent";
+
 import * as S from "../../styles/preview";
 
 interface OwnProps {
-  setPdfPage: (pdfPage: number) => void;
-  pdfPage: number;
+  applyType: string;
 }
 
-const htmlToImage = async (domId: string) => {
-  const htmlElement = document.getElementById(domId);
-  const domImg = document.createElement("img");
-
-  const canvas = await html2Canvase(htmlElement);
-  const imageData = canvas.toDataURL("image/png");
-  domImg.src = imageData;
-
-  htmlElement.removeChild(htmlElement.childNodes[0]);
-};
-
-class PdfBody extends React.Component<OwnProps, {}> {
-  constructor(props: OwnProps) {
-    super(props);
-  }
+class PdfBody extends Component<OwnProps, {}> {
   public render() {
     return (
-      <S.PdfTarget>
-        {/* <S.PdfContent id="applicationForm">
+      <S.PdfTarget id="pdfTarget">
+        <S.PdfContent id="applicationForm">
           <ApplicationForm />
-        </S.PdfContent> */}
-        <S.PdfContent>
-          제발좀 됨녕ㄹ마ㅣㄴㅇ롬ㄴ어ㅏㅣ롬ㅇㄴㄹㅁㄴㅇㄻㄴㅇㄻㄴㅇㄹ
         </S.PdfContent>
-        {/* <S.PdfContent id="recommendationLetter">
-          <RecommendationLetter />
-        </S.PdfContent> */}
-        {/* <S.PdfContent id="nonSmokingPledge">
+        <S.PdfContent id="selfIntroduction">
+          <SelfIntroduction />
+        </S.PdfContent>
+        <S.PdfContent id="SchoolPlan">
+          <SchoolPlan />
+        </S.PdfContent>
+        {this.props.applyType !== "일반전형" && (
+          <S.PdfContent id="recommendationLetter">
+            <RecommendationLetter />
+          </S.PdfContent>
+        )}
+        <S.PdfContent id="nonSmokingPledge">
           <NonSmokingPledge />
-        </S.PdfContent> */}
-        <S.PdfContent isLast>
-          제발좀 됨녕ㄹ마ㅣㄴㅇ롬ㄴ어ㅏㅣ롬ㅇㄴㄹㅁㄴㅇㄻㄴㅇㄻㄴㅇㄹ
+        </S.PdfContent>
+        <S.PdfContent id="admissionConsent" isLast>
+          <AdmissionConsent />
         </S.PdfContent>
       </S.PdfTarget>
     );
