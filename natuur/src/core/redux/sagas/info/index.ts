@@ -48,6 +48,7 @@ function* patchClassificationInfo(action: PatchClassificationInfo) {
     social_detail_type,
     is_daejeon,
     is_graduated,
+    graduated_year,
     additional_type
   } = action.payload;
   try {
@@ -57,6 +58,7 @@ function* patchClassificationInfo(action: PatchClassificationInfo) {
       social_detail_type,
       is_daejeon,
       is_graduated,
+      graduated_year,
       additional_type
     });
     yield put({ type: PATCH_CLASSIFICATION_SUCCESS });

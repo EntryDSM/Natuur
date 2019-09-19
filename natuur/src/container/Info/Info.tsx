@@ -74,7 +74,8 @@ const Info: FC<Props> = ({
               social_detail_type: applyType.split("/")[1],
               is_daejeon: selectRegion === "대전",
               is_graduated: graduationClassification === "졸업자",
-              additional_type: !remarks ? undefined : remarks
+              graduated_year: graduationYear ? graduationYear : undefined,
+              additional_type: remarks ? remarks : undefined
             })
           }
           prevRouterPath="/"
