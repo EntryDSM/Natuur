@@ -4,6 +4,14 @@ import {
   UserApplicantStatusApiType,
   UserApplicantInfoApiType
 } from "../../core/redux/actions/main";
+import {
+  DiligenceApiType,
+  GedGradeApiType,
+  GradeApiType,
+  DiligenceType,
+  GedGradeType,
+  GradeType
+} from "../../core/redux/actions/grade";
 import { DocumentApiType } from "../../core/redux/actions/intro";
 
 const instanceAxios = axios.create({
@@ -175,6 +183,81 @@ export const changeUserApplicantPhotoApi = async (
       "content-type": "multipart/form-data"
     }
   });
+
+  return response.data;
+};
+
+export const getUserDiligenceGradeApi = async (payload: {
+  accessToken: string;
+}) => {
+  const response = await instanceAxios.get<DiligenceApiType>(
+    "/applicant/me/diligence",
+    {
+      headers: authorizationHeader(payload.accessToken)
+    }
+  );
+
+  return response.data;
+};
+
+export const patchUserDiligenceGradeApi = async (payload: DiligenceType) => {
+  const response = await instanceAxios.patch(
+    "/applicant/me/diligence",
+    payload,
+    {
+      headers: authorizationHeader(payload.accessToken)
+    }
+  );
+
+  return response.data;
+};
+
+export const getGedApplicantGradeApi = async (payload: {
+  accessToken: string;
+}) => {
+  const response = await instanceAxios.get<GedGradeApiType>(
+    "/applicant/me/ged-score",
+    {
+      headers: authorizationHeader(payload.accessToken)
+    }
+  );
+
+  return response.data;
+};
+
+export const patchGedApplicantGradeApi = async (payload: GedGradeType) => {
+  const response = await instanceAxios.patch(
+    "/applicant/me/ged-score",
+    payload,
+    {
+      headers: authorizationHeader(payload.accessToken)
+    }
+  );
+
+  return response.data;
+};
+
+export const getApplicantGradeApi = async (payload: {
+  accessToken: string;
+}) => {
+  const response = await instanceAxios.get<GradeApiType>(
+    "/applicant/me/academic-score",
+    {
+      headers: authorizationHeader(payload.accessToken)
+    }
+  );
+
+  return response.data;
+};
+
+export const patchApplicantGradeApi = async (payload: GradeType) => {
+  const response = await instanceAxios.patch(
+    "/applicant/me/academic-score",
+    payload,
+    {
+      headers: authorizationHeader(payload.accessToken)
+    }
+  );
 
   return response.data;
 };
