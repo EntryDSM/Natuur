@@ -9,7 +9,7 @@ export interface FinalSubmitDependencyState {
   applyType?: string;
   selectRegion?: string;
   graduationClassification?: string;
-  graduationYear?: number;
+  graduationYear?: string;
   remarks?: string;
   receiptCode?: number;
   examCode?: number;
