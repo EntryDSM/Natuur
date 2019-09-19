@@ -1,0 +1,1 @@
+export const SCORE_LIST = ['A', "B", "C", "D", "E"];

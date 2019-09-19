@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from "react";
+import React, { FC, useState } from "react";
 import { hot } from "react-hot-loader/root";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
@@ -15,12 +15,13 @@ import {
   SignUp,
   PersonalInformation
 } from "./container";
+import ConnectSelectCategory from "./container/Info/ConnectSelectCategory";
+import ConnectGrade from "./container/Grade/ConnectGrade";
 import ErrorPage from "./components/default/ErrorPage";
-import GlobalStyle from "./styles/GlobalStyle";
 import ToastrBar from "./components/default/Common/ToastrBarCover";
 import ScrollToTop from "./components/default/ScrollToTop";
+import GlobalStyle from "./styles/GlobalStyle";
 import { AppState } from "./core/redux/store/store";
-import ConnectSelectCategory from "./container/Info/ConnectSelectCategory";
 import { logOut } from "./core/redux/actions/user";
 
 const mapStaetToProps = (state: AppState) => ({
@@ -82,7 +83,7 @@ const App: FC<Props> = ({ accessToken, refreshToken, email, logOut }) => {
               render={() => <Preview updateAppClass={setAppClass} />}
               exact
             />
-            <Route path="/grade" render={() => <Grade />} exact />
+            <Route path="/grade" render={() => <ConnectGrade />} exact />
             <Route path="/mypage" render={() => <MyPage />} exact />
             <Route component={ErrorPage} />
           </Switch>
