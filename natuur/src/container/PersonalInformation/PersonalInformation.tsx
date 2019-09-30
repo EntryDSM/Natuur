@@ -15,7 +15,8 @@ import {
   patchApplicantInfo,
   PatchApplicantInfoType,
   changeApplicantPhoto,
-  ChangeApplicantPhotoType
+  ChangeApplicantPhotoType,
+  getApplicantPhoto
 } from "../../core/redux/actions/personal";
 import Pagination from "../../components/default/pagination/Pagination";
 
@@ -50,15 +51,14 @@ const mapDispatchToProps = dispatch => ({
     dispatch(patchApplicantInfo(payload)),
   changeApplicantPhoto: (payload: ChangeApplicantPhotoType) =>
     dispatch(changeApplicantPhoto(payload)),
-  getAddressData: ({
-    zipCode,
-    address
-  }: {
-    zipCode: string;
-    address: string;
-  }) => dispatch(getAddressData({ zipCode, address })),
+  getAddressData: (payload: { zipCode: string; address: string }) =>
+    dispatch(
+      getAddressData({ zipCode: payload.zipCode, address: payload.address })
+    ),
   setMiddleSchool: (payload: { school: string }) =>
-    dispatch(setMiddleSchool(payload))
+    dispatch(setMiddleSchool(payload)),
+  getApplicantPhoto: (payload: { accessToken: string }) =>
+    dispatch(getApplicantPhoto({ accessToken: payload.accessToken }))
 });
 
 type Props = ReturnType<typeof mapStateToProps> &
@@ -70,6 +70,7 @@ const PersonalInformation: FC<Props> = ({
   getApplicantInfo,
   patchApplicantInfo,
   changeApplicantPhoto,
+  getApplicantPhoto,
   getAddressData,
   email,
   accessToken,
@@ -100,6 +101,7 @@ const PersonalInformation: FC<Props> = ({
       didMountRef.current = true;
 
       getApplicantInfo({ email, accessToken });
+      getApplicantPhoto({ accessToken });
     }
   },        []);
 
@@ -148,12 +150,14 @@ const PersonalInformation: FC<Props> = ({
               payload: {
                 applicant_name: name,
                 sex: gender,
-                birth_date: `${birthYear}/${birthMonth}/${birthDate}`,
+                birth_date: !!(birthYear && birthMonth && birthDate)
+                  ? `${birthYear}-${birthMonth}-${birthDate}`
+                  : undefined,
                 parent_name: parentsName,
                 parent_tel: parentsContact,
                 applicant_tel: userContact,
-                address: `${address}/${detailedAddress}`,
-                post_code: Number(zipCode)
+                address: address && `${address}/${detailedAddress}`,
+                post_code: zipCode !== "undefined" ? zipCode : undefined
               }
             })
           }
