@@ -23,9 +23,7 @@ const RemarksRow: FC<OwnProps> = ({ radioType, setRadioType }) => (
           id={result.CHECK_BOX_CASE}
           value={result.CHECK_BOX_NAME}
           onChange={({ currentTarget: { value } }) => setRadioType(value)}
-          onClick={({ currentTarget: { value } }) =>
-            radioType && radioType === value && setRadioType(undefined)
-          }
+          onClick={() => radioType && setRadioType(undefined)}
         />
         <S.CircleLabel htmlFor={result.CHECK_BOX_CASE}>
           {radioType === result.CHECK_BOX_NAME && <S.AcceptCircle />}
