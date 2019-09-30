@@ -9,15 +9,19 @@ import {
 interface Props {
   subText?: string;
   title: string;
+  isClassification?: boolean;
 }
 
 const HeadLine: FC<Props> = ({
   subText = "대덕소프트웨어마이스터고등학교",
-  title
+  title,
+  isClassification
 }) => (
   <HeadLineCover>
     <HeadLineCoverSubText>{subText}</HeadLineCoverSubText>
-    <HeadLineCoverTitle>{title}</HeadLineCoverTitle>
+    <HeadLineCoverTitle isClassification={isClassification}>
+      {title}
+    </HeadLineCoverTitle>
   </HeadLineCover>
 );
 
