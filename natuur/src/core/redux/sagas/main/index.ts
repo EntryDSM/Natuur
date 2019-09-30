@@ -7,14 +7,19 @@ import {
   GET_USER_APPLICANT_INFOMATION,
   GET_USER_APPLICANT_INFOMATION_SUCCESS,
   GET_USER_APPLICANT_INFOMATION_FAILURE,
+  PATCH_FIANL_SUBMIT,
+  PATCH_FIANL_SUBMIT_FAILURE,
+  PATCH_FIANL_SUBMIT_SUCCESS,
   UserApplicantStatus,
   UserApplicantInfo,
+  PatchFinalSubmit,
   UserApplicantStatusApiType,
   UserApplicantInfoApiType
 } from "../../actions/main";
 import {
   getUserApplicationStatusApi,
-  getUserApplicantInfoApi
+  getUserApplicantInfoApi,
+  patchFianlSubmitApi
 } from "../../../../lib/api";
 import { tokenRefresh } from "../token";
 
@@ -69,9 +74,34 @@ function* watchGetUserApplicantInfo() {
   yield takeLatest(GET_USER_APPLICANT_INFOMATION, getUserApplicantInfo);
 }
 
+function* patchFinalSubmit(action: PatchFinalSubmit) {
+  try {
+    const response = yield call(patchFianlSubmitApi, action.payload);
+    yield put({
+      type: PATCH_FIANL_SUBMIT_SUCCESS,
+      payload: response
+    });
+  } catch (e) {
+    if (e.response.status === 401) {
+      yield tokenRefresh(
+        patchFianlSubmitApi,
+        action.payload,
+        PATCH_FIANL_SUBMIT_SUCCESS,
+        PATCH_FIANL_SUBMIT_FAILURE
+      );
+    }
+    yield put({ type: PATCH_FIANL_SUBMIT_FAILURE });
+  }
+}
+
+function* watchPatchFinalSubmit() {
+  yield takeLatest(PATCH_FIANL_SUBMIT, patchFinalSubmit);
+}
+
 export default function* mainSaga() {
   yield all([
     fork(watchGetUserApplicantStatus),
-    fork(watchGetUserApplicantInfo)
+    fork(watchGetUserApplicantInfo),
+    fork(watchPatchFinalSubmit)
   ]);
 }

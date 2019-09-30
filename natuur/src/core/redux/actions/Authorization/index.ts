@@ -21,7 +21,7 @@ export interface AuthenticationNumberByEmail {
     | typeof SEND_AUTHENTICATION_NUMBER_BY_EMAIL
     | typeof SEND_AUTHENTICATION_NUMBER_BY_EMAIL_SUCCESS
     | typeof SEND_AUTHENTICATION_NUMBER_BY_EMAIL_FAILURS;
-  payload: { email: string };
+  payload: { email: string; isResend?: boolean };
 }
 
 export interface RegisterVerifyNumber {
@@ -29,7 +29,7 @@ export interface RegisterVerifyNumber {
     | typeof GET_REGISTER_VERIFY_NUMBER
     | typeof GET_REGISTER_VERIFY_NUMBER_SUCCESS
     | typeof GET_REGISTER_VERIFY_NUMBER_FAILURS;
-  payload: { verify: string };
+  payload: { email: string; verify: string };
 }
 
 export interface SignUp {
@@ -46,6 +46,7 @@ export type AuthorizationTypes =
 // Actions
 export const sendAuthenticationNumberByEmail = (payload: {
   email: string;
+  isResend?: boolean;
 }): AuthorizationTypes => ({
   payload,
   type: SEND_AUTHENTICATION_NUMBER_BY_EMAIL
@@ -53,6 +54,7 @@ export const sendAuthenticationNumberByEmail = (payload: {
 
 export const getRegisterVerifyNumber = (payload: {
   verify: string;
+  email: string;
 }): AuthorizationTypes => ({
   payload,
   type: GET_REGISTER_VERIFY_NUMBER

@@ -21,7 +21,8 @@ export const SEND_APPLICANT_PASSWORD_FAILURE =
   "SEND_APPLICANT_PASSWORD_FAILURE";
 export const REVERT_SEND_VERIFICATION_STATE = "REVERT_SEND_VERIFICATION_STATE";
 export const REVERT_RESET_APPLICATN_STATE = "REVERT_RESET_APPLICATN_STATE";
-export const REVERT_RE_SEND_VERIFICATION_STATE = "REVERT_RE_SEND_VERIFICATION_STATE";
+export const REVERT_RE_SEND_VERIFICATION_STATE =
+  "REVERT_RE_SEND_VERIFICATION_STATE";
 
 export interface SendVerificationNumber {
   type:
@@ -36,7 +37,7 @@ export interface ResetApplicantPassword {
     | typeof RESET_APPLICANT_PASSWORD_SUCCESS
     | typeof RESET_APPLICANT_PASSWORD_FAILURE;
   payload: {
-    verify: string;
+    email: string;
     password: string;
   };
 }
@@ -45,7 +46,10 @@ export interface SendApplicantPassword {
     | typeof SEND_APPLICANT_PASSWORD
     | typeof SEND_APPLICANT_PASSWORD_SUCCESS
     | typeof SEND_APPLICANT_PASSWORD_FAILURE;
-  payload: string;
+  payload: {
+    email: string;
+    verify: string;
+  };
 }
 export interface ReSendApplicationPassword {
   type:
@@ -83,16 +87,17 @@ export const sendVerificationNumber = (
 });
 
 export const resetApplicantPassword = (payload: {
-  verify: string;
+  email: string;
   password: string;
 }): VerificationActionTypes => ({
   payload,
   type: RESET_APPLICANT_PASSWORD
 });
 
-export const sendApplicantPassword = (
-  payload: string
-): VerificationActionTypes => ({
+export const sendApplicantPassword = (payload: {
+  email: string;
+  verify: string;
+}): VerificationActionTypes => ({
   payload,
   type: SEND_APPLICANT_PASSWORD
 });

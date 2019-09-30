@@ -46,7 +46,7 @@ const SignUp: FC<Props> = ({ updateAppClass, updateToastr }) => {
         <HeadLine title="2020 지원자 계정 생성하기" />
         <AcceptTerms />
         <PrivacyCheckBox
-          isAccept={setChecked}
+          setChecked={setChecked}
           checkedState={checked}
           userEmail={userEmail}
           userPassword={userPassword}

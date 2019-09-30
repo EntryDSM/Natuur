@@ -18,10 +18,20 @@ export const mapStateToProps = (state: AppState) => ({
 });
 
 export const mapDispatchToProps = dispatch => ({
-  getRegisterVerifyNumber: ({ verify }: { verify: string }) =>
-    dispatch(getRegisterVerifyNumber({ verify })),
-  sendAuthenticationNumberByEmailApi: ({ email }: { email: string }) =>
-    dispatch(sendAuthenticationNumberByEmail({ email })),
+  getRegisterVerifyNumber: ({
+    verify,
+    email
+  }: {
+    verify: string;
+    email: string;
+  }) => dispatch(getRegisterVerifyNumber({ verify, email })),
+  sendAuthenticationNumberByEmailApi: ({
+    email,
+    isResend
+  }: {
+    email: string;
+    isResend?: boolean;
+  }) => dispatch(sendAuthenticationNumberByEmail({ email, isResend })),
   signUp: ({ email, password }: { email: string; password: string }) =>
     dispatch(signUp({ email, password }))
 });
