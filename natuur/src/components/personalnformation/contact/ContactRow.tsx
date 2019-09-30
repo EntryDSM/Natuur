@@ -24,7 +24,7 @@ const ContactRow: FC<OwnProps> = ({
     >
       <S.Input
         type="text"
-        value={contact}
+        value={contact || ""}
         onChange={({ target: { value } }) => setContact({ contact: value })}
         inputCase="contact"
         isDisable={isDisable}

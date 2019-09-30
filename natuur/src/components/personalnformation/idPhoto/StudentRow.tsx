@@ -35,7 +35,7 @@ const StudentRow: FC<OwnProps> = ({
       <S.InputCover isDisable={isGed}>
         <S.Input
           type="text"
-          value={userClass}
+          value={userClass || ""}
           onChange={({ target: { value } }) =>
             checkOnlyNumber(value) && setClass({ class: value })
           }
@@ -48,7 +48,7 @@ const StudentRow: FC<OwnProps> = ({
       <S.InputCover isDisable={isGed}>
         <S.Input
           type="text"
-          value={studentID}
+          value={studentID || ""}
           onChange={({ target: { value } }) =>
             checkOnlyNumber(value) && setStudentID({ studentID: value })
           }

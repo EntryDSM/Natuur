@@ -33,8 +33,18 @@ const AddressComponent: FC<OwnProps> = ({
     <InputRow rowTitle="주소" isAddress>
       <AddressContent>
         <S.InlineDiv>
-          <S.Input type="text" value={zipCode} inputCase="zipcode" readOnly />
-          <S.Input type="text" value={address} inputCase="address" readOnly />
+          <S.Input
+            type="text"
+            value={zipCode || ""}
+            inputCase="zipcode"
+            readOnly
+          />
+          <S.Input
+            type="text"
+            value={address || ""}
+            inputCase="address"
+            readOnly
+          />
           <S.SearchButton
             onClick={() => openPopUp(setIsAddress, setIsOpenPopUp)}
           >
@@ -43,7 +53,7 @@ const AddressComponent: FC<OwnProps> = ({
         </S.InlineDiv>
         <S.Input
           type="text"
-          value={detailedAddress}
+          value={detailedAddress || ""}
           onChange={({ target: { value } }) =>
             setDetailedAddress({ address: value })
           }
