@@ -8,7 +8,11 @@ import RecommendationBody from "./RecommendationBody";
 import { FinalSubmitDependencyState } from "../FinalSubmitButton";
 import { AppState } from "../../../core/redux/store/store";
 
-const RecommendationLetter: FC = () => {
+interface OwnProps {
+  isPrint?: boolean;
+}
+
+const RecommendationLetter: FC<OwnProps> = ({ isPrint }) => {
   const {
     receiptCode,
     applyType,
@@ -19,7 +23,7 @@ const RecommendationLetter: FC = () => {
   } = useSelector<AppState, FinalSubmitDependencyState>(state => ({
     applyType: state.infoReducer.applyType,
     selectRegion: state.infoReducer.selectRegion,
-    receiptCode: state.mainReducer.receiptCode,
+    receiptCode: state.mainReducer.receipt_code,
     name: state.PersonalReducer.name,
     userClass: state.PersonalReducer.userClass,
     middleSchool: state.PersonalReducer.middleSchool
@@ -38,7 +42,7 @@ const RecommendationLetter: FC = () => {
 
   return (
     <S.RecommendationLetter>
-      <WaterMark isShow={!recommendationLetterDependency} />
+      {!isPrint && <WaterMark isShow={!recommendationLetterDependency} />}
       <div id="mainDiv">
         <S.subContiner>
           <RecommendationHeader receiptCode={receiptCode} />
