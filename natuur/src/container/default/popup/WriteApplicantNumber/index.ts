@@ -17,7 +17,7 @@ export const mapStateToProps = (state: AppState) => ({
 export const mapDispatchToProps = dispatch => ({
   reSendVerificationNumber: (payload: string) =>
     dispatch(reSendVerificationNumber(payload)),
-  sendApplicantPassword: (payload: string) =>
+  sendApplicantPassword: (payload: { email: string; verify: string }) =>
     dispatch(sendApplicantPassword(payload)),
   resetState: () => dispatch(revertReSendVerificationState())
 });

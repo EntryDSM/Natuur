@@ -13,7 +13,7 @@ export const mapStateToProps = (state: AppState) => ({
 });
 
 export const mapDispatchToProps = dispatch => ({
-  resetApplicantPassword: (payload: { verify: string; password: string }) =>
+  resetApplicantPassword: (payload: { email: string; password: string }) =>
     dispatch(resetApplicantPassword(payload)),
   resetState: () => dispatch(revertResetApplicantState())
 });
