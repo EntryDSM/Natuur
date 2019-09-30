@@ -17,17 +17,29 @@ export const HeadLineCoverSubText = styled.h4`
   color: #000000;
 `;
 
-export const HeadLineCoverTitle = styled.h1`
+export const HeadLineCoverTitle = styled.h1<{ isClassification?: boolean }>`
   font-weight: 500;
+  position: relative;
   font-size: 36px;
   height: 64.5px;
   line-height: 37px;
   color: #000000;
-  padding: 10px 0 15px;
+  padding: 10px 79px 15px 0;
   border-bottom: 2.5px solid #70b1ba;
   box-sizing: border-box;
   letter-spacing: -2px;
   width: fit-content;
+
+  ${props =>
+    props.isClassification &&
+    `&::before {
+    content: "*";
+    font-size: 18px;
+    color: #5f8a90;
+    position: absolute;
+    top: -10px;
+    left: 205px;
+  }`}
 `;
 
 // CommonButtons
