@@ -7,7 +7,10 @@ import {
   GET_USER_APPLICANT_STATUS_SUCCESS,
   GET_USER_APPLICANT_INFOMATION,
   GET_USER_APPLICANT_INFOMATION_SUCCESS,
-  GET_USER_APPLICANT_INFOMATION_FAILURE
+  GET_USER_APPLICANT_INFOMATION_FAILURE,
+  PATCH_FIANL_SUBMIT,
+  PATCH_FIANL_SUBMIT_FAILURE,
+  PATCH_FIANL_SUBMIT_SUCCESS
 } from "../../actions/main";
 
 export interface RootState
@@ -19,13 +22,13 @@ export interface RootState
 }
 
 const initialStae: RootState = {
-  isPaid: false,
-  isPassedFirstApply: false,
-  isPassedFinalApply: false,
-  isPrintedApplicationArrived: false,
-  isFinalSubmit: false,
-  receiptCode: 0,
-  examCode: 0,
+  is_paid: false,
+  is_passed_interview: false,
+  is_printed_application_arrived: false,
+  is_final_submit: false,
+  is_passed_final_apply: false,
+  receipt_code: 0,
+  exam_code: 0,
   email: "",
   applicantName: "",
   sex: "",
@@ -54,21 +57,23 @@ const mainReducer = (
     }
     case GET_USER_APPLICANT_STATUS_SUCCESS: {
       const {
-        isPaid,
-        isPassedFirstApply,
-        isPrintedApplicationArrived,
-        isFinalSubmit,
-        receiptCode,
-        examCode
+        is_paid,
+        is_passed_interview,
+        is_printed_application_arrived,
+        is_final_submit,
+        is_passed_final_apply,
+        receipt_code,
+        exam_code
       } = action.payload;
       return {
         ...state,
-        isPaid,
-        isPassedFirstApply,
-        isPrintedApplicationArrived,
-        isFinalSubmit,
-        receiptCode,
-        examCode,
+        is_paid,
+        is_passed_interview,
+        is_printed_application_arrived,
+        is_final_submit,
+        is_passed_final_apply,
+        receipt_code,
+        exam_code,
         isSuccess: true,
         isError: false,
         isWaiting: false
@@ -99,6 +104,23 @@ const mainReducer = (
       return {
         ...state,
         isWaiting: true
+      };
+    }
+    case PATCH_FIANL_SUBMIT: {
+      return {
+        ...state
+      };
+    }
+    case PATCH_FIANL_SUBMIT_SUCCESS: {
+      return {
+        ...state,
+        is_final_submit: true
+      };
+    }
+    case PATCH_FIANL_SUBMIT_FAILURE: {
+      return {
+        ...state,
+        is_final_submit: false
       };
     }
     default:

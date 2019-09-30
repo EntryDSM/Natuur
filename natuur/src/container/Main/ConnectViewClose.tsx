@@ -5,8 +5,8 @@ import { AppState } from "../../core/redux/store/store";
 import { getUserApplicantStatus } from "../../core/redux/actions/main";
 
 export const mapStateToProps = (state: AppState) => ({
-  isPassedFirstApply: state.mainReducer.isPassedFirstApply,
-  isPassedFinalApply: state.mainReducer.isPassedFinalApply,
+  isPassedFirstApply: state.mainReducer.is_passed_interview,
+  isPassedFinalApply: state.mainReducer.is_passed_final_apply,
   isSuccess: state.mainReducer.isSuccess,
   isError: state.mainReducer.isError,
   isWaiting: state.mainReducer.isWaiting
