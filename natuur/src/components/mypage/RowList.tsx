@@ -15,9 +15,10 @@ const RowList: FC = () => {
     isPrintedApplicationArrived
   } = useSelector<AppState, RowProps>(state => ({
     gender: state.PersonalReducer.gender,
-    isFinalSubmit: state.mainReducer.isFinalSubmit,
-    isPaid: state.mainReducer.isPaid,
-    isPrintedApplicationArrived: state.mainReducer.isPrintedApplicationArrived,
+    isFinalSubmit: state.mainReducer.is_final_submit,
+    isPaid: state.mainReducer.is_paid,
+    isPrintedApplicationArrived:
+      state.mainReducer.is_printed_application_arrived,
     name: state.PersonalReducer.name
   }));
 
@@ -35,6 +36,7 @@ const RowList: FC = () => {
       <RowItem
         title="최종제출"
         content={isFinalSubmit ? "제출완료" : "미 완료"}
+        isPreview
       />
       <S.Horizon />
 
