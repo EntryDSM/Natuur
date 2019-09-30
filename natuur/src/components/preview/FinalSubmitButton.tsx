@@ -1,5 +1,6 @@
-import React, { FC, useState, useEffect, useRef } from "react";
-import { useSelector } from "react-redux";
+import React, { FC, useState, useEffect, useRef, useCallback } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { patchFinalSubmit } from "../../core/redux/actions/main";
 
 import * as S from "../../styles/preview";
 import { AppState } from "../../core/redux/store/store";
@@ -30,9 +31,11 @@ export interface FinalSubmitDependencyState {
   file?: string;
   selfIntroduction?: string;
   studyPlan?: string;
+  accessToken?: string;
 }
 
 const FinalSubmitButton: FC = () => {
+  const dispatch = useDispatch();
   const [isFinalSubmit, setIsFinalSubmit] = useState(false);
   const didMountRef = useRef(false);
 
@@ -53,14 +56,14 @@ const FinalSubmitButton: FC = () => {
     userClass,
     studentID,
     middleSchool,
-    parentsName,
     schoolContact,
     parentsContact,
     userContact,
     address,
     file,
     selfIntroduction,
-    studyPlan
+    studyPlan,
+    accessToken
   } = useSelector<AppState, FinalSubmitDependencyState>(state => ({
     isGed: state.infoReducer.isGed,
     applyType: state.infoReducer.applyType,
@@ -68,8 +71,8 @@ const FinalSubmitButton: FC = () => {
     graduationClassification: state.infoReducer.graduationClassification,
     graduationYear: state.infoReducer.graduationYear,
     remarks: state.infoReducer.remarks,
-    receiptCode: state.mainReducer.receiptCode,
-    examCode: state.mainReducer.examCode,
+    receiptCode: state.mainReducer.receipt_code,
+    examCode: state.mainReducer.exam_code,
     name: state.PersonalReducer.name,
     gender: state.PersonalReducer.gender,
     birthYear: state.PersonalReducer.birthYear,
@@ -85,7 +88,8 @@ const FinalSubmitButton: FC = () => {
     address: state.PersonalReducer.address,
     file: state.PersonalReducer.file,
     selfIntroduction: state.introReducer.selfIntroduction,
-    studyPlan: state.introReducer.studyPlan
+    studyPlan: state.introReducer.studyPlan,
+    accessToken: state.userReducer.accessToken
   }));
 
   const applicantFormDependency = !!(
@@ -168,10 +172,15 @@ const FinalSubmitButton: FC = () => {
     }
   },        []);
 
+  const presentFinalSubmit = useCallback(
+    () => dispatch(patchFinalSubmit({ accessToken })),
+    [dispatch]
+  );
+
   return (
     <S.SubmitButton
       isDisable={!isFinalSubmit}
-      onClick={() => isFinalSubmit && console.log("최종제출 ㅠㅠ")}
+      onClick={() => isFinalSubmit && presentFinalSubmit()}
     >
       최종제출
     </S.SubmitButton>

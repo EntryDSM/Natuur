@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect, useRef } from "react";
+import React, { FC, useState, useEffect, useCallback, useRef } from "react";
 import { useSelector } from "react-redux";
 import ReactToPrint from "react-to-print";
 
@@ -11,22 +11,11 @@ import { returnNowToInlineString } from "../../lib/utils/date";
 
 const lastPdfMargin = 20;
 
-const scrollHandler = (
-  pdfPage: number,
-  setPdfPage: (pdfPage: number) => void
-) => {
-  const pdfBody = document.getElementById("scrollBody");
-  const nextPoint = (pdfBody.clientHeight - lastPdfMargin) * pdfPage;
-  const prevPoint = (pdfBody.clientHeight - lastPdfMargin) * (pdfPage - 1);
+interface OwnProps {
+  isPrint?: boolean;
+}
 
-  if (pdfBody.scrollTop >= nextPoint) {
-    setPdfPage(pdfPage + 1);
-  }
-  if (pdfBody.scrollTop < prevPoint) {
-    setPdfPage(pdfPage - 1);
-  }
-};
-const PDFcontainer: FC = () => {
+const PDFcontainer: FC<OwnProps> = ({ isPrint }) => {
   const printArea = useRef();
   const didMountRef = useRef(false);
 
@@ -51,6 +40,22 @@ const PDFcontainer: FC = () => {
     }
   },        []);
 
+  const scrollHandler = useCallback(
+    (pdfPage: number, setPdfPage: (pdfPage: number) => void) => {
+      const pdfBody = document.getElementById("scrollBody");
+      const nextPoint = (pdfBody.clientHeight - lastPdfMargin) * pdfPage;
+      const prevPoint = (pdfBody.clientHeight - lastPdfMargin) * (pdfPage - 1);
+
+      if (pdfBody.scrollTop >= nextPoint) {
+        setPdfPage(pdfPage + 1);
+      }
+      if (pdfBody.scrollTop < prevPoint) {
+        setPdfPage(pdfPage - 1);
+      }
+    },
+    [pdfPage]
+  );
+
   return (
     <S.PdfWrapper>
       <S.PdfHeader>
@@ -62,20 +67,23 @@ const PDFcontainer: FC = () => {
         <p>
           {pdfPage} / {maxPage}
         </p>
+
         <S.HeaderContentsBox>
-          <ReactToPrint
-            trigger={() => <S.HeaderIcon src={printIcon} alt="인쇄" />}
-            content={() => printArea.current}
-          />
+          {isPrint && (
+            <ReactToPrint
+              trigger={() => <S.HeaderIcon src={printIcon} alt="인쇄" />}
+              content={() => printArea.current}
+            />
+          )}
         </S.HeaderContentsBox>
       </S.PdfHeader>
       <S.PdfContents
         id="scrollBody"
         onScroll={() => scrollHandler(pdfPage, setPdfPage)}
       >
-        <PdfBody applyType={applyType} ref={printArea} />
+        <PdfBody applyType={applyType} ref={printArea} isPrint={isPrint} />
       </S.PdfContents>
-      <FinalSubmitButton />
+      {!isPrint && <FinalSubmitButton />}
     </S.PdfWrapper>
   );
 };

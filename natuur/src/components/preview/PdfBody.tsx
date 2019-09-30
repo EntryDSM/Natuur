@@ -11,31 +11,34 @@ import * as S from "../../styles/preview";
 
 interface OwnProps {
   applyType: string;
+  isPrint?: boolean;
 }
 
 class PdfBody extends Component<OwnProps, {}> {
   public render() {
+    const { isPrint, applyType } = this.props;
+
     return (
       <S.PdfTarget id="pdfTarget">
         <S.PdfContent id="applicationForm">
-          <ApplicationForm />
+          <ApplicationForm isPrint={isPrint} />
         </S.PdfContent>
         <S.PdfContent id="selfIntroduction">
-          <SelfIntroduction />
+          <SelfIntroduction isPrint={isPrint} />
         </S.PdfContent>
         <S.PdfContent id="SchoolPlan">
-          <SchoolPlan />
+          <SchoolPlan isPrint={isPrint} />
         </S.PdfContent>
-        {this.props.applyType !== "일반전형" && (
+        {applyType !== "일반전형" && (
           <S.PdfContent id="recommendationLetter">
-            <RecommendationLetter />
+            <RecommendationLetter isPrint={isPrint} />
           </S.PdfContent>
         )}
         <S.PdfContent id="nonSmokingPledge">
-          <NonSmokingPledge />
+          <NonSmokingPledge isPrint={isPrint} />
         </S.PdfContent>
         <S.PdfContent id="admissionConsent" isLast>
-          <AdmissionConsent />
+          <AdmissionConsent isPrint={isPrint} />
         </S.PdfContent>
       </S.PdfTarget>
     );

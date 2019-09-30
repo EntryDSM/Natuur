@@ -9,7 +9,11 @@ import AdmissionBody from "./AdmissionBody";
 import { FinalSubmitDependencyState } from "../FinalSubmitButton";
 import { AppState } from "../../../core/redux/store/store";
 
-const AdmissionConsent: FC = () => {
+interface OwnProps {
+  isPrint?: boolean;
+}
+
+const AdmissionConsent: FC<OwnProps> = ({ isPrint }) => {
   const {
     examCode,
     name,
@@ -23,7 +27,7 @@ const AdmissionConsent: FC = () => {
     address,
     detailedAddress
   } = useSelector<AppState, FinalSubmitDependencyState>(state => ({
-    examCode: state.mainReducer.examCode,
+    examCode: state.mainReducer.exam_code,
     name: state.PersonalReducer.name,
     gender: state.PersonalReducer.gender,
     birthYear: state.PersonalReducer.birthYear,
@@ -53,7 +57,7 @@ const AdmissionConsent: FC = () => {
 
   return (
     <S.AdmissionConsent>
-      <WaterMark isShow={!recommendationLetterDependency} />
+      {!isPrint && <WaterMark isShow={!recommendationLetterDependency} />}
       <div id="mainDiv">
         <S.SubContainer>
           <S.Title>입학동의서</S.Title>

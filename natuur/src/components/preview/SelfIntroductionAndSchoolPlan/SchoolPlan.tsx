@@ -9,7 +9,11 @@ import { SCHOOL_PLAN } from "./constance";
 import { FinalSubmitDependencyState } from "../FinalSubmitButton";
 import { AppState } from "../../../core/redux/store/store";
 
-const SchoolPlan: FC = () => {
+interface OwnProps {
+  isPrint?: boolean;
+}
+
+const SchoolPlan: FC<OwnProps> = ({ isPrint }) => {
   const {
     name,
     receiptCode,
@@ -18,7 +22,7 @@ const SchoolPlan: FC = () => {
     studyPlan
   } = useSelector<AppState, FinalSubmitDependencyState>(state => ({
     name: state.PersonalReducer.name,
-    receiptCode: state.mainReducer.receiptCode,
+    receiptCode: state.mainReducer.receipt_code,
     middleSchool: state.PersonalReducer.middleSchool,
     selfIntroduction: state.introReducer.selfIntroduction,
     studyPlan: state.introReducer.studyPlan
@@ -30,7 +34,7 @@ const SchoolPlan: FC = () => {
 
   return (
     <S.SelfIntroductionAndSchoolPlan>
-      <WaterMark isShow={!introduceDependency} />
+      {!isPrint && <WaterMark isShow={!introduceDependency} />}
       <div id="mainDiv">
         <S.SubContainer>
           <S.Title>학업계획서</S.Title>

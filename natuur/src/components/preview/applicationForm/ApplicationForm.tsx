@@ -10,7 +10,11 @@ import WaterMark from "../WaterMark";
 import { FinalSubmitDependencyState } from "../FinalSubmitButton";
 import { AppState } from "../../../core/redux/store/store";
 
-const ApplicationForm: FC = () => {
+interface OwnProps {
+  isPrint?: boolean;
+}
+
+const ApplicationForm: FC<OwnProps> = ({ isPrint }) => {
   const {
     isGed,
     applyType,
@@ -40,8 +44,8 @@ const ApplicationForm: FC = () => {
     graduationClassification: state.infoReducer.graduationClassification,
     graduationYear: state.infoReducer.graduationYear,
     remarks: state.infoReducer.remarks,
-    receiptCode: state.mainReducer.receiptCode,
-    examCode: state.mainReducer.examCode,
+    receiptCode: state.mainReducer.receipt_code,
+    examCode: state.mainReducer.exam_code,
     name: state.PersonalReducer.name,
     gender: state.PersonalReducer.gender,
     birthYear: state.PersonalReducer.birthYear,
@@ -74,7 +78,7 @@ const ApplicationForm: FC = () => {
 
   return (
     <S.ApplicationForm>
-      <WaterMark isShow={!admissionConsentDependency} />
+      {!isPrint && <WaterMark isShow={!admissionConsentDependency} />}
       <S.Title>2020학년도 대덕소프트웨어마이스터고등학교 입학원서</S.Title>
       <div id="MainDiv">
         <S.SubContainer id="SubDiv">
