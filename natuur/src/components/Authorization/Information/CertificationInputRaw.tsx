@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from "react";
+import React, { FC, useState, useEffect, useRef } from "react";
 
 import * as S from "../../../styles/Authorization";
 import { TextInput, EventButton } from "../../default/Common";
@@ -8,6 +8,7 @@ interface OwnProps {
   isCheckAuthorization?: boolean;
   userVerify: string;
   userEmail: string;
+  userPassword: string;
   isPasswordClose: boolean;
   isSendSuccess: boolean;
   isGetSuccess: boolean;
@@ -17,7 +18,7 @@ interface OwnProps {
   isReadOnly: boolean;
   handleChanger?(event: React.ChangeEvent<HTMLInputElement>): void;
   getRegisterVerifyNumber({ verify }: { verify: string }): void;
-  sendAuthenticationNumberByEmailApi({ email }: { email: string }): void;
+  signUp({ email, password }: { email: string; password: string }): void;
 }
 
 const getTimeFormat = (time: number): string => {
@@ -38,43 +39,60 @@ const getTime = (time: number): string => {
 
 const useTimer = (
   time: number,
-  setVerbleibendeZeit: (time: string) => void
+  setVerbleibendeZeit: (time: string) => void,
+  setIsResend: (isResend: boolean) => void
 ) => {
+  setIsResend(true);
+
   const timer = setInterval(() => {
     if (time === 0) {
+      setIsResend(false);
       clearInterval(timer);
     }
 
     setVerbleibendeZeit(getTime(time));
     time -= 1;
   },                        1000);
+
+  return timer;
 };
 
 const CertificationInputRaw: FC<OwnProps> = ({
   handleChanger,
   userVerify,
   userEmail,
+  userPassword,
   isCheckAuthorization,
   isPasswordClose,
   isSendSuccess,
-  isGetSuccess,
-  isSendError,
-  isGetError,
   isSendWaiting,
   getRegisterVerifyNumber,
-  sendAuthenticationNumberByEmailApi,
-  isReadOnly
+  isReadOnly,
+  signUp
 }) => {
+  const didMountRef = useRef(false);
   const [verbleibendeZeit, setVerbleibendeZeit] = useState("03:00");
   const [isOpenTextBox, setIsOpenTextBox] = useState(false);
+  const [isResend, setIsResend] = useState(false);
 
   useEffect(() => {
-    return useTimer(180, setVerbleibendeZeit);
+    if (!didMountRef.current) {
+      didMountRef.current = true;
+
+      const timer = useTimer(180, setVerbleibendeZeit, setIsResend);
+
+      return () => clearInterval(timer);
+    }
   },        []);
 
   useEffect(() => {
-    isSendSuccess && useTimer(180, setVerbleibendeZeit);
-  });
+    if (isSendSuccess) {
+      setVerbleibendeZeit("03:00");
+      const timer = useTimer(180, setVerbleibendeZeit, setIsResend);
+
+      return () => clearInterval(timer);
+    }
+  },        [isSendSuccess]);
 
   return (
     <S.InfomationInputBoxCoverWrapper>
@@ -94,26 +112,26 @@ const CertificationInputRaw: FC<OwnProps> = ({
         isButtonDisable={!isCheckAuthorization}
         buttonWidth={78}
         buttonContent={isPasswordClose ? "확인" : "인증완료"}
-        buttonEvent={() =>
-          isCheckAuthorization &&
-          getRegisterVerifyNumber({ verify: userVerify })
-        }
+        buttonEvent={() => getRegisterVerifyNumber({ verify: userVerify })}
         buttonMargin={12}
       />
 
       <EventButton
+        isButtonDisable={!isPasswordClose || isResend}
         buttonWidth={78}
         buttonContent="재전송"
-        buttonEvent={() =>
-          sendAuthenticationNumberByEmailApi({ email: userEmail })
-        }
+        buttonEvent={() => signUp({ email: userEmail, password: userPassword })}
         buttonMargin={14}
       />
 
       {isSendWaiting ? (
         <img src={loding} alt="로딩" style={{ marginLeft: "5px" }} />
       ) : (
-        <S.Timer>{verbleibendeZeit}</S.Timer>
+        <S.Timer>
+          {verbleibendeZeit === "00:00"
+            ? "다시 시도해주세요."
+            : verbleibendeZeit}
+        </S.Timer>
       )}
 
       <S.InformationInputSpaceWarning

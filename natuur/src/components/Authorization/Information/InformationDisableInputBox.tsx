@@ -22,11 +22,6 @@ const InformationDisableInputBox: FC<Props> = ({ updateToastr }) => (
         name="emailInput"
         type="text"
         isReadOnly
-        isButtonRow
-        isCheckAuthorization={false}
-        buttonContent="인증"
-        buttonWidth={78}
-        buttonMargin={12}
       />
 
       <GradationHorizon />
