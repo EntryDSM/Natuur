@@ -7,6 +7,7 @@ import {
   GetApplicantInfoApiType,
   PatchApplicantInfo,
   ChangeApplicantPhoto,
+  GetApplicantPhoto,
   SEARCH_ADDRESS,
   SEARCH_ADDRESS_SUCCESS,
   SEARCH_ADDRESS_FAILURE,
@@ -16,15 +17,19 @@ import {
   PATCH_APPLICANT_INFO,
   PATCH_APPLICANT_INFO_SUCCESS,
   PATCH_APPLICANT_INFO_FAILURE,
-  CHANGE_APPLICANT_PHOTO,
-  CHANGE_APPLICANT_PHOTO_SUCCESS,
-  CHANGE_APPLICANT_PHOTO_FAILURE
+  PUT_APPLICANT_PHOTO,
+  PUT_APPLICANT_PHOTO_SUCCESS,
+  PUT_APPLICANT_PHOTO_FAILURE,
+  GET_APPLICANT_PHOTO,
+  GET_APPLICANT_PHOTO_SUCCESS,
+  GET_APPLICANT_PHOTO_FAILURE
 } from "../../actions/personal";
 import { getMapDataApi } from "../../../../lib/api/kakao";
 import {
   getUserApplicantInfoApi,
   patchUserApplicantInfoApi,
-  changeUserApplicantPhotoApi
+  changeUserApplicantPhotoApi,
+  getUserApplicantPhotoApi
 } from "../../../../lib/api";
 import { tokenRefresh } from "../token";
 
@@ -56,6 +61,7 @@ function* getUserApplicantInfo(action: GetApplicantInfo) {
     );
     yield put({ type: GET_APPLICANT_INFO_SUCCESS, payload: response });
   } catch (e) {
+    console.log(e);
     if (e.response.status === 401) {
       yield tokenRefresh(
         getUserApplicantInfoApi,
@@ -94,21 +100,41 @@ function* changeUserApplicantPhoto(action: ChangeApplicantPhoto) {
   try {
     yield call(
       changeUserApplicantPhotoApi,
-      action.payload.email,
       action.payload.accessToken,
       action.payload.payload
     );
-    yield put({ type: CHANGE_APPLICANT_PHOTO_SUCCESS });
+    yield put({ type: PUT_APPLICANT_PHOTO_SUCCESS });
   } catch (e) {
     if (e.response.status === 401) {
       yield tokenRefresh(
         changeUserApplicantPhotoApi,
         action.payload,
-        CHANGE_APPLICANT_PHOTO_SUCCESS,
-        CHANGE_APPLICANT_PHOTO_FAILURE
+        PUT_APPLICANT_PHOTO_SUCCESS,
+        PUT_APPLICANT_PHOTO_FAILURE
       );
     }
-    yield put({ type: CHANGE_APPLICANT_PHOTO_FAILURE });
+    yield put({ type: PUT_APPLICANT_PHOTO_FAILURE });
+  }
+}
+
+function* getUserApplicantPhoto(action: GetApplicantPhoto) {
+  const { accessToken } = action.payload;
+
+  try {
+    const response: Blob = yield call(getUserApplicantPhotoApi, {
+      accessToken
+    });
+    yield put({ type: GET_APPLICANT_PHOTO_SUCCESS, payload: response });
+  } catch (e) {
+    if (e.response.status === 401) {
+      yield tokenRefresh(
+        getUserApplicantPhotoApi,
+        { accessToken },
+        GET_APPLICANT_PHOTO_SUCCESS,
+        GET_APPLICANT_PHOTO_FAILURE
+      );
+    }
+    yield put({ type: GET_APPLICANT_PHOTO_FAILURE });
   }
 }
 
@@ -122,7 +148,10 @@ function* watchPatchUserApplicantInfo() {
   yield takeLatest(PATCH_APPLICANT_INFO, patchUserApplicantInfo);
 }
 function* watchChangeUserApplicantPhoto() {
-  yield takeLatest(CHANGE_APPLICANT_PHOTO, changeUserApplicantPhoto);
+  yield takeLatest(PUT_APPLICANT_PHOTO, changeUserApplicantPhoto);
+}
+function* watchGetUserApplicantPhoto() {
+  yield takeLatest(GET_APPLICANT_PHOTO, getUserApplicantPhoto);
 }
 
 export default function* personalSaga() {
@@ -130,6 +159,7 @@ export default function* personalSaga() {
     fork(watchGetMapData),
     fork(watchGetUserApplicantInfo),
     fork(watchPatchUserApplicantInfo),
-    fork(watchChangeUserApplicantPhoto)
+    fork(watchChangeUserApplicantPhoto),
+    fork(watchGetUserApplicantPhoto)
   ]);
 }

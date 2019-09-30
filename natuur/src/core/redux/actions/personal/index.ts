@@ -7,9 +7,12 @@ export const GET_APPLICANT_INFO_FAILURE = "GET_APPLICANT_INFO_FAILURE";
 export const PATCH_APPLICANT_INFO = "PATCH_APPLICANT_INFO";
 export const PATCH_APPLICANT_INFO_SUCCESS = "PATCH_APPLICANT_INFO_SUCCESS";
 export const PATCH_APPLICANT_INFO_FAILURE = "PATCH_APPLICANT_INFO_FAILURE";
-export const CHANGE_APPLICANT_PHOTO = "CHANGE_APPLICANT_PHOTO";
-export const CHANGE_APPLICANT_PHOTO_SUCCESS = "CHANGE_APPLICANT_PHOTO_SUCCESS";
-export const CHANGE_APPLICANT_PHOTO_FAILURE = "CHANGE_APPLICANT_PHOTO_FAILURE";
+export const PUT_APPLICANT_PHOTO = "PUT_APPLICANT_PHOTO";
+export const PUT_APPLICANT_PHOTO_SUCCESS = "PUT_APPLICANT_PHOTO_SUCCESS";
+export const PUT_APPLICANT_PHOTO_FAILURE = "PUT_APPLICANT_PHOTO_FAILURE";
+export const GET_APPLICANT_PHOTO = "GET_APPLICANT_PHOTO";
+export const GET_APPLICANT_PHOTO_SUCCESS = "GET_APPLICANT_PHOTO_SUCCESS";
+export const GET_APPLICANT_PHOTO_FAILURE = "GET_APPLICANT_PHOTO_FAILURE";
 
 export const GET_ADDRESS_DATA = "GET_ADDRESS_DATA";
 export const SET_NAME = "SET_NAME";
@@ -85,7 +88,7 @@ export interface PatchApplicantInfoType {
     parent_tel: string;
     applicant_tel: string;
     address: string;
-    post_code: number;
+    post_code: string;
   };
 }
 export interface PatchApplicantInfo {
@@ -97,16 +100,22 @@ export interface PatchApplicantInfo {
 }
 
 export interface ChangeApplicantPhotoType {
-  email: { email: string };
   accessToken: { accessToken: string };
   payload: { file: File };
 }
 export interface ChangeApplicantPhoto {
   type:
-    | typeof CHANGE_APPLICANT_PHOTO
-    | typeof CHANGE_APPLICANT_PHOTO_SUCCESS
-    | typeof CHANGE_APPLICANT_PHOTO_FAILURE;
+    | typeof PUT_APPLICANT_PHOTO
+    | typeof PUT_APPLICANT_PHOTO_SUCCESS
+    | typeof PUT_APPLICANT_PHOTO_FAILURE;
   payload: ChangeApplicantPhotoType;
+}
+export interface GetApplicantPhoto {
+  type:
+    | typeof GET_APPLICANT_PHOTO
+    | typeof GET_APPLICANT_PHOTO_SUCCESS
+    | typeof GET_APPLICANT_PHOTO_FAILURE;
+  payload: { accessToken: string; file?: Blob };
 }
 
 export interface getAddressData {
@@ -175,6 +184,7 @@ export type PersonalActionTypes =
   | SearchAddress
   | GetApplicantInfo
   | ChangeApplicantPhoto
+  | GetApplicantPhoto
   | getAddressData
   | SetName
   | SetGender
@@ -217,7 +227,14 @@ export const changeApplicantPhoto = (
   payload: ChangeApplicantPhotoType
 ): PersonalActionTypes => ({
   payload,
-  type: CHANGE_APPLICANT_PHOTO
+  type: PUT_APPLICANT_PHOTO
+});
+
+export const getApplicantPhoto = (payload: {
+  accessToken: string;
+}): PersonalActionTypes => ({
+  payload,
+  type: GET_APPLICANT_PHOTO
 });
 
 export const getAddressData = (payload: {

@@ -8,9 +8,12 @@ import {
   PATCH_APPLICANT_INFO,
   PATCH_APPLICANT_INFO_SUCCESS,
   PATCH_APPLICANT_INFO_FAILURE,
-  CHANGE_APPLICANT_PHOTO,
-  CHANGE_APPLICANT_PHOTO_SUCCESS,
-  CHANGE_APPLICANT_PHOTO_FAILURE,
+  PUT_APPLICANT_PHOTO,
+  PUT_APPLICANT_PHOTO_SUCCESS,
+  PUT_APPLICANT_PHOTO_FAILURE,
+  GET_APPLICANT_PHOTO,
+  GET_APPLICANT_PHOTO_SUCCESS,
+  GET_APPLICANT_PHOTO_FAILURE,
   GET_ADDRESS_DATA,
   SET_NAME,
   SET_GENDER,
@@ -121,9 +124,9 @@ const PersonalReducer = (
         ...state,
         name: applicantName,
         gender: sex,
-        birthYear: birthDate.split("/")[0],
-        birthMonth: birthDate.split("/")[1],
-        birthDate: birthDate.split("/")[2],
+        birthYear: birthDate ? birthDate.split("-")[0] : "",
+        birthMonth: birthDate ? birthDate.split("-")[1] : "",
+        birthDate: birthDate ? birthDate.split("-")[2] : "",
         userClass: "",
         studentID: "",
         middleSchool: "",
@@ -132,8 +135,8 @@ const PersonalReducer = (
         parentsContact: parentTel,
         userContact: applicantTel,
         zipCode: `${postCode}`,
-        address: address.split("/")[0],
-        detailedAddress: address.split("/")[1],
+        address: address ? address.split("/")[0] : "",
+        detailedAddress: address ? address.split("/")[1] : "",
         imagePath
       };
     }
@@ -154,15 +157,32 @@ const PersonalReducer = (
       return {
         ...state
       };
-    case CHANGE_APPLICANT_PHOTO:
+    case PUT_APPLICANT_PHOTO:
       return {
         ...state
       };
-    case CHANGE_APPLICANT_PHOTO_SUCCESS:
+    case PUT_APPLICANT_PHOTO_SUCCESS:
       return {
         ...state
       };
-    case CHANGE_APPLICANT_PHOTO_FAILURE:
+    case PUT_APPLICANT_PHOTO_FAILURE:
+      return {
+        ...state
+      };
+    case GET_APPLICANT_PHOTO:
+      return {
+        ...state
+      };
+    case GET_APPLICANT_PHOTO_SUCCESS: {
+      const { file } = action.payload;
+      const url = URL.createObjectURL(new Blob([file]));
+
+      return {
+        ...state,
+        file: url
+      };
+    }
+    case GET_APPLICANT_PHOTO_FAILURE:
       return {
         ...state
       };
