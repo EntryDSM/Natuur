@@ -76,7 +76,12 @@ const WriteVerificationNumber: FC<Props> = ({
         <S.Button isSmall onClick={() => reSendVerificationNumber(userEmail)}>
           재전송
         </S.Button>
-        <S.Button isSmall onClick={() => sendApplicantPassword(userVerify)}>
+        <S.Button
+          isSmall
+          onClick={() =>
+            sendApplicantPassword({ email: userEmail, verify: userVerify })
+          }
+        >
           확인
         </S.Button>
       </S.ButtonCover>

@@ -89,7 +89,7 @@ const SetPasswordPopUp: FC<OwnProps> = ({
       )}
       {selectSetPasswordModal(modalCase) === "WriteNewPassword" && (
         <WriteNewPasswordContainer
-          userVerify={userVerify}
+          userEmail={userEmail}
           updatePopUpCase={updatePopUpCase}
           handleKeyPress={handleKeyPress}
         />
