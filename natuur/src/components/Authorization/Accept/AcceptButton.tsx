@@ -15,6 +15,7 @@ interface OwnProps {
   isSignUpError: boolean;
   userEmail: string;
   userPassword: string;
+  isPasswordClose: boolean;
   updateToastr(toastrInformation: object): void;
   signUp({ email, password }: { email: string; password: string }): void;
 }
@@ -37,6 +38,7 @@ const AcceptButton: FC<Props> = ({
   isSuccess,
   isSignUpError,
   isSignUpSuccess,
+  isPasswordClose,
   signUp,
   history,
   userEmail,
@@ -59,8 +61,9 @@ const AcceptButton: FC<Props> = ({
   },                                      []);
 
   useEffect(() => {
-    isSignUpSuccess &&
+    if (isSignUpSuccess) {
       pushMainAndUpdateToastr(createSuccessToastr, history, isSignUpSuccess);
+    }
   },        [isSignUpSuccess]);
 
   return (
@@ -68,7 +71,7 @@ const AcceptButton: FC<Props> = ({
       <ButtonCover
         isDisable={!isSuccess}
         onClick={
-          isSuccess || isSignUpError
+          isSuccess
             ? () => signUp({ email: userEmail, password: userPassword })
             : createFailursToastr
         }
@@ -76,7 +79,7 @@ const AcceptButton: FC<Props> = ({
         as="button"
       >
         <ButtonArrow>〉</ButtonArrow>
-        <ButtonText>생성하기</ButtonText>
+        <ButtonText>{isPasswordClose ? "계정인증" : "생성하기"}</ButtonText>
       </ButtonCover>
     </AcceptButtonComponent>
   );
