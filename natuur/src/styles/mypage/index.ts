@@ -1,4 +1,7 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+
+import textBox from "../../assets/authorization/Textbox.png";
 
 export const MyPageWrapper = styled.div`
   width: 1140px;
@@ -90,4 +93,41 @@ export const PagenationHorizon = styled.div`
   }
 `;
 
-export const PageTitle = styled.p``;
+export const PreviewButton = styled(Link)<{ isSuccess?: boolean }>`
+  all: unset;
+  width: 125px;
+  height: 40px;
+  border-radius: 5px;
+  border: solid 0.5px
+    ${props => (props.isSuccess ? "#5f8a90" : "rgba(112,112,112,0.3)")};
+  background-color: ${props => (props.isSuccess ? "#f7fbfc" : "#fcfcfc")};
+  color: ${props => (props.isSuccess ? "#79c2ca" : "rgba(0,0,0,0.3)")};
+  font-size: 16px;
+  line-height: 40px;
+  text-align: center;
+  margin: 0 20px 0 auto;
+  cursor: ${props => (props.isSuccess ? "pointer" : "default")};
+  position: relative;
+
+  &:hover {
+    ${props => props.isSuccess && "background: #e4f6fb"};
+    ${props =>
+      !props.isSuccess &&
+      `&::after {
+        content: "원서 제출 후 출력이 가능합니다.";
+        background-image: url(${textBox});
+        width: 210px;
+        background-repeat: round;
+        height: 36px;
+        display: flex;
+        justify-content: center;
+        box-sizing: border-box;
+        font-size: 13px;
+        position: absolute;
+        top: -40px;
+        left: -40px;
+        line-height: 26px;
+        color: #000;
+    }`};
+  }
+`;

@@ -56,10 +56,7 @@ const PageList: FC = () => {
 
   return (
     <S.PageListWrapper>
-      <PageItem
-        title="전형구분"
-        isActive={applyType && selectRegion && isGed}
-      />
+      <PageItem title="전형구분" isActive={!!(applyType && selectRegion)} />
       <PagenationHorizon />
 
       <PageItem
