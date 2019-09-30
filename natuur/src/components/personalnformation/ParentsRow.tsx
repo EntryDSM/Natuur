@@ -13,7 +13,7 @@ const ParentsRow: FC<OwnProps> = ({ name, setName }) => {
     <InputRow rowTitle="보호자명">
       <S.Input
         type="text"
-        value={name}
+        value={name || ""}
         onChange={({ target: { value } }) => setName({ name: value })}
         inputCase="parents"
       />

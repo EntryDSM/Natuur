@@ -13,7 +13,7 @@ const NameRow: FC<OwnProps> = ({ name, setName }) => {
     <InputRow rowTitle="이름" isSmall>
       <S.Input
         type="text"
-        value={name}
+        value={name || ""}
         onChange={({ target: { value } }) => setName({ name: value })}
         inputCase="name"
       />

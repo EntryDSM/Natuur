@@ -22,7 +22,7 @@ const GenderRow: FC<OwnProps> = ({ gender, setGender }) => {
             type="radio"
             name="genderRow"
             id={result.CHECK_BOX_CASE}
-            value={result.CHECK_BOX_NAME}
+            value={result.CHECK_BOX_NAME || ""}
             onChange={({ currentTarget: { value } }) =>
               setGender({ gender: value === "여자" ? "FEMALE" : "MALE" })
             }
