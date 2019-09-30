@@ -8,7 +8,7 @@ import {
 import { passwordRegular } from "../../../lib/regularExpressions";
 
 interface OwnProps {
-  userVerify: string;
+  userEmail: string;
   handleKeyPress: (
     { key }: React.KeyboardEvent<HTMLInputElement>,
     handleEvent: () => void
@@ -24,7 +24,7 @@ const WriteNewPassword: FC<Props> = ({
   isError,
   isSuccess,
   isWaiting,
-  userVerify,
+  userEmail,
   resetApplicantPassword,
   updatePopUpCase,
   handleKeyPress,
@@ -48,7 +48,7 @@ const WriteNewPassword: FC<Props> = ({
         newRePassword === newPassword || newRePassword === ""
           ? resetApplicantPassword({
             password: newRePassword,
-            verify: userVerify
+            email: userEmail
           })
           : setIsCheckRegular(true)
     : () => (setIsReWritePassword(true), () => setIsCheckRegular(false));
