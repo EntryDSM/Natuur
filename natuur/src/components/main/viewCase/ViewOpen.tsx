@@ -64,7 +64,8 @@ const ViewOpen: FC<Props> = ({
     />
     <MainButton
       isWaitingPeriod={
-        timeStempChecker < 0 || periodListFactor >= 1 ? true : false
+        // timeStempChecker < 0 || periodListFactor >= 1 ? true : false
+        false
       }
       content={
         timeStempChecker < 0
@@ -74,9 +75,10 @@ const ViewOpen: FC<Props> = ({
           : "로그인 하기"
       }
       clickEvent={
-        timeStempChecker < 0 || periodListFactor >= 1
-          ? null
-          : accessToken !== ""
+        // timeStempChecker < 0 || periodListFactor >= 1
+        //   ? null
+        //   : accessToken !== ""
+        accessToken !== ""
           ? () => history.push("/info-summary")
           : () => loginEvent(getIsUpdatePopUp, updatePopUpCase, "login")
       }

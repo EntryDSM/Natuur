@@ -21,17 +21,6 @@ type Props = ReturnType<typeof mapStateToProps> &
   ReturnType<typeof mapDispatchToProps> &
   OwnProps;
 
-function loginAction(
-  getJWTcredential: (payload: { email: string; password: string }) => void,
-  userEmail: string,
-  userPassword: string,
-  isSuccessLogin: boolean,
-  setIsSuccessLogin: (isSuccessLogin: boolean) => void
-) {
-  getJWTcredential({ email: userEmail, password: userPassword });
-  setIsSuccessLogin(!isSuccessLogin);
-}
-
 const LoginPopUp: FC<Props> = ({
   updatePopUpCase,
   getIsUpdatePopUp,
@@ -46,13 +35,14 @@ const LoginPopUp: FC<Props> = ({
   handleKeyPress
 }) => {
   const [userPassword, setUserPassword] = useState("");
-  const [isSuccessLogin, setIsSuccessLogin] = useState(false);
 
   useEffect(() => {
     if (isSuccess) {
       getIsUpdatePopUp();
     }
-  },        [isSuccessLogin]);
+
+    return () => resetState();
+  },        [isSuccess]);
 
   return (
     <>
@@ -94,13 +84,7 @@ const LoginPopUp: FC<Props> = ({
       <S.ButtonCover isLoginButton>
         <S.Button
           onClick={() =>
-            loginAction(
-              getJWTcredential,
-              userEmail,
-              userPassword,
-              isSuccessLogin,
-              setIsSuccessLogin
-            )
+            getJWTcredential({ email: userEmail, password: userPassword })
           }
         >
           로그인
