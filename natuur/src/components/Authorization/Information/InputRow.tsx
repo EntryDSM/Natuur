@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 
 import * as S from "../../../styles/Authorization";
-import { TextInput, EventButton } from "../../default/Common";
+import { TextInput } from "../../default/Common";
 
 interface Props {
   title?: string;
@@ -13,12 +13,6 @@ interface Props {
   warningMessage?: string;
   isReadOnly?: boolean;
   isWrong?: boolean;
-  isCheckAuthorization?: boolean;
-  isButtonRow?: boolean;
-  buttonWidth?: number;
-  buttonContent?: string;
-  buttonEvent?: () => void;
-  buttonMargin?: number;
   isCertification?: boolean;
   handleChanger?(event: React.ChangeEvent<HTMLInputElement>): void;
 }
@@ -34,12 +28,6 @@ const InputRow: FC<Props> = ({
   warningMessage,
   isReadOnly,
   isWrong,
-  isButtonRow,
-  isCheckAuthorization,
-  buttonWidth,
-  buttonContent,
-  buttonEvent,
-  buttonMargin,
   isCertification
 }) => {
   return (
@@ -56,15 +44,6 @@ const InputRow: FC<Props> = ({
         isReadOnly={isReadOnly}
         isCertification={isCertification}
       />
-      {isButtonRow && (
-        <EventButton
-          isButtonDisable={!isCheckAuthorization}
-          buttonWidth={buttonWidth}
-          buttonContent={buttonContent}
-          buttonEvent={buttonEvent}
-          buttonMargin={buttonMargin}
-        />
-      )}
       {isWarning && (
         <S.InformationInputSpaceWarning isCertification={isCertification}>
           {warningMessage}

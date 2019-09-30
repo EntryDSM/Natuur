@@ -12,11 +12,11 @@ interface Props {
   userEmail: string;
   userPassword: string;
   userPasswordCheck: string;
-  isAccept(text: string): void;
+  setChecked(text: string): void;
 }
 
 const PrivacyCheckBox: FC<Props> = ({
-  isAccept,
+  setChecked,
   checkedState,
   userEmail,
   userPassword,
@@ -32,7 +32,7 @@ const PrivacyCheckBox: FC<Props> = ({
           !userEmail &&
           !userPassword &&
           !userPasswordCheck &&
-          (checkedState ? isAccept("") : isAccept("checked"))
+          (checkedState ? setChecked("") : setChecked("checked"))
         }
         className={checkedState}
       />

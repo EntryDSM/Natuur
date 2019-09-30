@@ -51,9 +51,19 @@ const InformationInputBox: FC<Props> = ({
   const [userVerify, setUserVerify] = useState("");
 
   useEffect(() => {
-    isSendSuccess && setIsCertification(true);
-    isGetSuccess && setIsPasswordClose(false);
-  });
+    if (isSignUpSuccess) {
+      setIsCertification(true);
+    }
+
+    if (isGetSuccess) {
+      setIsPasswordClose(false);
+    }
+
+    return () => {
+      setIsCertification(false);
+      setIsPasswordClose(true);
+    };
+  },        [isSendSuccess, isGetSuccess]);
 
   const handleEmail = useCallback(
     ({ target: { value } }: React.ChangeEvent<HTMLInputElement>): void => {
@@ -92,45 +102,12 @@ const InformationInputBox: FC<Props> = ({
           placeHolder="example@dsmhs.kr"
           name="emailInput"
           type="text"
-          isReadOnly={isSendSuccess}
+          isReadOnly={isCertification}
           isCheckMark={emailRegular.test(userEmail)}
           handleChanger={handleEmail}
-          isButtonRow
-          isCheckAuthorization={emailRegular.test(userEmail)}
-          buttonContent="인증"
-          buttonWidth={78}
-          buttonMargin={12}
-          buttonEvent={() =>
-            emailRegular.test(userEmail) &&
-            sendAuthenticationNumberByEmailApi({ email: userEmail })
-          }
         />
 
         <GradationHorizon />
-
-        {isCertification && (
-          <>
-            <CertificationInputRaw
-              isReadOnly={isGetSuccess}
-              handleChanger={handleVerify}
-              isCheckAuthorization={!!userVerify}
-              userEmail={userEmail}
-              userVerify={userVerify}
-              isPasswordClose={isPasswordClose}
-              isSendSuccess={isSendSuccess}
-              isGetSuccess={isGetSuccess}
-              isSendError={isSendError}
-              isGetError={isGetError}
-              isSendWaiting={isSendWaiting}
-              getRegisterVerifyNumber={getRegisterVerifyNumber}
-              sendAuthenticationNumberByEmailApi={
-                sendAuthenticationNumberByEmailApi
-              }
-            />
-
-            <GradationHorizon />
-          </>
-        )}
 
         {/* 비밀번호 입력란 */}
         <InputRow
@@ -139,8 +116,7 @@ const InformationInputBox: FC<Props> = ({
           name="passwordInput"
           type="password"
           isWarning
-          isReadOnly={isPasswordClose}
-          isCertification={isPasswordClose}
+          isReadOnly={isCertification}
           warningMessage="*영문(대소문자 구분),숫자 포함 8자리 이상 특수기호 가능"
           isCheckMark={passwordRegular.test(userPassword)}
           handleChanger={handlePassword}
@@ -154,14 +130,35 @@ const InformationInputBox: FC<Props> = ({
           placeHolder="••••••••"
           name="passwordCheckInput"
           type="password"
-          isReadOnly={isPasswordClose}
-          isCertification={isPasswordClose}
+          isReadOnly={isCertification}
           isCheckMark={
             !!(userPassword === userPasswordCheck && userPasswordCheck)
           }
           handleChanger={handlePasswordCheck}
           isWrong={!!(userPassword !== userPasswordCheck && userPassword)}
         />
+        {isCertification && (
+          <>
+            <CertificationInputRaw
+              isReadOnly={isGetSuccess}
+              handleChanger={handleVerify}
+              isCheckAuthorization={!!userVerify}
+              userEmail={userEmail}
+              userPassword={userPassword}
+              userVerify={userVerify}
+              isPasswordClose={isPasswordClose}
+              isSendSuccess={isSendSuccess}
+              isGetSuccess={isGetSuccess}
+              isSendError={isSendError}
+              isGetError={isGetError}
+              isSendWaiting={isSendWaiting}
+              getRegisterVerifyNumber={getRegisterVerifyNumber}
+              signUp={signUp}
+            />
+
+            <GradationHorizon />
+          </>
+        )}
       </div>
       <AcceptButton
         updateToastr={updateToastr}
@@ -175,6 +172,7 @@ const InformationInputBox: FC<Props> = ({
         isSignUpError={isSignUpError}
         userEmail={userEmail}
         userPassword={userPassword}
+        isPasswordClose={isPasswordClose}
       />
     </InfomationInputBoxCover>
   );
