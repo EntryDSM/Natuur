@@ -13,7 +13,8 @@ import {
   MyPage,
   Preview,
   SignUp,
-  PersonalInformation
+  PersonalInformation,
+  Print
 } from "./container";
 import ConnectSelectCategory from "./container/Info/ConnectSelectCategory";
 import ConnectGrade from "./container/Grade/ConnectGrade";
@@ -85,6 +86,11 @@ const App: FC<Props> = ({ accessToken, refreshToken, email, logOut }) => {
             />
             <Route path="/grade" render={() => <ConnectGrade />} exact />
             <Route path="/mypage" render={() => <MyPage />} exact />
+            <Route
+              path="/print"
+              render={() => <Print updateAppClass={setAppClass} />}
+              exact
+            />
             <Route component={ErrorPage} />
           </Switch>
         </ScrollToTop>
