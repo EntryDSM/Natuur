@@ -18,7 +18,7 @@ const EventButton: FC<OwnProps> = ({
   buttonMargin
 }) => (
   <S.Button
-    onClick={buttonEvent}
+    onClick={!isButtonDisable ? buttonEvent : null}
     width={buttonWidth}
     isDisable={isButtonDisable}
     marginLeft={buttonMargin}
