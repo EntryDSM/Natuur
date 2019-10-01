@@ -24,8 +24,6 @@ const Info: FC<Props> = ({
   remarks,
   accessToken,
   isSuccess,
-  getClassificationInfo,
-  patchClassificationInfo,
   setIsGed,
   setApplyType,
   setSelectRegion,
@@ -47,7 +45,11 @@ const Info: FC<Props> = ({
   return (
     <div>
       <S.InfoWrapper>
-        <HeadLine subText="2020 입학원서 작성" title="전형 구분 선택" />
+        <HeadLine
+          isClassification
+          subText="2020 입학원서 작성"
+          title="전형 구분 선택"
+        />
         <SelectCategory
           isGed={isGed}
           applyType={applyType}
@@ -57,7 +59,7 @@ const Info: FC<Props> = ({
           remarks={remarks}
           accessToken={accessToken}
           isSuccess={isSuccess}
-          getClassificationInfo={getClassificationInfo}
+          getClassificationInfo={() => console.log("바꿔")}
           setIsGed={setIsGed}
           setApplyType={setApplyType}
           setSelectRegion={setSelectRegion}
@@ -66,18 +68,6 @@ const Info: FC<Props> = ({
           setRemark={setRemark}
         />
         <Pagination
-          connectServer={() =>
-            patchClassificationInfo({
-              accessToken,
-              is_ged: isGed,
-              apply_type: applyType.split("/")[0],
-              social_detail_type: applyType.split("/")[1],
-              is_daejeon: selectRegion === "대전",
-              is_graduated: graduationClassification === "졸업자",
-              graduated_year: graduationYear ? graduationYear : undefined,
-              additional_type: remarks ? remarks : undefined
-            })
-          }
           prevRouterPath="/"
           nextRouterPath="/personal"
           AcceptPagination="info"

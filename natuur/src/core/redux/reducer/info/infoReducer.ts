@@ -1,10 +1,4 @@
 import {
-  GET_CLASSIFICATION,
-  GET_CLASSIFICATION_SUCCESS,
-  GET_CLASSIFICATION_FAILURE,
-  PATCH_CLASSIFICATION,
-  PATCH_CLASSIFICATION_SUCCESS,
-  PATCH_CLASSIFICATION_FAILURE,
   InfoActionTypes,
   SET_IS_GED,
   SET_APPLY_TYPE,
@@ -36,49 +30,6 @@ const infoReducer = (
   action: InfoActionTypes
 ): RootState => {
   switch (action.type) {
-    case GET_CLASSIFICATION: {
-      return {
-        ...state,
-        isSuccess: false
-      };
-    }
-    case GET_CLASSIFICATION_SUCCESS: {
-      const {
-        is_ged,
-        apply_type,
-        social_detail_type,
-        is_daejeon,
-        is_graduated,
-        graduated_year,
-        additional_type
-      } = action.payload;
-
-      return {
-        ...state,
-        isSuccess: true,
-        isGed: is_ged,
-        applyType: `${apply_type}${social_detail_type !== undefined &&
-          "/" + social_detail_type}`,
-        selectRegion: `${is_daejeon ? "대전" : "전국"}`,
-        graduationClassification:
-          is_graduated !== undefined &&
-          `${is_graduated ? "졸업자" : "졸업 예정자"}`,
-        graduationYear: graduated_year,
-        remarks: additional_type
-      };
-    }
-    case GET_CLASSIFICATION_FAILURE: {
-      return state;
-    }
-    case PATCH_CLASSIFICATION: {
-      return state;
-    }
-    case PATCH_CLASSIFICATION_SUCCESS: {
-      return state;
-    }
-    case PATCH_CLASSIFICATION_FAILURE: {
-      return state;
-    }
     case SET_IS_GED: {
       return {
         ...state,
