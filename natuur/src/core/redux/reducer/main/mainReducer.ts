@@ -1,21 +1,15 @@
 import {
   MainActionTypes,
-  UserApplicantStatusApiType,
-  UserApplicantInfoApiType,
   GET_USER_APPLICANT_STATUS,
   GET_USER_APPLICANT_STATUS_FAILURE,
   GET_USER_APPLICANT_STATUS_SUCCESS,
-  GET_USER_APPLICANT_INFOMATION,
-  GET_USER_APPLICANT_INFOMATION_SUCCESS,
-  GET_USER_APPLICANT_INFOMATION_FAILURE,
   PATCH_FIANL_SUBMIT,
   PATCH_FIANL_SUBMIT_FAILURE,
   PATCH_FIANL_SUBMIT_SUCCESS
 } from "../../actions/main";
+import { UserApplicantStatusApiType } from "../../../../lib/api/apiType";
 
-export interface RootState
-  extends UserApplicantStatusApiType,
-    UserApplicantInfoApiType {
+export interface RootState extends UserApplicantStatusApiType {
   isSuccess?: boolean;
   isError?: boolean;
   isWaiting?: boolean;
@@ -85,25 +79,6 @@ const mainReducer = (
         isError: true,
         isSuccess: false,
         isWaiting: false
-      };
-    }
-    case GET_USER_APPLICANT_INFOMATION: {
-      return {
-        ...state
-      };
-    }
-    case GET_USER_APPLICANT_INFOMATION_SUCCESS: {
-      const { email } = action.payload;
-      return {
-        ...state,
-        isWaiting: true,
-        email
-      };
-    }
-    case GET_USER_APPLICANT_INFOMATION_FAILURE: {
-      return {
-        ...state,
-        isWaiting: true
       };
     }
     case PATCH_FIANL_SUBMIT: {
