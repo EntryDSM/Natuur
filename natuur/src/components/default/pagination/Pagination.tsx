@@ -1,43 +1,44 @@
-import React, { FC } from "react";
+import React, { FC, memo, useCallback } from "react";
 
 import * as S from "../../../styles/default/pagination";
 import PaginationButton from "./PaginationButton";
 import { prevArrow, nextArrow } from "../../../assets/common";
 
-const Prev: FC = () => (
+const Prev: FC = memo(() => (
   <>
     <S.ButtonArrow src={prevArrow} alt="이전_화살표" />
     <S.ButtonContent>이전</S.ButtonContent>
   </>
-);
-const Next: FC = () => (
+));
+const Next: FC = memo(() => (
   <>
     <S.ButtonContent>다음</S.ButtonContent>
     <S.ButtonArrow src={nextArrow} alt="다음_화살표" />
   </>
-);
-
-const allowedPageCheckers = (
-  isAccept: boolean,
-  connectServer: () => void,
-  event: React.BaseSyntheticEvent
-) => {
-  return isAccept ? event.preventDefault() : connectServer();
-};
+));
 
 interface OwnProps {
-  connectServer: () => void;
   prevRouterPath: string;
   nextRouterPath: string;
   AcceptPagination: "info" | "personal" | "grade" | "intro";
 }
 
 const Pagination: FC<OwnProps> = ({
-  connectServer,
   prevRouterPath,
   nextRouterPath,
   AcceptPagination
 }) => {
+  const connectServer = useCallback(() => {
+    console.log("바꿔");
+  },                                []);
+
+  const allowedPageCheckers = useCallback(
+    (isAccept: boolean, event: React.BaseSyntheticEvent) => {
+      return isAccept ? event.preventDefault() : connectServer();
+    },
+    []
+  );
+
   return (
     <S.PaginationWrapper>
       <PaginationButton
@@ -50,44 +51,28 @@ const Pagination: FC<OwnProps> = ({
       <S.PaginationButtonWrapper>
         <S.PaginationButton
           onClick={event =>
-            allowedPageCheckers(
-              AcceptPagination === "info",
-              connectServer,
-              event
-            )
+            allowedPageCheckers(AcceptPagination === "info", event)
           }
           to="/info-summary"
           actived={AcceptPagination === "info" ? "isActive" : null}
         />
         <S.PaginationButton
           onClick={event =>
-            allowedPageCheckers(
-              AcceptPagination === "personal",
-              connectServer,
-              event
-            )
+            allowedPageCheckers(AcceptPagination === "personal", event)
           }
           to="/personal"
           actived={AcceptPagination === "personal" ? "isActive" : null}
         />
         <S.PaginationButton
           onClick={event =>
-            allowedPageCheckers(
-              AcceptPagination === "grade",
-              connectServer,
-              event
-            )
+            allowedPageCheckers(AcceptPagination === "grade", event)
           }
           to="/grade"
           actived={AcceptPagination === "grade" ? "isActive" : null}
         />
         <S.PaginationButton
           onClick={event =>
-            allowedPageCheckers(
-              AcceptPagination === "intro",
-              connectServer,
-              event
-            )
+            allowedPageCheckers(AcceptPagination === "intro", event)
           }
           to="/intro"
           actived={AcceptPagination === "intro" ? "isActive" : null}
