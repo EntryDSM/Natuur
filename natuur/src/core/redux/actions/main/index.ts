@@ -19,7 +19,6 @@ export interface UserApplicantStatus {
     | typeof GET_USER_APPLICANT_STATUS_FAILURE;
   payload: UserApplicantStatusType;
 }
-}
 
 export interface PatchFinalSubmit {
   type:
