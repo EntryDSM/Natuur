@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState, useEffect, useRef } from "react";
 import { hot } from "react-hot-loader/root";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
@@ -6,7 +6,6 @@ import { connect } from "react-redux";
 import {
   Classification,
   Footer,
-  Grade,
   Header,
   Introduce,
   Main,
@@ -24,6 +23,7 @@ import ScrollToTop from "./components/default/ScrollToTop";
 import GlobalStyle from "./styles/GlobalStyle";
 import { AppState } from "./core/redux/store/store";
 import { logOut } from "./core/redux/actions/user";
+import { getApplicationDocument } from "./core/redux/actions/applicantDocument";
 
 const mapStaetToProps = (state: AppState) => ({
   accessToken: state.userReducer.accessToken,
@@ -32,14 +32,31 @@ const mapStaetToProps = (state: AppState) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  logOut: (payload: { refreshToken: string }) => dispatch(logOut(payload))
+  logOut: (payload: { refreshToken: string }) => dispatch(logOut(payload)),
+  getApplicationDocument: (payload: { accessToken: string }) =>
+    dispatch(getApplicationDocument(payload))
 });
 
 type Props = ReturnType<typeof mapStaetToProps> &
   ReturnType<typeof mapDispatchToProps>;
 
-const App: FC<Props> = ({ accessToken, refreshToken, email, logOut }) => {
+const App: FC<Props> = ({
+  accessToken,
+  refreshToken,
+  email,
+  logOut,
+  getApplicationDocument
+}) => {
+  const didMountRef = useRef(false);
   const [appClass, setAppClass] = useState("");
+
+  useEffect(() => {
+    if (!didMountRef.current) {
+      didMountRef.current = true;
+
+      getApplicationDocument({ accessToken });
+    }
+  },        []);
 
   return (
     <BrowserRouter>
