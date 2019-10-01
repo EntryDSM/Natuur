@@ -3,9 +3,9 @@ const nowYear = dateObj.getFullYear();
 const nowMonth = dateObj.getMonth() + 1;
 const nowDate = dateObj.getDate();
 
-function formatDate(
-  nowMonth: number,
-  nowDate: number
+export function formatDate(
+  nowMonth?: number,
+  nowDate?: number
 ): { stringMonth: string; stringDate: string } {
   let stringMonth = "";
   let stringDate = "";
