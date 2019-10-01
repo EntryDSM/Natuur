@@ -3,10 +3,6 @@ import { connect } from "react-redux";
 import Info from "./Info";
 import { AppState } from "../../core/redux/store/store";
 import {
-  getClassificationInfo,
-  patchClassificationInfo,
-  GetClassificationInfoType,
-  PatchClassificationInfoType,
   setIsGed,
   setApplyType,
   setSelectRegion,
@@ -27,10 +23,6 @@ export const mapStateToProps = (state: AppState) => ({
 });
 
 export const mapDispatchToProps = dispatch => ({
-  getClassificationInfo: (payload: GetClassificationInfoType) =>
-    dispatch(getClassificationInfo(payload)),
-  patchClassificationInfo: (payload: PatchClassificationInfoType) =>
-    dispatch(patchClassificationInfo(payload)),
   setIsGed: (payload: boolean) => dispatch(setIsGed(payload)),
   setApplyType: (payload: string) => dispatch(setApplyType(payload)),
   setSelectRegion: (payload: string) => dispatch(setSelectRegion(payload)),

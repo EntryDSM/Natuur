@@ -3,15 +3,6 @@ import { connect } from "react-redux";
 import Grade from "./Grade";
 import { AppState } from "../../core/redux/store/store";
 import {
-  DiligenceType,
-  GedGradeType,
-  GradeType,
-  getDiligence,
-  patchDiligence,
-  getGedGrade,
-  patchGedGrade,
-  getGrade,
-  patchGrade,
   setVolunteer,
   setAbsent,
   setEarlyLeave,
@@ -45,15 +36,6 @@ export const mapStateToProps = (state: AppState) => ({
 });
 
 export const mapDispatchToProps = dispatch => ({
-  getDiligence: ({ accessToken }: { accessToken: string }) =>
-    dispatch(getDiligence({ accessToken })),
-  patchDiligence: (payload: DiligenceType) => dispatch(patchDiligence(payload)),
-  getGedGrade: ({ accessToken }: { accessToken: string }) =>
-    dispatch(getGedGrade({ accessToken })),
-  patchGedGrade: (payload: GedGradeType) => dispatch(patchGedGrade(payload)),
-  getGrade: ({ accessToken }: { accessToken: string }) =>
-    dispatch(getGrade({ accessToken })),
-  patchGrade: (payload: GradeType) => dispatch(patchGrade(payload)),
   setVolunteer: (payload: { volunteer: number }) =>
     dispatch(setVolunteer(payload)),
   setAbsent: (payload: { absent: number }) => dispatch(setAbsent(payload)),

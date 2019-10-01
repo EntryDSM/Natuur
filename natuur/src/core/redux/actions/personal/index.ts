@@ -1,12 +1,6 @@
 export const SEARCH_ADDRESS = "SEARCH_ADDRESS";
 export const SEARCH_ADDRESS_SUCCESS = "SEARCH_ADDRESS_SUCCESS";
 export const SEARCH_ADDRESS_FAILURE = "SEARCH_ADDRESS_FAILURE";
-export const GET_APPLICANT_INFO = "GET_APPLICANT_INFO";
-export const GET_APPLICANT_INFO_SUCCESS = "GET_APPLICANT_INFO_SUCCESS";
-export const GET_APPLICANT_INFO_FAILURE = "GET_APPLICANT_INFO_FAILURE";
-export const PATCH_APPLICANT_INFO = "PATCH_APPLICANT_INFO";
-export const PATCH_APPLICANT_INFO_SUCCESS = "PATCH_APPLICANT_INFO_SUCCESS";
-export const PATCH_APPLICANT_INFO_FAILURE = "PATCH_APPLICANT_INFO_FAILURE";
 export const PUT_APPLICANT_PHOTO = "PUT_APPLICANT_PHOTO";
 export const PUT_APPLICANT_PHOTO_SUCCESS = "PUT_APPLICANT_PHOTO_SUCCESS";
 export const PUT_APPLICANT_PHOTO_FAILURE = "PUT_APPLICANT_PHOTO_FAILURE";
@@ -51,52 +45,6 @@ export interface SearchAddress {
     | typeof SEARCH_ADDRESS_SUCCESS
     | typeof SEARCH_ADDRESS_FAILURE;
   payload: SearchAddressType;
-}
-
-export interface GetApplicantInfoApiType {
-  email?: string;
-  applicantName?: string;
-  sex?: string;
-  birthDate?: string;
-  parentName?: string;
-  parentTel?: string;
-  applicantTel?: string;
-  address?: string;
-  postCode?: number;
-  imagePath?: string;
-}
-export interface GetApplicantInfoType extends GetApplicantInfoApiType {
-  email: string;
-  accessToken: string;
-}
-export interface GetApplicantInfo {
-  type:
-    | typeof GET_APPLICANT_INFO
-    | typeof GET_APPLICANT_INFO_SUCCESS
-    | typeof GET_APPLICANT_INFO_FAILURE;
-  payload: GetApplicantInfoType;
-}
-
-export interface PatchApplicantInfoType {
-  email: { email: string };
-  accessToken: { accessToken: string };
-  payload: {
-    applicant_name: string;
-    sex: string;
-    birth_date: string;
-    parent_name: string;
-    parent_tel: string;
-    applicant_tel: string;
-    address: string;
-    post_code: string;
-  };
-}
-export interface PatchApplicantInfo {
-  type:
-    | typeof PATCH_APPLICANT_INFO
-    | typeof PATCH_APPLICANT_INFO_SUCCESS
-    | typeof PATCH_APPLICANT_INFO_FAILURE;
-  payload: PatchApplicantInfoType;
 }
 
 export interface ChangeApplicantPhotoType {
@@ -180,9 +128,7 @@ export interface SetFile {
 }
 
 export type PersonalActionTypes =
-  | PatchApplicantInfo
   | SearchAddress
-  | GetApplicantInfo
   | ChangeApplicantPhoto
   | GetApplicantPhoto
   | getAddressData
@@ -207,20 +153,6 @@ export const searchAddress = (
 ): PersonalActionTypes => ({
   payload,
   type: SEARCH_ADDRESS
-});
-
-export const getApplicantInfo = (
-  payload: GetApplicantInfoType
-): PersonalActionTypes => ({
-  payload,
-  type: GET_APPLICANT_INFO
-});
-
-export const patchApplicantInfo = (
-  payload: PatchApplicantInfoType
-): PersonalActionTypes => ({
-  payload,
-  type: PATCH_APPLICANT_INFO
 });
 
 export const changeApplicantPhoto = (

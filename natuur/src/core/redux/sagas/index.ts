@@ -5,9 +5,6 @@ import verification from "./verification";
 import main from "./main";
 import authorization from "./authorization";
 import personal from "./personal";
-import info from "./info";
-import intro from "./intro";
-import grade from "./grade";
 import tokenSaga from "./token";
 
 export default function* rootSaga() {
@@ -17,9 +14,6 @@ export default function* rootSaga() {
     call(main),
     call(authorization),
     call(personal),
-    call(info),
-    call(intro),
-    call(grade),
     call(tokenSaga)
   ]);
 }

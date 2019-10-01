@@ -4,23 +4,17 @@ import {
   GET_USER_APPLICANT_STATUS,
   GET_USER_APPLICANT_STATUS_SUCCESS,
   GET_USER_APPLICANT_STATUS_FAILURE,
-  GET_USER_APPLICANT_INFOMATION,
-  GET_USER_APPLICANT_INFOMATION_SUCCESS,
-  GET_USER_APPLICANT_INFOMATION_FAILURE,
   PATCH_FIANL_SUBMIT,
   PATCH_FIANL_SUBMIT_FAILURE,
   PATCH_FIANL_SUBMIT_SUCCESS,
   UserApplicantStatus,
-  UserApplicantInfo,
-  PatchFinalSubmit,
-  UserApplicantStatusApiType,
-  UserApplicantInfoApiType
+  PatchFinalSubmit
 } from "../../actions/main";
 import {
   getUserApplicationStatusApi,
-  getUserApplicantInfoApi,
   patchFianlSubmitApi
 } from "../../../../lib/api";
+import { UserApplicantStatusApiType } from "../../../../lib/api/apiType";
 import { tokenRefresh } from "../token";
 
 function* getUserApplicationStatus(action: UserApplicantStatus) {
@@ -45,33 +39,6 @@ function* getUserApplicationStatus(action: UserApplicantStatus) {
 
 function* watchGetUserApplicantStatus() {
   yield takeLatest(GET_USER_APPLICANT_STATUS, getUserApplicationStatus);
-}
-
-function* getUserApplicantInfo(action: UserApplicantInfo) {
-  try {
-    const response: UserApplicantInfoApiType = yield call(
-      getUserApplicantInfoApi,
-      action.payload
-    );
-    yield put({
-      type: GET_USER_APPLICANT_INFOMATION_SUCCESS,
-      payload: response
-    });
-  } catch (e) {
-    if (e.response.status === 401) {
-      yield tokenRefresh(
-        getUserApplicantInfoApi,
-        action.payload,
-        GET_USER_APPLICANT_INFOMATION_SUCCESS,
-        GET_USER_APPLICANT_INFOMATION_FAILURE
-      );
-    }
-    yield put({ type: GET_USER_APPLICANT_INFOMATION_FAILURE });
-  }
-}
-
-function* watchGetUserApplicantInfo() {
-  yield takeLatest(GET_USER_APPLICANT_INFOMATION, getUserApplicantInfo);
 }
 
 function* patchFinalSubmit(action: PatchFinalSubmit) {
@@ -99,9 +66,5 @@ function* watchPatchFinalSubmit() {
 }
 
 export default function* mainSaga() {
-  yield all([
-    fork(watchGetUserApplicantStatus),
-    fork(watchGetUserApplicantInfo),
-    fork(watchPatchFinalSubmit)
-  ]);
+  yield all([fork(watchGetUserApplicantStatus), fork(watchPatchFinalSubmit)]);
 }
