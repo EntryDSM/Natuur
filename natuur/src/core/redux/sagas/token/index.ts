@@ -12,7 +12,7 @@ function* requsetApi(api, payload, successType, failureType) {
     const response = yield call(api, payload);
     yield put({ type: successType, payload: response });
   } catch (e) {
-    yield put({ type: failureType });
+    yield put({ type: failureType, payload: e.response.status });
   }
 }
 
