@@ -22,20 +22,7 @@ const initialStae: RootState = {
   is_final_submit: false,
   is_passed_final_apply: false,
   receipt_code: 0,
-  exam_code: 0,
-  email: "",
-  applicantName: "",
-  sex: "",
-  birthDate: "",
-  parentName: "",
-  parentTel: "",
-  applicantTel: "",
-  address: "",
-  postCode: 0,
-  imagePath: "",
-  isSuccess: false,
-  isError: false,
-  isWaiting: false
+  exam_code: 0
 };
 
 const mainReducer = (

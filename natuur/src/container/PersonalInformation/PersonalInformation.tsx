@@ -19,7 +19,7 @@ import Pagination from "../../components/default/pagination/Pagination";
 const mapStateToProps = (state: AppState) => ({
   addressDocuments: state.PersonalReducer.addressData,
   isSuccess: state.PersonalReducer.isSuccess,
-  email: state.mainReducer.email,
+  email: state.userReducer.userEmail,
   accessToken: state.userReducer.accessToken,
   name: state.PersonalReducer.name,
   gender: state.PersonalReducer.gender,
