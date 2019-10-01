@@ -29,15 +29,15 @@ const Wrapper: FC<OwnProps> = ({
 }) => {
   const debouncedText = useDebounce(value, 3500);
 
-  useEffect(() => {
-    if (debouncedText || !value) {
-      if (title === "자기소개서") {
-        patchDocument({ accessToken, self_introduction_text: debouncedText });
-      } else {
-        patchDocument({ accessToken, study_plan_text: debouncedText });
-      }
-    }
-  },        [debouncedText]);
+  // useEffect(() => {
+  //   if (debouncedText || !value) {
+  //     if (title === "자기소개서") {
+  //       patchDocument({ accessToken, self_introduction_text: debouncedText });
+  //     } else {
+  //       patchDocument({ accessToken, study_plan_text: debouncedText });
+  //     }
+  //   }
+  // },        [debouncedText]);
 
   return (
     <S.WrapperCover isLast={isLast}>
