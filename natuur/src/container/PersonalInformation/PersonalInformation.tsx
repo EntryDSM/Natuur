@@ -10,10 +10,6 @@ import {
   searchAddress,
   getAddressData,
   setMiddleSchool,
-  getApplicantInfo,
-  GetApplicantInfoType,
-  patchApplicantInfo,
-  PatchApplicantInfoType,
   changeApplicantPhoto,
   ChangeApplicantPhotoType,
   getApplicantPhoto
@@ -45,10 +41,6 @@ const mapStateToProps = (state: AppState) => ({
 const mapDispatchToProps = dispatch => ({
   searchAddress: ({ query }: { query: string }) =>
     dispatch(searchAddress({ query })),
-  getApplicantInfo: (payload: GetApplicantInfoType) =>
-    dispatch(getApplicantInfo(payload)),
-  patchApplicantInfo: (payload: PatchApplicantInfoType) =>
-    dispatch(patchApplicantInfo(payload)),
   changeApplicantPhoto: (payload: ChangeApplicantPhotoType) =>
     dispatch(changeApplicantPhoto(payload)),
   getAddressData: (payload: { zipCode: string; address: string }) =>
@@ -67,8 +59,6 @@ type Props = ReturnType<typeof mapStateToProps> &
 const PersonalInformation: FC<Props> = ({
   addressDocuments,
   searchAddress,
-  getApplicantInfo,
-  patchApplicantInfo,
   changeApplicantPhoto,
   getApplicantPhoto,
   getAddressData,
@@ -100,7 +90,6 @@ const PersonalInformation: FC<Props> = ({
     if (!didMountRef.current) {
       didMountRef.current = true;
 
-      getApplicantInfo({ email, accessToken });
       getApplicantPhoto({ accessToken });
     }
   },        []);
@@ -143,24 +132,6 @@ const PersonalInformation: FC<Props> = ({
           changeApplicantPhoto={changeApplicantPhoto}
         />
         <Pagination
-          connectServer={() =>
-            patchApplicantInfo({
-              email: { email },
-              accessToken: { accessToken },
-              payload: {
-                applicant_name: name,
-                sex: gender,
-                birth_date: !!(birthYear && birthMonth && birthDate)
-                  ? `${birthYear}-${birthMonth}-${birthDate}`
-                  : undefined,
-                parent_name: parentsName,
-                parent_tel: parentsContact,
-                applicant_tel: userContact,
-                address: address && `${address}/${detailedAddress}`,
-                post_code: zipCode !== "undefined" ? zipCode : undefined
-              }
-            })
-          }
           prevRouterPath="/info-summary"
           nextRouterPath="/grade"
           AcceptPagination="personal"

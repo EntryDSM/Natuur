@@ -2,12 +2,6 @@ import {
   SEARCH_ADDRESS,
   SEARCH_ADDRESS_SUCCESS,
   SEARCH_ADDRESS_FAILURE,
-  GET_APPLICANT_INFO,
-  GET_APPLICANT_INFO_SUCCESS,
-  GET_APPLICANT_INFO_FAILURE,
-  PATCH_APPLICANT_INFO,
-  PATCH_APPLICANT_INFO_SUCCESS,
-  PATCH_APPLICANT_INFO_FAILURE,
   PUT_APPLICANT_PHOTO,
   PUT_APPLICANT_PHOTO_SUCCESS,
   PUT_APPLICANT_PHOTO_FAILURE,
@@ -101,59 +95,6 @@ const PersonalReducer = (
         addressData: action.payload.documents
       };
     case SEARCH_ADDRESS_FAILURE:
-      return {
-        ...state
-      };
-    case GET_APPLICANT_INFO:
-      return {
-        ...state
-      };
-    case GET_APPLICANT_INFO_SUCCESS: {
-      const {
-        applicantName,
-        sex,
-        birthDate,
-        parentName,
-        parentTel,
-        applicantTel,
-        address,
-        postCode,
-        imagePath
-      } = action.payload;
-      return {
-        ...state,
-        name: applicantName,
-        gender: sex,
-        birthYear: birthDate ? birthDate.split("-")[0] : "",
-        birthMonth: birthDate ? birthDate.split("-")[1] : "",
-        birthDate: birthDate ? birthDate.split("-")[2] : "",
-        userClass: "",
-        studentID: "",
-        middleSchool: "",
-        parentsName: parentName,
-        schoolContact: "",
-        parentsContact: parentTel,
-        userContact: applicantTel,
-        zipCode: `${postCode}`,
-        address: address ? address.split("/")[0] : "",
-        detailedAddress: address ? address.split("/")[1] : "",
-        imagePath
-      };
-    }
-
-    case GET_APPLICANT_INFO_FAILURE:
-      return {
-        ...state
-      };
-    case PATCH_APPLICANT_INFO:
-      return {
-        ...state
-      };
-    case PATCH_APPLICANT_INFO_SUCCESS:
-      return {
-        ...state
-      };
-    case PATCH_APPLICANT_INFO_FAILURE:
       return {
         ...state
       };
