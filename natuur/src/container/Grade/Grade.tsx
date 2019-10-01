@@ -8,41 +8,7 @@ import ScoreTable from "../../components/Grade/scoreTable";
 import GedScoreTable from "../../components/Grade/GedScoreTable";
 import Pagination from "../../components/default/pagination/Pagination";
 import { mapStateToProps, mapDispatchToProps } from "./ConnectGrade";
-import { DiligenceType, GradeType } from "../../core/redux/actions/grade";
 import { subjectList } from "../../lib/utils/subjectList";
-
-const patchGradeData = async (
-  accessToken: string,
-  subjectScores: Array<{
-    semester: number;
-    subject:
-      | "korean"
-      | "math"
-      | "social"
-      | "science"
-      | "english"
-      | "history"
-      | "tech_home";
-    score: string;
-  }>,
-  volunteer: number,
-  absent: number,
-  earlyLeave: number,
-  tardy: number,
-  missingClass: number,
-  patchDiligence: (payload: DiligenceType) => void,
-  patchGrade: (payload: GradeType) => void
-) => {
-  await patchDiligence({
-    accessToken,
-    volunteer_time: volunteer,
-    full_cut_count: absent,
-    period_cut_count: earlyLeave,
-    late_count: tardy,
-    early_leave_count: missingClass
-  });
-  await patchGrade({ accessToken, subject_scores: subjectScores });
-};
 
 type Props = ReturnType<typeof mapStateToProps> &
   ReturnType<typeof mapDispatchToProps>;
@@ -63,12 +29,6 @@ const Grade: FC<Props> = ({
   isThirdGradeSmester1,
   isGed,
   graduationClassification,
-  getDiligence,
-  patchDiligence,
-  getGedGrade,
-  patchGedGrade,
-  getGrade,
-  patchGrade,
   setVolunteer,
   setAbsent,
   setEarlyLeave,
@@ -116,7 +76,7 @@ const Grade: FC<Props> = ({
         {isGed ? (
           <GedScoreTable
             accessToken={accessToken}
-            getGedGrade={getGedGrade}
+            getGedGrade={() => console.log("바꿔")}
             setGedAverageScore={setGedAverageScore}
           />
         ) : (
@@ -133,7 +93,7 @@ const Grade: FC<Props> = ({
               missingClass={missingClass}
               setMissingClass={setMissingClass}
               accessToken={accessToken}
-              getDiligence={getDiligence}
+              getDiligence={() => console.log("바꿔")}
             />
             <MissedSemester
               isFirstGradeSmester1={isFirstGradeSmester1}
@@ -152,33 +112,13 @@ const Grade: FC<Props> = ({
             <ScoreTable
               accessToken={accessToken}
               graduationClassification={graduationClassification}
-              getGrade={getGrade}
+              getGrade={() => console.log("바꿔")}
               setSubjectScores={setSubjectScores}
               subjectScores={subjectScores}
             />
           </>
         )}
         <Pagination
-          connectServer={
-            isGed
-              ? () =>
-                  patchGedGrade({
-                    accessToken,
-                    ged_average_score: gedAverageScore
-                  })
-              : () =>
-                  patchGradeData(
-                    accessToken,
-                    subjectScores,
-                    volunteer,
-                    absent,
-                    earlyLeave,
-                    tardy,
-                    missingClass,
-                    patchDiligence,
-                    patchGrade
-                  )
-          }
           prevRouterPath="/personal"
           nextRouterPath="/intro"
           AcceptPagination="grade"
