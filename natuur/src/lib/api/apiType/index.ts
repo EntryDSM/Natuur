@@ -1,10 +1,6 @@
-type Grade<TLength extends 5 | 6> =
-  | "A"
-  | "B"
-  | "C"
-  | "D"
-  | "E"
-  | "X" & { length: TLength };
+type Grade = "A" | "B" | "C" | "D" | "E" | "X";
+type GradeLength5 = [Grade, Grade, Grade, Grade, Grade];
+type GradeLength6 = [Grade, Grade, Grade, Grade, Grade, Grade];
 
 export interface UserApplicantStatusApiType {
   is_paid?: boolean;
@@ -90,13 +86,13 @@ export interface GraduatedApplicationApiType {
     early_leave_count: number;
   };
   school_grade: {
-    korean: Array<Grade<6>>;
-    social: Array<Grade<6>>;
-    history: Array<Grade<6>>;
-    math: Array<Grade<6>>;
-    science: Array<Grade<6>>;
-    tech_and_home: Array<Grade<6>>;
-    english: Array<Grade<6>>;
+    korean: GradeLength5;
+    social: GradeLength5;
+    history: GradeLength5;
+    math: GradeLength5;
+    science: GradeLength5;
+    tech_and_home: GradeLength5;
+    english: GradeLength5;
   };
   self_introduction_and_study_plan: {
     self_introduction: string;
@@ -142,13 +138,13 @@ export interface UnGraduatedApplicationApiType {
     early_leave_count: number;
   };
   school_grade: {
-    korean: Array<Grade<5>>;
-    social: Array<Grade<5>>;
-    history: Array<Grade<5>>;
-    math: Array<Grade<5>>;
-    science: Array<Grade<5>>;
-    tech_and_home: Array<Grade<5>>;
-    english: Array<Grade<5>>;
+    korean: GradeLength6;
+    social: GradeLength6;
+    history: GradeLength6;
+    math: GradeLength6;
+    science: GradeLength6;
+    tech_and_home: GradeLength6;
+    english: GradeLength6;
   };
   self_introduction_and_study_plan: {
     self_introduction: string;
@@ -156,7 +152,6 @@ export interface UnGraduatedApplicationApiType {
   };
 }
 
-export type GetApplicantDocumentApiType =
-  | GedApplicationApiType
-  | GraduatedApplicationApiType
-  | UnGraduatedApplicationApiType;
+export type GetApplicantDocumentApiType = GedApplicationApiType &
+  GraduatedApplicationApiType &
+  UnGraduatedApplicationApiType;

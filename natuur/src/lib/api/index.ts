@@ -124,7 +124,7 @@ export const getUserApplicantPhotoApi = async (payload: {
   return response.data;
 };
 
-export const getApplicantDocument = async (payload: {
+export const getApplicationDocumentApi = async (payload: {
   accessToken: string;
 }) => {
   const response = await instanceAxios.get<GetApplicantDocumentApiType>(
@@ -139,7 +139,7 @@ export const getApplicantDocument = async (payload: {
   return response.data;
 };
 
-export const putGedApplicationDocument = async (
+export const putGedApplicationDocumentApi = async (
   payload: GedApplicationApiType & {
     accessToken: string;
   }
@@ -162,7 +162,7 @@ export const putGedApplicationDocument = async (
   return response.data;
 };
 
-export const putGraduatedApplicationDocument = async (
+export const putGraduatedApplicationDocumentApi = async (
   payload: GraduatedApplicationApiType & {
     accessToken: string;
   }
@@ -186,7 +186,7 @@ export const putGraduatedApplicationDocument = async (
   return response.data;
 };
 
-export const putUnGraduatedApplicationDocument = async (
+export const putUnGraduatedApplicationDocumentApi = async (
   payload: UnGraduatedApplicationApiType & {
     accessToken: string;
   }
