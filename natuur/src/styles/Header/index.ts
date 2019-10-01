@@ -22,7 +22,6 @@ export const ContentsLogo = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
 
   & > a {
     height: 30px;
