@@ -10,6 +10,7 @@ import PersonalInformation from "./PersonalInformation/PersonalInformation";
 import Preview from "./Preview/Preview";
 import Header from "./default/header/Header";
 import Footer from "./default/footer/Footer";
+import Print from "./Print/Print";
 
 export {
   SignUp,
@@ -23,5 +24,6 @@ export {
   PersonalInformation,
   Preview,
   Header,
-  Footer
+  Footer,
+  Print
 };

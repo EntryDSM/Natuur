@@ -85,7 +85,11 @@ const App: FC<Props> = ({ accessToken, refreshToken, email, logOut }) => {
               exact
             />
             <Route path="/grade" render={() => <ConnectGrade />} exact />
-            <Route path="/mypage" render={() => <MyPage />} exact />
+            <Route
+              path="/mypage"
+              render={() => <MyPage updateAppClass={setAppClass} />}
+              exact
+            />
             <Route
               path="/print"
               render={() => <Print updateAppClass={setAppClass} />}
