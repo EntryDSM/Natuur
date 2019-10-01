@@ -14,7 +14,9 @@ const PlanInput: FC<OwnProps> = ({ title, value, setValue }) => {
       <S.TextArea
         value={value}
         placeholder={title}
-        onChange={({ target: { value } }) => setValue({ text: value })}
+        onChange={({ target: { value } }) =>
+          value.length <= 1600 && setValue({ text: value })
+        }
       />
     </S.AreaCover>
   );
