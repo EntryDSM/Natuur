@@ -14,13 +14,14 @@ interface RootState {
   selectRegion: string;
   graduationClassification?: string;
   graduationYear?: string;
-  remarks?: string;
+  remarks: string;
   isSuccess?: boolean;
 }
 
 const initialState: RootState = {
   applyType: "",
   selectRegion: "",
+  remarks: "",
   isGed: false,
   isSuccess: false
 };
