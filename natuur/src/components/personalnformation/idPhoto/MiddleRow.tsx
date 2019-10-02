@@ -18,7 +18,7 @@ const MiddleRow: FC<OwnProps> = ({
 }) => {
   useEffect(() => {
     if (isGed) {
-      setMiddleSchool({ school: undefined });
+      setMiddleSchool({ school: "" });
     }
   },        [isGed]);
 
