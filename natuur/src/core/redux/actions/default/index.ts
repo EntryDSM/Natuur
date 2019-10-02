@@ -3,6 +3,7 @@ import { RootState } from "../../reducer/default/defaultReducer";
 // Types
 export const UPDATE_TOASTR = "UPDATE_TOASTR";
 export const REMOVE_TOASTR = "REMOVE_TOASTR";
+export const SET_IS_OPEN = "SET_IS_OPEN";
 
 export interface PayloadType {
   toastrState?: string;
@@ -13,16 +14,24 @@ export interface PayloadType {
 }
 
 interface UpdateToastr {
-  type: string;
+  type: typeof UPDATE_TOASTR;
   payload: PayloadType;
 }
 
 interface RemoveToastr {
-  type: string;
+  type: typeof REMOVE_TOASTR;
   payload: PayloadType;
 }
 
-export type DefaultActionTypes = UpdateToastr | RemoveToastr | null;
+interface SetIsOpen {
+  type: typeof SET_IS_OPEN;
+  payload: {
+    pageName: "info" | "personal" | "grade" | "intro";
+    isOpen: boolean;
+  };
+}
+
+export type DefaultActionTypes = UpdateToastr | RemoveToastr | SetIsOpen;
 
 // Actions
 export const updateToastr = (payload: RootState) => ({
@@ -33,4 +42,12 @@ export const updateToastr = (payload: RootState) => ({
 export const removeToastr = (payload: number) => ({
   payload,
   type: REMOVE_TOASTR
+});
+
+export const setIsOpen = (payload: {
+  pageName: "info" | "personal" | "grade" | "intro";
+  isOpen: boolean;
+}) => ({
+  payload,
+  type: SET_IS_OPEN
 });

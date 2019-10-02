@@ -12,6 +12,7 @@ import PersonalReducer from "./personal/personalReducer";
 import infoReducer from "./info/infoReducer";
 import gradeReducer from "./grade/gradeReducer";
 import introReducer from "./intro/introReducer";
+import applicantDocument from "./applicantDocument/applicantDocumentReucer";
 
 export default combineReducers({
   AuthorizationReducer,
@@ -25,6 +26,6 @@ export default combineReducers({
   infoReducer,
   PersonalReducer,
   gradeReducer,
-  introReducer
-  // reducers
+  introReducer,
+  applicantDocument
 });

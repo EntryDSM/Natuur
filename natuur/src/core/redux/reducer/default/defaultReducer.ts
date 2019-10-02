@@ -1,16 +1,29 @@
 import { PayloadType } from "../../actions/default/index";
 import {
   UPDATE_TOASTR,
-  DefaultActionTypes,
-  REMOVE_TOASTR
+  REMOVE_TOASTR,
+  SET_IS_OPEN,
+  DefaultActionTypes
 } from "../../actions/default";
 
 export interface RootState {
   toastrInformations: PayloadType[];
+  isOpen: {
+    info: boolean;
+    personal: boolean;
+    grade: boolean;
+    intro: boolean;
+  };
 }
 
 const initialState: RootState = {
-  toastrInformations: []
+  toastrInformations: [],
+  isOpen: {
+    info: false,
+    personal: false,
+    grade: false,
+    intro: false
+  }
 };
 
 const defaultReducer = (
@@ -40,6 +53,14 @@ const defaultReducer = (
         toastrInformations: toastrInformations.filter(
           (_, id) => id !== action.payload
         )
+      };
+    }
+    case SET_IS_OPEN: {
+      const { pageName, isOpen } = action.payload;
+
+      return {
+        ...state,
+        isOpen: { ...state.isOpen, [pageName]: isOpen }
       };
     }
     default:

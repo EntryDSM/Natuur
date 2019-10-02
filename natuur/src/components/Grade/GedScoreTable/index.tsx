@@ -4,15 +4,25 @@ import * as S from "../../../styles/Grade";
 import Wrapper from "../Wrapper";
 
 interface OwnProps {
-  getGedGrade: (payload: { accessToken: string }) => void;
+  gedGrade: { ged_average_score: number };
   setGedAverageScore: (payload: { gedAverageScore: number }) => void;
-  accessToken: string;
+  isOpen: {
+    info: boolean;
+    personal: boolean;
+    grade: boolean;
+    intro: boolean;
+  };
+  setIsOpen: (payload: {
+    pageName: "info" | "personal" | "grade" | "intro";
+    isOpen: boolean;
+  }) => void;
 }
 
 const GedScoreTable: FC<OwnProps> = ({
-  getGedGrade,
-  accessToken,
-  setGedAverageScore
+  setGedAverageScore,
+  gedGrade,
+  isOpen,
+  setIsOpen
 }) => {
   const didMountRef = useRef(false);
 
@@ -20,8 +30,11 @@ const GedScoreTable: FC<OwnProps> = ({
     if (!didMountRef.current) {
       didMountRef.current = true;
 
-      getGedGrade({ accessToken });
+      if (!isOpen.grade) {
+        setGedAverageScore({ gedAverageScore: gedGrade.ged_average_score });
+      }
     }
+    return () => setIsOpen({ pageName: "grade", isOpen: true });
   },        []);
 
   return (

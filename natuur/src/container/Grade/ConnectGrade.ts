@@ -16,6 +16,7 @@ import {
   setGedAverageScore,
   setSubjectScores
 } from "../../core/redux/actions/grade";
+import { setIsOpen } from "../../core/redux/actions/default";
 
 export const mapStateToProps = (state: AppState) => ({
   accessToken: state.userReducer.accessToken,
@@ -32,7 +33,11 @@ export const mapStateToProps = (state: AppState) => ({
   isSecondGradeSmester2: state.gradeReducer.isSecondGradeSmester2,
   isThirdGradeSmester1: state.gradeReducer.isThirdGradeSmester1,
   graduationClassification: state.infoReducer.graduationClassification,
-  isGed: state.infoReducer.isGed
+  isGed: state.infoReducer.isGed,
+  ged_grade: state.applicantDocument.ged_grade,
+  diligence_grade: state.applicantDocument.diligence_grade,
+  school_grade: state.applicantDocument.school_grade,
+  isOpen: state.defaultReducer.isOpen
 });
 
 export const mapDispatchToProps = dispatch => ({
@@ -69,7 +74,11 @@ export const mapDispatchToProps = dispatch => ({
         | "tech_home";
       score: "A" | "B" | "C" | "D" | "E" | "X";
     }>;
-  }) => dispatch(setSubjectScores(payload))
+  }) => dispatch(setSubjectScores(payload)),
+  setIsOpen: (payload: {
+    pageName: "info" | "personal" | "grade" | "intro";
+    isOpen: boolean;
+  }) => dispatch(setIsOpen(payload))
 });
 
 export default connect(

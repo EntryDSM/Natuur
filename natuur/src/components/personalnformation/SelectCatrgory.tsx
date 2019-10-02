@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useRef, useEffect } from "react";
 
 import * as S from "../../styles/personallinformation";
 import IdPhotoComponent from "./idPhoto/IdPhotoComponent";
@@ -80,8 +80,51 @@ const SelectCategory: FC<Props> = ({
   accessToken,
   imagePath,
   file,
-  setFile
+  setFile,
+  personalInformation,
+  getAddressData,
+  isOpen,
+  setIsOpen
 }) => {
+  const didMountRef = useRef(false);
+
+  useEffect(() => {
+    if (!didMountRef.current) {
+      didMountRef.current = true;
+
+      if (!isOpen.personal) {
+        const {
+          name,
+          sex,
+          birth_date,
+          parent_name,
+          parent_tel,
+          applicant_tel,
+          address,
+          post_code,
+          student_number,
+          school_name,
+          school_tel
+        } = personalInformation;
+
+        setName({ name });
+        setGender({ gender: sex });
+        setBirthDayYear(birth_date.split("-")[0]);
+        setBirthDayMonth(birth_date.split("-")[1]);
+        setBirthDayDate(birth_date.split("-")[2]);
+        setClass({ class: student_number.slice(1, 3) });
+        setStudentID({ studentID: student_number.slice(3, 5) });
+        setMiddleSchool({ school: school_name });
+        setParentsName({ name: parent_name });
+        setSchoolContact({ contact: school_tel });
+        setParentsContact({ contact: parent_tel });
+        setUserContact({ contact: applicant_tel });
+        getAddressData({ address, zipCode: post_code });
+      }
+    }
+    return () => setIsOpen({ pageName: "personal", isOpen: true });
+  },        []);
+
   return (
     <S.CategoryList>
       <IdPhotoComponent

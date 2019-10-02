@@ -14,13 +14,11 @@ type Props = ReturnType<typeof mapStateToProps> &
   ReturnType<typeof mapDispatchToProps>;
 
 const Grade: FC<Props> = ({
-  accessToken,
   volunteer,
   absent,
   earlyLeave,
   tardy,
   missingClass,
-  gedAverageScore,
   subjectScores,
   isFirstGradeSmester1,
   isFirstGradeSmester2,
@@ -40,7 +38,12 @@ const Grade: FC<Props> = ({
   setIsSecondGrade2Semester,
   setIsThirdGrade1Semester,
   setGedAverageScore,
-  setSubjectScores
+  setSubjectScores,
+  ged_grade,
+  diligence_grade,
+  school_grade,
+  isOpen,
+  setIsOpen
 }) => {
   const didMountRef = useRef(false);
 
@@ -75,9 +78,10 @@ const Grade: FC<Props> = ({
         <HeadLine subText="2020 입학원서 작성" title="성적 입력" />
         {isGed ? (
           <GedScoreTable
-            accessToken={accessToken}
-            getGedGrade={() => console.log("바꿔")}
             setGedAverageScore={setGedAverageScore}
+            gedGrade={ged_grade}
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
           />
         ) : (
           <>
@@ -92,8 +96,9 @@ const Grade: FC<Props> = ({
               setTardy={setTardy}
               missingClass={missingClass}
               setMissingClass={setMissingClass}
-              accessToken={accessToken}
-              getDiligence={() => console.log("바꿔")}
+              diligenceGrade={diligence_grade}
+              isOpen={isOpen}
+              setIsOpen={setIsOpen}
             />
             <MissedSemester
               isFirstGradeSmester1={isFirstGradeSmester1}
@@ -110,11 +115,12 @@ const Grade: FC<Props> = ({
               subjectScores={subjectScores}
             />
             <ScoreTable
-              accessToken={accessToken}
               graduationClassification={graduationClassification}
-              getGrade={() => console.log("바꿔")}
               setSubjectScores={setSubjectScores}
               subjectScores={subjectScores}
+              schoolGrade={school_grade}
+              isOpen={isOpen}
+              setIsOpen={setIsOpen}
             />
           </>
         )}
