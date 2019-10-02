@@ -3,33 +3,23 @@ const nowYear = dateObj.getFullYear();
 const nowMonth = dateObj.getMonth() + 1;
 const nowDate = dateObj.getDate();
 
-export function formatDate(
-  nowMonth?: number,
-  nowDate?: number
-): { stringMonth: string; stringDate: string } {
-  let stringMonth = "";
-  let stringDate = "";
+export function precededByZeroBeforeOneDigitForString(
+  pNumber?: number
+): string {
+  let numberToString = "";
 
-  if (nowMonth < 10) {
-    stringMonth = `0${nowMonth}`;
+  if (pNumber < 10) {
+    numberToString = `0${pNumber}`;
   } else {
-    stringMonth = String(nowMonth);
+    numberToString = String(pNumber);
   }
 
-  if (nowDate < 10) {
-    stringDate = `0${nowDate}`;
-  } else {
-    stringDate = String(nowDate);
-  }
-
-  return {
-    stringMonth,
-    stringDate
-  };
+  return numberToString;
 }
 
 export function returnNowToInlineString(): string {
-  const { stringMonth, stringDate } = formatDate(nowMonth, nowDate);
+  const stringMonth = precededByZeroBeforeOneDigitForString(nowMonth);
+  const stringDate = precededByZeroBeforeOneDigitForString(nowDate);
   return `${nowYear}${stringMonth}${stringDate}`;
 }
 
@@ -37,7 +27,8 @@ export function returnMonthAndDate(): {
   stringMonth: string;
   stringDate: string;
 } {
-  const { stringMonth, stringDate } = formatDate(nowMonth, nowDate);
+  const stringMonth = precededByZeroBeforeOneDigitForString(nowMonth);
+  const stringDate = precededByZeroBeforeOneDigitForString(nowDate);
 
   return { stringMonth, stringDate };
 }
