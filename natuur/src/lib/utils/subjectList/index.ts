@@ -29,7 +29,7 @@ export function returnSubjectScoresList(): Array<{
     | "english"
     | "history"
     | "tech_home";
-  score: string;
+  score: "A" | "B" | "C" | "D" | "E" | "X";
 }> {
   for (const subject of subjectList) {
     for (let semester = 1; semester <= 5; semester += 1) {

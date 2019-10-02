@@ -14,7 +14,7 @@ interface OwnProps {
   subjectScores: Array<{
     semester: number;
     subject: string;
-    score: string;
+    score: "A" | "B" | "C" | "D" | "E" | "X";
   }>;
 }
 

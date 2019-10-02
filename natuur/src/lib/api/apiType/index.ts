@@ -1,6 +1,4 @@
 type Grade = "A" | "B" | "C" | "D" | "E" | "X";
-type GradeLength5 = [Grade, Grade, Grade, Grade, Grade];
-type GradeLength6 = [Grade, Grade, Grade, Grade, Grade, Grade];
 
 export interface UserApplicantStatusApiType {
   is_paid?: boolean;
@@ -31,7 +29,7 @@ export interface GedApplicationApiType {
   };
   personal_information: {
     name: string;
-    sex: "MALE" | "FEMALE";
+    sex: string;
     birth_date: string;
     parent_name: string;
     parent_tel: string;
@@ -64,10 +62,11 @@ export interface GraduatedApplicationApiType {
       | "PRIVILEGED_ADMISSION"
       | "NOT_APPLICABLE";
     is_daejeon: boolean;
+    graduated_year: string;
   };
   personal_information: {
     name: string;
-    sex: "MALE" | "FEMALE";
+    sex: string;
     birth_date: string;
     parent_name: string;
     parent_tel: string;
@@ -86,13 +85,13 @@ export interface GraduatedApplicationApiType {
     early_leave_count: number;
   };
   school_grade: {
-    korean: GradeLength5;
-    social: GradeLength5;
-    history: GradeLength5;
-    math: GradeLength5;
-    science: GradeLength5;
-    tech_and_home: GradeLength5;
-    english: GradeLength5;
+    korean: Grade[];
+    social: Grade[];
+    history: Grade[];
+    math: Grade[];
+    science: Grade[];
+    tech_home: Grade[];
+    english: Grade[];
   };
   self_introduction_and_study_plan: {
     self_introduction: string;
@@ -116,10 +115,11 @@ export interface UnGraduatedApplicationApiType {
       | "PRIVILEGED_ADMISSION"
       | "NOT_APPLICABLE";
     is_daejeon: boolean;
+    graduated_year: string;
   };
   personal_information: {
     name: string;
-    sex: "MALE" | "FEMALE";
+    sex: string;
     birth_date: string;
     parent_name: string;
     parent_tel: string;
@@ -138,13 +138,13 @@ export interface UnGraduatedApplicationApiType {
     early_leave_count: number;
   };
   school_grade: {
-    korean: GradeLength6;
-    social: GradeLength6;
-    history: GradeLength6;
-    math: GradeLength6;
-    science: GradeLength6;
-    tech_and_home: GradeLength6;
-    english: GradeLength6;
+    korean: Grade[];
+    social: Grade[];
+    history: Grade[];
+    math: Grade[];
+    science: Grade[];
+    tech_home: Grade[];
+    english: Grade[];
   };
   self_introduction_and_study_plan: {
     self_introduction: string;
