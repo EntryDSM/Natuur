@@ -20,7 +20,13 @@ interface OwnProps {
   updateUserEmail(targetValue: string): any;
   updateUserPassword(targetValue: string): void;
   updateUserPasswordCheck(targetValue: string): void;
-  updateToastr(toastrInformation: object): void;
+  updateToastr(toastrInformation: {
+    toastrState?: "info" | "errorState" | "success" | "warning";
+    toastrTitle?: string;
+    toastrMessage?: string;
+    timer?: number;
+    id?: number;
+  }): void;
 }
 
 type Props = ReturnType<typeof mapStateToProps> &

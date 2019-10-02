@@ -8,7 +8,13 @@ import {
 } from "../../../styles/default";
 
 interface Props {
-  updateToastr(toastrInformation: object): void;
+  updateToastr(toastrInformation: {
+    toastrState?: "info" | "errorState" | "success" | "warning";
+    toastrTitle?: string;
+    toastrMessage?: string;
+    timer?: number;
+    id?: number;
+  }): void;
 }
 
 const AcceptDisableButton: FC<Props> = ({ updateToastr }) => {
