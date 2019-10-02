@@ -37,6 +37,7 @@ export interface PaginationStateToProps {
     subject: string;
     score: "A" | "B" | "C" | "D" | "E" | "X";
   }>;
+  putStatusCode: number;
 }
 
 export const convertApplyTypeToEnglish = (

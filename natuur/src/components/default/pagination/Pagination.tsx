@@ -1,4 +1,4 @@
-import React, { FC, memo, useCallback } from "react";
+import React, { FC, memo, useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import * as S from "../../../styles/default/pagination";
@@ -16,6 +16,7 @@ import {
   returnSubjectScore
 } from "./presenter";
 import { AppState } from "../../../core/redux/store/store";
+import { updateToastr } from "../../../core/redux/actions/default";
 import { precededByZeroBeforeOneDigitForString } from "../../../lib/utils/date";
 
 const Prev: FC = memo(() => (
@@ -74,7 +75,8 @@ const Pagination: FC<OwnProps> = ({
     earlyLeave,
     tardy,
     missingClass,
-    subjectScores
+    subjectScores,
+    putStatusCode
   } = useSelector<AppState, PaginationStateToProps>(state => ({
     isGed: state.infoReducer.isGed,
     applyType: state.infoReducer.applyType,
@@ -105,7 +107,8 @@ const Pagination: FC<OwnProps> = ({
     earlyLeave: state.gradeReducer.earlyLeave,
     tardy: state.gradeReducer.tardy,
     missingClass: state.gradeReducer.missingClass,
-    subjectScores: state.gradeReducer.subjectScores
+    subjectScores: state.gradeReducer.subjectScores,
+    putStatusCode: state.applicantDocument.putStatusCode
   }));
 
   const connectServer = useCallback(() => {
@@ -249,6 +252,38 @@ const Pagination: FC<OwnProps> = ({
     },
     []
   );
+
+  const showToastr = useCallback(
+    (payload: {
+      state: "info" | "errorState" | "success" | "warning";
+      message: string;
+    }) => {
+      dispatch(
+        updateToastr({
+          timer: 5,
+          toastrMessage: payload.message,
+          toastrState: payload.state
+        })
+      );
+    },
+    []
+  );
+
+  useEffect(() => {
+    if (putStatusCode <= 204) {
+      showToastr({ state: "success", message: "임시저장을 완료하였습니다." });
+    } else if (putStatusCode >= 400 && putStatusCode <= 408) {
+      showToastr({
+        state: "errorState",
+        message: "임시저장에 실패하였습니다."
+      });
+    } else if (putStatusCode === 409) {
+      showToastr({
+        state: "info",
+        message: "최종제출 이후에는 원서접수가 불가능 합니다!"
+      });
+    }
+  },        [putStatusCode]);
 
   return (
     <S.PaginationWrapper>
