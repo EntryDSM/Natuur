@@ -79,7 +79,7 @@ export interface SetSubjectScores {
         | "english"
         | "history"
         | "tech_home";
-      score: string;
+      score: "A" | "B" | "C" | "D" | "E" | "X";
     }>;
   };
 }
@@ -183,7 +183,7 @@ export const setSubjectScores = (payload: {
       | "english"
       | "history"
       | "tech_home";
-    score: string;
+    score: "A" | "B" | "C" | "D" | "E" | "X";
   }>;
 }): GradeActionTypes => ({
   payload,

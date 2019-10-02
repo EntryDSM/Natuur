@@ -32,7 +32,7 @@ interface RootState {
       | "english"
       | "history"
       | "tech_home";
-    score: string;
+    score: "A" | "B" | "C" | "D" | "E" | "X";
   }>;
   isFirstGradeSmester1: boolean;
   isFirstGradeSmester2: boolean;

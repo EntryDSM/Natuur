@@ -67,7 +67,7 @@ export const mapDispatchToProps = dispatch => ({
         | "english"
         | "history"
         | "tech_home";
-      score: string;
+      score: "A" | "B" | "C" | "D" | "E" | "X";
     }>;
   }) => dispatch(setSubjectScores(payload))
 });
