@@ -19,10 +19,9 @@ import {
   UnGraduatedApplicationApiType
 } from "../../../../lib/api/apiType";
 
-type RootState =
-  | { putStatusCode: number }
-  | GedApplicationApiType & GraduatedApplicationApiType
-  | UnGraduatedApplicationApiType;
+type RootState = { putStatusCode: number } & GedApplicationApiType &
+  GraduatedApplicationApiType &
+  UnGraduatedApplicationApiType;
 
 const initialState: RootState = {
   putStatusCode: 0,
