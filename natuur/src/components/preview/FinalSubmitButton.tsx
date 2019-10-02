@@ -27,6 +27,7 @@ export interface FinalSubmitDependencyState {
   parentsContact?: string;
   userContact?: string;
   address?: string;
+  zipCode?: string;
   detailedAddress?: string;
   file?: string;
   selfIntroduction?: string;
