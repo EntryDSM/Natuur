@@ -24,6 +24,7 @@ import GlobalStyle from "./styles/GlobalStyle";
 import { AppState } from "./core/redux/store/store";
 import { logOut } from "./core/redux/actions/user";
 import { getApplicationDocument } from "./core/redux/actions/applicantDocument";
+import { setIsOpen } from "./core/redux/actions/default";
 
 const mapStaetToProps = (state: AppState) => ({
   accessToken: state.userReducer.accessToken,
@@ -34,7 +35,11 @@ const mapStaetToProps = (state: AppState) => ({
 const mapDispatchToProps = dispatch => ({
   logOut: (payload: { refreshToken: string }) => dispatch(logOut(payload)),
   getApplicationDocument: (payload: { accessToken: string }) =>
-    dispatch(getApplicationDocument(payload))
+    dispatch(getApplicationDocument(payload)),
+  setIsOpen: (payload: {
+    pageName: "info" | "personal" | "grade" | "intro";
+    isOpen: boolean;
+  }) => dispatch(setIsOpen(payload))
 });
 
 type Props = ReturnType<typeof mapStaetToProps> &
@@ -45,7 +50,8 @@ const App: FC<Props> = ({
   refreshToken,
   email,
   logOut,
-  getApplicationDocument
+  getApplicationDocument,
+  setIsOpen
 }) => {
   const didMountRef = useRef(false);
   const [appClass, setAppClass] = useState("");
@@ -55,6 +61,11 @@ const App: FC<Props> = ({
       didMountRef.current = true;
 
       getApplicationDocument({ accessToken });
+
+      setIsOpen({ pageName: "info", isOpen: false });
+      setIsOpen({ pageName: "personal", isOpen: false });
+      setIsOpen({ pageName: "grade", isOpen: false });
+      setIsOpen({ pageName: "intro", isOpen: false });
     }
   },        []);
 
