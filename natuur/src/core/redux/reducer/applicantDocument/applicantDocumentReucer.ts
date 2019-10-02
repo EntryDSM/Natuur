@@ -29,7 +29,8 @@ const initialState: RootState = {
   classification: {
     apply_type: "COMMON",
     additional_type: "NOT_APPLICABLE",
-    is_daejeon: false
+    is_daejeon: false,
+    graduated_year: ""
   },
   personal_information: {
     name: "",
@@ -60,7 +61,7 @@ const initialState: RootState = {
     history: ["A", "A", "A", "A", "A"],
     math: ["A", "A", "A", "A", "A"],
     science: ["A", "A", "A", "A", "A"],
-    tech_and_home: ["A", "A", "A", "A", "A"],
+    tech_home: ["A", "A", "A", "A", "A"],
     english: ["A", "A", "A", "A", "A"]
   },
   self_introduction_and_study_plan: {
