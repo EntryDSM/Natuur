@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect, useRef } from "react";
+import React, { FC } from "react";
 
 import * as S from "../../styles/Information";
 import {
@@ -17,9 +17,7 @@ interface OwnProps {
   graduationClassification: string;
   graduationYear: string;
   remarks: string;
-  accessToken: string;
   isSuccess: boolean;
-  getClassificationInfo: (payload: { accessToken: string }) => void;
   setIsGed: (payload: boolean) => void;
   setApplyType: (payload: string) => void;
   setSelectRegion: (payload: string) => void;
@@ -35,57 +33,40 @@ const SelectCategory: FC<OwnProps> = ({
   graduationClassification,
   remarks,
   graduationYear,
-  accessToken,
-  getClassificationInfo,
   setIsGed,
   setApplyType,
   setSelectRegion,
   setGraduationClassification,
   setGraduationYear,
   setRemark
-}) => {
-  const didMountRef = useRef(false);
+}) => (
+  <S.CategoryList>
+    <GedRow isChecked={isGed} setIsChecked={setIsGed} />
+    <S.GradationHorizon />
 
-  useEffect(() => {
-    if (!didMountRef.current) {
-      didMountRef.current = true;
+    <SelectTypeRow radioType={applyType} setRadioType={setApplyType} />
+    <S.GradationHorizon />
 
-      getClassificationInfo({ accessToken });
-    }
-  },        []);
+    <SelectRegionRow radioType={selectRegion} setRadioType={setSelectRegion} />
+    <S.GradationHorizon />
 
-  return (
-    <S.CategoryList>
-      <GedRow isChecked={isGed} setIsChecked={setIsGed} />
-      <S.GradationHorizon />
+    <GraduationClassificationRow
+      radioType={graduationClassification}
+      setRadioType={setGraduationClassification}
+      isGedState={isGed}
+    />
+    <S.GradationHorizon />
 
-      <SelectTypeRow radioType={applyType} setRadioType={setApplyType} />
-      <S.GradationHorizon />
+    <GraduationYearRow
+      year={graduationYear}
+      setYear={setGraduationYear}
+      isGedState={isGed}
+      graduationClassificationState={graduationClassification}
+    />
+    <S.GradationHorizon />
 
-      <SelectRegionRow
-        radioType={selectRegion}
-        setRadioType={setSelectRegion}
-      />
-      <S.GradationHorizon />
-
-      <GraduationClassificationRow
-        radioType={graduationClassification}
-        setRadioType={setGraduationClassification}
-        isGedState={isGed}
-      />
-      <S.GradationHorizon />
-
-      <GraduationYearRow
-        year={graduationYear}
-        setYear={setGraduationYear}
-        isGedState={isGed}
-        graduationClassificationState={graduationClassification}
-      />
-      <S.GradationHorizon />
-
-      <RemarksRow radioType={remarks} setRadioType={setRemark} />
-    </S.CategoryList>
-  );
-};
+    <RemarksRow radioType={remarks} setRadioType={setRemark} />
+  </S.CategoryList>
+);
 
 export default SelectCategory;

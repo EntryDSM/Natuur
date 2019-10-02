@@ -10,6 +10,7 @@ import {
   setGraduationYear,
   setRemark
 } from "../../core/redux/actions/info";
+import { setIsOpen } from "../../core/redux/actions/default";
 
 export const mapStateToProps = (state: AppState) => ({
   isGed: state.infoReducer.isGed,
@@ -18,8 +19,9 @@ export const mapStateToProps = (state: AppState) => ({
   graduationClassification: state.infoReducer.graduationClassification,
   graduationYear: state.infoReducer.graduationYear,
   remarks: state.infoReducer.remarks,
-  accessToken: state.userReducer.accessToken,
-  isSuccess: state.infoReducer.isSuccess
+  isSuccess: state.infoReducer.isSuccess,
+  classification: state.applicantDocument.classification,
+  isOpen: state.defaultReducer.isOpen
 });
 
 export const mapDispatchToProps = dispatch => ({
@@ -29,7 +31,11 @@ export const mapDispatchToProps = dispatch => ({
   setGraduationClassification: (payload: string) =>
     dispatch(setGraduationClassification(payload)),
   setGraduationYear: (payload: string) => dispatch(setGraduationYear(payload)),
-  setRemark: (payload: string) => dispatch(setRemark(payload))
+  setRemark: (payload: string) => dispatch(setRemark(payload)),
+  setIsOpen: (payload: {
+    pageName: "info" | "personal" | "grade" | "intro";
+    isOpen: boolean;
+  }) => dispatch(setIsOpen(payload))
 });
 
 export default connect(

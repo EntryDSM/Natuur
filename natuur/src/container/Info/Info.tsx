@@ -5,6 +5,10 @@ import SelectCategory from "../../components/Information/SelectCategory";
 import Pagination from "../../components/default/pagination/Pagination";
 import * as S from "../../styles/Information";
 import { mapStateToProps, mapDispatchToProps } from "./ConnectSelectCategory";
+import {
+  convertApplyTypeToKorean,
+  convertAdditionalTypeToKorean
+} from "./presenter";
 
 interface OwnProps {
   updateAppClass(text: string): void;
@@ -22,25 +26,39 @@ const Info: FC<Props> = ({
   graduationClassification,
   graduationYear,
   remarks,
-  accessToken,
   isSuccess,
   setIsGed,
   setApplyType,
   setSelectRegion,
   setGraduationClassification,
   setGraduationYear,
-  setRemark
+  setRemark,
+  classification,
+  setIsOpen,
+  isOpen
 }) => {
   const didMountRef = useRef(false);
 
   useEffect(() => {
     if (!didMountRef.current) {
       didMountRef.current = true;
+      const {
+        apply_type,
+        additional_type,
+        is_daejeon,
+        graduated_year
+      } = classification;
 
-      // input did mount logic.
-      updateAppClass("info-summary");
+      if (!isOpen.info) {
+        updateAppClass("info-summary");
+        setApplyType(convertApplyTypeToKorean(apply_type));
+        setSelectRegion(is_daejeon ? "대전" : "전국");
+        setRemark(convertAdditionalTypeToKorean(additional_type));
+        setGraduationYear(graduated_year);
+      }
     }
-  });
+    return () => setIsOpen({ pageName: "info", isOpen: true });
+  },        []);
 
   return (
     <div>
@@ -57,9 +75,7 @@ const Info: FC<Props> = ({
           graduationClassification={graduationClassification}
           graduationYear={graduationYear}
           remarks={remarks}
-          accessToken={accessToken}
           isSuccess={isSuccess}
-          getClassificationInfo={() => console.log("바꿔")}
           setIsGed={setIsGed}
           setApplyType={setApplyType}
           setSelectRegion={setSelectRegion}
