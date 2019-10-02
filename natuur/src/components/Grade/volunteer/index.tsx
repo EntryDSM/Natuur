@@ -15,8 +15,23 @@ interface OwnProps {
   setTardy: (payload: { tardy: number }) => void;
   missingClass: number;
   setMissingClass: (payload: { missingClass: number }) => void;
-  accessToken: string;
-  getDiligence: (payload: { accessToken: string }) => void;
+  diligenceGrade: {
+    volunteer_time: number;
+    full_cut_count: number;
+    period_cut_count: number;
+    late_count: number;
+    early_leave_count: number;
+  };
+  isOpen: {
+    info: boolean;
+    personal: boolean;
+    grade: boolean;
+    intro: boolean;
+  };
+  setIsOpen: (payload: {
+    pageName: "info" | "personal" | "grade" | "intro";
+    isOpen: boolean;
+  }) => void;
 }
 
 const Volunteer: FC<OwnProps> = ({
@@ -30,8 +45,9 @@ const Volunteer: FC<OwnProps> = ({
   setEarlyLeave,
   setTardy,
   setMissingClass,
-  accessToken,
-  getDiligence
+  diligenceGrade,
+  isOpen,
+  setIsOpen
 }) => {
   const didMountRef = useRef(false);
 
@@ -39,8 +55,23 @@ const Volunteer: FC<OwnProps> = ({
     if (!didMountRef.current) {
       didMountRef.current = true;
 
-      getDiligence({ accessToken });
+      if (!isOpen.grade) {
+        const {
+          volunteer_time,
+          full_cut_count,
+          period_cut_count,
+          late_count,
+          early_leave_count
+        } = diligenceGrade;
+
+        setVolunteerTime({ volunteer: volunteer_time });
+        setAbsent({ absent: full_cut_count });
+        setEarlyLeave({ earlyLeave: early_leave_count });
+        setTardy({ tardy: late_count });
+        setMissingClass({ missingClass: period_cut_count });
+      }
     }
+    return () => setIsOpen({ pageName: "grade", isOpen: true });
   },        []);
 
   return (
