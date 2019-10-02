@@ -16,7 +16,13 @@ interface OwnProps {
   userEmail: string;
   userPassword: string;
   isPasswordClose: boolean;
-  updateToastr(toastrInformation: object): void;
+  updateToastr(toastrInformation: {
+    toastrState?: "info" | "errorState" | "success" | "warning";
+    toastrTitle?: string;
+    toastrMessage?: string;
+    timer?: number;
+    id?: number;
+  }): void;
   signUp({ email, password }: { email: string; password: string }): void;
 }
 

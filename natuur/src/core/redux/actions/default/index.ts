@@ -6,7 +6,7 @@ export const REMOVE_TOASTR = "REMOVE_TOASTR";
 export const SET_IS_OPEN = "SET_IS_OPEN";
 
 export interface PayloadType {
-  toastrState?: string;
+  toastrState?: "info" | "errorState" | "success" | "warning";
   toastrTitle?: string;
   toastrMessage?: string;
   timer?: number;
@@ -34,7 +34,7 @@ interface SetIsOpen {
 export type DefaultActionTypes = UpdateToastr | RemoveToastr | SetIsOpen;
 
 // Actions
-export const updateToastr = (payload: RootState) => ({
+export const updateToastr = (payload: PayloadType) => ({
   payload,
   type: UPDATE_TOASTR
 });
