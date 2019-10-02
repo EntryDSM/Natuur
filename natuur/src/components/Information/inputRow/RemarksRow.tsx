@@ -18,12 +18,13 @@ const RemarksRow: FC<OwnProps> = ({ radioType, setRadioType }) => (
     {radioList.map(result => (
       <S.CheckBoxItem checkBoxCase="Remarks" key={result.CHECK_BOX_CASE}>
         <S.CheckBox
-          type="radio"
+          type="checkbox"
           name="remarksRow"
           id={result.CHECK_BOX_CASE}
           value={result.CHECK_BOX_NAME}
-          onChange={({ currentTarget: { value } }) => setRadioType(value)}
-          onClick={() => radioType && setRadioType(undefined)}
+          onClick={({ currentTarget: { value } }) =>
+            radioType === value ? setRadioType("") : setRadioType(value)
+          }
         />
         <S.CircleLabel htmlFor={result.CHECK_BOX_CASE}>
           {radioType === result.CHECK_BOX_NAME && <S.AcceptCircle />}
