@@ -38,7 +38,7 @@ function* getApplicationDocument(action: GetApplicationDocument) {
     if (e.response.status === 401) {
       yield tokenRefresh(
         getApplicationDocumentApi,
-        action.payload,
+        { putStatusCode: e.response.status },
         GET_APPLICATION_DOCUMENT_SUCCESS,
         GET_APPLICATION_DOCUMENT_FAILURS
       );
@@ -55,12 +55,15 @@ function* putGedApplicationDocument(action: PutGedDocument) {
     if (e.response.status === 401) {
       yield tokenRefresh(
         putGedApplicationDocumentApi,
-        action.payload,
+        { putStatusCode: e.response.status },
         PUT_GED_DOCUMENT_SUCCESS,
         PUT_GED_DOCUMENT_FAILURS
       );
     }
-    yield put({ type: PUT_GED_DOCUMENT_FAILURS, payload: e.response.statuse });
+    yield put({
+      type: PUT_GED_DOCUMENT_FAILURS,
+      payload: { putStatusCode: e.response.status }
+    });
   }
 }
 
@@ -72,14 +75,14 @@ function* putGraduatedApplicationDocument(action: PutGraduaatedDocument) {
     if (e.response.status === 401) {
       yield tokenRefresh(
         putGraduatedApplicationDocumentApi,
-        action.payload,
+        { putStatusCode: e.response.status },
         PUT_GRADUATED_DOCUMENT_SUCCESS,
         PUT_GRADUATED_DOCUMENT_FAILURS
       );
     }
     yield put({
       type: PUT_GRADUATED_DOCUMENT_FAILURS,
-      payload: e.response.statuse
+      payload: { putStatusCode: e.response.status }
     });
   }
 }
@@ -92,14 +95,14 @@ function* putUnGraduatedApplicationDocument(action: PutUnGraduaatedDocument) {
     if (e.response.status === 401) {
       yield tokenRefresh(
         putUnGraduatedApplicationDocumentApi,
-        action.payload,
+        { putStatusCode: e.response.status },
         PUT_UNGRADUATED_DOCUMENT_SUCCESS,
         PUT_UNGRADUATED_DOCUMENT_FAILURS
       );
     }
     yield put({
       type: PUT_UNGRADUATED_DOCUMENT_FAILURS,
-      payload: e.response.statuse
+      payload: { putStatusCode: e.response.status }
     });
   }
 }
