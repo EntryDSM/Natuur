@@ -12,7 +12,8 @@ import {
   setMiddleSchool,
   changeApplicantPhoto,
   ChangeApplicantPhotoType,
-  getApplicantPhoto
+  getApplicantPhoto,
+  searchSchool
 } from "../../core/redux/actions/personal";
 import Pagination from "../../components/default/pagination/Pagination";
 
@@ -29,13 +30,15 @@ const mapStateToProps = (state: AppState) => ({
   userClass: state.PersonalReducer.userClass,
   studentID: state.PersonalReducer.studentID,
   middleSchool: state.PersonalReducer.middleSchool,
+  middleSchoolData: state.PersonalReducer.middleSchoolData,
   parentsName: state.PersonalReducer.parentsName,
   schoolContact: state.PersonalReducer.schoolContact,
   parentsContact: state.PersonalReducer.parentsContact,
   userContact: state.PersonalReducer.userContact,
   zipCode: state.PersonalReducer.zipCode,
   address: state.PersonalReducer.address,
-  detailedAddress: state.PersonalReducer.detailedAddress
+  detailedAddress: state.PersonalReducer.detailedAddress,
+  schoolSearchStatusCode: state.PersonalReducer.schoolSearchStatusCode
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -50,7 +53,9 @@ const mapDispatchToProps = dispatch => ({
   setMiddleSchool: (payload: { school: string }) =>
     dispatch(setMiddleSchool(payload)),
   getApplicantPhoto: (payload: { accessToken: string }) =>
-    dispatch(getApplicantPhoto({ accessToken: payload.accessToken }))
+    dispatch(getApplicantPhoto({ accessToken: payload.accessToken })),
+  searchSchool: (payload: { accessToken: string; school: string }) =>
+    dispatch(searchSchool(payload))
 });
 
 type Props = ReturnType<typeof mapStateToProps> &
@@ -66,6 +71,7 @@ const PersonalInformation: FC<Props> = ({
   accessToken,
   isSuccess,
   setMiddleSchool,
+  searchSchool,
   name,
   gender,
   birthYear,
@@ -74,13 +80,15 @@ const PersonalInformation: FC<Props> = ({
   userClass,
   studentID,
   middleSchool,
+  middleSchoolData,
   parentsName,
   schoolContact,
   parentsContact,
   userContact,
   zipCode,
   address,
-  detailedAddress
+  detailedAddress,
+  schoolSearchStatusCode
 }) => {
   const didMountRef = useRef(false);
   const [isOpenPopUp, setIsOpenPopUp] = useState(false);
@@ -105,6 +113,11 @@ const PersonalInformation: FC<Props> = ({
           searchAddress={searchAddress}
           getAddressData={getAddressData}
           isSuccess={isSuccess}
+          searchSchool={searchSchool}
+          accessToken={accessToken}
+          setMiddleSchool={setMiddleSchool}
+          middleSchoolData={middleSchoolData}
+          schoolSearchStatusCode={schoolSearchStatusCode}
         />
       )}
       <S.personalWrapper>

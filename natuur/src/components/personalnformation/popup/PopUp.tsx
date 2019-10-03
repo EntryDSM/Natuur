@@ -2,6 +2,7 @@ import React, { FC } from "react";
 
 import * as S from "../../../styles/personallinformation/popup";
 import OfficeOfEducationPopUpInput from "./officeOfEducation/OfficeOfEducationInput";
+import OfficeOfEducationList from "./officeOfEducation/OfficeOfEducationList";
 import AddressInput from "./address/AddressInput";
 import AddressList from "./address/AddressList";
 
@@ -19,6 +20,10 @@ interface OwnProps {
   }>;
   isSuccess: boolean;
   searchAddress: ({ query }: { query: string }) => void;
+  accessToken: string;
+  middleSchoolData: string[];
+  schoolSearchStatusCode: number;
+  searchSchool: (payload: { accessToken: string; school: string }) => void;
   getAddressData: ({
     zipCode,
     address
@@ -28,6 +33,7 @@ interface OwnProps {
   }) => void;
   setIsOpenPopUp: (isOpenPopUp: boolean) => void;
   setIsAddress: (isAddress: boolean) => void;
+  setMiddleSchool: (payload: { school: string }) => void;
 }
 
 const cloasePopUp = (
@@ -45,7 +51,12 @@ const PopUp: FC<OwnProps> = ({
   searchAddress,
   getAddressData,
   setIsOpenPopUp,
-  setIsAddress
+  setIsAddress,
+  searchSchool,
+  accessToken,
+  setMiddleSchool,
+  middleSchoolData,
+  schoolSearchStatusCode
 }) => {
   return (
     <S.PopUpBackground
@@ -63,7 +74,18 @@ const PopUp: FC<OwnProps> = ({
             />
           </>
         ) : (
-          <OfficeOfEducationPopUpInput />
+          <>
+            <OfficeOfEducationPopUpInput
+              searchSchool={searchSchool}
+              accessToken={accessToken}
+            />
+            <OfficeOfEducationList
+              schoolSearchStatusCode={schoolSearchStatusCode}
+              middleSchoolData={middleSchoolData}
+              setMiddleSchool={setMiddleSchool}
+              closePopUp={() => cloasePopUp(setIsOpenPopUp, setIsAddress)}
+            />
+          </>
         )}
       </S.PopUpWrapper>
     </S.PopUpBackground>
