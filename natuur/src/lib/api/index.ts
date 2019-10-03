@@ -217,3 +217,19 @@ export const patchFianlSubmitApi = async (payload: { accessToken: string }) => {
 
   return response.data;
 };
+
+export const getSchoolDataApi = async (payload: {
+  accessToken: string;
+  school: string;
+}) => {
+  const response = await instanceAxios.get<string[]>("/school/search", {
+    headers: {
+      Authorization: authorizationHeader(payload.accessToken)
+    },
+    params: {
+      query: payload.school
+    }
+  });
+
+  return response.data;
+};

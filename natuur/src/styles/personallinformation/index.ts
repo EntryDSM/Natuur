@@ -194,7 +194,8 @@ export const SelectBox = styled.div<SelectBoxProp>`
   ${SelecOption} {
     font-size: ${props => props.isPopUp && "12px"};
     padding: ${props =>
-      props.isPopUp ? "0 15px" : props.isBig ? "0 19px" : "0 16px"};
+      props.isPopUp ? "15px 15px" : props.isBig ? "0 19px" : "0 16px"};
+    border-bottom: ${props => props.isPopUp && "1px solid #f2f2f2"};
   }
 `;
 
@@ -263,7 +264,7 @@ export const Input = styled.input<InputProps>`
       case "detailedAddress":
         return "581px";
       case "popup":
-        return "258px";
+        return "100%";
       case "addressPopUp":
         return "335px";
       default:

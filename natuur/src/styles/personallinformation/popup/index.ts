@@ -23,10 +23,55 @@ export const PopUpWrapper = styled.div<{ isAddress: boolean }>`
 
 export const OfficeOfEducationPopUpInputWrapper = styled.div`
   display: flex;
-  justify-content: flex-end;
   width: 100%;
   margin-bottom: 20px;
   position: relative;
+`;
+
+export const OfficeOfEducationPopUpItemList = styled.div`
+  width: 100%;
+  max-height: 470px;
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    width: 14px;
+    height: 80px;
+    border-radius: 24px;
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    width: 14px;
+    height: 80px;
+    border-radius: 24px;
+    background-color: #e4ebec;
+  }
+
+  & > div {
+    width: 100%;
+    height: 70px;
+    border-top: 1px solid rgba(95, 138, 144, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 300;
+    color: #000000;
+    cursor: pointer;
+
+    &:hover {
+      background: -webkit-linear-gradient(
+        left,
+        #ffffff 0%,
+        #bbd2d6 50%,
+        #ffffff 100%
+      );
+    }
+
+    &:first-child {
+      border: 0;
+    }
+  }
 `;
 
 export const AddressInputWrapper = styled.div`

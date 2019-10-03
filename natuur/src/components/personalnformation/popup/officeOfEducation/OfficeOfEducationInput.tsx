@@ -1,21 +1,43 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState, useEffect, useCallback } from "react";
 
 import * as S from "../../../../styles/personallinformation";
 import { OfficeOfEducationPopUpInputWrapper } from "../../../../styles/personallinformation/popup";
-import SelectBox from "../../SelectBox";
-import { OFFICE_OF_EDUCATION_LIST } from "../../constant";
+import { useDebounce } from "../../../../lib/utils/hooks";
 
-const OfficeOfEducationPopUpInput: FC = () => {
-  const [officeOfEducation, setOfficeOfEducation] = useState("");
+interface OwnProps {
+  searchSchool: (payload: { accessToken: string; school: string }) => void;
+  accessToken: string;
+}
+
+const OfficeOfEducationPopUpInput: FC<OwnProps> = ({
+  searchSchool,
+  accessToken
+}) => {
+  const [school, setSchool] = useState("");
+  const debounceSchool = useDebounce(school, 300);
+
+  const inputHandler = useCallback(
+    ({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => {
+      setSchool(value);
+    },
+    []
+  );
+
+  useEffect(() => {
+    if (debounceSchool || !school) {
+      searchSchool({ accessToken, school });
+    }
+  },        [debounceSchool]);
+
   return (
     <OfficeOfEducationPopUpInputWrapper>
-      <SelectBox
-        value={officeOfEducation}
-        setValue={setOfficeOfEducation}
-        valueList={OFFICE_OF_EDUCATION_LIST}
-        isPopUp
+      <S.Input
+        type="text"
+        value={school}
+        onChange={e => inputHandler(e)}
+        placeholder="중학교 명"
+        inputCase="popup"
       />
-      <S.Input type="text" placeholder="중학교 명" inputCase="popup" />
     </OfficeOfEducationPopUpInputWrapper>
   );
 };
