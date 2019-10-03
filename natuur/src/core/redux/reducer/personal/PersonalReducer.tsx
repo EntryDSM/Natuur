@@ -2,6 +2,9 @@ import {
   SEARCH_ADDRESS,
   SEARCH_ADDRESS_SUCCESS,
   SEARCH_ADDRESS_FAILURE,
+  SEARCH_SCHOOL,
+  SEARCH_SCHOOL_SUCCESS,
+  SEARCH_SCHOOL_FAILURE,
   PUT_APPLICANT_PHOTO,
   PUT_APPLICANT_PHOTO_SUCCESS,
   PUT_APPLICANT_PHOTO_FAILURE,
@@ -28,6 +31,7 @@ import {
 
 interface RootState {
   isSuccess: boolean;
+  schoolSearchStatusCode: number;
   addressData: Array<{
     address_name: string;
     address: {
@@ -38,6 +42,7 @@ interface RootState {
       zone_no: string;
     };
   }>;
+  middleSchoolData: string[];
   name: string;
   gender: string;
   birthYear: string;
@@ -59,7 +64,9 @@ interface RootState {
 
 const initialState: RootState = {
   isSuccess: false,
+  schoolSearchStatusCode: 0,
   addressData: [],
+  middleSchoolData: [],
   name: "",
   gender: "",
   birthYear: "",
@@ -126,6 +133,22 @@ const PersonalReducer = (
     case GET_APPLICANT_PHOTO_FAILURE:
       return {
         ...state
+      };
+    case SEARCH_SCHOOL:
+      return {
+        ...state
+      };
+    case SEARCH_SCHOOL_SUCCESS:
+      return {
+        ...state,
+        middleSchoolData: action.payload.schoolList,
+        schoolSearchStatusCode: 200
+      };
+    case SEARCH_SCHOOL_FAILURE:
+      return {
+        ...state,
+        middleSchoolData: [],
+        schoolSearchStatusCode: 401
       };
     case GET_ADDRESS_DATA:
       return {

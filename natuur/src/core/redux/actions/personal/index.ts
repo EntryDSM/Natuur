@@ -1,6 +1,9 @@
 export const SEARCH_ADDRESS = "SEARCH_ADDRESS";
 export const SEARCH_ADDRESS_SUCCESS = "SEARCH_ADDRESS_SUCCESS";
 export const SEARCH_ADDRESS_FAILURE = "SEARCH_ADDRESS_FAILURE";
+export const SEARCH_SCHOOL = "SEARCH_SCHOOL";
+export const SEARCH_SCHOOL_SUCCESS = "SEARCH_SCHOOL_SUCCESS";
+export const SEARCH_SCHOOL_FAILURE = "SEARCH_SCHOOL_FAILURE";
 export const PUT_APPLICANT_PHOTO = "PUT_APPLICANT_PHOTO";
 export const PUT_APPLICANT_PHOTO_SUCCESS = "PUT_APPLICANT_PHOTO_SUCCESS";
 export const PUT_APPLICANT_PHOTO_FAILURE = "PUT_APPLICANT_PHOTO_FAILURE";
@@ -45,6 +48,18 @@ export interface SearchAddress {
     | typeof SEARCH_ADDRESS_SUCCESS
     | typeof SEARCH_ADDRESS_FAILURE;
   payload: SearchAddressType;
+}
+
+export interface SearchSchool {
+  type:
+    | typeof SEARCH_SCHOOL
+    | typeof SEARCH_SCHOOL_SUCCESS
+    | typeof SEARCH_SCHOOL_FAILURE;
+  payload: {
+    accessToken: string;
+    school: string;
+    schoolList?: string[];
+  };
 }
 
 export interface ChangeApplicantPhotoType {
@@ -129,6 +144,7 @@ export interface SetFile {
 
 export type PersonalActionTypes =
   | SearchAddress
+  | SearchSchool
   | ChangeApplicantPhoto
   | GetApplicantPhoto
   | getAddressData
@@ -153,6 +169,14 @@ export const searchAddress = (
 ): PersonalActionTypes => ({
   payload,
   type: SEARCH_ADDRESS
+});
+
+export const searchSchool = (payload: {
+  accessToken: string;
+  school: string;
+}): PersonalActionTypes => ({
+  payload,
+  type: SEARCH_SCHOOL
 });
 
 export const changeApplicantPhoto = (
