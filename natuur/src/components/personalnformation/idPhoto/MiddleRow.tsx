@@ -27,7 +27,7 @@ const MiddleRow: FC<OwnProps> = ({
       <S.Input
         isDisable={isGed}
         type="text"
-        value={middleSchool}
+        value={middleSchool || ""}
         readOnly
         inputCase="middle"
       />
