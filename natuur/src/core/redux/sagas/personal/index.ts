@@ -97,7 +97,10 @@ function* getSchoolData(action: SearchSchool) {
       accessToken,
       school
     });
-    yield put({ type: SEARCH_SCHOOL_SUCCESS, payload: response });
+    yield put({
+      type: SEARCH_SCHOOL_SUCCESS,
+      payload: { schoolList: response }
+    });
   } catch (e) {
     if (e.response.status === 401) {
       yield tokenRefresh(
