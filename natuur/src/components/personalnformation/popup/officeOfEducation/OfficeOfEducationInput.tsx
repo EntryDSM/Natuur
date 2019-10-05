@@ -24,8 +24,10 @@ const OfficeOfEducationPopUpInput: FC<OwnProps> = ({
   );
 
   useEffect(() => {
-    if (debounceSchool || !school) {
-      searchSchool({ accessToken, school });
+    if (school.length >= 2) {
+      if (debounceSchool || !school) {
+        searchSchool({ accessToken, school });
+      }
     }
   },        [debounceSchool]);
 
