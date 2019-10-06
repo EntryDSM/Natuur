@@ -34,7 +34,14 @@ export interface PaginationStateToProps {
   missingClass?: number;
   subjectScores?: Array<{
     semester: number;
-    subject: string;
+    subject:
+      | "korean"
+      | "math"
+      | "social"
+      | "science"
+      | "english"
+      | "history"
+      | "tech_home";
     score: "A" | "B" | "C" | "D" | "E" | "X";
   }>;
 }

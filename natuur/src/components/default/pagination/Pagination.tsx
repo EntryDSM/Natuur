@@ -1,4 +1,4 @@
-import React, { FC, memo, useCallback } from "react";
+import React, { FC, memo, useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import * as S from "../../../styles/default/pagination";
@@ -9,12 +9,14 @@ import {
   putGraduaatedDocument,
   putUnGraduaatedDocument
 } from "../../../core/redux/actions/applicantDocument";
+import { setSubjectScores } from "../../../core/redux/actions/grade";
 import {
   PaginationStateToProps,
   convertApplyTypeToEnglish,
   convertAdditionalTypeToEnglish,
   returnSubjectScore
 } from "./presenter";
+import { subjectList } from "../../../lib/utils/subjectList";
 import { AppState } from "../../../core/redux/store/store";
 import { precededByZeroBeforeOneDigitForString } from "../../../lib/utils/date";
 
@@ -116,6 +118,31 @@ const Pagination: FC<OwnProps> = ({
     subjectScores: state.gradeReducer.subjectScores
   }));
 
+  useEffect(() => {
+    if (graduationClassification) {
+      const graduateScores = [...subjectScores];
+
+      if (graduationClassification === "졸업자") {
+        if (graduateScores[graduateScores.length - 1].semester === 5) {
+          for (const subject of subjectList) {
+            graduateScores.push({
+              subject,
+              score: "A",
+              semester: 6
+            });
+          }
+        }
+        dispatch(setSubjectScores({ subjectScores: graduateScores }));
+      } else {
+        dispatch(
+          setSubjectScores({
+            subjectScores: graduateScores.filter(value => value.semester <= 5)
+          })
+        );
+      }
+    }
+  },        [graduationClassification]);
+
   const connectServer = useCallback(() => {
     const stringMonth = precededByZeroBeforeOneDigitForString(
       Number(birthMonth)
@@ -181,7 +208,9 @@ const Pagination: FC<OwnProps> = ({
               address: ifFalseNull(address),
               post_code: ifFalseNull(zipCode),
               student_number: stringStudentID
-                ? `3${stringUserClass}${stringStudentID}`
+                ? `3${userClass ? stringUserClass : "01"}${
+                    studentID ? stringStudentID : "01"
+                  }`
                 : null,
               school_name: ifFalseNull(middleSchool),
               school_tel: ifFalseNull(schoolContact)
@@ -230,7 +259,9 @@ const Pagination: FC<OwnProps> = ({
               address: ifFalseNull(address),
               post_code: ifFalseNull(zipCode),
               student_number: stringStudentID
-                ? `3${stringUserClass}${stringStudentID}`
+                ? `3${userClass ? stringUserClass : "01"}${
+                    studentID ? stringStudentID : "01"
+                  }`
                 : null,
               school_name: ifFalseNull(middleSchool),
               school_tel: ifFalseNull(schoolContact)
@@ -259,7 +290,7 @@ const Pagination: FC<OwnProps> = ({
         );
       }
     }
-  },                                [dispatch]);
+  },                                [dispatch, isGed, graduationClassification]);
 
   const allowedPageCheckers = useCallback(
     (isAccept: boolean, event: React.BaseSyntheticEvent) => {
