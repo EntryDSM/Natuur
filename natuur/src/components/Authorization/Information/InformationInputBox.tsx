@@ -69,7 +69,7 @@ const InformationInputBox: FC<Props> = ({
       setIsCertification(false);
       setIsPasswordClose(true);
     };
-  },        [isSendSuccess, isGetSuccess]);
+  },        [isSignUpSuccess, isGetSuccess]);
 
   const handleEmail = useCallback(
     ({ target: { value } }: React.ChangeEvent<HTMLInputElement>): void => {
@@ -174,7 +174,7 @@ const InformationInputBox: FC<Props> = ({
           !!(userPassword === userPasswordCheck && userPasswordCheck)
         }
         signUp={signUp}
-        isSignUpSuccess={isSignUpSuccess}
+        isGetSuccess={isGetSuccess}
         isSignUpError={isSignUpError}
         userEmail={userEmail}
         userPassword={userPassword}
