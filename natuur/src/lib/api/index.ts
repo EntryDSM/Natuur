@@ -100,7 +100,7 @@ export const changeUserApplicantPhotoApi = async (
   payload: { file: File }
 ) => {
   const formData = new FormData();
-  formData.append("file", payload.file);
+  formData.append("image", payload.file);
 
   const response = await instanceAxios.put(`/self/photo`, formData, {
     headers: {
@@ -224,7 +224,7 @@ export const getSchoolDataApi = async (payload: {
 }) => {
   const response = await instanceAxios.get<string[]>("/school/search", {
     headers: {
-      Authorization: authorizationHeader(payload.accessToken)
+      Authorization: `Bearer ${payload.accessToken}`
     },
     params: {
       query: payload.school

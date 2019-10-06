@@ -75,7 +75,10 @@ function* getUserApplicantPhoto(action: GetApplicantPhoto) {
     const response: Blob = yield call(getUserApplicantPhotoApi, {
       accessToken
     });
-    yield put({ type: GET_APPLICANT_PHOTO_SUCCESS, payload: response });
+    yield put({
+      type: GET_APPLICANT_PHOTO_SUCCESS,
+      payload: { file: response }
+    });
   } catch (e) {
     if (e.response.status === 401) {
       yield tokenRefresh(
