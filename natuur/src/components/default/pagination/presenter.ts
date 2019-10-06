@@ -102,11 +102,7 @@ export const returnSubjectScore = (
     score: "A" | "B" | "C" | "D" | "E" | "X";
   }>
 ): Array<"A" | "B" | "C" | "D" | "E" | "X"> => {
-  const score = subjectScores.map(value => {
-    if (value.subject === subject) {
-      return value.score;
-    }
-  });
+  const score = subjectScores.filter(value => value.subject === subject);
 
-  return score;
+  return score.map(value => value.score);
 };
