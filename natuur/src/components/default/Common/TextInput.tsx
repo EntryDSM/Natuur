@@ -31,7 +31,6 @@ const TextInput: FC<Props> = ({
   return (
     <InfomationInputBoxWrapperInputSpace>
       <InformationInputSpaceArea
-        maxLength={name === "certification" ? 6 : null}
         isCertification={isCertification}
         width={width}
         type={type}
