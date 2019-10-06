@@ -41,7 +41,7 @@ export const userLogOutApi = async (payload: { refreshToken: string }) => {
 };
 
 export const refreshJWTApi = async (payload: { refreshToken: string }) => {
-  const response = await instanceAxios.patch("/auth", {
+  const response = await instanceAxios.patch("/auth", null, {
     headers: {
       "X-Refresh-Token": `Bearer ${payload.refreshToken}`
     }
@@ -102,7 +102,7 @@ export const changeUserApplicantPhotoApi = async (
   const formData = new FormData();
   formData.append("file", payload.file);
 
-  const response = await instanceAxios.put(`/self/photo`, payload, {
+  const response = await instanceAxios.put(`/self/photo`, formData, {
     headers: {
       Authorization: `Bearer ${accessToken.accessToken}`,
       "content-type": "multipart/form-data"
