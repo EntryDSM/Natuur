@@ -31,7 +31,7 @@ interface RootState {
       | "science"
       | "english"
       | "history"
-      | "tech_home";
+      | "tech_and_home";
     score: "A" | "B" | "C" | "D" | "E" | "X";
   }>;
   isFirstGradeSmester1: boolean;

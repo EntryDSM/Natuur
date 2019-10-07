@@ -5,7 +5,7 @@ type subject =
   | "science"
   | "english"
   | "history"
-  | "tech_home";
+  | "tech_and_home";
 
 export const subjectList: subject[] = [
   "korean",
@@ -14,7 +14,7 @@ export const subjectList: subject[] = [
   "science",
   "english",
   "history",
-  "tech_home"
+  "tech_and_home"
 ];
 
 export const subjectScoresList = [];
@@ -28,7 +28,7 @@ export function returnSubjectScoresList(): Array<{
     | "science"
     | "english"
     | "history"
-    | "tech_home";
+    | "tech_and_home";
   score: "A" | "B" | "C" | "D" | "E" | "X";
 }> {
   for (const subject of subjectList) {

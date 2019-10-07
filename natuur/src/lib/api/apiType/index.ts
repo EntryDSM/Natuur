@@ -90,7 +90,7 @@ export interface GraduatedApplicationApiType {
     history: Grade[];
     math: Grade[];
     science: Grade[];
-    tech_home: Grade[];
+    tech_and_home: Grade[];
     english: Grade[];
   };
   self_introduction_and_study_plan: {
@@ -115,7 +115,6 @@ export interface UnGraduatedApplicationApiType {
       | "PRIVILEGED_ADMISSION"
       | "NOT_APPLICABLE";
     is_daejeon: boolean;
-    graduated_year: string;
   };
   personal_information: {
     name: string;
@@ -143,7 +142,7 @@ export interface UnGraduatedApplicationApiType {
     history: Grade[];
     math: Grade[];
     science: Grade[];
-    tech_home: Grade[];
+    tech_and_home: Grade[];
     english: Grade[];
   };
   self_introduction_and_study_plan: {

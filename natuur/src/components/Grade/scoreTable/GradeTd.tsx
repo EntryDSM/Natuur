@@ -11,7 +11,7 @@ interface OwnProps {
     | "math"
     | "science"
     | "english"
-    | "tech_home";
+    | "tech_and_home";
   isLast?: boolean;
   subjectScores: Array<{
     semester: number;

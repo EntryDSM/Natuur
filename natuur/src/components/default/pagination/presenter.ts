@@ -41,7 +41,7 @@ export interface PaginationStateToProps {
       | "science"
       | "english"
       | "history"
-      | "tech_home";
+      | "tech_and_home";
     score: "A" | "B" | "C" | "D" | "E" | "X";
   }>;
 }
@@ -102,7 +102,7 @@ export const returnSubjectScore = (
     | "math"
     | "science"
     | "english"
-    | "tech_home",
+    | "tech_and_home",
   subjectScores: Array<{
     semester: number;
     subject: string;

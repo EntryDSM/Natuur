@@ -25,7 +25,7 @@ interface OwnProps {
     history: Array<"A" | "B" | "C" | "D" | "E" | "X">;
     math: Array<"A" | "B" | "C" | "D" | "E" | "X">;
     science: Array<"A" | "B" | "C" | "D" | "E" | "X">;
-    tech_home: Array<"A" | "B" | "C" | "D" | "E" | "X">;
+    tech_and_home: Array<"A" | "B" | "C" | "D" | "E" | "X">;
     english: Array<"A" | "B" | "C" | "D" | "E" | "X">;
   };
   isOpen: {
@@ -127,10 +127,10 @@ const ScoreTable: FC<OwnProps> = ({
           <GradeList
             setSubjectScores={setSubjectScores}
             subjectScores={subjectScores.filter(
-              value => value.subject === "tech_home"
+              value => value.subject === "tech_and_home"
             )}
             course="기술가정"
-            subject="tech_home"
+            subject="tech_and_home"
           />
           <GradeList
             setSubjectScores={setSubjectScores}

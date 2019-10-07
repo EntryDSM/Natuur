@@ -1,4 +1,4 @@
-import React, { FC, memo, useCallback, useEffect } from "react";
+import React, { FC, memo, useCallback, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import * as S from "../../../styles/default/pagination";
@@ -7,7 +7,8 @@ import { prevArrow, nextArrow } from "../../../assets/common";
 import {
   putGedDocument,
   putGraduaatedDocument,
-  putUnGraduaatedDocument
+  putUnGraduaatedDocument,
+  getApplicationDocument
 } from "../../../core/redux/actions/applicantDocument";
 import { setSubjectScores } from "../../../core/redux/actions/grade";
 import {
@@ -53,6 +54,7 @@ const Pagination: FC<OwnProps> = ({
   AcceptPagination
 }) => {
   const dispatch = useDispatch();
+  const didMountRef = useRef(false);
 
   const {
     isGed,
@@ -117,6 +119,14 @@ const Pagination: FC<OwnProps> = ({
     missingClass: state.gradeReducer.missingClass,
     subjectScores: state.gradeReducer.subjectScores
   }));
+
+  useEffect(() => {
+    if (!didMountRef.current) {
+      didMountRef.current = true;
+
+      dispatch(getApplicationDocument({ accessToken }));
+    }
+  },        []);
 
   useEffect(() => {
     if (graduationClassification) {
@@ -194,7 +204,7 @@ const Pagination: FC<OwnProps> = ({
               apply_type: convertApplyTypeToEnglish(applyType),
               additional_type: convertAdditionalTypeToEnglish(remarks),
               is_daejeon: selectRegion === "대전",
-              graduated_year: graduationYear
+              graduated_year: ifFalseNull(graduationYear)
             },
             personal_information: {
               name: ifFalseNull(name),
@@ -228,7 +238,7 @@ const Pagination: FC<OwnProps> = ({
               history: returnSubjectScore("history", subjectScores),
               math: returnSubjectScore("math", subjectScores),
               science: returnSubjectScore("science", subjectScores),
-              tech_home: returnSubjectScore("tech_home", subjectScores),
+              tech_and_home: returnSubjectScore("tech_and_home", subjectScores),
               english: returnSubjectScore("english", subjectScores)
             },
             self_introduction_and_study_plan: {
@@ -244,8 +254,7 @@ const Pagination: FC<OwnProps> = ({
             classification: {
               apply_type: convertApplyTypeToEnglish(applyType),
               additional_type: convertAdditionalTypeToEnglish(remarks),
-              is_daejeon: selectRegion === "대전",
-              graduated_year: graduationYear
+              is_daejeon: selectRegion === "대전"
             },
             personal_information: {
               name: ifFalseNull(name),
@@ -279,7 +288,7 @@ const Pagination: FC<OwnProps> = ({
               history: returnSubjectScore("history", subjectScores),
               math: returnSubjectScore("math", subjectScores),
               science: returnSubjectScore("science", subjectScores),
-              tech_home: returnSubjectScore("tech_home", subjectScores),
+              tech_and_home: returnSubjectScore("tech_and_home", subjectScores),
               english: returnSubjectScore("english", subjectScores)
             },
             self_introduction_and_study_plan: {
@@ -290,7 +299,7 @@ const Pagination: FC<OwnProps> = ({
         );
       }
     }
-  },                                [dispatch, isGed, graduationClassification]);
+  },                                [dispatch, isGed, graduationClassification, subjectScores.length]);
 
   const allowedPageCheckers = useCallback(
     (isAccept: boolean, event: React.BaseSyntheticEvent) => {
