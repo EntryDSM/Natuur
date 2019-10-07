@@ -34,7 +34,13 @@ const PageList: FC = () => {
     file,
     address,
     selfIntroduction,
-    studyPlan
+    studyPlan,
+    gedAverageScore,
+    volunteer,
+    absent,
+    earlyLeave,
+    tardy,
+    missingClass
   } = useSelector<AppState, State>(state => ({
     applyType: state.infoReducer.applyType,
     selectRegion: state.infoReducer.selectRegion,
@@ -51,7 +57,13 @@ const PageList: FC = () => {
     address: state.PersonalReducer.address,
     file: state.PersonalReducer.file,
     selfIntroduction: state.introReducer.selfIntroduction,
-    studyPlan: state.introReducer.studyPlan
+    studyPlan: state.introReducer.studyPlan,
+    gedAverageScore: state.gradeReducer.gedAverageScore,
+    volunteer: state.gradeReducer.volunteer,
+    absent: state.gradeReducer.absent,
+    earlyLeave: state.gradeReducer.earlyLeave,
+    tardy: state.gradeReducer.tardy,
+    missingClass: state.gradeReducer.missingClass
   }));
 
   return (
@@ -79,7 +91,15 @@ const PageList: FC = () => {
       />
       <PagenationHorizon />
 
-      <PageItem title="성적입력" isActive={false} />
+      <PageItem
+        title="성적입력"
+        isActive={
+          !!(
+            gedAverageScore ||
+            (volunteer && absent && earlyLeave && tardy && missingClass)
+          )
+        }
+      />
       <PagenationHorizon />
 
       <PageItem
