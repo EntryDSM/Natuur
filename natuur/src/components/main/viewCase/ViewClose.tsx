@@ -27,6 +27,8 @@ type Props = ReturnType<typeof mapStateToProps> &
   ReturnType<typeof mapDispatchToProps> &
   OwnProps;
 
+const isWaitingPeriod: boolean = getIsWaitingPeriod();
+
 const ViewClose: FC<Props> = ({
   setIsOpenView,
   getIsUpdatePopUp,
@@ -36,19 +38,8 @@ const ViewClose: FC<Props> = ({
   isPassedFinalApply,
   isSuccess,
   isWaiting,
-  getUserApplicantStatus,
   periodList
 }) => {
-  const didMountRef = useRef(false);
-
-  useEffect(() => {
-    if (!didMountRef.current) {
-      didMountRef.current = true;
-      getUserApplicantStatus({ accessToken });
-    }
-  },        []);
-
-  const isWaitingPeriod: boolean = getIsWaitingPeriod();
   return (
     <S.ContentsSorter>
       {isSettingCookie(accessToken) ? (
