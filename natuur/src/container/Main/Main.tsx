@@ -24,6 +24,7 @@ import {
 } from "../../core/redux/actions/popup";
 import PopUp from "../default/popup/PopUp";
 import { AppState } from "../../core/redux/store/store";
+import { getUserApplicantStatus } from "../../core/redux/actions/main/index";
 
 const mapStateToProps = (state: AppState) => ({
   userEmail: state.userReducer.userEmail
@@ -32,7 +33,9 @@ const mapStateToProps = (state: AppState) => ({
 const mapDispatchToProps = dispatch => ({
   getIsUpdatePopUp: () => dispatch(getIsUpdatePopUp()),
   updatePopUpCase: (popUpCase: "default" | "login" | "set" | "check") =>
-    dispatch(updatePopUpCase(popUpCase))
+    dispatch(updatePopUpCase(popUpCase)),
+  getUserApplicantStatus: (payload: { accessToken: string }) =>
+    dispatch(getUserApplicantStatus(payload))
 });
 
 interface OwnProps {
@@ -55,6 +58,7 @@ const Main: FC<Props> = ({
   getIsUpdatePopUp,
   updatePopUpCase,
   accessToken,
+  getUserApplicantStatus,
   userEmail
 }) => {
   const didMountRef = useRef(false);
@@ -110,6 +114,8 @@ const Main: FC<Props> = ({
         setCheckImgList,
         PERIOD_LIST
       );
+
+      getUserApplicantStatus({ accessToken });
     }
   },        []);
 
