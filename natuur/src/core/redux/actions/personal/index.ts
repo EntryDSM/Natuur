@@ -63,8 +63,8 @@ export interface SearchSchool {
 }
 
 export interface ChangeApplicantPhotoType {
-  accessToken: { accessToken: string };
-  payload: { file: File };
+  file: File;
+  accessToken: string;
 }
 export interface ChangeApplicantPhoto {
   type:
