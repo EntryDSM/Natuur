@@ -86,6 +86,7 @@ const Grade: FC<Props> = ({
         ) : (
           <>
             <Volunteer
+              isGed={isGed}
               volunteerTime={volunteer}
               setVolunteerTime={setVolunteer}
               absent={absent}

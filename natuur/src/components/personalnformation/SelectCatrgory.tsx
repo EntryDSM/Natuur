@@ -112,14 +112,17 @@ const SelectCategory: FC<Props> = ({
         setBirthDayYear(birth_date.split("-")[0]);
         setBirthDayMonth(birth_date.split("-")[1]);
         setBirthDayDate(birth_date.split("-")[2]);
-        setClass({ class: student_number.slice(1, 3) });
-        setStudentID({ studentID: student_number.slice(3, 5) });
-        setMiddleSchool({ school: school_name });
         setParentsName({ name: parent_name });
-        setSchoolContact({ contact: school_tel });
         setParentsContact({ contact: parent_tel });
         setUserContact({ contact: applicant_tel });
         getAddressData({ address, zipCode: post_code });
+
+        if (school_name || student_number || school_name || school_tel) {
+          setClass({ class: student_number.slice(1, 3) });
+          setStudentID({ studentID: student_number.slice(3, 5) });
+          setMiddleSchool({ school: school_name });
+          setSchoolContact({ contact: school_tel });
+        }
       }
     }
     return () => setIsOpen({ pageName: "personal", isOpen: true });

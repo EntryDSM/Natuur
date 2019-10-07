@@ -32,6 +32,7 @@ interface OwnProps {
     pageName: "info" | "personal" | "grade" | "intro";
     isOpen: boolean;
   }) => void;
+  isGed: boolean;
 }
 
 const Volunteer: FC<OwnProps> = ({
@@ -47,7 +48,8 @@ const Volunteer: FC<OwnProps> = ({
   setMissingClass,
   diligenceGrade,
   isOpen,
-  setIsOpen
+  setIsOpen,
+  isGed
 }) => {
   const didMountRef = useRef(false);
 
@@ -56,19 +58,21 @@ const Volunteer: FC<OwnProps> = ({
       didMountRef.current = true;
 
       if (!isOpen.grade) {
-        const {
-          volunteer_time,
-          full_cut_count,
-          period_cut_count,
-          late_count,
-          early_leave_count
-        } = diligenceGrade;
+        if (diligenceGrade) {
+          const {
+            volunteer_time,
+            full_cut_count,
+            period_cut_count,
+            late_count,
+            early_leave_count
+          } = diligenceGrade;
 
-        setVolunteerTime({ volunteer: volunteer_time });
-        setAbsent({ absent: full_cut_count });
-        setEarlyLeave({ earlyLeave: early_leave_count });
-        setTardy({ tardy: late_count });
-        setMissingClass({ missingClass: period_cut_count });
+          setVolunteerTime({ volunteer: volunteer_time });
+          setAbsent({ absent: full_cut_count });
+          setEarlyLeave({ earlyLeave: early_leave_count });
+          setTardy({ tardy: late_count });
+          setMissingClass({ missingClass: period_cut_count });
+        }
       }
     }
     return () => setIsOpen({ pageName: "grade", isOpen: true });

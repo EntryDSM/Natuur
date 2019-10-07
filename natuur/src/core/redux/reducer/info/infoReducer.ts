@@ -13,7 +13,7 @@ interface RootState {
   applyType: string;
   selectRegion: string;
   graduationClassification?: string;
-  graduationYear?: string;
+  graduationYear: string;
   remarks: string;
   isSuccess?: boolean;
 }
@@ -23,7 +23,8 @@ const initialState: RootState = {
   selectRegion: "",
   remarks: "",
   isGed: false,
-  isSuccess: false
+  isSuccess: false,
+  graduationYear: ""
 };
 
 const infoReducer = (

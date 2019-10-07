@@ -123,6 +123,7 @@ const PersonalReducer = (
       };
     case GET_APPLICANT_PHOTO_SUCCESS: {
       const { file } = action.payload;
+
       const url = URL.createObjectURL(new Blob([file]));
 
       return {
