@@ -41,20 +41,9 @@ const IdPhotoWrapper: FC<OwnProps> = ({
   changeApplicantPhoto,
   email,
   accessToken,
-  imagePath,
   file,
   setFile
 }) => {
-  const didMountRef = useRef(false);
-
-  useEffect(() => {
-    if (!didMountRef.current) {
-      didMountRef.current = true;
-
-      setFile(imagePath);
-    }
-  },        []);
-
   return (
     <S.IdPhotoBox>
       <S.IdPhotoInput

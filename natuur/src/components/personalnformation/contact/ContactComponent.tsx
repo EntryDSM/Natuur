@@ -22,12 +22,6 @@ const ContactComponent: FC<OwnProps> = ({
   setParentsContact,
   setUserContact
 }) => {
-  useEffect(() => {
-    if (isGed) {
-      setSchoolContact({ contact: undefined });
-    }
-  },        [isGed]);
-
   return (
     <>
       <ContactRow
