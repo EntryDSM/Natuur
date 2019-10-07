@@ -68,11 +68,16 @@ const PageList: FC = () => {
 
   return (
     <S.PageListWrapper>
-      <PageItem title="전형구분" isActive={!!(applyType && selectRegion)} />
+      <PageItem
+        title="전형구분"
+        link="info-summary"
+        isActive={!!(applyType && selectRegion)}
+      />
       <PagenationHorizon />
 
       <PageItem
         title="인적사항"
+        link="personal"
         isActive={
           !!(
             name &&
@@ -93,6 +98,7 @@ const PageList: FC = () => {
 
       <PageItem
         title="성적입력"
+        link="grade"
         isActive={
           !!(
             gedAverageScore ||
@@ -104,6 +110,7 @@ const PageList: FC = () => {
 
       <PageItem
         title="자기소개서"
+        link="intro"
         isActive={!!(studyPlan && selfIntroduction)}
       />
     </S.PageListWrapper>
