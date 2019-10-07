@@ -450,7 +450,7 @@ const ApplicationTables: FC<OwnProps> = ({
                   2019년 10월 <S.Blank widthSize={10} />일
                 </S.marginTopBottomP>
                 <S.Blank widthSize={6} />
-                교사 : <S.Blank widthSize={10}>{middleSchool}</S.Blank> (서명)
+                교사 : <S.Blank>{middleSchool}</S.Blank> (서명)
               </div>
             </td>
           </tr>

@@ -25,7 +25,7 @@ const RecommendationBody: FC<OwnProps> = ({
     <S.BodyContent>
       <S.Information>
         <S.Blank isUnderLine widthSize={68}>
-          {middleSchool}
+          {middleSchool.split("중학교")[0]}
         </S.Blank>{" "}
         중학교
         <br />
@@ -57,7 +57,7 @@ const RecommendationBody: FC<OwnProps> = ({
       </S.TeacherSignature>
       <S.MiddleSchoolPrincipal>
         <S.Blank isUnderLine widthSize={230}>
-          {middleSchool}
+          {middleSchool.split("중학교")[0]}
         </S.Blank>{" "}
         중학교장
       </S.MiddleSchoolPrincipal>
