@@ -33,11 +33,11 @@ const GraduationClassificationRow: FC<OwnProps> = ({
           key={result.CHECK_BOX_CASE}
         >
           <S.CheckBox
-            type="radio"
+            type="checkbox"
             name="GraduationClassificationRow"
             id={result.CHECK_BOX_CASE}
             value={result.CHECK_BOX_NAME}
-            onChange={({ currentTarget: { value } }) => setRadioType(value)}
+            onClick={({ currentTarget: { value } }) => setRadioType(value)}
             disabled={isGedState}
           />
           <S.CircleLabel htmlFor={result.CHECK_BOX_CASE}>
