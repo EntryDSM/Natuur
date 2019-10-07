@@ -57,14 +57,16 @@ export const FooterFooterNavigationCover = styled.div`
   flex-direction: column;
 `;
 
-export const FooterNavigation = styled(Link)<{
+export const FooterNavigation = styled.a<{
   margintop?: string;
   isactive?: number;
+  istitle?: boolean;
 }>`
   font-size: 14px;
   color: #ffffff;
   margin-top: ${props => props.margintop};
   opacity: ${props => (props.isactive ? "1" : "0.6")};
+  ${props => props.istitle && "cursor: default"};
 
   &:link {
     color: #ffffff;

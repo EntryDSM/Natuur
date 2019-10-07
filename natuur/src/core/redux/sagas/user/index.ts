@@ -28,7 +28,6 @@ function* logOut(action: LogOut) {
     yield call(userLogOutApi, action.payload);
     yield put({ type: LOG_OUT_SUCCESS });
   } catch (e) {
-    console.log(JSON.parse(JSON.stringify(e)));
     yield put({ type: LOG_OUT_FAILURS });
   }
 }

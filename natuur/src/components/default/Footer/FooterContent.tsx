@@ -47,18 +47,20 @@ const FooterContent: FC<Props> = ({ footerNavigationIsActive }) => {
 
       <FooterCoverNav>
         <FooterFooterNavigationCover>
-          <FooterNavigation to="/" isactive={footerNavigationIsActive[0]}>
+          <FooterNavigation istitle isactive={footerNavigationIsActive[0]}>
             Entry 소개
           </FooterNavigation>
           <FooterNavigation
-            to="/"
+            href="https://www.notion.so/junukimdev/e084056b67d34dcfa71e8e78143ee4cd"
+            target="_blank"
             margintop="14px"
             isactive={footerNavigationIsActive[1]}
           >
             시스템 소개
           </FooterNavigation>
           <FooterNavigation
-            to="/"
+            href="https://www.notion.so/junukimdev/Entry-05231333090d4b5196f14ae4a19f1acc"
+            target="_blank"
             margintop="14px"
             isactive={footerNavigationIsActive[2]}
           >

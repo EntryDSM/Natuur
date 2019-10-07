@@ -35,7 +35,7 @@ function* getApplicationDocument(action: GetApplicationDocument) {
     );
     yield put({ type: GET_APPLICATION_DOCUMENT_SUCCESS, payload: response });
   } catch (e) {
-    if (e.response.status === 401) {
+    if (e.response.status === 401 || e.response.status === 422) {
       yield tokenRefresh(
         getApplicationDocumentApi,
         { putStatusCode: e.response.status },
@@ -52,7 +52,7 @@ function* putGedApplicationDocument(action: PutGedDocument) {
     yield call(putGedApplicationDocumentApi, action.payload);
     yield put({ type: PUT_GED_DOCUMENT_SUCCESS });
   } catch (e) {
-    if (e.response.status === 401) {
+    if (e.response.status === 401 || e.response.status === 422) {
       yield tokenRefresh(
         putGedApplicationDocumentApi,
         { putStatusCode: e.response.status },
@@ -72,7 +72,7 @@ function* putGraduatedApplicationDocument(action: PutGraduaatedDocument) {
     yield call(putGraduatedApplicationDocumentApi, action.payload);
     yield put({ type: PUT_GRADUATED_DOCUMENT_SUCCESS });
   } catch (e) {
-    if (e.response.status === 401) {
+    if (e.response.status === 401 || e.response.status === 422) {
       yield tokenRefresh(
         putGraduatedApplicationDocumentApi,
         { putStatusCode: e.response.status },
@@ -92,7 +92,7 @@ function* putUnGraduatedApplicationDocument(action: PutUnGraduaatedDocument) {
     yield call(putUnGraduatedApplicationDocumentApi, action.payload);
     yield put({ type: PUT_UNGRADUATED_DOCUMENT_SUCCESS });
   } catch (e) {
-    if (e.response.status === 401) {
+    if (e.response.status === 401 || e.response.status === 422) {
       yield tokenRefresh(
         putUnGraduatedApplicationDocumentApi,
         { putStatusCode: e.response.status },

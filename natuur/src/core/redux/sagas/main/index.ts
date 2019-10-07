@@ -25,7 +25,7 @@ function* getUserApplicationStatus(action: UserApplicantStatus) {
     );
     yield put({ type: GET_USER_APPLICANT_STATUS_SUCCESS, payload: response });
   } catch (e) {
-    if (e.response.status === 401) {
+    if (e.response.status === 401 || e.response.status === 422) {
       yield tokenRefresh(
         getUserApplicationStatusApi,
         action.payload,
@@ -49,7 +49,7 @@ function* patchFinalSubmit(action: PatchFinalSubmit) {
       payload: response
     });
   } catch (e) {
-    if (e.response.status === 401) {
+    if (e.response.status === 401 || e.response.status === 422) {
       yield tokenRefresh(
         patchFianlSubmitApi,
         action.payload,

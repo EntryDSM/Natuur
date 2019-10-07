@@ -35,7 +35,7 @@ function* getMapData(action: SearchAddress) {
     );
     yield put({ type: SEARCH_ADDRESS_SUCCESS, payload: response });
   } catch (e) {
-    if (e.response.status === 401) {
+    if (e.response.status === 401 || e.response.status === 422) {
       yield tokenRefresh(
         getMapDataApi,
         action.payload,
@@ -56,7 +56,7 @@ function* changeUserApplicantPhoto(action: ChangeApplicantPhoto) {
     );
     yield put({ type: PUT_APPLICANT_PHOTO_SUCCESS });
   } catch (e) {
-    if (e.response.status === 401) {
+    if (e.response.status === 401 || e.response.status === 422) {
       yield tokenRefresh(
         changeUserApplicantPhotoApi,
         action.payload,
@@ -75,12 +75,13 @@ function* getUserApplicantPhoto(action: GetApplicantPhoto) {
     const response: Blob = yield call(getUserApplicantPhotoApi, {
       accessToken
     });
+
     yield put({
       type: GET_APPLICANT_PHOTO_SUCCESS,
       payload: { file: response }
     });
   } catch (e) {
-    if (e.response.status === 401) {
+    if (e.response.status === 401 || e.response.status === 422) {
       yield tokenRefresh(
         getUserApplicantPhotoApi,
         { accessToken },
@@ -105,7 +106,7 @@ function* getSchoolData(action: SearchSchool) {
       payload: { schoolList: response }
     });
   } catch (e) {
-    if (e.response.status === 401) {
+    if (e.response.status === 401 || e.response.status === 422) {
       yield tokenRefresh(
         getSchoolDataApi,
         {
