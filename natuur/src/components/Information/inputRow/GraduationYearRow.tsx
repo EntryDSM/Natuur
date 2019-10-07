@@ -41,7 +41,7 @@ const GraduationYearRow: FC<OwnProps> = ({
     if (graduationClassificationState === "졸업 예정자") {
       setYear("2020");
     } else if (isGedState) {
-      setYear(undefined);
+      setYear("");
     }
   },        [graduationClassificationState]);
 
