@@ -61,8 +61,10 @@ const Introduce: FC<Props> = ({
       const { self_introduction, study_plan } = selfIntroductionAndStudyPlan;
 
       if (!isOpen.intro) {
-        setSelfIntroduction({ text: self_introduction });
-        setStudyPlan({ text: study_plan });
+        setSelfIntroduction({
+          text: self_introduction === null ? "" : self_introduction
+        });
+        setStudyPlan({ text: study_plan === null ? "" : study_plan });
       }
     }
     return () => setIsOpen({ pageName: "intro", isOpen: true });
