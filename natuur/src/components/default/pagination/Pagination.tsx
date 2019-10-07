@@ -1,4 +1,4 @@
-import React, { FC, memo, useCallback } from "react";
+import React, { FC, memo, useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import * as S from "../../../styles/default/pagination";
@@ -9,14 +9,24 @@ import {
   putGraduaatedDocument,
   putUnGraduaatedDocument
 } from "../../../core/redux/actions/applicantDocument";
+import { setSubjectScores } from "../../../core/redux/actions/grade";
 import {
   PaginationStateToProps,
   convertApplyTypeToEnglish,
   convertAdditionalTypeToEnglish,
   returnSubjectScore
 } from "./presenter";
+import { subjectList } from "../../../lib/utils/subjectList";
 import { AppState } from "../../../core/redux/store/store";
 import { precededByZeroBeforeOneDigitForString } from "../../../lib/utils/date";
+
+const ifFalseNull = (value: any) => {
+  if (value !== "") {
+    return value;
+  }
+
+  return null;
+};
 
 const Prev: FC = memo(() => (
   <>
@@ -108,6 +118,31 @@ const Pagination: FC<OwnProps> = ({
     subjectScores: state.gradeReducer.subjectScores
   }));
 
+  useEffect(() => {
+    if (graduationClassification) {
+      const graduateScores = [...subjectScores];
+
+      if (graduationClassification === "졸업자") {
+        if (graduateScores[graduateScores.length - 1].semester === 5) {
+          for (const subject of subjectList) {
+            graduateScores.push({
+              subject,
+              score: "A",
+              semester: 6
+            });
+          }
+        }
+        dispatch(setSubjectScores({ subjectScores: graduateScores }));
+      } else {
+        dispatch(
+          setSubjectScores({
+            subjectScores: graduateScores.filter(value => value.semester <= 5)
+          })
+        );
+      }
+    }
+  },        [graduationClassification]);
+
   const connectServer = useCallback(() => {
     const stringMonth = precededByZeroBeforeOneDigitForString(
       Number(birthMonth)
@@ -130,21 +165,23 @@ const Pagination: FC<OwnProps> = ({
             is_daejeon: selectRegion === "대전"
           },
           personal_information: {
-            name,
-            sex: gender,
-            birth_date: `${birthYear}-${stringMonth}-${stringDate}`,
-            parent_name: parentsName,
-            parent_tel: parentsContact,
-            applicant_tel: userContact,
-            address,
-            post_code: zipCode
+            name: ifFalseNull(name),
+            sex: ifFalseNull(gender),
+            birth_date: `${birthYear ? birthYear : "2003"}-${
+              birthMonth ? stringMonth : "01"
+            }-${birthDate ? stringDate : "01"}`,
+            parent_name: ifFalseNull(parentsName),
+            parent_tel: ifFalseNull(parentsContact),
+            applicant_tel: ifFalseNull(userContact),
+            address: ifFalseNull(address),
+            post_code: ifFalseNull(zipCode)
           },
           ged_grade: {
             ged_average_score: gedAverageScore
           },
           self_introduction_and_study_plan: {
-            self_introduction: selfIntroduction,
-            study_plan: studyPlan
+            self_introduction: ifFalseNull(selfIntroduction),
+            study_plan: ifFalseNull(studyPlan)
           }
         })
       );
@@ -160,17 +197,23 @@ const Pagination: FC<OwnProps> = ({
               graduated_year: graduationYear
             },
             personal_information: {
-              name,
-              sex: gender,
-              birth_date: `${birthYear}-${stringMonth}-${stringDate}`,
-              parent_name: parentsName,
-              parent_tel: parentsContact,
-              applicant_tel: userContact,
-              address,
-              post_code: zipCode,
-              student_number: `3${stringUserClass}${stringStudentID}`,
-              school_name: middleSchool,
-              school_tel: schoolContact
+              name: ifFalseNull(name),
+              sex: ifFalseNull(gender),
+              birth_date: `${birthYear ? birthYear : "2003"}-${
+                birthMonth ? stringMonth : "01"
+              }-${birthDate ? stringDate : "01"}`,
+              parent_name: ifFalseNull(parentsName),
+              parent_tel: ifFalseNull(parentsContact),
+              applicant_tel: ifFalseNull(userContact),
+              address: ifFalseNull(address),
+              post_code: ifFalseNull(zipCode),
+              student_number: stringStudentID
+                ? `3${userClass ? stringUserClass : "01"}${
+                    studentID ? stringStudentID : "01"
+                  }`
+                : null,
+              school_name: ifFalseNull(middleSchool),
+              school_tel: ifFalseNull(schoolContact)
             },
             diligence_grade: {
               volunteer_time: volunteer,
@@ -189,8 +232,8 @@ const Pagination: FC<OwnProps> = ({
               english: returnSubjectScore("english", subjectScores)
             },
             self_introduction_and_study_plan: {
-              self_introduction: selfIntroduction,
-              study_plan: studyPlan
+              self_introduction: ifFalseNull(selfIntroduction),
+              study_plan: ifFalseNull(studyPlan)
             }
           })
         );
@@ -205,17 +248,23 @@ const Pagination: FC<OwnProps> = ({
               graduated_year: graduationYear
             },
             personal_information: {
-              name,
-              sex: gender,
-              birth_date: `${birthYear}-${stringMonth}-${stringDate}`,
-              parent_name: parentsName,
-              parent_tel: parentsContact,
-              applicant_tel: userContact,
-              address,
-              post_code: zipCode,
-              student_number: `3${stringUserClass}${stringStudentID}`,
-              school_name: middleSchool,
-              school_tel: schoolContact
+              name: ifFalseNull(name),
+              sex: ifFalseNull(gender),
+              birth_date: `${birthYear ? birthYear : "2003"}-${
+                birthMonth ? stringMonth : "01"
+              }-${birthDate ? stringDate : "01"}`,
+              parent_name: ifFalseNull(parentsName),
+              parent_tel: ifFalseNull(parentsContact),
+              applicant_tel: ifFalseNull(userContact),
+              address: ifFalseNull(address),
+              post_code: ifFalseNull(zipCode),
+              student_number: stringStudentID
+                ? `3${userClass ? stringUserClass : "01"}${
+                    studentID ? stringStudentID : "01"
+                  }`
+                : null,
+              school_name: ifFalseNull(middleSchool),
+              school_tel: ifFalseNull(schoolContact)
             },
             diligence_grade: {
               volunteer_time: volunteer,
@@ -234,14 +283,14 @@ const Pagination: FC<OwnProps> = ({
               english: returnSubjectScore("english", subjectScores)
             },
             self_introduction_and_study_plan: {
-              self_introduction: selfIntroduction,
-              study_plan: studyPlan
+              self_introduction: ifFalseNull(selfIntroduction),
+              study_plan: ifFalseNull(studyPlan)
             }
           })
         );
       }
     }
-  },                                [dispatch]);
+  },                                [dispatch, isGed, graduationClassification]);
 
   const allowedPageCheckers = useCallback(
     (isAccept: boolean, event: React.BaseSyntheticEvent) => {

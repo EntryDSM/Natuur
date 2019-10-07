@@ -11,7 +11,7 @@ import {
 
 interface OwnProps {
   isSuccess: boolean;
-  isSignUpSuccess: boolean;
+  isGetSuccess: boolean;
   isSignUpError: boolean;
   userEmail: string;
   userPassword: string;
@@ -43,7 +43,7 @@ const AcceptButton: FC<Props> = ({
   updateToastr,
   isSuccess,
   isSignUpError,
-  isSignUpSuccess,
+  isGetSuccess,
   isPasswordClose,
   signUp,
   history,
@@ -67,10 +67,10 @@ const AcceptButton: FC<Props> = ({
   },                                      []);
 
   useEffect(() => {
-    if (isSignUpSuccess) {
-      pushMainAndUpdateToastr(createSuccessToastr, history, isSignUpSuccess);
+    if (isGetSuccess) {
+      pushMainAndUpdateToastr(createSuccessToastr, history, isGetSuccess);
     }
-  },        [isSignUpSuccess]);
+  },        [isGetSuccess]);
 
   return (
     <AcceptButtonComponent>
