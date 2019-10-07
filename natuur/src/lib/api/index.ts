@@ -95,16 +95,16 @@ export const getRegisterVerifyNumberApi = (payload: { verify: string }) => {
   return instanceAxios.get(`/signup/verify?key=${payload.verify}`);
 };
 
-export const changeUserApplicantPhotoApi = async (
-  accessToken: { accessToken: string },
-  payload: { file: File }
-) => {
+export const changeUserApplicantPhotoApi = async (payload: {
+  accessToken: string;
+  file: File;
+}) => {
   const formData = new FormData();
   formData.append("image", payload.file);
 
   const response = await instanceAxios.put(`/self/photo`, formData, {
     headers: {
-      Authorization: `Bearer ${accessToken.accessToken}`,
+      Authorization: `Bearer ${payload.accessToken}`,
       "content-type": "multipart/form-data"
     }
   });

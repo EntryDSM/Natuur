@@ -84,7 +84,8 @@ const applicantDocumentReducer = (
         personal_information,
         diligence_grade,
         school_grade,
-        self_introduction_and_study_plan
+        self_introduction_and_study_plan,
+        ged_grade
       } = action.payload;
       return {
         ...state,
@@ -92,7 +93,8 @@ const applicantDocumentReducer = (
         personal_information,
         diligence_grade,
         school_grade,
-        self_introduction_and_study_plan
+        self_introduction_and_study_plan,
+        ged_grade
       };
     }
     case GET_APPLICATION_DOCUMENT_FAILURS:

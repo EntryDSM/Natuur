@@ -48,18 +48,15 @@ function* getMapData(action: SearchAddress) {
 }
 
 function* changeUserApplicantPhoto(action: ChangeApplicantPhoto) {
+  const { file } = action.payload;
   try {
-    yield call(
-      changeUserApplicantPhotoApi,
-      action.payload.accessToken,
-      action.payload.payload
-    );
+    yield call(changeUserApplicantPhotoApi, action.payload);
     yield put({ type: PUT_APPLICANT_PHOTO_SUCCESS });
   } catch (e) {
     if (e.response.status === 401 || e.response.status === 422) {
       yield tokenRefresh(
         changeUserApplicantPhotoApi,
-        action.payload,
+        { file },
         PUT_APPLICANT_PHOTO_SUCCESS,
         PUT_APPLICANT_PHOTO_FAILURE
       );
@@ -84,7 +81,7 @@ function* getUserApplicantPhoto(action: GetApplicantPhoto) {
     if (e.response.status === 401 || e.response.status === 422) {
       yield tokenRefresh(
         getUserApplicantPhotoApi,
-        { accessToken },
+        {},
         GET_APPLICANT_PHOTO_SUCCESS,
         GET_APPLICANT_PHOTO_FAILURE
       );
@@ -110,7 +107,6 @@ function* getSchoolData(action: SearchSchool) {
       yield tokenRefresh(
         getSchoolDataApi,
         {
-          accessToken,
           school
         },
         SEARCH_SCHOOL_SUCCESS,

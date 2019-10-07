@@ -28,11 +28,7 @@ interface OwnProps {
   setStudentID: (payload: { studentID: string }) => void;
   setIsOpenPopUp: (isOpenPopUp: boolean) => void;
   setMiddleSchool: (payload: { school: string }) => void;
-  changeApplicantPhoto: (payload: {
-    email: { email: string };
-    accessToken: { accessToken: string };
-    payload: { file: File };
-  }) => void;
+  changeApplicantPhoto: (payload: { accessToken: string; file: File }) => void;
 }
 
 const IdPhotoComponent: FC<OwnProps> = ({

@@ -5,6 +5,7 @@ import Wrapper from "../Wrapper";
 
 interface OwnProps {
   gedGrade: { ged_average_score: number };
+  gedAverageScore: number;
   setGedAverageScore: (payload: { gedAverageScore: number }) => void;
   isOpen: {
     info: boolean;
@@ -20,6 +21,7 @@ interface OwnProps {
 
 const GedScoreTable: FC<OwnProps> = ({
   setGedAverageScore,
+  gedAverageScore,
   gedGrade,
   isOpen,
   setIsOpen
@@ -47,6 +49,7 @@ const GedScoreTable: FC<OwnProps> = ({
               <S.Div marginLeft={28}>
                 <S.InputCover>
                   <S.Input
+                    value={gedAverageScore}
                     onChange={({ target: { value } }) =>
                       setGedAverageScore({ gedAverageScore: Number(value) })
                     }

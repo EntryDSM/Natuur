@@ -13,11 +13,7 @@ import ParentsRow from "./ParentsRow";
 interface OwnProps {
   setIsOpenPopUp: (isOpenPopUp: boolean) => void;
   setIsAddress: (isAddress: boolean) => void;
-  changeApplicantPhoto: (payload: {
-    email: { email: string };
-    accessToken: { accessToken: string };
-    payload: { file: File };
-  }) => void;
+  changeApplicantPhoto: (payload: { accessToken: string; file: File }) => void;
   setFile: (file: string) => void;
   file: string;
   name: string;
@@ -121,10 +117,15 @@ const SelectCategory: FC<Props> = ({
           setClass({ class: student_number.slice(1, 3) });
           setStudentID({ studentID: student_number.slice(3, 5) });
           setMiddleSchool({ school: school_name });
-          if (isGed) {
-            setSchoolContact({ contact: school_tel });
-          }
+          setSchoolContact({ contact: school_tel });
         }
+      }
+
+      if (isGed) {
+        setClass({ class: "" });
+        setStudentID({ studentID: "" });
+        setMiddleSchool({ school: "" });
+        setSchoolContact({ contact: "" });
       }
     }
     return () => setIsOpen({ pageName: "personal", isOpen: true });

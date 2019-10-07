@@ -23,9 +23,14 @@ export function* tokenRefresh(api, payload, successType, failureType) {
     const response = yield call(refreshJWTApi, { refreshToken });
     yield put({
       type: REFRESH_JWT_SUCCESS,
-      payload: response
+      payload: { access: response }
     });
-    yield requsetApi(api, payload, successType, failureType);
+    yield requsetApi(
+      api,
+      { accessToken: response, ...payload },
+      successType,
+      failureType
+    );
   } catch (e) {
     yield put({ type: REFRESH_JWT_FAILURS });
   }
