@@ -1,63 +1,141 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState, useEffect, useRef } from "react";
 import { hot } from "react-hot-loader/root";
-import { Route, BrowserRouter, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { connect } from "react-redux";
 
-import { GlobalStyle } from "./styles/default";
 import {
-  SignUp,
-  Login,
   Classification,
-  Grade,
-  Info,
+  Footer,
+  Header,
   Introduce,
   Main,
   MyPage,
-  PersonalInformation,
   Preview,
-  Header,
-  Footer
+  SignUp,
+  PersonalInformation,
+  Print
 } from "./container";
+import ConnectSelectCategory from "./container/Info/ConnectSelectCategory";
+import ConnectGrade from "./container/Grade/ConnectGrade";
+import ErrorPage from "./components/default/ErrorPage";
+import ToastrBar from "./components/default/Common/ToastrBarCover";
+import ScrollToTop from "./components/default/ScrollToTop";
+import GlobalStyle from "./styles/GlobalStyle";
+import { AppState } from "./core/redux/store/store";
+import { logOut } from "./core/redux/actions/user";
+import { getApplicationDocument } from "./core/redux/actions/applicantDocument";
+import { setIsOpen } from "./core/redux/actions/default";
 
-const App: FC = () => {
+const mapStaetToProps = (state: AppState) => ({
+  accessToken: state.userReducer.accessToken,
+  refreshToken: state.userReducer.refreshToken,
+  email: state.userReducer.userEmail
+});
+
+const mapDispatchToProps = dispatch => ({
+  logOut: (payload: { refreshToken: string }) => dispatch(logOut(payload)),
+  getApplicationDocument: (payload: { accessToken: string }) =>
+    dispatch(getApplicationDocument(payload)),
+  setIsOpen: (payload: {
+    pageName: "info" | "personal" | "grade" | "intro";
+    isOpen: boolean;
+  }) => dispatch(setIsOpen(payload))
+});
+
+type Props = ReturnType<typeof mapStaetToProps> &
+  ReturnType<typeof mapDispatchToProps>;
+
+const App: FC<Props> = ({
+  accessToken,
+  refreshToken,
+  email,
+  logOut,
+  getApplicationDocument,
+  setIsOpen
+}) => {
+  const didMountRef = useRef(false);
   const [appClass, setAppClass] = useState("");
 
-  const updateAppClass = (text: string): void => {
-    setAppClass(text);
-  };
+  useEffect(() => {
+    if (!didMountRef.current) {
+      didMountRef.current = true;
+
+      getApplicationDocument({ accessToken });
+
+      setIsOpen({ pageName: "info", isOpen: false });
+      setIsOpen({ pageName: "personal", isOpen: false });
+      setIsOpen({ pageName: "grade", isOpen: false });
+      setIsOpen({ pageName: "intro", isOpen: false });
+    }
+  },        []);
 
   return (
     <BrowserRouter>
-      <div className={appClass}>
+      <div id={appClass}>
         <GlobalStyle />
-        <Header />
-        <Switch>
-          <Route
-            path="/"
-            component={() => <Main updateAppClass={updateAppClass} />}
-            exact
-          />
-          <Route path="/auth" component={() => <SignUp />} exact />
-          <Route path="/confirm/:code" component={() => <Login />} exact />
-          <Route
-            path="/info-summary"
-            component={() => <Info updateAppClass={updateAppClass} />}
-            exact
-          />
-          <Route path="/classify" component={() => <Classification />} exact />
-          <Route
-            path="/personal"
-            component={() => <PersonalInformation />}
-            exact
-          />
-          <Route path="/intro" component={() => <Introduce />} exact />
-          <Route path="/preview" component={() => <Preview />} exact />
-          <Route path="/grade" component={() => <Grade />} exact />
-          <Route path="/mypage" component={() => <MyPage />} exact />
-        </Switch>
+        <Header
+          userName={email.split("@")[0]}
+          accessToken={accessToken}
+          refreshToken={refreshToken}
+          logOut={logOut}
+        />
+        <ScrollToTop>
+          <Switch>
+            <Route
+              path="/"
+              render={() => (
+                <Main accessToken={accessToken} updateAppClass={setAppClass} />
+              )}
+              exact
+            />
+            <Route
+              path="/auth"
+              render={() => <SignUp updateAppClass={setAppClass} />}
+              exact
+            />
+            <Route
+              path="/info-summary"
+              render={() => (
+                <ConnectSelectCategory updateAppClass={setAppClass} />
+              )}
+              exact
+            />
+            <Route path="/classify" render={() => <Classification />} exact />
+            <Route
+              path="/personal"
+              render={() => <PersonalInformation />}
+              exact
+            />
+            <Route path="/intro" render={() => <Introduce />} exact />
+            <Route
+              path="/preview"
+              render={() => <Preview updateAppClass={setAppClass} />}
+              exact
+            />
+            <Route path="/grade" render={() => <ConnectGrade />} exact />
+            <Route
+              path="/mypage"
+              render={() => <MyPage updateAppClass={setAppClass} />}
+              exact
+            />
+            <Route
+              path="/print"
+              render={() => <Print updateAppClass={setAppClass} />}
+              exact
+            />
+            <Route component={ErrorPage} />
+          </Switch>
+        </ScrollToTop>
         <Footer />
+        <ToastrBar />
       </div>
     </BrowserRouter>
   );
 };
 
-export default hot(App);
+export default hot(
+  connect(
+    mapStaetToProps,
+    mapDispatchToProps
+  )(App)
+);

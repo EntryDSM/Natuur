@@ -4,5 +4,7 @@
 # bundle files
 /dist
 
-# package.json
-package-lock.json
+# env
+.env
+
+.history

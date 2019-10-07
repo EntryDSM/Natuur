@@ -6,7 +6,9 @@ import {
   FooterCopyright,
   FooterExplain,
   FooterCoverNav,
-  FooterCoverIcons
+  FooterCoverIcons,
+  FooterFooterNavigationCover,
+  FooterNavigation
 } from "../../../styles/Footer";
 import {
   FOOTER_ADDRESS,
@@ -17,11 +19,15 @@ import {
   FOOTER_TITLE,
   FACEBOOK_LINK,
   GITHUB_LINK
-} from "../../constance";
+} from "../Constance";
 import FooterLink from "./FooterLink";
 import { logo, faceBook, github } from "../../../assets/Footer";
 
-const FooterContent: FC = () => {
+interface Props {
+  footerNavigationIsActive: number[];
+}
+
+const FooterContent: FC<Props> = ({ footerNavigationIsActive }) => {
   return (
     <FooterCover>
       <FooterLogo src={logo} alt="푸터 로고" />
@@ -33,13 +39,34 @@ const FooterContent: FC = () => {
         <br />
         {FOOTER_ADDRESS}
         <br />
-        {FOOTER_OFFICE /* 교무실 */}
-        <span>{FOOTER_ADMINISTRATIVE /* 행정실 */}</span>
+        {FOOTER_OFFICE/* 교무실 */}
+        <span>{FOOTER_ADMINISTRATIVE/* 행정실 */}</span>
         <br />
         {FOOTER_REGISTRATION}
       </FooterExplain>
 
       <FooterCoverNav>
+        <FooterFooterNavigationCover>
+          <FooterNavigation istitle isactive={footerNavigationIsActive[0]}>
+            Entry 소개
+          </FooterNavigation>
+          <FooterNavigation
+            href="https://www.notion.so/junukimdev/e084056b67d34dcfa71e8e78143ee4cd"
+            target="_blank"
+            margintop="14px"
+            isactive={footerNavigationIsActive[1]}
+          >
+            시스템 소개
+          </FooterNavigation>
+          <FooterNavigation
+            href="https://www.notion.so/junukimdev/Entry-05231333090d4b5196f14ae4a19f1acc"
+            target="_blank"
+            margintop="14px"
+            isactive={footerNavigationIsActive[2]}
+          >
+            개발자 소개
+          </FooterNavigation>
+        </FooterFooterNavigationCover>
         <FooterCoverIcons>
           <FooterLink
             path={FACEBOOK_LINK}

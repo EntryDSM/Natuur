@@ -1,20 +1,53 @@
-// reducerState
-export interface RootState {
-  container: string;
-}
+import { RootState } from "../../reducer/default/defaultReducer";
 
 // Types
-export const UPDATE_APP_CONTAINER = "UPDATE_APP_CONTAINER";
+export const UPDATE_TOASTR = "UPDATE_TOASTR";
+export const REMOVE_TOASTR = "REMOVE_TOASTR";
+export const SET_IS_OPEN = "SET_IS_OPEN";
 
-interface UpdateAppContainer {
-  type: string;
-  payload: string;
+export interface PayloadType {
+  toastrState?: "info" | "errorState" | "success" | "warning";
+  toastrTitle?: string;
+  toastrMessage?: string;
+  timer?: number;
+  id?: number;
 }
 
-export type DefaultActionTypes = UpdateAppContainer | null; // 이런식으로 다중으로 넣음.
+interface UpdateToastr {
+  type: typeof UPDATE_TOASTR;
+  payload: PayloadType;
+}
+
+interface RemoveToastr {
+  type: typeof REMOVE_TOASTR;
+  payload: PayloadType;
+}
+
+interface SetIsOpen {
+  type: typeof SET_IS_OPEN;
+  payload: {
+    pageName: "info" | "personal" | "grade" | "intro";
+    isOpen: boolean;
+  };
+}
+
+export type DefaultActionTypes = UpdateToastr | RemoveToastr | SetIsOpen;
 
 // Actions
-export const updateAppContainer = (payload: RootState) => ({
-  type: UPDATE_APP_CONTAINER,
-  payload
+export const updateToastr = (payload: PayloadType) => ({
+  payload,
+  type: UPDATE_TOASTR
+});
+
+export const removeToastr = (payload: number) => ({
+  payload,
+  type: REMOVE_TOASTR
+});
+
+export const setIsOpen = (payload: {
+  pageName: "info" | "personal" | "grade" | "intro";
+  isOpen: boolean;
+}) => ({
+  payload,
+  type: SET_IS_OPEN
 });

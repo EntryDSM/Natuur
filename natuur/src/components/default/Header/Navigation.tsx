@@ -1,21 +1,30 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { Link } from "react-router-dom";
 
 import EntryLogo from "../../../assets/entry_logo.png";
-import {
-  NavWrapper,
-  WrapperContants,
-  ContentsLogo,
-  ContentList
-} from "../../../styles/Header";
-import { QUESTION_ANSWER_PAGE_LINK, NOTICE_PAGE_LINK } from "../../constance";
-import LinkList from "./LinkList";
+import * as S from "../../../styles/Header";
+import buttonDropdown from "../../../assets/Header/buttonDropdown.png";
+import DropDown from "./DropDown";
 
-const Navigation: FC = () => {
+interface Props {
+  userName: string;
+  isActive: boolean;
+  refreshToken: string;
+  logOut: (payload: { refreshToken: string }) => void;
+}
+
+const Navigation: FC<Props> = ({
+  userName,
+  isActive,
+  refreshToken,
+  logOut
+}) => {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <NavWrapper>
-      <WrapperContants>
-        <ContentsLogo>
+    <S.NavWrapper>
+      <S.WrapperContants>
+        <S.ContentsLogo>
           <Link to="/">
             <img
               className="nav__wrapper__contants__logo--img"
@@ -23,26 +32,16 @@ const Navigation: FC = () => {
               alt="EntryDSM 로고"
             />
           </Link>
-        </ContentsLogo>
-        <ContentList>
-          <LinkList
-            path={NOTICE_PAGE_LINK}
-            target="_blank"
-            content="공지사항"
-            external={true}
-          />
-          <LinkList
-            path={QUESTION_ANSWER_PAGE_LINK}
-            target="_blank"
-            content="Q&A"
-            external={true}
-          />
-          <LinkList path="/info-summary" content="전형요강" />
-          <LinkList path="/" content="모집일정" />
-          <LinkList isLogin={true} content={"코드봐야함ㅎ"} />
-        </ContentList>
-      </WrapperContants>
-    </NavWrapper>
+        </S.ContentsLogo>
+        {isActive && (
+          <S.ContentsUser onClick={() => setIsOpen(!isOpen)}>
+            <S.UserName>{`${userName} 님`}</S.UserName>
+            <S.SlideBar src={buttonDropdown} alt="슬라이더" />
+            {isOpen && <DropDown logOut={logOut} refreshToken={refreshToken} />}
+          </S.ContentsUser>
+        )}
+      </S.WrapperContants>
+    </S.NavWrapper>
   );
 };
 

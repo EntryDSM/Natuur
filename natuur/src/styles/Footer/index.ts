@@ -1,4 +1,5 @@
-import styled, { ThemedStyledFunction } from "styled-components";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const FooterContainer = styled.footer`
   position: relative;
@@ -49,20 +50,47 @@ export const FooterCoverNav = styled.div`
   right: 0;
 `;
 
+export const FooterFooterNavigationCover = styled.div`
+  position: absolute;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+`;
+
+export const FooterNavigation = styled.a<{
+  margintop?: string;
+  isactive?: number;
+  istitle?: boolean;
+}>`
+  font-size: 14px;
+  color: #ffffff;
+  margin-top: ${props => props.margintop};
+  opacity: ${props => (props.isactive ? "1" : "0.6")};
+  ${props => props.istitle && "cursor: default"};
+
+  &:link {
+    color: #ffffff;
+  }
+
+  &:visited {
+    color: #ffffff;
+  }
+`;
+
 export const FooterCoverIcons = styled.div`
   position: absolute;
   bottom: 0;
   right: 0;
 `;
 
-export const LinkIcon: any = styled.img`
+export const LinkIcon = styled.img<{ position?: string }>`
   position: absolute;
   width: 30px;
   margin-top: -25px;
   opacity: 0.75;
   transition: 0.5s;
+  right: ${props => props.position};
 
-  right: ${(props: any) => props.position};
   &:hover {
     opacity: 1;
   }

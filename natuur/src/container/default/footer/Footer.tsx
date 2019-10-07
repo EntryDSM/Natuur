@@ -5,7 +5,7 @@ import FooterContent from "../../../components/default/Footer/FooterContent";
 
 const Footer: FC = () => (
   <FooterContainer>
-    <FooterContent />
+    <FooterContent footerNavigationIsActive={[1, 0, 0]} />
   </FooterContainer>
 );
 
