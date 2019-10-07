@@ -29,7 +29,7 @@ export const AcceptTermsBox = styled.div`
     content: "";
     display: block;
     width: 100%;
-    height: 1px;
+    height: 2px;
     position: absolute;
     background: -webkit-linear-gradient(
       left,
@@ -107,7 +107,7 @@ export const InfomationInputBoxCoverWrapper = styled.div`
 export const GradationHorizon = styled.div`
   display: block;
   width: 1140px;
-  height: 1px;
+  height: 2px;
 `;
 
 export const InfomationInputBoxWapperTitle = styled.div<{
