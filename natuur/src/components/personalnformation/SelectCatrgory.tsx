@@ -121,7 +121,9 @@ const SelectCategory: FC<Props> = ({
           setClass({ class: student_number.slice(1, 3) });
           setStudentID({ studentID: student_number.slice(3, 5) });
           setMiddleSchool({ school: school_name });
-          setSchoolContact({ contact: school_tel });
+          if (isGed) {
+            setSchoolContact({ contact: school_tel });
+          }
         }
       }
     }
