@@ -75,5 +75,5 @@ export const signUp = (payload: {
 });
 
 export const resetStatus = () => ({
-  type: SIGN_UP
+  type: RESET_STATUS
 });
