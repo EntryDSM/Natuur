@@ -16,6 +16,8 @@ export const SIGN_UP = "SIGN_UP";
 export const SIGN_UP_SUCCESS = "SIGN_UP_SUCCESS";
 export const SIGN_UP_FAILURS = "SIGN_UP_FAILURS";
 
+export const RESET_STATUS = "RESET_STATUS";
+
 export interface AuthenticationNumberByEmail {
   type:
     | typeof SEND_AUTHENTICATION_NUMBER_BY_EMAIL
@@ -37,11 +39,15 @@ export interface SignUp {
   payload: { email: string; password: string };
 }
 
+export interface ResetStatus {
+  type: typeof RESET_STATUS;
+}
+
 export type AuthorizationTypes =
   | AuthenticationNumberByEmail
   | RegisterVerifyNumber
   | SignUp
-  | null;
+  | ResetStatus;
 
 // Actions
 export const sendAuthenticationNumberByEmail = (payload: {
@@ -65,5 +71,9 @@ export const signUp = (payload: {
   password: string;
 }): AuthorizationTypes => ({
   payload,
+  type: SIGN_UP
+});
+
+export const resetStatus = () => ({
   type: SIGN_UP
 });

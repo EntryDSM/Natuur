@@ -65,7 +65,7 @@ export const ButtonText = styled.span`
 `;
 
 interface ButtonCoverProps {
-  readonly isDisable?: boolean;
+  readonly isdisable?: boolean;
   readonly prev?: boolean;
   readonly next?: boolean;
 }
@@ -80,23 +80,23 @@ export const ButtonCover: AnyStyledComponent = styled(Link)<ButtonCoverProps>`
   transition: 0.5s;
   left: ${props => props.prev && 0};
   right: ${props => props.next && 0};
-  color: ${props => (props.isDisable ? "#979797" : "#296169")};
-  background-color: ${props => (props.isDisable ? "#f7fbfc" : " #f7fbfc")};
-  border: 1px solid ${props => (props.isDisable ? "#a7a7a7" : "#5f8a90")};
+  color: ${props => (props.isdisable ? "#979797" : "#296169")};
+  background-color: ${props => (props.isdisable ? "#f7fbfc" : " #f7fbfc")};
+  border: 1px solid ${props => (props.isdisable ? "#a7a7a7" : "#5f8a90")};
 
   &:active {
     background-color: #d8e6e9;
   }
 
   ${ButtonArrow} {
-    color: ${props => props.isDisable && "#979797"};
+    color: ${props => props.isdisable && "#979797"};
     float: ${props => (props.prev ? "left" : "right")};
     margin-left: ${props => props.prev && "13px"};
     margin-right: ${props => props.next && "13px"};
   }
 
   ${ButtonText} {
-    color: ${props => props.isDisable && "#979797"};
+    color: ${props => props.isdisable && "#979797"};
     float: ${props => (props.prev ? "right" : "left")};
     margin-right: ${props => props.prev && "14px"};
     margin-left: ${props => props.next && "14px"};

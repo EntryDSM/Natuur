@@ -49,7 +49,7 @@ const InformationInputBox: FC<Props> = ({
   signUp,
   isSendWaiting,
   getRegisterVerifyNumber,
-  sendAuthenticationNumberByEmailApi,
+  resetStatus,
   updateToastr
 }) => {
   const [isCertification, setIsCertification] = useState(false);
@@ -70,6 +70,10 @@ const InformationInputBox: FC<Props> = ({
       setIsPasswordClose(true);
     };
   },        [isSignUpSuccess, isGetSuccess]);
+
+  useEffect(() => {
+    return () => resetStatus();
+  },        []);
 
   const handleEmail = useCallback(
     ({ target: { value } }: React.ChangeEvent<HTMLInputElement>): void => {
@@ -145,6 +149,8 @@ const InformationInputBox: FC<Props> = ({
         />
         {isCertification && (
           <>
+            <GradationHorizon />
+
             <CertificationInputRaw
               isReadOnly={isGetSuccess}
               handleChanger={handleVerify}
@@ -161,8 +167,6 @@ const InformationInputBox: FC<Props> = ({
               getRegisterVerifyNumber={getRegisterVerifyNumber}
               signUp={signUp}
             />
-
-            <GradationHorizon />
           </>
         )}
       </div>
