@@ -28,7 +28,13 @@ const AcceptDisableButton: FC<Props> = ({ updateToastr }) => {
 
   return (
     <AcceptButtonComponent>
-      <ButtonCover onClick={createToastr} as="button" isDisable next>
+      <ButtonCover
+        onClick={createToastr}
+        as="button"
+        to="/auth"
+        isdisable="true"
+        next="true"
+      >
         <ButtonArrow>〉</ButtonArrow>
         <ButtonText>계정인증</ButtonText>
       </ButtonCover>

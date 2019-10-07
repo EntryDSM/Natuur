@@ -8,7 +8,8 @@ import {
   GET_REGISTER_VERIFY_NUMBER_FAILURS,
   SIGN_UP,
   SIGN_UP_SUCCESS,
-  SIGN_UP_FAILURS
+  SIGN_UP_FAILURS,
+  RESET_STATUS
 } from "../../actions/Authorization";
 
 // reducerState
@@ -101,6 +102,19 @@ const AuthorizationReducer = (
         ...state,
         isSignUpSuccess: false,
         isSignUpError: true
+      };
+    }
+    case RESET_STATUS: {
+      return {
+        ...state,
+        isSendSuccess: false,
+        isSendError: false,
+        isSendWaiting: false,
+        isGetSuccess: false,
+        isGetError: false,
+        isGetWaiting: false,
+        isSignUpSuccess: false,
+        isSignUpError: false
       };
     }
     default:

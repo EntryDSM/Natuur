@@ -66,6 +66,14 @@ const AcceptButton: FC<Props> = ({
     });
   },                                      []);
 
+  const createErrorToastr = useCallback(() => {
+    updateToastr({
+      timer: 5,
+      toastrMessage: "이미 가입된 계정입니다.",
+      toastrState: "errorState"
+    });
+  },                                    []);
+
   useEffect(() => {
     if (isGetSuccess) {
       pushMainAndUpdateToastr(createSuccessToastr, history, isGetSuccess);
@@ -78,10 +86,13 @@ const AcceptButton: FC<Props> = ({
         isDisable={!isSuccess}
         onClick={
           isSuccess
-            ? () => signUp({ email: userEmail, password: userPassword })
+            ? isSignUpError
+              ? () => createErrorToastr()
+              : () => signUp({ email: userEmail, password: userPassword })
             : createFailursToastr
         }
         next="true"
+        to="/auth"
         as="button"
       >
         <ButtonArrow>〉</ButtonArrow>
