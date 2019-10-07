@@ -135,16 +135,20 @@ export const SubmitButton = styled.div<{ isDisable?: boolean }>`
     ${props => (props.isDisable ? "#a7a7a7" : "rgba(121, 194, 202, 0.5)")};
   cursor: ${props => !props.isDisable && "pointer"};
 
-  &:hover {
-    &::before {
-      content: "원서를 모두 채워주시기 바랍니다.";
-      position: absolute;
-      left: -300px;
-      padding: 16px;
-      border: 1px solid;
-      border-radius: 6px;
-      background: rgba(121, 194, 202, 0.2);
-      color: #78c2ca;
-    }
-  }
+  ${props =>
+    props.isDisable &&
+    `
+      &:hover {
+        &::before {
+          content: "원서를 모두 채워주시기 바랍니다.";
+          position: absolute;
+          left: -300px;
+          padding: 16px;
+          border: 1px solid;
+          border-radius: 6px;
+          background: rgba(121, 194, 202, 0.2);
+          color: #78c2ca;
+        }
+      }
+    `};
 `;

@@ -264,20 +264,27 @@ export const Signature = styled.div<{ widthSize?: number; pb?: number }>`
   margin: 0 auto;
 `;
 
-export const SignatureItem = styled(Signature)<{ widthSize?: number }>`
+interface SignatureItemProps {
+  widthSize?: number;
+  isEnd?: boolean;
+}
+export const SignatureItem = styled(Signature)<SignatureItemProps>`
   width: ${props => (props.widthSize ? `${props.widthSize}px` : "110px")};
+  ${props => props.isEnd && "justify-content: flex-end"};
 `;
 
 interface BlankProps {
-  widthSize: number;
+  widthSize?: number;
   isCenter?: boolean;
   isUnderLine?: boolean;
+  mr?: number;
 }
 export const Blank = styled.span<BlankProps>`
   display: inline-block;
   width: ${props => `${props.widthSize}px`};
   text-align: ${props => (props.isCenter ? "center" : "right")};
   border-bottom: ${props => props.isUnderLine && "1px solid black"};
+  margin-right: ${props => `${props.mr}px`};
 `;
 
 export const CheckBox = styled.span<{ isAccept?: boolean; ml?: number }>`
