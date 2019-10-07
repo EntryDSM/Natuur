@@ -4,8 +4,7 @@ import { AppState } from "../../../core/redux/store/store";
 import {
   sendAuthenticationNumberByEmail,
   getRegisterVerifyNumber,
-  signUp,
-  resetStatus
+  signUp
 } from "../../../core/redux/actions/Authorization/index";
 
 export const mapStateToProps = (state: AppState) => ({
@@ -34,8 +33,7 @@ export const mapDispatchToProps = dispatch => ({
     isResend?: boolean;
   }) => dispatch(sendAuthenticationNumberByEmail({ email, isResend })),
   signUp: ({ email, password }: { email: string; password: string }) =>
-    dispatch(signUp({ email, password })),
-  resetStatus: () => dispatch(resetStatus())
+    dispatch(signUp({ email, password }))
 });
 
 export default connect(

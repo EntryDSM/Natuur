@@ -49,12 +49,19 @@ const InformationInputBox: FC<Props> = ({
   signUp,
   isSendWaiting,
   getRegisterVerifyNumber,
-  resetStatus,
   updateToastr
 }) => {
   const [isCertification, setIsCertification] = useState(false);
   const [isPasswordClose, setIsPasswordClose] = useState(true);
   const [userVerify, setUserVerify] = useState("");
+
+  const createErrorToastr = useCallback(() => {
+    updateToastr({
+      timer: 5,
+      toastrMessage: "이미 가입된 계정입니다.",
+      toastrState: "errorState"
+    });
+  },                                    []);
 
   useEffect(() => {
     if (isSignUpSuccess) {
@@ -72,8 +79,10 @@ const InformationInputBox: FC<Props> = ({
   },        [isSignUpSuccess, isGetSuccess]);
 
   useEffect(() => {
-    return () => resetStatus();
-  },        []);
+    if (isSignUpError) {
+      createErrorToastr();
+    }
+  },        [isSignUpError]);
 
   const handleEmail = useCallback(
     ({ target: { value } }: React.ChangeEvent<HTMLInputElement>): void => {

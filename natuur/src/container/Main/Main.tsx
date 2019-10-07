@@ -25,6 +25,7 @@ import {
 import PopUp from "../default/popup/PopUp";
 import { AppState } from "../../core/redux/store/store";
 import { getUserApplicantStatus } from "../../core/redux/actions/main/index";
+import { resetStatus } from "../../core/redux/actions/Authorization/index";
 
 const mapStateToProps = (state: AppState) => ({
   userEmail: state.userReducer.userEmail
@@ -35,7 +36,8 @@ const mapDispatchToProps = dispatch => ({
   updatePopUpCase: (popUpCase: "default" | "login" | "set" | "check") =>
     dispatch(updatePopUpCase(popUpCase)),
   getUserApplicantStatus: (payload: { accessToken: string }) =>
-    dispatch(getUserApplicantStatus(payload))
+    dispatch(getUserApplicantStatus(payload)),
+  resetStatus: () => dispatch(resetStatus())
 });
 
 interface OwnProps {
@@ -59,7 +61,7 @@ const Main: FC<Props> = ({
   updatePopUpCase,
   accessToken,
   getUserApplicantStatus,
-  userEmail
+  resetStatus
 }) => {
   const didMountRef = useRef(false);
 
@@ -108,6 +110,7 @@ const Main: FC<Props> = ({
       didMountRef.current = true;
 
       updateAppClass("main-page");
+      resetStatus();
       timeChangeChecker(
         periodListFactor,
         setProgressWidth,
