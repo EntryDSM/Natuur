@@ -27,6 +27,7 @@ const Grade: FC<Props> = ({
   isThirdGradeSmester1,
   isGed,
   graduationClassification,
+  gedAverageScore,
   setVolunteer,
   setAbsent,
   setEarlyLeave,
@@ -78,6 +79,7 @@ const Grade: FC<Props> = ({
         <HeadLine subText="2020 입학원서 작성" title="성적 입력" />
         {isGed ? (
           <GedScoreTable
+            gedAverageScore={gedAverageScore}
             setGedAverageScore={setGedAverageScore}
             gedGrade={ged_grade}
             isOpen={isOpen}
