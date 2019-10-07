@@ -78,7 +78,7 @@ export interface GetApplicantPhoto {
     | typeof GET_APPLICANT_PHOTO
     | typeof GET_APPLICANT_PHOTO_SUCCESS
     | typeof GET_APPLICANT_PHOTO_FAILURE;
-  payload: { accessToken: string; file?: Blob };
+  payload: { accessToken: string; file?: string };
 }
 
 export interface getAddressData {

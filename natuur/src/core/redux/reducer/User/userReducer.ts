@@ -91,7 +91,7 @@ const userReducer = (
     case REFRESH_JWT_SUCCESS: {
       return {
         ...state,
-        accessToken: action.payload.accessToken,
+        accessToken: action.payload.access,
         isExpirationJWT: false
       };
     }
