@@ -1,8 +1,5 @@
 import {
   AuthorizationTypes,
-  SEND_AUTHENTICATION_NUMBER_BY_EMAIL,
-  SEND_AUTHENTICATION_NUMBER_BY_EMAIL_SUCCESS,
-  SEND_AUTHENTICATION_NUMBER_BY_EMAIL_FAILURS,
   GET_REGISTER_VERIFY_NUMBER,
   GET_REGISTER_VERIFY_NUMBER_SUCCESS,
   GET_REGISTER_VERIFY_NUMBER_FAILURS,
@@ -14,23 +11,19 @@ import {
 
 // reducerState
 export interface RootState {
-  isSendSuccess: boolean;
-  isSendError: boolean;
-  isSendWaiting: boolean;
   isGetSuccess: boolean;
   isGetError: boolean;
   isGetWaiting: boolean;
+  isSignUpWaiting: boolean;
   isSignUpSuccess: boolean;
   isSignUpError: boolean;
 }
 
 const initialState: RootState = {
-  isSendSuccess: false,
-  isSendError: false,
-  isSendWaiting: false,
   isGetSuccess: false,
   isGetError: false,
   isGetWaiting: false,
+  isSignUpWaiting: false,
   isSignUpSuccess: false,
   isSignUpError: false
 };
@@ -40,29 +33,6 @@ const AuthorizationReducer = (
   action: AuthorizationTypes
 ): RootState => {
   switch (action.type) {
-    case SEND_AUTHENTICATION_NUMBER_BY_EMAIL: {
-      return {
-        ...state,
-        isSendWaiting: true,
-        isSendSuccess: false
-      };
-    }
-    case SEND_AUTHENTICATION_NUMBER_BY_EMAIL_SUCCESS: {
-      return {
-        ...state,
-        isSendSuccess: true,
-        isSendError: false,
-        isSendWaiting: false
-      };
-    }
-    case SEND_AUTHENTICATION_NUMBER_BY_EMAIL_FAILURS: {
-      return {
-        ...state,
-        isSendError: true,
-        isSendSuccess: false,
-        isSendWaiting: false
-      };
-    }
     case GET_REGISTER_VERIFY_NUMBER: {
       return {
         ...state,
@@ -87,29 +57,29 @@ const AuthorizationReducer = (
     }
     case SIGN_UP: {
       return {
-        ...state
+        ...state,
+        isSignUpWaiting: true
       };
     }
     case SIGN_UP_SUCCESS: {
       return {
         ...state,
         isSignUpSuccess: true,
-        isSignUpError: false
+        isSignUpError: false,
+        isSignUpWaiting: false
       };
     }
     case SIGN_UP_FAILURS: {
       return {
         ...state,
         isSignUpSuccess: false,
-        isSignUpError: true
+        isSignUpError: true,
+        isSignUpWaiting: false
       };
     }
     case RESET_STATUS: {
       return {
         ...state,
-        isSendSuccess: false,
-        isSendError: false,
-        isSendWaiting: false,
         isGetSuccess: false,
         isGetError: false,
         isGetWaiting: false,

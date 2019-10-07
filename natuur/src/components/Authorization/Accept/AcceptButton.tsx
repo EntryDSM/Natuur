@@ -12,7 +12,7 @@ import {
 interface OwnProps {
   isSuccess: boolean;
   isGetSuccess: boolean;
-  isSignUpError: boolean;
+  isCertification: boolean;
   userEmail: string;
   userPassword: string;
   isPasswordClose: boolean;
@@ -42,7 +42,7 @@ const pushMainAndUpdateToastr = (
 const AcceptButton: FC<Props> = ({
   updateToastr,
   isSuccess,
-  isSignUpError,
+  isCertification,
   isGetSuccess,
   isPasswordClose,
   signUp,
@@ -78,7 +78,9 @@ const AcceptButton: FC<Props> = ({
         isDisable={!isSuccess}
         onClick={
           isSuccess
-            ? () => signUp({ email: userEmail, password: userPassword })
+            ? isCertification
+              ? null
+              : () => signUp({ email: userEmail, password: userPassword })
             : createFailursToastr
         }
         next="true"

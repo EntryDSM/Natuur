@@ -8,11 +8,9 @@ import {
 } from "../../../core/redux/actions/Authorization/index";
 
 export const mapStateToProps = (state: AppState) => ({
-  isSendSuccess: state.AuthorizationReducer.isSendSuccess,
-  isSendError: state.AuthorizationReducer.isSendError,
-  isSendWaiting: state.AuthorizationReducer.isSendWaiting,
   isGetSuccess: state.AuthorizationReducer.isGetSuccess,
   isGetError: state.AuthorizationReducer.isGetError,
+  isSignUpWaiting: state.AuthorizationReducer.isSignUpWaiting,
   isSignUpSuccess: state.AuthorizationReducer.isSignUpSuccess,
   isSignUpError: state.AuthorizationReducer.isSignUpError
 });
