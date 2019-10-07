@@ -26,7 +26,14 @@ export interface PersonalInformation {
   file: string;
 }
 
-export interface GradeEntry {}
+export interface GradeEntry {
+  gedAverageScore: number;
+  volunteer: number;
+  absent: number;
+  earlyLeave: number;
+  tardy: number;
+  missingClass: number;
+}
 
 export interface SelfIntroduction {
   selfIntroduction: string;
