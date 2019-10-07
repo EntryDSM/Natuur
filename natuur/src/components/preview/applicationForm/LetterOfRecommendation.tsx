@@ -26,7 +26,7 @@ const LetterOfRecommendation: FC<OwnProps> = ({ middleSchool }) => (
       </S.SignatureItem>
       <S.SignatureItem isEnd widthSize={130}>
         <S.Blank mr={6} isUnderLine>
-          {middleSchool.split("중학교")[0]}
+          {middleSchool ? middleSchool.split("중학교")[0] : ""}
         </S.Blank>
         중학교장 <span>(직인)</span>
       </S.SignatureItem>
