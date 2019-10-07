@@ -49,8 +49,9 @@ const Info: FC<Props> = ({
         graduated_year
       } = classification;
 
+      updateAppClass("info-summary");
+
       if (!isOpen.info) {
-        updateAppClass("info-summary");
         setApplyType(convertApplyTypeToKorean(apply_type));
         setSelectRegion(is_daejeon ? "대전" : "전국");
         setRemark(convertAdditionalTypeToKorean(additional_type));
