@@ -13,7 +13,7 @@ interface OwnProps {
     | "math"
     | "science"
     | "english"
-    | "tech_home";
+    | "tech_and_home";
   subjectScores: Array<{
     semester: number;
     subject: string;

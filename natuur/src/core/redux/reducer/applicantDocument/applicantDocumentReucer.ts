@@ -60,7 +60,7 @@ const initialState: RootState = {
     history: ["A", "A", "A", "A", "A"],
     math: ["A", "A", "A", "A", "A"],
     science: ["A", "A", "A", "A", "A"],
-    tech_home: ["A", "A", "A", "A", "A"],
+    tech_and_home: ["A", "A", "A", "A", "A"],
     english: ["A", "A", "A", "A", "A"]
   },
   self_introduction_and_study_plan: {
