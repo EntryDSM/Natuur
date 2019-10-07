@@ -46,7 +46,6 @@ const FinalSubmitButton: FC = () => {
     selectRegion,
     graduationClassification,
     graduationYear,
-    remarks,
     receiptCode,
     examCode,
     name,
@@ -100,10 +99,9 @@ const FinalSubmitButton: FC = () => {
         schoolContact &&
         middleSchool &&
         userClass &&
+        graduationClassification &&
         studentID)) &&
     selectRegion &&
-    graduationClassification &&
-    remarks &&
     receiptCode &&
     examCode &&
     name &&
@@ -121,14 +119,11 @@ const FinalSubmitButton: FC = () => {
     name &&
     receiptCode &&
     userContact &&
-    address &&
-    middleSchool
+    address
   );
 
   const recommendationLetterDependency = !!(
     receiptCode &&
-    middleSchool &&
-    userClass &&
     name &&
     selectRegion &&
     applyType
@@ -136,7 +131,6 @@ const FinalSubmitButton: FC = () => {
 
   const introduceDependency = !!(
     receiptCode &&
-    middleSchool &&
     name &&
     selfIntroduction &&
     studyPlan
@@ -180,7 +174,15 @@ const FinalSubmitButton: FC = () => {
 
   return (
     <S.SubmitButton
-      isDisable={!isFinalSubmit}
+      isDisable={
+        !(
+          applicantFormDependency &&
+          nonSmokingPledgeDependency &&
+          recommendationLetterDependency &&
+          introduceDependency &&
+          admissionConsentDependency
+        )
+      }
       onClick={() => isFinalSubmit && presentFinalSubmit()}
     >
       최종제출
