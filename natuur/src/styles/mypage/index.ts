@@ -35,7 +35,7 @@ export const RowContent = styled.p`
 
 export const Horizon = styled.div`
   width: 100%;
-  height: 1px;
+  height: 2px;
   opacity: 0.4;
   background: #5f8a90;
 `;

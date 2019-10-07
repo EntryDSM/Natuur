@@ -192,7 +192,7 @@ export const EmphasisScore = styled.span`
   display: block;
   margin: 2px auto;
   width: 20px;
-  height: 1px;
+  height: 2px;
   background: #bfd0d2;
 `;
 

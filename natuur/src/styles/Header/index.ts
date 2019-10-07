@@ -14,7 +14,7 @@ export const WrapperContants = styled.div`
   position: relative;
   width: 1140px;
   height: 100%;
-  margin: 0 auto;
+  margin: 6px auto 0;
   display: flex;
 `;
 
@@ -85,6 +85,6 @@ export const Button = styled(Link)`
 
 export const Horizon = styled.div`
   width: 43px;
-  height: 1px;
+  height: 2px;
   background: #79c2ca;
 `;
