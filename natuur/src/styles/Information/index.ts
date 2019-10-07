@@ -15,7 +15,7 @@ export const CategoryList = styled.div`
 export const GradationHorizon = styled.div`
   display: block;
   width: 1140px;
-  height: 1px;
+  height: 2px;
   opacity: 0.4;
   background: #5f8a90;
 `;
@@ -147,7 +147,7 @@ export const GraduationSelectAccept = styled.div`
 
 export const GraduationSelectHorizon = styled.div`
   width: 133px;
-  height: 1px;
+  height: 2px;
   margin: 0 auto;
   background: #bccdd0;
 `;

@@ -10,11 +10,9 @@ interface OwnProps {
   userEmail: string;
   userPassword: string;
   isPasswordClose: boolean;
-  isSendSuccess: boolean;
   isGetSuccess: boolean;
-  isSendError: boolean;
   isGetError: boolean;
-  isSendWaiting: boolean;
+  isSignUpWaiting: boolean;
   isReadOnly: boolean;
   handleChanger?(event: React.ChangeEvent<HTMLInputElement>): void;
   getRegisterVerifyNumber({ verify }: { verify: string }): void;
@@ -64,8 +62,7 @@ const CertificationInputRaw: FC<OwnProps> = ({
   userPassword,
   isCheckAuthorization,
   isPasswordClose,
-  isSendSuccess,
-  isSendWaiting,
+  isSignUpWaiting,
   getRegisterVerifyNumber,
   isReadOnly,
   signUp
@@ -86,13 +83,11 @@ const CertificationInputRaw: FC<OwnProps> = ({
   },        []);
 
   useEffect(() => {
-    if (isSendSuccess) {
+    if (isSignUpWaiting) {
       setVerbleibendeZeit("03:00");
-      const timer = useTimer(180, setVerbleibendeZeit, setIsResend);
-
-      return () => clearInterval(timer);
+      useTimer(180, setVerbleibendeZeit, setIsResend);
     }
-  },        [isSendSuccess]);
+  },        [isSignUpWaiting]);
 
   return (
     <S.InfomationInputBoxCoverWrapper>
@@ -124,7 +119,7 @@ const CertificationInputRaw: FC<OwnProps> = ({
         buttonMargin={14}
       />
 
-      {isSendWaiting ? (
+      {isSignUpWaiting ? (
         <img src={loding} alt="로딩" style={{ marginLeft: "5px" }} />
       ) : (
         <S.Timer>
@@ -144,7 +139,7 @@ const CertificationInputRaw: FC<OwnProps> = ({
       {isOpenTextBox && (
         <S.MiniTextBox>
           <S.MiniTextBoxContent>
-            메일주소가 example@dsmhs.kr이 맞는지 확인해주세요
+            이메일주소와 스팸메일함을 확인해주세요.
           </S.MiniTextBoxContent>
         </S.MiniTextBox>
       )}

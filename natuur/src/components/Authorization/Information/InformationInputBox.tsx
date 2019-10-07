@@ -40,14 +40,12 @@ const InformationInputBox: FC<Props> = ({
   updateUserEmail,
   updateUserPassword,
   updateUserPasswordCheck,
-  isSendSuccess,
+  isSignUpWaiting,
   isGetSuccess,
-  isSendError,
   isGetError,
   isSignUpSuccess,
   isSignUpError,
   signUp,
-  isSendWaiting,
   getRegisterVerifyNumber,
   updateToastr
 }) => {
@@ -161,6 +159,7 @@ const InformationInputBox: FC<Props> = ({
             <GradationHorizon />
 
             <CertificationInputRaw
+              isSignUpWaiting={isSignUpWaiting}
               isReadOnly={isGetSuccess}
               handleChanger={handleVerify}
               isCheckAuthorization={!!userVerify}
@@ -168,11 +167,8 @@ const InformationInputBox: FC<Props> = ({
               userPassword={userPassword}
               userVerify={userVerify}
               isPasswordClose={isPasswordClose}
-              isSendSuccess={isSendSuccess}
               isGetSuccess={isGetSuccess}
-              isSendError={isSendError}
               isGetError={isGetError}
-              isSendWaiting={isSendWaiting}
               getRegisterVerifyNumber={getRegisterVerifyNumber}
               signUp={signUp}
             />
@@ -181,6 +177,7 @@ const InformationInputBox: FC<Props> = ({
       </div>
       <AcceptButton
         updateToastr={updateToastr}
+        isCertification={isCertification}
         isSuccess={
           emailRegular.test(userEmail) &&
           passwordRegular.test(userPassword) &&
@@ -188,7 +185,6 @@ const InformationInputBox: FC<Props> = ({
         }
         signUp={signUp}
         isGetSuccess={isGetSuccess}
-        isSignUpError={isSignUpError}
         userEmail={userEmail}
         userPassword={userPassword}
         isPasswordClose={isPasswordClose}

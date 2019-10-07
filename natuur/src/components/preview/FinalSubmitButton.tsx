@@ -47,7 +47,6 @@ const FinalSubmitButton: FC = () => {
     graduationClassification,
     graduationYear,
     receiptCode,
-    examCode,
     name,
     gender,
     birthYear,
@@ -72,7 +71,6 @@ const FinalSubmitButton: FC = () => {
     graduationYear: state.infoReducer.graduationYear,
     remarks: state.infoReducer.remarks,
     receiptCode: state.mainReducer.receipt_code,
-    examCode: state.mainReducer.exam_code,
     name: state.PersonalReducer.name,
     gender: state.PersonalReducer.gender,
     birthYear: state.PersonalReducer.birthYear,
@@ -103,7 +101,6 @@ const FinalSubmitButton: FC = () => {
         studentID)) &&
     selectRegion &&
     receiptCode &&
-    examCode &&
     name &&
     gender &&
     birthYear &&
@@ -138,7 +135,6 @@ const FinalSubmitButton: FC = () => {
 
   const admissionConsentDependency = !!(
     receiptCode &&
-    examCode &&
     name &&
     gender &&
     birthYear &&
