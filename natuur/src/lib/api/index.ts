@@ -117,8 +117,10 @@ export const getUserApplicantPhotoApi = async (payload: {
 }) => {
   const response = await instanceAxios.get<Blob>("/self/photo", {
     headers: {
+      Accept: "image/*",
       Authorization: `Bearer ${payload.accessToken}`
-    }
+    },
+    responseType: "blob"
   });
 
   return response.data;
@@ -211,9 +213,13 @@ export const putUnGraduatedApplicationDocumentApi = async (
 };
 
 export const patchFianlSubmitApi = async (payload: { accessToken: string }) => {
-  const response = await instanceAxios.patch("/self/application/final-submit", {
-    headers: authorizationHeader(payload.accessToken)
-  });
+  const response = await instanceAxios.patch(
+    "/self/application/final-submit",
+    null,
+    {
+      headers: authorizationHeader(payload.accessToken)
+    }
+  );
 
   return response.data;
 };
