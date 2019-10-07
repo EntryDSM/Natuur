@@ -6,20 +6,14 @@ import frameLandScape from "../../../assets/personal/frame-landscape.png";
 const handleFile = (
   { target: { files } },
   setFile: (file: string) => void,
-  changeApplicantPhoto: (payload: {
-    email: { email: string };
-    accessToken: { accessToken: string };
-    payload: { file: File };
-  }) => void,
-  email: string,
+  changeApplicantPhoto: (payload: { accessToken: string; file: File }) => void,
   accessToken: string
 ) => {
   const file = files[0];
 
   changeApplicantPhoto({
-    email: { email },
-    accessToken: { accessToken },
-    payload: { file }
+    accessToken,
+    file
   });
   setFile(URL.createObjectURL(file));
 };
@@ -30,11 +24,7 @@ interface OwnProps {
   imagePath: string;
   file: string;
   setFile: (file: string) => void;
-  changeApplicantPhoto: (payload: {
-    email: { email: string };
-    accessToken: { accessToken: string };
-    payload: { file: File };
-  }) => void;
+  changeApplicantPhoto: (payload: { accessToken: string; file: File }) => void;
 }
 
 const IdPhotoWrapper: FC<OwnProps> = ({
@@ -51,7 +41,7 @@ const IdPhotoWrapper: FC<OwnProps> = ({
         accept="image/x-png,image/jpg,image/jpeg,image/jpeg2000"
         id="idPhoto"
         onChange={e =>
-          handleFile(e, setFile, changeApplicantPhoto, email, accessToken)
+          handleFile(e, setFile, changeApplicantPhoto, accessToken)
         }
       />
       <S.IdPhotoPictureLabel htmlFor="idPhoto">
