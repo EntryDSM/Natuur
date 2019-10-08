@@ -1,7 +1,9 @@
 import React, { FC, useState, useEffect, useRef, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { patchFinalSubmit } from "../../core/redux/actions/main";
+import { useHistory } from "react-router-dom";
 
+import { patchFinalSubmit } from "../../core/redux/actions/main";
+import { updateToastr } from "../../core/redux/actions/default";
 import * as S from "../../styles/preview";
 import { AppState } from "../../core/redux/store/store";
 
@@ -33,12 +35,14 @@ export interface FinalSubmitDependencyState {
   selfIntroduction?: string;
   studyPlan?: string;
   accessToken?: string;
+  gedAverageScore?: number;
 }
 
 const FinalSubmitButton: FC = () => {
   const dispatch = useDispatch();
   const [isFinalSubmit, setIsFinalSubmit] = useState(false);
   const didMountRef = useRef(false);
+  const { push } = useHistory();
 
   const {
     isGed,
@@ -62,7 +66,8 @@ const FinalSubmitButton: FC = () => {
     file,
     selfIntroduction,
     studyPlan,
-    accessToken
+    accessToken,
+    gedAverageScore
   } = useSelector<AppState, FinalSubmitDependencyState>(state => ({
     isGed: state.infoReducer.isGed,
     applyType: state.infoReducer.applyType,
@@ -87,14 +92,15 @@ const FinalSubmitButton: FC = () => {
     file: state.PersonalReducer.file,
     selfIntroduction: state.introReducer.selfIntroduction,
     studyPlan: state.introReducer.studyPlan,
-    accessToken: state.userReducer.accessToken
+    accessToken: state.userReducer.accessToken,
+    gedAverageScore: state.gradeReducer.gedAverageScore
   }));
 
   const applicantFormDependency = !!(
-    (isGed ||
+    ((isGed && gedAverageScore) ||
       (applyType &&
         graduationYear &&
-        schoolContact &&
+        /^[0-9]+$/g.test(schoolContact) &&
         middleSchool &&
         userClass &&
         graduationClassification &&
@@ -106,8 +112,8 @@ const FinalSubmitButton: FC = () => {
     birthYear &&
     birthMonth &&
     birthDate &&
-    parentsContact &&
-    userContact &&
+    /^[0-9]+$/g.test(parentsContact) &&
+    /^[0-9]+$/g.test(userContact) &&
     address &&
     file
   );
@@ -115,7 +121,7 @@ const FinalSubmitButton: FC = () => {
   const nonSmokingPledgeDependency = !!(
     name &&
     receiptCode &&
-    userContact &&
+    /^[0-9]+$/g.test(userContact) &&
     address
   );
 
@@ -141,8 +147,8 @@ const FinalSubmitButton: FC = () => {
     birthMonth &&
     birthDate &&
     address &&
-    parentsContact &&
-    userContact
+    /^[0-9]+$/g.test(parentsContact) &&
+    /^[0-9]+$/g.test(userContact)
   );
 
   useEffect(() => {
@@ -163,10 +169,21 @@ const FinalSubmitButton: FC = () => {
     }
   },        []);
 
-  const presentFinalSubmit = useCallback(
-    () => dispatch(patchFinalSubmit({ accessToken })),
-    [dispatch]
-  );
+  const createToastr = useCallback(() => {
+    dispatch(
+      updateToastr({
+        timer: 5,
+        toastrMessage: "제출이 완료되었습니다.",
+        toastrState: "success"
+      })
+    );
+  },                               []);
+
+  const presentFinalSubmit = useCallback(() => {
+    dispatch(patchFinalSubmit({ accessToken }));
+    push("/");
+    createToastr();
+  },                                     [dispatch]);
 
   return (
     <S.SubmitButton
