@@ -30,6 +30,7 @@ const LoginPopUp: FC<Props> = ({
   isSuccess,
   userEmail,
   setUserEmail,
+  getApplicationDocument,
   accessToken,
   refreshToken,
   handleKeyPress
@@ -39,6 +40,7 @@ const LoginPopUp: FC<Props> = ({
   useEffect(() => {
     if (isSuccess) {
       getIsUpdatePopUp();
+      getApplicationDocument({ accessToken });
     }
 
     return () => resetState();

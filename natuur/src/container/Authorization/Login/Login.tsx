@@ -7,6 +7,7 @@ import {
   resetState,
   getUserEmail
 } from "../../../core/redux/actions/user";
+import { getApplicationDocument } from "../../../core/redux/actions/applicantDocument";
 
 export const mapStateToProps = (state: AppState) => ({
   isError: state.userReducer.isError,
@@ -22,7 +23,9 @@ export const mapDispatchToProps = dispatch => ({
     dispatch(logIn(payload)),
   resetState: () => dispatch(resetState()),
   setUserEmail: ({ userEmail }: { userEmail: string }) =>
-    dispatch(getUserEmail({ userEmail }))
+    dispatch(getUserEmail({ userEmail })),
+  getApplicationDocument: ({ accessToken }: { accessToken: string }) =>
+    dispatch(getApplicationDocument({ accessToken }))
 });
 
 export default connect(
