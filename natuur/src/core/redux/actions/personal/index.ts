@@ -31,11 +31,11 @@ export interface SearchAddressApiType {
   documents?: Array<{
     address_name: string;
     address: {
-      address_name: string;
+      address_name?: string;
     };
     road_address: {
-      address_name: string;
-      zone_no: string;
+      address_name?: string;
+      zone_no?: string;
     };
   }>;
 }
@@ -78,7 +78,7 @@ export interface GetApplicantPhoto {
     | typeof GET_APPLICANT_PHOTO
     | typeof GET_APPLICANT_PHOTO_SUCCESS
     | typeof GET_APPLICANT_PHOTO_FAILURE;
-  payload: { accessToken: string; file?: string };
+  payload: { accessToken: string } & Partial<string>;
 }
 
 export interface getAddressData {
@@ -186,9 +186,7 @@ export const changeApplicantPhoto = (
   type: PUT_APPLICANT_PHOTO
 });
 
-export const getApplicantPhoto = (payload: {
-  accessToken: string;
-}): PersonalActionTypes => ({
+export const getApplicantPhoto = (payload: { accessToken: string }) => ({
   payload,
   type: GET_APPLICANT_PHOTO
 });

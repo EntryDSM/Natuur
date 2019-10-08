@@ -75,7 +75,7 @@ function* getUserApplicantPhoto(action: GetApplicantPhoto) {
 
     yield put({
       type: GET_APPLICANT_PHOTO_SUCCESS,
-      payload: { file: response }
+      payload: response
     });
   } catch (e) {
     if (e.response.status === 401 || e.response.status === 422) {

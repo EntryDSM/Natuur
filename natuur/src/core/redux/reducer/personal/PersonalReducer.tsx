@@ -35,11 +35,11 @@ interface RootState {
   addressData: Array<{
     address_name: string;
     address: {
-      address_name: string;
+      address_name?: string;
     };
     road_address: {
-      address_name: string;
-      zone_no: string;
+      address_name?: string;
+      zone_no?: string;
     };
   }>;
   middleSchoolData: string[];
@@ -122,7 +122,7 @@ const PersonalReducer = (
         ...state
       };
     case GET_APPLICANT_PHOTO_SUCCESS: {
-      const { file } = action.payload;
+      const file = action.payload;
 
       const url = URL.createObjectURL(new Blob([file]));
 
