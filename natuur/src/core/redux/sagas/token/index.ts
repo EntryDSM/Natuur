@@ -23,11 +23,11 @@ export function* tokenRefresh(api, payload, successType, failureType) {
     const response = yield call(refreshJWTApi, { refreshToken });
     yield put({
       type: REFRESH_JWT_SUCCESS,
-      payload: { access: response }
+      payload: { access: response.access }
     });
     yield requsetApi(
       api,
-      { accessToken: response, ...payload },
+      { accessToken: response.access, ...payload },
       successType,
       failureType
     );

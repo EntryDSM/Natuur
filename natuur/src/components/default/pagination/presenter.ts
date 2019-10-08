@@ -44,6 +44,7 @@ export interface PaginationStateToProps {
       | "tech_and_home";
     score: "A" | "B" | "C" | "D" | "E" | "X";
   }>;
+  putStatusCode: number;
 }
 
 export const convertApplyTypeToEnglish = (

@@ -33,7 +33,11 @@ const GedScoreTable: FC<OwnProps> = ({
       didMountRef.current = true;
 
       if (!isOpen.grade) {
-        setGedAverageScore({ gedAverageScore: gedGrade.ged_average_score });
+        setGedAverageScore({
+          gedAverageScore: gedGrade.ged_average_score
+            ? gedGrade.ged_average_score
+            : 0
+        });
       }
     }
     return () => setIsOpen({ pageName: "grade", isOpen: true });

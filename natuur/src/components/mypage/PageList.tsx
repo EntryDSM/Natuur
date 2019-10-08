@@ -36,11 +36,7 @@ const PageList: FC = () => {
     selfIntroduction,
     studyPlan,
     gedAverageScore,
-    volunteer,
-    absent,
-    earlyLeave,
-    tardy,
-    missingClass
+    volunteer
   } = useSelector<AppState, State>(state => ({
     applyType: state.infoReducer.applyType,
     selectRegion: state.infoReducer.selectRegion,
@@ -86,8 +82,8 @@ const PageList: FC = () => {
             birthMonth &&
             birthDate &&
             parentsName &&
-            parentsContact &&
-            userContact &&
+            /^[0-9]+$/g.test(parentsContact) &&
+            /^[0-9]+$/g.test(userContact) &&
             zipCode &&
             address &&
             file
@@ -99,12 +95,7 @@ const PageList: FC = () => {
       <PageItem
         title="성적입력"
         link="grade"
-        isActive={
-          !!(
-            gedAverageScore ||
-            (volunteer && absent && earlyLeave && tardy && missingClass)
-          )
-        }
+        isActive={!!(gedAverageScore || volunteer)}
       />
       <PagenationHorizon />
 
