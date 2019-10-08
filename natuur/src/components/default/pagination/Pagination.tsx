@@ -1,5 +1,6 @@
 import React, { FC, memo, useCallback, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 
 import * as S from "../../../styles/default/pagination";
 import PaginationButton from "./PaginationButton";
@@ -19,6 +20,7 @@ import {
 } from "./presenter";
 import { subjectList } from "../../../lib/utils/subjectList";
 import { AppState } from "../../../core/redux/store/store";
+import { updateToastr } from "../../../core/redux/actions/default";
 import { precededByZeroBeforeOneDigitForString } from "../../../lib/utils/date";
 
 const ifFalseNull = (value: any) => {
@@ -53,41 +55,11 @@ const Pagination: FC<OwnProps> = ({
   nextRouterPath,
   AcceptPagination
 }) => {
+  const { pathname } = useLocation();
   const dispatch = useDispatch();
   const didMountRef = useRef(false);
 
-  const {
-    isGed,
-    applyType,
-    selectRegion,
-    graduationClassification,
-    graduationYear,
-    remarks,
-    name,
-    gender,
-    birthYear,
-    birthMonth,
-    birthDate,
-    userClass,
-    studentID,
-    middleSchool,
-    parentsName,
-    schoolContact,
-    parentsContact,
-    userContact,
-    address,
-    zipCode,
-    gedAverageScore,
-    selfIntroduction,
-    studyPlan,
-    accessToken,
-    volunteer,
-    absent,
-    earlyLeave,
-    tardy,
-    missingClass,
-    subjectScores
-  } = useSelector<AppState, PaginationStateToProps>(state => ({
+  const state = useSelector<AppState, PaginationStateToProps>(state => ({
     isGed: state.infoReducer.isGed,
     applyType: state.infoReducer.applyType,
     selectRegion: state.infoReducer.selectRegion,
@@ -117,22 +89,70 @@ const Pagination: FC<OwnProps> = ({
     earlyLeave: state.gradeReducer.earlyLeave,
     tardy: state.gradeReducer.tardy,
     missingClass: state.gradeReducer.missingClass,
-    subjectScores: state.gradeReducer.subjectScores
+    subjectScores: state.gradeReducer.subjectScores,
+    putStatusCode: state.applicantDocument.putStatusCode
   }));
+
+  const createToastr = useCallback(
+    (payload: {
+      message: string;
+      title?: string;
+      state: "info" | "errorState" | "success" | "warning";
+    }) => {
+      dispatch(
+        updateToastr({
+          timer: 5,
+          toastrTitle: payload.title,
+          toastrMessage: payload.message,
+          toastrState: payload.state
+        })
+      );
+    },
+    []
+  );
 
   useEffect(() => {
     if (!didMountRef.current) {
       didMountRef.current = true;
+      const { accessToken } = state;
 
-      dispatch(getApplicationDocument({ accessToken }));
+      // dispatch(getApplicationDocument({ accessToken }));
     }
   },        []);
 
   useEffect(() => {
-    if (graduationClassification) {
+    if (state.putStatusCode) {
+      if (state.putStatusCode === 409) {
+        createToastr({
+          message: "최종 제출 이후에는 사용할 수 없습니다.",
+          state: "errorState"
+        });
+      } else if (state.putStatusCode === 400) {
+        createToastr({
+          title: "임시저장에 실패하였습니다.",
+          message: "형식에 맞추어 입력해주세요.",
+          state: "errorState"
+        });
+      } else if (state.putStatusCode >= 500) {
+        createToastr({
+          message: "서버에서 에러가 발생하였습니다.",
+          state: "errorState"
+        });
+      } else if (state.putStatusCode === 204) {
+        createToastr({
+          message: "임시저장에 성공하였습니다.",
+          state: "success"
+        });
+      }
+    }
+  },        [state.putStatusCode]);
+
+  useEffect(() => {
+    if (state.graduationClassification) {
+      const { subjectScores } = state;
       const graduateScores = [...subjectScores];
 
-      if (graduationClassification === "졸업자") {
+      if (state.graduationClassification === "졸업자") {
         if (graduateScores[graduateScores.length - 1].semester === 5) {
           for (const subject of subjectList) {
             graduateScores.push({
@@ -151,9 +171,43 @@ const Pagination: FC<OwnProps> = ({
         );
       }
     }
-  },        [graduationClassification]);
+  },        [state.graduationClassification]);
 
   const connectServer = useCallback(() => {
+    const {
+      isGed,
+      applyType,
+      selectRegion,
+      graduationClassification,
+      graduationYear,
+      remarks,
+      name,
+      gender,
+      birthYear,
+      birthMonth,
+      birthDate,
+      userClass,
+      studentID,
+      middleSchool,
+      parentsName,
+      schoolContact,
+      parentsContact,
+      userContact,
+      address,
+      zipCode,
+      gedAverageScore,
+      selfIntroduction,
+      studyPlan,
+      accessToken,
+      volunteer,
+      absent,
+      earlyLeave,
+      tardy,
+      missingClass,
+      subjectScores,
+      putStatusCode
+    } = state;
+
     const stringMonth = precededByZeroBeforeOneDigitForString(
       Number(birthMonth)
     );
@@ -299,7 +353,7 @@ const Pagination: FC<OwnProps> = ({
         );
       }
     }
-  },                                [dispatch, isGed, graduationClassification, subjectScores.length]);
+  },                                [dispatch, pathname, state]);
 
   const allowedPageCheckers = useCallback(
     (isAccept: boolean, event: React.BaseSyntheticEvent) => {
