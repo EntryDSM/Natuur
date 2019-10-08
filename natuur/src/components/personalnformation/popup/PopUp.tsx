@@ -11,11 +11,11 @@ interface OwnProps {
   addressDocuments: Array<{
     address_name: string;
     address: {
-      address_name: string;
+      address_name?: string;
     };
     road_address: {
-      address_name: string;
-      zone_no: string;
+      address_name?: string;
+      zone_no?: string;
     };
   }>;
   isSuccess: boolean;
