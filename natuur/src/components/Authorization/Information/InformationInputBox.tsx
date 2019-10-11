@@ -64,10 +64,14 @@ const InformationInputBox: FC<Props> = ({
   useEffect(() => {
     if (isSignUpSuccess) {
       setIsCertification(true);
+    } else if(!isSignUpSuccess) {
+      setIsCertification(false);
     }
 
     if (isGetSuccess) {
       setIsPasswordClose(false);
+    } else if(!isGetSuccess) {
+      setIsPasswordClose(true);
     }
 
     return () => {

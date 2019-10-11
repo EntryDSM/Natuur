@@ -4,3 +4,6 @@ export const authenticationNumber = /^[0-9a-zA-Z]{6}$/;
 
 export const checkOnlyNumber = (value: string): boolean =>
   /^[0-9]+$/g.test(value) || !value;
+
+export const checkLanguage = (value: string): boolean =>
+  /^[ㄱ-ㅎ각-힣a-zA-Z]+$/g.test(value) || !value;

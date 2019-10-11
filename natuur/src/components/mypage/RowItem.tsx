@@ -21,7 +21,7 @@ const RowItem: FC<OwnProps> = ({ title, content, isPreview }) => {
       <S.RowContent>{content}</S.RowContent>
       {isPreview && (
         <S.PreviewButton
-          isSuccess={isFinalSubmit}
+          issuccess={isFinalSubmit ? "true" : "false"}
           onClick={e => !isFinalSubmit && e.preventDefault()}
           to="/print"
         >

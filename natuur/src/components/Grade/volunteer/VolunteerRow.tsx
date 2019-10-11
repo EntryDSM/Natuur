@@ -4,8 +4,8 @@ import * as S from "../../../styles/Grade";
 import { checkOnlyNumber } from "../../../lib/regularExpressions";
 
 interface OwnProps {
-  volunteerTime: number;
-  setVolunteerTime: (payload: { volunteer: number }) => void;
+  volunteerTime: string;
+  setVolunteerTime: (payload: { volunteer: string }) => void;
 }
 
 const VolunteerRow: FC<OwnProps> = ({ volunteerTime, setVolunteerTime }) => (
@@ -18,10 +18,8 @@ const VolunteerRow: FC<OwnProps> = ({ volunteerTime, setVolunteerTime }) => (
         <S.InputCover>
           <S.Input
             type="text"
-            maxLength={4}
             onChange={({ target: { value } }) =>
-              checkOnlyNumber(value) &&
-              setVolunteerTime({ volunteer: Number(value) })
+              checkOnlyNumber(value) && setVolunteerTime({ volunteer: value })
             }
             value={volunteerTime}
           />

@@ -25,6 +25,7 @@ const ApplicationForm: FC<OwnProps> = ({ isPrint }) => {
     receiptCode,
     examCode,
     name,
+    parentsName,
     gender,
     birthYear,
     birthMonth,
@@ -36,7 +37,16 @@ const ApplicationForm: FC<OwnProps> = ({ isPrint }) => {
     userContact,
     address,
     detailedAddress,
-    file
+    file,
+    schoolCode,
+    firstGradeScore,
+    secondGradeScores,
+    thirdGradeScores,
+    conversionScore,
+    attendanceScore,
+    volunteerTime,
+    finalScore,
+    volunteerScore
   } = useSelector<AppState, FinalSubmitDependencyState>(state => ({
     isGed: state.infoReducer.isGed,
     applyType: state.infoReducer.applyType,
@@ -52,13 +62,23 @@ const ApplicationForm: FC<OwnProps> = ({ isPrint }) => {
     birthMonth: state.PersonalReducer.birthMonth,
     birthDate: state.PersonalReducer.birthDate,
     userClass: state.PersonalReducer.userClass,
+    parentsName: state.PersonalReducer.parentsName,
     middleSchool: state.PersonalReducer.middleSchool,
     schoolContact: state.PersonalReducer.schoolContact,
     parentsContact: state.PersonalReducer.parentsContact,
     userContact: state.PersonalReducer.userContact,
     address: state.PersonalReducer.address,
     detailedAddress: state.PersonalReducer.detailedAddress,
-    file: state.PersonalReducer.file
+    file: state.PersonalReducer.file,
+    schoolCode: state.PersonalReducer.schoolCode,
+    firstGradeScore: state.printReducer.first_grade_score,
+    secondGradeScores: state.printReducer.second_grade_scores,
+    thirdGradeScores: state.printReducer.third_grade_scores,
+    conversionScore: state.printReducer.conversion_score,
+    attendanceScore: state.printReducer.attendance_score,
+    volunteerTime: state.printReducer.volunteer_time,
+    finalScore: state.printReducer.final_score,
+    volunteerScore: state.printReducer.volunteer_score
   }));
 
   const [admissionConsentDependency] = useState(
@@ -83,6 +103,8 @@ const ApplicationForm: FC<OwnProps> = ({ isPrint }) => {
       <div id="MainDiv">
         <S.SubContainer id="SubDiv">
           <ApplicationTables
+            isPrint={isPrint}
+            schoolCode={schoolCode}
             isGed={isGed}
             applyType={applyType}
             selectRegion={selectRegion}
@@ -97,17 +119,25 @@ const ApplicationForm: FC<OwnProps> = ({ isPrint }) => {
             birthMonth={birthMonth}
             birthDate={birthDate}
             userClass={userClass}
-            middleSchool={middleSchool}
+            parentsName={parentsName}
             schoolContact={schoolContact}
             parentsContact={parentsContact}
             userContact={userContact}
             address={address}
             detailedAddress={detailedAddress}
             file={file}
+            firstGradeScore={firstGradeScore}
+            secondGradeScores={secondGradeScores}
+            thirdGradeScores={thirdGradeScores}
+            conversionScore={conversionScore}
+            attendanceScore={attendanceScore}
+            volunteerTime={volunteerTime}
+            finalScore={finalScore}
+            volunteerScore={volunteerScore}
           />
           <LetterOfRecommendation middleSchool={middleSchool} />
           <Agreement />
-          <AppicationFooter />
+          <AppicationFooter name={name} parentsName={parentsName} />
         </S.SubContainer>
       </div>
     </S.ApplicationForm>

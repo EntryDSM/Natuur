@@ -1,4 +1,11 @@
-import React, { FC, useState, useEffect, useRef, useCallback } from "react";
+import React, {
+  FC,
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+  memo
+} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
@@ -6,6 +13,7 @@ import { patchFinalSubmit } from "../../core/redux/actions/main";
 import { updateToastr } from "../../core/redux/actions/default";
 import * as S from "../../styles/preview";
 import { AppState } from "../../core/redux/store/store";
+import prevArrow from "../../assets/common/prevArrow.png";
 
 export interface FinalSubmitDependencyState {
   isGed?: boolean;
@@ -35,8 +43,36 @@ export interface FinalSubmitDependencyState {
   selfIntroduction?: string;
   studyPlan?: string;
   accessToken?: string;
-  gedAverageScore?: number;
+  gedAverageScore?: string;
+  schoolCode?: string;
+  subjectScores?: Array<{
+    semester: number;
+    subject:
+      | "korean"
+      | "math"
+      | "social"
+      | "science"
+      | "english"
+      | "history"
+      | "tech_and_home";
+    score: "A" | "B" | "C" | "D" | "E" | "X";
+  }>;
+  firstGradeScore?: number;
+  secondGradeScores?: number;
+  thirdGradeScores?: number;
+  conversionScore?: number;
+  attendanceScore?: number;
+  volunteerTime?: number;
+  finalScore?: number;
+  volunteerScore?: number;
 }
+
+const Prev: FC = memo(() => (
+  <>
+    <S.ButtonArrow src={prevArrow} alt="이전_화살표" />
+    <S.ButtonContent>이전</S.ButtonContent>
+  </>
+));
 
 const FinalSubmitButton: FC = () => {
   const dispatch = useDispatch();
@@ -67,7 +103,8 @@ const FinalSubmitButton: FC = () => {
     selfIntroduction,
     studyPlan,
     accessToken,
-    gedAverageScore
+    gedAverageScore,
+    subjectScores
   } = useSelector<AppState, FinalSubmitDependencyState>(state => ({
     isGed: state.infoReducer.isGed,
     applyType: state.infoReducer.applyType,
@@ -93,18 +130,21 @@ const FinalSubmitButton: FC = () => {
     selfIntroduction: state.introReducer.selfIntroduction,
     studyPlan: state.introReducer.studyPlan,
     accessToken: state.userReducer.accessToken,
-    gedAverageScore: state.gradeReducer.gedAverageScore
+    gedAverageScore: state.gradeReducer.gedAverageScore,
+    subjectScores: state.gradeReducer.subjectScores
   }));
 
   const applicantFormDependency = !!(
-    ((isGed && gedAverageScore) ||
-      (applyType &&
-        graduationYear &&
-        /^[0-9]+$/g.test(schoolContact) &&
-        middleSchool &&
-        userClass &&
-        graduationClassification &&
-        studentID)) &&
+    (isGed
+      ? gedAverageScore
+      : !!(
+          /^[0-9]+$/g.test(schoolContact) &&
+          middleSchool &&
+          userClass &&
+          graduationClassification &&
+          studentID
+        )) &&
+    (subjectScores.length >= 36 ? graduationYear : true) &&
     selectRegion &&
     receiptCode &&
     name &&
@@ -186,20 +226,25 @@ const FinalSubmitButton: FC = () => {
   },                                     [dispatch]);
 
   return (
-    <S.SubmitButton
-      isDisable={
-        !(
-          applicantFormDependency &&
-          nonSmokingPledgeDependency &&
-          recommendationLetterDependency &&
-          introduceDependency &&
-          admissionConsentDependency
-        )
-      }
-      onClick={() => isFinalSubmit && presentFinalSubmit()}
-    >
-      최종제출
-    </S.SubmitButton>
+    <S.PaginationWrapper>
+      <S.Button to="/intro">
+        <Prev />
+      </S.Button>
+      <S.SubmitButton
+        isDisable={
+          !(
+            applicantFormDependency &&
+            nonSmokingPledgeDependency &&
+            recommendationLetterDependency &&
+            introduceDependency &&
+            admissionConsentDependency
+          )
+        }
+        onClick={() => isFinalSubmit && presentFinalSubmit()}
+      >
+        최종제출
+      </S.SubmitButton>
+    </S.PaginationWrapper>
   );
 };
 

@@ -20,6 +20,7 @@ import {
   SET_CLASS,
   SET_STUDENT_ID,
   SET_MIDDLE_SCHOOL,
+  SET_SCHOOL_CODE,
   SET_PARENTS_NAME,
   SET_SCHOOL_CONTACT,
   SET_PARENTS_CONTACT,
@@ -42,7 +43,10 @@ interface RootState {
       zone_no?: string;
     };
   }>;
-  middleSchoolData: string[];
+  middleSchoolData: Array<{
+    name: string;
+    code: string;
+  }>;
   name: string;
   gender: string;
   birthYear: string;
@@ -51,6 +55,7 @@ interface RootState {
   userClass: string;
   studentID: string;
   middleSchool: string;
+  schoolCode: string;
   parentsName: string;
   schoolContact: string;
   parentsContact: string;
@@ -75,6 +80,7 @@ const initialState: RootState = {
   userClass: "",
   studentID: "",
   middleSchool: "",
+  schoolCode: "",
   parentsName: "",
   schoolContact: "",
   parentsContact: "",
@@ -196,6 +202,11 @@ const PersonalReducer = (
       return {
         ...state,
         middleSchool: action.payload.school
+      };
+    case SET_SCHOOL_CODE:
+      return {
+        ...state,
+        schoolCode: action.payload.code
       };
     case SET_PARENTS_NAME:
       return {

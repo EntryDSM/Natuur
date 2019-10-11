@@ -388,8 +388,8 @@ export const IdPhotoPictureLabel = styled.label`
 `;
 
 export const TextBox = styled.div`
-  width: 138px;
   height: 24px;
+  padding: 0 10px;
   border: solid 1px #bccdd0;
   position: relative;
   font-size: 10px;

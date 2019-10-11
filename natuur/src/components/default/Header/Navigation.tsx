@@ -11,13 +11,15 @@ interface Props {
   isActive: boolean;
   refreshToken: string;
   logOut: (payload: { refreshToken: string }) => void;
+  isLogOut: boolean;
 }
 
 const Navigation: FC<Props> = ({
   userName,
   isActive,
   refreshToken,
-  logOut
+  logOut,
+  isLogOut
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -37,7 +39,13 @@ const Navigation: FC<Props> = ({
           <S.ContentsUser onClick={() => setIsOpen(!isOpen)}>
             <S.UserName>{`${userName} 님`}</S.UserName>
             <S.SlideBar src={buttonDropdown} alt="슬라이더" />
-            {isOpen && <DropDown logOut={logOut} refreshToken={refreshToken} />}
+            {isOpen && (
+              <DropDown
+                isLogOut={isLogOut}
+                logOut={logOut}
+                refreshToken={refreshToken}
+              />
+            )}
           </S.ContentsUser>
         )}
       </S.WrapperContants>

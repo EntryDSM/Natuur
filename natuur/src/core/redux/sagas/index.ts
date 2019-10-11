@@ -7,6 +7,7 @@ import authorization from "./authorization";
 import personal from "./personal";
 import tokenSaga from "./token";
 import applicantDocument from "./applicantDocument";
+import print from "./print";
 
 export default function* rootSaga() {
   yield all([
@@ -16,6 +17,7 @@ export default function* rootSaga() {
     call(authorization),
     call(personal),
     call(tokenSaga),
-    call(applicantDocument)
+    call(applicantDocument),
+    call(print)
   ]);
 }

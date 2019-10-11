@@ -1,10 +1,9 @@
-import React, { FC, useState, useEffect, useRef } from "react";
+import React, { FC, useState, useEffect, useCallback, useRef } from "react";
 import { hot } from "react-hot-loader/root";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 
 import {
-  Classification,
   Footer,
   Header,
   Introduce,
@@ -24,22 +23,27 @@ import GlobalStyle from "./styles/GlobalStyle";
 import { AppState } from "./core/redux/store/store";
 import { logOut } from "./core/redux/actions/user";
 import { getApplicationDocument } from "./core/redux/actions/applicantDocument";
-import { setIsOpen } from "./core/redux/actions/default";
+import { updateToastr } from "./core/redux/actions/default";
 
 const mapStaetToProps = (state: AppState) => ({
   accessToken: state.userReducer.accessToken,
   refreshToken: state.userReducer.refreshToken,
-  email: state.userReducer.userEmail
+  email: state.userReducer.userEmail,
+  errorRefreshStatus: state.userReducer.errorRefreshStatus,
+  isLogOut: state.userReducer.isLogOut
 });
 
 const mapDispatchToProps = dispatch => ({
   logOut: (payload: { refreshToken: string }) => dispatch(logOut(payload)),
   getApplicationDocument: (payload: { accessToken: string }) =>
     dispatch(getApplicationDocument(payload)),
-  setIsOpen: (payload: {
-    pageName: "info" | "personal" | "grade" | "intro";
-    isOpen: boolean;
-  }) => dispatch(setIsOpen(payload))
+  updateToastr: (payload: {
+    toastrState?: "info" | "errorState" | "success" | "warning";
+    toastrTitle?: string;
+    toastrMessage?: string;
+    timer?: number;
+    id?: number;
+  }) => dispatch(updateToastr(payload))
 });
 
 type Props = ReturnType<typeof mapStaetToProps> &
@@ -50,24 +54,38 @@ const App: FC<Props> = ({
   refreshToken,
   email,
   logOut,
+  isLogOut,
   getApplicationDocument,
-  setIsOpen
+  errorRefreshStatus,
+  updateToastr
 }) => {
   const didMountRef = useRef(false);
   const [appClass, setAppClass] = useState("");
+
+  const createToastr = useCallback(() => {
+    updateToastr({
+      timer: 5,
+      toastrMessage: "세션이 만료되어 로그아웃 됩니다.",
+      toastrState: "info"
+    });
+  },                               []);
 
   useEffect(() => {
     if (!didMountRef.current) {
       didMountRef.current = true;
 
-      getApplicationDocument({ accessToken });
-
-      setIsOpen({ pageName: "info", isOpen: false });
-      setIsOpen({ pageName: "personal", isOpen: false });
-      setIsOpen({ pageName: "grade", isOpen: false });
-      setIsOpen({ pageName: "intro", isOpen: false });
+      if (accessToken) {
+        getApplicationDocument({ accessToken });
+      }
     }
   },        []);
+
+  useEffect(() => {
+    if (errorRefreshStatus === 401) {
+      createToastr();
+      logOut({ refreshToken });
+    }
+  },        [errorRefreshStatus]);
 
   return (
     <BrowserRouter>
@@ -78,6 +96,7 @@ const App: FC<Props> = ({
           accessToken={accessToken}
           refreshToken={refreshToken}
           logOut={logOut}
+          isLogOut={isLogOut}
         />
         <Switch>
           <Route
@@ -92,6 +111,16 @@ const App: FC<Props> = ({
             render={() => <SignUp updateAppClass={setAppClass} />}
             exact
           />
+          <Route
+            path="/mypage"
+            render={() => <MyPage updateAppClass={setAppClass} />}
+            exact
+          />
+          <Route
+            path="/print"
+            render={() => <Print updateAppClass={setAppClass} />}
+            exact
+          />
           <CheckToken accessToken={accessToken}>
             <>
               <Route
@@ -101,7 +130,6 @@ const App: FC<Props> = ({
                 )}
                 exact
               />
-              <Route path="/classify" render={() => <Classification />} exact />
               <Route
                 path="/personal"
                 render={() => <PersonalInformation />}
@@ -114,16 +142,6 @@ const App: FC<Props> = ({
                 exact
               />
               <Route path="/grade" render={() => <ConnectGrade />} exact />
-              <Route
-                path="/mypage"
-                render={() => <MyPage updateAppClass={setAppClass} />}
-                exact
-              />
-              <Route
-                path="/print"
-                render={() => <Print updateAppClass={setAppClass} />}
-                exact
-              />
             </>
           </CheckToken>
           <Route component={ErrorPage} />

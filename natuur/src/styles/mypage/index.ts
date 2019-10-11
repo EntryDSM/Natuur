@@ -93,26 +93,29 @@ export const PagenationHorizon = styled.div`
   }
 `;
 
-export const PreviewButton = styled(Link)<{ isSuccess?: boolean }>`
+export const PreviewButton = styled(Link)<{ issuccess?: "true" | "false" }>`
   all: unset;
   width: 125px;
   height: 40px;
   border-radius: 5px;
   border: solid 0.5px
-    ${props => (props.isSuccess ? "#5f8a90" : "rgba(112,112,112,0.3)")};
-  background-color: ${props => (props.isSuccess ? "#f7fbfc" : "#fcfcfc")};
-  color: ${props => (props.isSuccess ? "#79c2ca" : "rgba(0,0,0,0.3)")};
+    ${props =>
+      props.issuccess === "true" ? "#5f8a90" : "rgba(112,112,112,0.3)"};
+  background-color: ${props =>
+    props.issuccess === "true" ? "#f7fbfc" : "#fcfcfc"};
+  color: ${props =>
+    props.issuccess === "true" ? "#79c2ca" : "rgba(0,0,0,0.3)"};
   font-size: 16px;
   line-height: 40px;
   text-align: center;
   margin: 0 20px 0 auto;
-  cursor: ${props => (props.isSuccess ? "pointer" : "default")};
+  cursor: ${props => (props.issuccess === "true" ? "pointer" : "default")};
   position: relative;
 
   &:hover {
-    ${props => props.isSuccess && "background: #e4f6fb"};
+    ${props => props.issuccess === "true" && "background: #e4f6fb"};
     ${props =>
-      !props.isSuccess &&
+      props.issuccess === "false" &&
       `&::after {
         content: "원서 제출 후 출력이 가능합니다.";
         background-image: url(${textBox});

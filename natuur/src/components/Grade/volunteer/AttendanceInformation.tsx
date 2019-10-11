@@ -7,12 +7,12 @@ interface OwnProps {
   caseName: "결석" | "조퇴" | "지각" | "결과";
   inforCase: "absent" | "earlyLeave" | "tardy" | "missingClass";
   onChangeHandler: (payload: {
-    absent?: number;
-    earlyLeave?: number;
-    tardy?: number;
-    missingClass?: number;
+    absent?: string;
+    earlyLeave?: string;
+    tardy?: string;
+    missingClass?: string;
   }) => void;
-  inputValue: number;
+  inputValue: string;
 }
 
 const AttendanceInformation: FC<OwnProps> = ({
@@ -29,8 +29,7 @@ const AttendanceInformation: FC<OwnProps> = ({
           type="text"
           maxLength={3}
           onChange={({ target: { value } }) =>
-            checkOnlyNumber(value) &&
-            onChangeHandler({ [inforCase]: Number(value) })
+            checkOnlyNumber(value) && onChangeHandler({ [inforCase]: value })
           }
           value={inputValue}
         />

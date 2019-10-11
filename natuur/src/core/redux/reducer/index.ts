@@ -13,8 +13,9 @@ import infoReducer from "./info/infoReducer";
 import gradeReducer from "./grade/gradeReducer";
 import introReducer from "./intro/introReducer";
 import applicantDocument from "./applicantDocument/applicantDocumentReucer";
+import printReducer from "./print/printReducer";
 
-export default combineReducers({
+const appReducer = combineReducers({
   AuthorizationReducer,
   defaultReducer,
   userReducer,
@@ -27,5 +28,16 @@ export default combineReducers({
   PersonalReducer,
   gradeReducer,
   introReducer,
-  applicantDocument
+  applicantDocument,
+  printReducer
 });
+
+const rootReducer = (state, action) => {
+  if (action.type === "LOG_OUT_SUCCESS") {
+    state = undefined;
+    localStorage.clear();
+  }
+  return appReducer(state, action);
+};
+
+export default rootReducer;

@@ -19,14 +19,16 @@ const NonSmokingPledge: FC<OwnProps> = ({ isPrint }) => {
     middleSchool,
     userContact,
     address,
-    detailedAddress
+    detailedAddress,
+    parentsName
   } = useSelector<AppState, FinalSubmitDependencyState>(state => ({
     receiptCode: state.mainReducer.receipt_code,
     name: state.PersonalReducer.name,
     middleSchool: state.PersonalReducer.middleSchool,
     userContact: state.PersonalReducer.userContact,
     address: state.PersonalReducer.address,
-    detailedAddress: state.PersonalReducer.detailedAddress
+    detailedAddress: state.PersonalReducer.detailedAddress,
+    parentsName: state.PersonalReducer.parentsName
   }));
 
   const [nonSmokingPledgeDependency] = useState(
@@ -47,7 +49,7 @@ const NonSmokingPledge: FC<OwnProps> = ({ isPrint }) => {
             address={address}
             detailedAddress={detailedAddress}
           />
-          <NonSmokingBody name={name} />
+          <NonSmokingBody parentsName={parentsName} name={name} />
         </S.SubContainer>
       </div>
     </S.NonSmokingPledge>

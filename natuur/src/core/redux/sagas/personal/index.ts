@@ -94,10 +94,13 @@ function* getSchoolData(action: SearchSchool) {
   const { accessToken, school } = action.payload;
 
   try {
-    const response: string[] = yield call(getSchoolDataApi, {
-      accessToken,
-      school
-    });
+    const response: Array<{ name: string; code: string }> = yield call(
+      getSchoolDataApi,
+      {
+        accessToken,
+        school
+      }
+    );
     yield put({
       type: SEARCH_SCHOOL_SUCCESS,
       payload: { schoolList: response }

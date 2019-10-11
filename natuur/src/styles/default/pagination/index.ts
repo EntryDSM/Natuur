@@ -21,6 +21,7 @@ export const Button = styled(Link)`
   justify-content: space-between;
   padding: 16px 22px 19px 24px;
   box-sizing: border-box;
+  cursor: pointer;
 `;
 
 export const ButtonContent = styled.span`

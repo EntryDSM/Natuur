@@ -1,6 +1,5 @@
 import SignUp from "./Authorization/SignUp/SignUp";
 import Login from "./Authorization/Login/Login";
-import Classification from "./Classification/Classification";
 import Grade from "./Grade/Grade";
 import Info from "./Info/Info";
 import Introduce from "./Introduce/Introduce";
@@ -15,7 +14,6 @@ import Print from "./Print/Print";
 export {
   SignUp,
   Login,
-  Classification,
   Grade,
   Info,
   Introduce,

@@ -18,9 +18,11 @@ export interface RootState {
   isWaiting?: boolean;
   isError?: boolean;
   isSuccess?: boolean;
+  isLogOut?: boolean;
   accessToken?: string;
   refreshToken?: string;
   userEmail?: string;
+  errorRefreshStatus: number;
   isExpirationJWT: boolean;
 }
 
@@ -28,9 +30,11 @@ const initialState: RootState = {
   isError: false,
   isWaiting: false,
   isSuccess: false,
+  isLogOut: false,
   accessToken: "",
   refreshToken: "",
   userEmail: "",
+  errorRefreshStatus: 0,
   isExpirationJWT: true
 };
 
@@ -55,7 +59,8 @@ const userReducer = (
         isSuccess: true,
         isError: false,
         isWaiting: false,
-        isExpirationJWT: false
+        isExpirationJWT: false,
+        isLogOut: false
       };
     }
     case LOG_IN_FAILURE: {
@@ -75,7 +80,9 @@ const userReducer = (
       return {
         ...state,
         accessToken: "",
-        refreshToken: ""
+        refreshToken: "",
+        isLogOut: true,
+        errorRefreshStatus: 0
       };
     }
     case LOG_OUT_FAILURS: {
@@ -97,7 +104,8 @@ const userReducer = (
     }
     case REFRESH_JWT_FAILURS: {
       return {
-        ...state
+        ...state,
+        errorRefreshStatus: action.payload.errorRefreshStatus
       };
     }
     case RESET_STATE: {

@@ -14,9 +14,10 @@ import { returnMonthAndDate } from "../../../lib/utils/date";
 
 interface OwnProps {
   name: string;
+  parentsName: string;
 }
 
-const NonSmokingBody: FC<OwnProps> = ({ name }) => {
+const NonSmokingBody: FC<OwnProps> = ({ name, parentsName }) => {
   const { stringMonth, stringDate } = returnMonthAndDate();
 
   return (
@@ -43,10 +44,10 @@ const NonSmokingBody: FC<OwnProps> = ({ name }) => {
       </S.Date>
       <S.VolunteerSignature>
         <p>
-          지원자 성명 <S.Blank widthSize={100} /> (서명)
+          지원자 성명 <S.Blank widthSize={100}>{name}</S.Blank> (서명)
         </p>
         <p>
-          보호자 성명 <S.Blank widthSize={100} /> (서명)
+          보호자 성명 <S.Blank widthSize={100}>{parentsName}</S.Blank> (서명)
         </p>
       </S.VolunteerSignature>
     </S.ContentWrapper>

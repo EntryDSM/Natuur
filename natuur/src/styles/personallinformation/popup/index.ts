@@ -84,6 +84,10 @@ export const AddressInputWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  & > div > span {
+    float: right;
+  }
 `;
 
 export const SearchButton = styled.div`

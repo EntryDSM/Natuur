@@ -39,7 +39,12 @@ export interface RefreshJWT {
     | typeof REFRESH_JWT
     | typeof REFRESH_JWT_SUCCESS
     | typeof REFRESH_JWT_FAILURS;
-  payload: { refreshToken: string; accessToken?: string; access?: string };
+  payload: {
+    refreshToken: string;
+    accessToken?: string;
+    access?: string;
+    errorRefreshStatus?: number;
+  };
 }
 export interface CheckAccessToken {
   type: typeof CHECK_ACCESS_TOKEN;

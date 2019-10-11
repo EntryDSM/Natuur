@@ -4,7 +4,9 @@ import {
   UserApplicantStatusApiType,
   GedApplicationApiType,
   GraduatedApplicationApiType,
-  UnGraduatedApplicationApiType
+  UnGraduatedApplicationApiType,
+  GetSchoolDataApiType,
+  GetCalculatedScoreApiType
 } from "./apiType";
 
 const instanceAxios = axios.create({
@@ -228,14 +230,32 @@ export const getSchoolDataApi = async (payload: {
   accessToken: string;
   school: string;
 }) => {
-  const response = await instanceAxios.get<string[]>("/school/search", {
-    headers: {
-      Authorization: `Bearer ${payload.accessToken}`
-    },
-    params: {
-      query: payload.school
+  const response = await instanceAxios.get<GetSchoolDataApiType>(
+    "/school/search",
+    {
+      headers: {
+        Authorization: `Bearer ${payload.accessToken}`
+      },
+      params: {
+        query: payload.school
+      }
     }
-  });
+  );
+
+  return response.data;
+};
+
+export const getCalculatedScoresApi = async (payload: {
+  accessToken: string;
+}) => {
+  const response = await instanceAxios.get<GetCalculatedScoreApiType>(
+    "/self/application/calculated-score",
+    {
+      headers: {
+        Authorization: `Bearer ${payload.accessToken}`
+      }
+    }
+  );
 
   return response.data;
 };

@@ -1,7 +1,9 @@
 import React, { FC, useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 import InputRow from "./InputRow";
 import * as S from "../../../styles/Information";
+import { setGraduationYear } from "../../../core/redux/actions/info";
 
 interface OwnProps {
   radioType: string;
@@ -19,6 +21,7 @@ const GraduationClassificationRow: FC<OwnProps> = ({
   setRadioType,
   isGedState
 }) => {
+  const dispatch = useDispatch();
   useEffect(() => {
     if (isGedState) {
       setRadioType("");
@@ -37,7 +40,10 @@ const GraduationClassificationRow: FC<OwnProps> = ({
             name="GraduationClassificationRow"
             id={result.CHECK_BOX_CASE}
             value={result.CHECK_BOX_NAME}
-            onClick={({ currentTarget: { value } }) => setRadioType(value)}
+            onClick={({ currentTarget: { value } }) => {
+              setRadioType(value),
+                value === "졸업자" && dispatch(setGraduationYear(""));
+            }}
             disabled={isGedState}
           />
           <S.CircleLabel htmlFor={result.CHECK_BOX_CASE}>

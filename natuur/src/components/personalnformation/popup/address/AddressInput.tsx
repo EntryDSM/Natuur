@@ -23,7 +23,10 @@ const AddressInput: FC<OwnProps> = ({ searchAddress }) => {
   const [query, setQuery] = useState("");
   return (
     <AddressInputWrapper>
-      우편번호 찾기
+      <div>
+        우편번호 찾기
+        <span>도로명 주소를 입력해주세요.</span>
+      </div>
       <S.InlineDiv>
         <S.Input
           type="text"

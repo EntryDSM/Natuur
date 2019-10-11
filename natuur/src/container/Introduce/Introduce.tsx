@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef } from "react";
+import React, { FC } from "react";
 import { connect } from "react-redux";
 
 import * as S from "../../styles/intro";
@@ -15,16 +15,12 @@ import {
   setStudyPlan,
   PatchDocumentType
 } from "../../core/redux/actions/intro";
-import { setIsOpen } from "../../core/redux/actions/default";
 import { AppState } from "../../core/redux/store/store";
 
 const mapStateToProps = (state: AppState) => ({
   accessToken: state.userReducer.accessToken,
   selfIntroduction: state.introReducer.selfIntroduction,
-  studyPlan: state.introReducer.studyPlan,
-  isOpen: state.defaultReducer.isOpen,
-  selfIntroductionAndStudyPlan:
-    state.applicantDocument.self_introduction_and_study_plan
+  studyPlan: state.introReducer.studyPlan
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -32,11 +28,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(patchDocument(payload)),
   setSelfIntroduction: (payload: { text: string }) =>
     dispatch(setSelfIntroduction(payload)),
-  setStudyPlan: (payload: { text: string }) => dispatch(setStudyPlan(payload)),
-  setIsOpen: (payload: {
-    pageName: "info" | "personal" | "grade" | "intro";
-    isOpen: boolean;
-  }) => dispatch(setIsOpen(payload))
+  setStudyPlan: (payload: { text: string }) => dispatch(setStudyPlan(payload))
 });
 
 type Props = ReturnType<typeof mapStateToProps> &
@@ -48,28 +40,8 @@ const Introduce: FC<Props> = ({
   studyPlan,
   patchDocument,
   setSelfIntroduction,
-  setStudyPlan,
-  selfIntroductionAndStudyPlan,
-  isOpen,
-  setIsOpen
+  setStudyPlan
 }) => {
-  const didMountRef = useRef(false);
-
-  useEffect(() => {
-    if (!didMountRef.current) {
-      didMountRef.current = true;
-      const { self_introduction, study_plan } = selfIntroductionAndStudyPlan;
-
-      if (!isOpen.intro) {
-        setSelfIntroduction({
-          text: self_introduction === null ? "" : self_introduction
-        });
-        setStudyPlan({ text: study_plan === null ? "" : study_plan });
-      }
-    }
-    return () => setIsOpen({ pageName: "intro", isOpen: true });
-  },        []);
-
   return (
     <div>
       <S.IntroWrapper>

@@ -21,6 +21,7 @@ export const PUT_UNGRADUATED_DOCUMENT_SUCCESS =
   "PUT_UNGRADUATED_DOCUMENT_SUCCESS";
 export const PUT_UNGRADUATED_DOCUMENT_FAILURS =
   "PUT_UNGRADUATED_DOCUMENT_FAILURS";
+export const RESET_STATUS = "RESET_STATUS";
 
 export interface GetApplicationDocument {
   type:
@@ -63,11 +64,16 @@ export interface PutUnGraduaatedDocument {
   } & UnGraduatedApplicationApiType;
 }
 
+export interface ResetStatus {
+  type: typeof RESET_STATUS;
+}
+
 export type ApplicantDocumentActionTypes =
   | GetApplicationDocument
   | PutGedDocument
   | PutGraduaatedDocument
-  | PutUnGraduaatedDocument;
+  | PutUnGraduaatedDocument
+  | ResetStatus;
 
 export const getApplicationDocument = (payload: {
   accessToken: string;
@@ -101,4 +107,8 @@ export const putUnGraduaatedDocument = (
 ): ApplicantDocumentActionTypes => ({
   payload,
   type: PUT_UNGRADUATED_DOCUMENT
+});
+
+export const resetStatus = (): ApplicantDocumentActionTypes => ({
+  type: RESET_STATUS
 });

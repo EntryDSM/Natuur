@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef } from "react";
+import React, { FC } from "react";
 
 import * as S from "../../styles/Grade";
 import HeadLine from "../../components/default/Common/HeadLine";
@@ -8,7 +8,6 @@ import ScoreTable from "../../components/Grade/scoreTable";
 import GedScoreTable from "../../components/Grade/GedScoreTable";
 import Pagination from "../../components/default/pagination/Pagination";
 import { mapStateToProps, mapDispatchToProps } from "./ConnectGrade";
-import { subjectList } from "../../lib/utils/subjectList";
 
 type Props = ReturnType<typeof mapStateToProps> &
   ReturnType<typeof mapDispatchToProps>;
@@ -39,40 +38,8 @@ const Grade: FC<Props> = ({
   setIsSecondGrade2Semester,
   setIsThirdGrade1Semester,
   setGedAverageScore,
-  setSubjectScores,
-  ged_grade,
-  diligence_grade,
-  school_grade,
-  isOpen,
-  setIsOpen
+  setSubjectScores
 }) => {
-  const didMountRef = useRef(false);
-
-  useEffect(() => {
-    if (!didMountRef.current) {
-      didMountRef.current = true;
-
-      const graduateScores = [...subjectScores];
-
-      if (graduationClassification === "졸업자") {
-        if (graduateScores[graduateScores.length - 1].semester === 5) {
-          for (const subject of subjectList) {
-            graduateScores.push({
-              subject,
-              score: "A",
-              semester: 6
-            });
-          }
-        }
-        setSubjectScores({ subjectScores: graduateScores });
-      } else {
-        setSubjectScores({
-          subjectScores: graduateScores.filter(value => value.semester <= 5)
-        });
-      }
-    }
-  },        [didMountRef]);
-
   return (
     <div>
       <S.GradeWrapper>
@@ -81,14 +48,10 @@ const Grade: FC<Props> = ({
           <GedScoreTable
             gedAverageScore={gedAverageScore}
             setGedAverageScore={setGedAverageScore}
-            gedGrade={ged_grade}
-            isOpen={isOpen}
-            setIsOpen={setIsOpen}
           />
         ) : (
           <>
             <Volunteer
-              isGed={isGed}
               volunteerTime={volunteer}
               setVolunteerTime={setVolunteer}
               absent={absent}
@@ -99,9 +62,6 @@ const Grade: FC<Props> = ({
               setTardy={setTardy}
               missingClass={missingClass}
               setMissingClass={setMissingClass}
-              diligenceGrade={diligence_grade}
-              isOpen={isOpen}
-              setIsOpen={setIsOpen}
             />
             <MissedSemester
               isFirstGradeSmester1={isFirstGradeSmester1}
@@ -121,9 +81,6 @@ const Grade: FC<Props> = ({
               graduationClassification={graduationClassification}
               setSubjectScores={setSubjectScores}
               subjectScores={subjectScores}
-              schoolGrade={school_grade}
-              isOpen={isOpen}
-              setIsOpen={setIsOpen}
             />
           </>
         )}

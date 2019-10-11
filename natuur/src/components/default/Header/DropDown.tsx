@@ -1,5 +1,6 @@
-import React, { FC, useCallback } from "react";
+import React, { FC, useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 import * as S from "../../../styles/Header";
 import { updateToastr } from "../../../core/redux/actions/default";
@@ -7,10 +8,12 @@ import { updateToastr } from "../../../core/redux/actions/default";
 interface OwnProps {
   refreshToken: string;
   logOut: (payload: { refreshToken: string }) => void;
+  isLogOut: boolean;
 }
 
-const DropDown: FC<OwnProps> = ({ refreshToken, logOut }) => {
+const DropDown: FC<OwnProps> = ({ refreshToken, logOut, isLogOut }) => {
   const dispatch = useDispatch();
+  const { push } = useHistory();
 
   const createToastr = useCallback(() => {
     dispatch(
@@ -27,12 +30,18 @@ const DropDown: FC<OwnProps> = ({ refreshToken, logOut }) => {
     createToastr();
   },                                [refreshToken]);
 
+  useEffect(() => {
+    if (isLogOut) {
+      push("/");
+    }
+  },        [isLogOut]);
+
   return (
     <S.HeaerDropDownBox>
       <div>
         <S.Button to="/mypage">마이페이지</S.Button>
         <S.Horizon />
-        <S.Button onClick={logOutHandler} to="/">
+        <S.Button onClick={logOutHandler} as="button" to="/">
           로그아웃
         </S.Button>
       </div>

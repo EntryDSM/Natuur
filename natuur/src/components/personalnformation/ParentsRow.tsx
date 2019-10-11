@@ -2,6 +2,7 @@ import React, { FC } from "react";
 
 import * as S from "../../styles/personallinformation";
 import InputRow from "./InputRow";
+import { checkLanguage } from "../../lib/regularExpressions";
 
 interface OwnProps {
   name: string;
@@ -17,6 +18,9 @@ const ParentsRow: FC<OwnProps> = ({ name, setName }) => {
         onChange={({ target: { value } }) => setName({ name: value })}
         inputCase="parents"
       />
+      {!checkLanguage(name) && (
+        <S.TextBox>한글 or 영어를 이용하여 입력해주세요.</S.TextBox>
+      )}
     </InputRow>
   );
 };

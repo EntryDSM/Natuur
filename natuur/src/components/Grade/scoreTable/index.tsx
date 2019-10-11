@@ -1,4 +1,4 @@
-import React, { FC, useRef, useEffect } from "react";
+import React, { FC } from "react";
 
 import ResetTable from "./ResetTable";
 import Wrapper from "../Wrapper";
@@ -19,62 +19,13 @@ interface OwnProps {
     subject: string;
     score: "A" | "B" | "C" | "D" | "E" | "X";
   }>;
-  schoolGrade: {
-    korean: Array<"A" | "B" | "C" | "D" | "E" | "X">;
-    social: Array<"A" | "B" | "C" | "D" | "E" | "X">;
-    history: Array<"A" | "B" | "C" | "D" | "E" | "X">;
-    math: Array<"A" | "B" | "C" | "D" | "E" | "X">;
-    science: Array<"A" | "B" | "C" | "D" | "E" | "X">;
-    tech_and_home: Array<"A" | "B" | "C" | "D" | "E" | "X">;
-    english: Array<"A" | "B" | "C" | "D" | "E" | "X">;
-  };
-  isOpen: {
-    info: boolean;
-    personal: boolean;
-    grade: boolean;
-    intro: boolean;
-  };
-  setIsOpen: (payload: {
-    pageName: "info" | "personal" | "grade" | "intro";
-    isOpen: boolean;
-  }) => void;
 }
 
 const ScoreTable: FC<OwnProps> = ({
   graduationClassification,
   setSubjectScores,
-  subjectScores,
-  schoolGrade,
-  isOpen,
-  setIsOpen
+  subjectScores
 }) => {
-  const didMountRef = useRef(false);
-
-  useEffect(() => {
-    if (!didMountRef.current) {
-      didMountRef.current = true;
-
-      const subjectScores = [];
-
-      if (!isOpen.grade) {
-        for (const subject in schoolGrade) {
-          if (schoolGrade.hasOwnProperty(subject)) {
-            subjectScores.push(
-              schoolGrade[subject].map((value, index) => ({
-                semester: index + 1,
-                subject,
-                score: value
-              }))
-            );
-          }
-        }
-
-        setSubjectScores({ subjectScores });
-      }
-    }
-    return () => setIsOpen({ pageName: "grade", isOpen: true });
-  },        []);
-
   return (
     <Wrapper title="성적입력">
       <ResetTable

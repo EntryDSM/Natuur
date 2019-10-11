@@ -3,11 +3,12 @@ import React, { FC } from "react";
 import * as S from "../../../styles/preview/admissionConsent";
 import { ADMISSION_PLEDGE, ADMISSION_WARNING } from "./constance";
 
-interface ReduxProps {
-  userName: string;
+interface OwnProps {
+  name: string;
+  parentsName: string;
 }
 
-const AdmissionBody: FC = () => (
+const AdmissionBody: FC<OwnProps> = ({ name, parentsName }) => (
   <S.Contentbody>
     <S.AdmissionPledge>{ADMISSION_PLEDGE}</S.AdmissionPledge>
     <div>
@@ -62,10 +63,10 @@ const AdmissionBody: FC = () => (
       </S.Date>
       <S.Sign>
         <p>
-          지원자 성명: <S.Blank widthSize={150} /> (서명)
+          지원자 성명: <S.Blank widthSize={150}>{name}</S.Blank> (서명)
         </p>
         <p>
-          보호자 성명: <S.Blank widthSize={150} /> (서명)
+          보호자 성명: <S.Blank widthSize={150}>{parentsName}</S.Blank> (서명)
         </p>
       </S.Sign>
       <S.SchoolText>대덕소프트웨어마이스터고등학교장 귀하</S.SchoolText>

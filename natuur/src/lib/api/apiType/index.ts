@@ -76,6 +76,7 @@ export interface GraduatedApplicationApiType {
     student_number: string;
     school_name: string;
     school_tel: string;
+    school_code: string;
   };
   diligence_grade: {
     volunteer_time: number;
@@ -128,6 +129,7 @@ export interface UnGraduatedApplicationApiType {
     student_number: string;
     school_name: string;
     school_tel: string;
+    school_code: string;
   };
   diligence_grade: {
     volunteer_time: number;
@@ -154,3 +156,36 @@ export interface UnGraduatedApplicationApiType {
 export type GetApplicantDocumentApiType = GedApplicationApiType &
   GraduatedApplicationApiType &
   UnGraduatedApplicationApiType;
+
+export type GetSchoolDataApiType = Array<{ name: string; code: string }>;
+
+export interface GetGEDScoreApiType {
+  volunteer_score: number;
+  attendance_score: number;
+  conversion_score: number;
+  final_score: number;
+  ged_average_score: number;
+}
+
+export interface GetGraduatedScoreApiType {
+  first_grade_score: number;
+  second_grade_scores: number;
+  third_grade_scores: number;
+  conversion_score: number;
+  attendance_score: number;
+  volunteer_time: number;
+  final_score: number;
+}
+
+export interface GetUngraduatedScoreApiType {
+  first_grade_score: number;
+  second_grade_scores: number;
+  third_grade_scores: number;
+  conversion_score: number;
+  attendance_score: number;
+  volunteer_time: number;
+  final_score: number;
+}
+export type GetCalculatedScoreApiType = GetGEDScoreApiType &
+  GetGraduatedScoreApiType &
+  GetUngraduatedScoreApiType;

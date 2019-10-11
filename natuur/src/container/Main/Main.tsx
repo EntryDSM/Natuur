@@ -117,10 +117,14 @@ const Main: FC<Props> = ({
         setCheckImgList,
         PERIOD_LIST
       );
-
-      getUserApplicantStatus({ accessToken });
     }
   },        []);
+
+  useEffect(() => {
+    if (accessToken) {
+      getUserApplicantStatus({ accessToken });
+    }
+  },        [accessToken]);
 
   return (
     <>

@@ -21,7 +21,7 @@ interface OwnProps {
   isSuccess: boolean;
   searchAddress: ({ query }: { query: string }) => void;
   accessToken: string;
-  middleSchoolData: string[];
+  middleSchoolData: Array<{ name: string; code: string }>;
   schoolSearchStatusCode: number;
   searchSchool: (payload: { accessToken: string; school: string }) => void;
   getAddressData: ({
@@ -34,6 +34,7 @@ interface OwnProps {
   setIsOpenPopUp: (isOpenPopUp: boolean) => void;
   setIsAddress: (isAddress: boolean) => void;
   setMiddleSchool: (payload: { school: string }) => void;
+  setSchoolCode: (payload: { code: string }) => void;
 }
 
 const cloasePopUp = (
@@ -55,6 +56,7 @@ const PopUp: FC<OwnProps> = ({
   searchSchool,
   accessToken,
   setMiddleSchool,
+  setSchoolCode,
   middleSchoolData,
   schoolSearchStatusCode
 }) => {
@@ -83,6 +85,7 @@ const PopUp: FC<OwnProps> = ({
               schoolSearchStatusCode={schoolSearchStatusCode}
               middleSchoolData={middleSchoolData}
               setMiddleSchool={setMiddleSchool}
+              setSchoolCode={setSchoolCode}
               closePopUp={() => cloasePopUp(setIsOpenPopUp, setIsAddress)}
             />
           </>

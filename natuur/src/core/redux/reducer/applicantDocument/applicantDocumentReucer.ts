@@ -11,6 +11,7 @@ import {
   PUT_UNGRADUATED_DOCUMENT,
   PUT_UNGRADUATED_DOCUMENT_SUCCESS,
   PUT_UNGRADUATED_DOCUMENT_FAILURS,
+  RESET_STATUS,
   ApplicantDocumentActionTypes
 } from "../../actions/applicantDocument";
 import {
@@ -19,7 +20,11 @@ import {
   UnGraduatedApplicationApiType
 } from "../../../../lib/api/apiType";
 
-type RootState = { putStatusCode: number } & GedApplicationApiType &
+type RootState = {
+  putStatusCode: number;
+  isGetAction: boolean;
+  isPutAction: boolean;
+} & GedApplicationApiType &
   GraduatedApplicationApiType &
   UnGraduatedApplicationApiType;
 
@@ -42,7 +47,8 @@ const initialState: RootState = {
     post_code: "",
     student_number: "",
     school_name: "",
-    school_tel: ""
+    school_tel: "",
+    school_code: ""
   },
   diligence_grade: {
     volunteer_time: 0,
@@ -66,7 +72,9 @@ const initialState: RootState = {
   self_introduction_and_study_plan: {
     self_introduction: "",
     study_plan: ""
-  }
+  },
+  isGetAction: false,
+  isPutAction: false
 };
 
 const applicantDocumentReducer = (
@@ -76,7 +84,8 @@ const applicantDocumentReducer = (
   switch (action.type) {
     case GET_APPLICATION_DOCUMENT:
       return {
-        ...state
+        ...state,
+        isGetAction: false
       };
     case GET_APPLICATION_DOCUMENT_SUCCESS: {
       const {
@@ -94,7 +103,8 @@ const applicantDocumentReducer = (
         diligence_grade,
         school_grade,
         self_introduction_and_study_plan,
-        ged_grade
+        ged_grade,
+        isGetAction: true
       };
     }
     case GET_APPLICATION_DOCUMENT_FAILURS:
@@ -103,12 +113,14 @@ const applicantDocumentReducer = (
       };
     case PUT_GED_DOCUMENT:
       return {
-        ...state
+        ...state,
+        isPutAction: false
       };
     case PUT_GED_DOCUMENT_SUCCESS: {
       return {
         ...state,
-        putStatusCode: 204
+        putStatusCode: 204,
+        isPutAction: true
       };
     }
     case PUT_GED_DOCUMENT_FAILURS:
@@ -118,12 +130,14 @@ const applicantDocumentReducer = (
       };
     case PUT_GRADUATED_DOCUMENT:
       return {
-        ...state
+        ...state,
+        isPutAction: true
       };
     case PUT_GRADUATED_DOCUMENT_SUCCESS: {
       return {
         ...state,
-        putStatusCode: 204
+        putStatusCode: 204,
+        isPutAction: true
       };
     }
     case PUT_GRADUATED_DOCUMENT_FAILURS:
@@ -133,18 +147,26 @@ const applicantDocumentReducer = (
       };
     case PUT_UNGRADUATED_DOCUMENT:
       return {
-        ...state
+        ...state,
+        isPutAction: false
       };
     case PUT_UNGRADUATED_DOCUMENT_SUCCESS: {
       return {
         ...state,
-        putStatusCode: 204
+        putStatusCode: 204,
+        isPutAction: true
       };
     }
     case PUT_UNGRADUATED_DOCUMENT_FAILURS:
       return {
         ...state,
         putStatusCode: action.payload.putStatusCode
+      };
+    case RESET_STATUS:
+      return {
+        ...state,
+        isGetAction: false,
+        isPutAction: false
       };
     default:
       return state;

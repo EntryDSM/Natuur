@@ -37,14 +37,6 @@ const GraduationYearRow: FC<OwnProps> = ({
     setIsOpenSelectBox(false);
   },        [year]);
 
-  useEffect(() => {
-    if (graduationClassificationState === "졸업자") {
-      setYear("");
-    } else {
-      setYear("2020");
-    }
-  },        [graduationClassificationState]);
-
   return (
     <InputRow
       rowTitle="졸업 연도"

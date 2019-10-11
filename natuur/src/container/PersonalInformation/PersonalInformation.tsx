@@ -10,6 +10,7 @@ import {
   searchAddress,
   getAddressData,
   setMiddleSchool,
+  setSchoolCode,
   changeApplicantPhoto,
   ChangeApplicantPhotoType,
   getApplicantPhoto,
@@ -52,6 +53,8 @@ const mapDispatchToProps = dispatch => ({
     ),
   setMiddleSchool: (payload: { school: string }) =>
     dispatch(setMiddleSchool(payload)),
+  setSchoolCode: (payload: { code: string }) =>
+    dispatch(setSchoolCode(payload)),
   getApplicantPhoto: (payload: { accessToken: string }) =>
     dispatch(getApplicantPhoto({ accessToken: payload.accessToken })),
   searchSchool: (payload: { accessToken: string; school: string }) =>
@@ -71,6 +74,7 @@ const PersonalInformation: FC<Props> = ({
   accessToken,
   isSuccess,
   setMiddleSchool,
+  setSchoolCode,
   searchSchool,
   name,
   gender,
@@ -117,6 +121,7 @@ const PersonalInformation: FC<Props> = ({
           accessToken={accessToken}
           setMiddleSchool={setMiddleSchool}
           middleSchoolData={middleSchoolData}
+          setSchoolCode={setSchoolCode}
           schoolSearchStatusCode={schoolSearchStatusCode}
         />
       )}
