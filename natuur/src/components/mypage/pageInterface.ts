@@ -27,12 +27,12 @@ export interface PersonalInformation {
 }
 
 export interface GradeEntry {
-  gedAverageScore: number;
-  volunteer: number;
-  absent: number;
-  earlyLeave: number;
-  tardy: number;
-  missingClass: number;
+  gedAverageScore: string;
+  volunteer: string;
+  absent: string;
+  earlyLeave: string;
+  tardy: string;
+  missingClass: string;
 }
 
 export interface SelfIntroduction {
