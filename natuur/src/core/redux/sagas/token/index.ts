@@ -32,7 +32,10 @@ export function* tokenRefresh(api, payload, successType, failureType) {
       failureType
     );
   } catch (e) {
-    yield put({ type: REFRESH_JWT_FAILURS });
+    yield put({
+      type: REFRESH_JWT_FAILURS,
+      payload: { errorRefreshStatus: e.response.status }
+    });
   }
 }
 
