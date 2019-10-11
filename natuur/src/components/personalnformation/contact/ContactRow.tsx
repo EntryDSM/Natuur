@@ -27,6 +27,7 @@ const ContactRow: FC<OwnProps> = ({
         value={contact || ""}
         onChange={({ target: { value } }) => setContact({ contact: value })}
         inputCase="contact"
+        maxLength={11}
         isDisable={isDisable}
         readOnly={isDisable}
       />
