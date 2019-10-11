@@ -13,27 +13,27 @@ export const SET_SUBJECT_SCORES = "SET_SUBJECT_SCORES";
 
 export interface SetVolunteer {
   type: typeof SET_VOLUNTEER;
-  payload: { volunteer: number };
+  payload: { volunteer: string };
 }
 
 export interface SetAbsent {
   type: typeof SET_ABSENT;
-  payload: { absent: number };
+  payload: { absent: string };
 }
 
 export interface SetEarlyLeave {
   type: typeof SET_EARLY_LEAVE;
-  payload: { earlyLeave: number };
+  payload: { earlyLeave: string };
 }
 
 export interface SetTardy {
   type: typeof SET_TARDY;
-  payload: { tardy: number };
+  payload: { tardy: string };
 }
 
 export interface SetMissingClass {
   type: typeof SET_MISSING_CLASS;
-  payload: { missingClass: number };
+  payload: { missingClass: string };
 }
 
 export interface SetIsFirstGrade1Semester {
@@ -63,7 +63,7 @@ export interface SetIsThirdGrade1Semester {
 
 export interface SetGedAverageScore {
   type: typeof SET_GED_AVERAGE_SCORE;
-  payload: { gedAverageScore: number };
+  payload: { gedAverageScore: string };
 }
 
 export interface SetSubjectScores {
@@ -100,31 +100,31 @@ export type GradeActionTypes =
   | null;
 
 export const setVolunteer = (payload: {
-  volunteer: number;
+  volunteer: string;
 }): GradeActionTypes => ({
   payload,
   type: SET_VOLUNTEER
 });
 
-export const setAbsent = (payload: { absent: number }): GradeActionTypes => ({
+export const setAbsent = (payload: { absent: string }): GradeActionTypes => ({
   payload,
   type: SET_ABSENT
 });
 
 export const setEarlyLeave = (payload: {
-  earlyLeave: number;
+  earlyLeave: string;
 }): GradeActionTypes => ({
   payload,
   type: SET_EARLY_LEAVE
 });
 
-export const setTardy = (payload: { tardy: number }): GradeActionTypes => ({
+export const setTardy = (payload: { tardy: string }): GradeActionTypes => ({
   payload,
   type: SET_TARDY
 });
 
 export const setMissingClass = (payload: {
-  missingClass: number;
+  missingClass: string;
 }): GradeActionTypes => ({
   payload,
   type: SET_MISSING_CLASS
@@ -166,7 +166,7 @@ export const setIsThirdGrade1Semester = (payload: {
 });
 
 export const setGedAverageScore = (payload: {
-  gedAverageScore: number;
+  gedAverageScore: string;
 }): GradeActionTypes => ({
   payload,
   type: SET_GED_AVERAGE_SCORE

@@ -16,12 +16,12 @@ import {
 import { returnSubjectScoresList } from "../../../../lib/utils/subjectList";
 
 interface RootState {
-  volunteer: number;
-  absent: number;
-  earlyLeave: number;
-  tardy: number;
-  missingClass: number;
-  gedAverageScore: number;
+  volunteer: string;
+  absent: string;
+  earlyLeave: string;
+  tardy: string;
+  missingClass: string;
+  gedAverageScore: string;
   subjectScores: Array<{
     semester: number;
     subject:
@@ -42,12 +42,12 @@ interface RootState {
 }
 
 const initialState: RootState = {
-  volunteer: 0,
-  absent: 0,
-  earlyLeave: 0,
-  tardy: 0,
-  missingClass: 0,
-  gedAverageScore: 0,
+  volunteer: "",
+  absent: "",
+  earlyLeave: "",
+  tardy: "",
+  missingClass: "",
+  gedAverageScore: "",
   subjectScores: returnSubjectScoresList(),
   isFirstGradeSmester1: false,
   isFirstGradeSmester2: false,

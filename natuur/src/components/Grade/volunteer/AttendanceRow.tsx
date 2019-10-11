@@ -4,14 +4,14 @@ import * as S from "../../../styles/Grade";
 import AttendanceInformation from "./AttendanceInformation";
 
 interface OwnProps {
-  absent: number;
-  setAbsent: (payload: { absent: number }) => void;
-  earlyLeave: number;
-  setEarlyLeave: (payload: { earlyLeave: number }) => void;
-  tardy: number;
-  setTardy: (payload: { tardy: number }) => void;
-  missingClass: number;
-  setMissingClass: (payload: { missingClass: number }) => void;
+  absent: string;
+  setAbsent: (payload: { absent: string }) => void;
+  earlyLeave: string;
+  setEarlyLeave: (payload: { earlyLeave: string }) => void;
+  tardy: string;
+  setTardy: (payload: { tardy: string }) => void;
+  missingClass: string;
+  setMissingClass: (payload: { missingClass: string }) => void;
 }
 
 const AttendanceRow: FC<OwnProps> = ({

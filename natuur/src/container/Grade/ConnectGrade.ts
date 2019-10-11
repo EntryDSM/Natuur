@@ -16,7 +16,6 @@ import {
   setGedAverageScore,
   setSubjectScores
 } from "../../core/redux/actions/grade";
-import { setIsOpen } from "../../core/redux/actions/default";
 
 export const mapStateToProps = (state: AppState) => ({
   accessToken: state.userReducer.accessToken,
@@ -36,18 +35,17 @@ export const mapStateToProps = (state: AppState) => ({
   isGed: state.infoReducer.isGed,
   ged_grade: state.applicantDocument.ged_grade,
   diligence_grade: state.applicantDocument.diligence_grade,
-  school_grade: state.applicantDocument.school_grade,
-  isOpen: state.defaultReducer.isOpen
+  school_grade: state.applicantDocument.school_grade
 });
 
 export const mapDispatchToProps = dispatch => ({
-  setVolunteer: (payload: { volunteer: number }) =>
+  setVolunteer: (payload: { volunteer: string }) =>
     dispatch(setVolunteer(payload)),
-  setAbsent: (payload: { absent: number }) => dispatch(setAbsent(payload)),
-  setEarlyLeave: (payload: { earlyLeave: number }) =>
+  setAbsent: (payload: { absent: string }) => dispatch(setAbsent(payload)),
+  setEarlyLeave: (payload: { earlyLeave: string }) =>
     dispatch(setEarlyLeave(payload)),
-  setTardy: (payload: { tardy: number }) => dispatch(setTardy(payload)),
-  setMissingClass: (payload: { missingClass: number }) =>
+  setTardy: (payload: { tardy: string }) => dispatch(setTardy(payload)),
+  setMissingClass: (payload: { missingClass: string }) =>
     dispatch(setMissingClass(payload)),
   setIsFirstGrade1Semester: (payload: { isMissSemester: boolean }) =>
     dispatch(setIsFirstGrade1Semester(payload)),
@@ -59,7 +57,7 @@ export const mapDispatchToProps = dispatch => ({
     dispatch(setIsSecondGrade2Semester(payload)),
   setIsThirdGrade1Semester: (payload: { isMissSemester: boolean }) =>
     dispatch(setIsThirdGrade1Semester(payload)),
-  setGedAverageScore: (payload: { gedAverageScore: number }) =>
+  setGedAverageScore: (payload: { gedAverageScore: string }) =>
     dispatch(setGedAverageScore(payload)),
   setSubjectScores: (payload: {
     subjectScores?: Array<{
@@ -74,11 +72,7 @@ export const mapDispatchToProps = dispatch => ({
         | "tech_and_home";
       score: "A" | "B" | "C" | "D" | "E" | "X";
     }>;
-  }) => dispatch(setSubjectScores(payload)),
-  setIsOpen: (payload: {
-    pageName: "info" | "personal" | "grade" | "intro";
-    isOpen: boolean;
-  }) => dispatch(setIsOpen(payload))
+  }) => dispatch(setSubjectScores(payload))
 });
 
 export default connect(
