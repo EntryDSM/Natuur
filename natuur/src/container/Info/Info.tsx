@@ -5,10 +5,6 @@ import SelectCategory from "../../components/Information/SelectCategory";
 import Pagination from "../../components/default/pagination/Pagination";
 import * as S from "../../styles/Information";
 import { mapStateToProps, mapDispatchToProps } from "./ConnectSelectCategory";
-import {
-  convertApplyTypeToKorean,
-  convertAdditionalTypeToKorean
-} from "./presenter";
 
 interface OwnProps {
   updateAppClass(text: string): void;
@@ -32,33 +28,16 @@ const Info: FC<Props> = ({
   setSelectRegion,
   setGraduationClassification,
   setGraduationYear,
-  setRemark,
-  classification,
-  setIsOpen,
-  isOpen
+  setRemark
 }) => {
   const didMountRef = useRef(false);
 
   useEffect(() => {
     if (!didMountRef.current) {
       didMountRef.current = true;
-      const {
-        apply_type,
-        additional_type,
-        is_daejeon,
-        graduated_year
-      } = classification;
 
       updateAppClass("info-summary");
-
-      if (!isOpen.info) {
-        setApplyType(convertApplyTypeToKorean(apply_type));
-        setSelectRegion(is_daejeon ? "대전" : "전국");
-        setRemark(convertAdditionalTypeToKorean(additional_type));
-        setGraduationYear(graduated_year);
-      }
     }
-    return () => setIsOpen({ pageName: "info", isOpen: true });
   },        []);
 
   return (

@@ -16,17 +16,13 @@ import {
   setUserContact,
   setDetailedAddress,
   setFile,
-  setMiddleSchool,
-  getAddressData
+  setMiddleSchool
 } from "../../core/redux/actions/personal";
-import { setIsOpen } from "../../core/redux/actions/default";
 
 export const mapStateToProps = (state: AppState) => ({
   isGed: state.infoReducer.isGed,
   imagePath: state.PersonalReducer.imagePath,
-  file: state.PersonalReducer.file,
-  personalInformation: state.applicantDocument.personal_information,
-  isOpen: state.defaultReducer.isOpen
+  file: state.PersonalReducer.file
 });
 
 export const mapDispatchToProps = dispatch => ({
@@ -50,15 +46,7 @@ export const mapDispatchToProps = dispatch => ({
     dispatch(setDetailedAddress(payload)),
   setMiddleSchool: (payload: { school: string }) =>
     dispatch(setMiddleSchool(payload)),
-  setFile: (payload: string) => dispatch(setFile(payload)),
-  getAddressData: (payload: { zipCode: string; address: string }) =>
-    dispatch(
-      getAddressData({ zipCode: payload.zipCode, address: payload.address })
-    ),
-  setIsOpen: (payload: {
-    pageName: "info" | "personal" | "grade" | "intro";
-    isOpen: boolean;
-  }) => dispatch(setIsOpen(payload))
+  setFile: (payload: string) => dispatch(setFile(payload))
 });
 
 export default connect(
