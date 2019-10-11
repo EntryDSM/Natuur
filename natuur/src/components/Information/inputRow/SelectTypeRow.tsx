@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useRef, useState, useEffect } from "react";
 
 import InputRow from "./InputRow";
 import * as S from "../../../styles/Information";
@@ -15,8 +15,21 @@ const radioList: Array<{ CHECK_BOX_CASE: string; CHECK_BOX_NAME: string }> = [
 ];
 
 const SelecTypeRow: FC<OwnProps> = ({ radioType, setRadioType }) => {
+  const didMountRef = useRef(false);
   const [socialIntegrationType, setSocialIntegration] = useState("");
   const [isOpenSelectBox, setIsOpenSelectBox] = useState(false);
+
+  useEffect(() => {
+    if (!didMountRef.current) {
+      didMountRef.current = true;
+
+      setSocialIntegration(
+        radioType.split("/")[1] !== undefined
+          ? `/${radioType.split("/")[1]}`
+          : ""
+      );
+    }
+  },        []);
 
   return (
     <InputRow rowTitle="전형 선택">
