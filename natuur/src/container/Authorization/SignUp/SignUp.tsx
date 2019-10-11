@@ -13,9 +13,11 @@ import {
   AuthorizationWrapper
 } from "../../../styles/Authorization";
 import { updateToastr } from "../../../core/redux/actions/default";
+import { resetStatus } from "../../../core/redux/actions/Authorization";
 
 const mapDispatchToProps = dispatch => ({
-  updateToastr: toastrData => dispatch(updateToastr(toastrData))
+  updateToastr: toastrData => dispatch(updateToastr(toastrData)),
+  resetState: () => dispatch(resetStatus())
 });
 
 interface OwnProps {
@@ -24,13 +26,14 @@ interface OwnProps {
 
 type Props = ReturnType<typeof mapDispatchToProps> & OwnProps;
 
-const SignUp: FC<Props> = ({ updateAppClass, updateToastr }) => {
+const SignUp: FC<Props> = ({ updateAppClass, updateToastr, resetState }) => {
   const didMountRef = useRef(false);
   useEffect(() => {
     if (!didMountRef.current) {
       didMountRef.current = true;
 
       updateAppClass("Authorization");
+      resetState();
     }
   });
 
