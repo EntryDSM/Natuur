@@ -8,13 +8,15 @@ interface OwnProps {
   refreshToken: string;
   userName: string;
   logOut: (payload: { refreshToken: string }) => void;
+  isLogOut: boolean;
 }
 
 const Header: FC<OwnProps> = ({
   accessToken,
   refreshToken,
   userName,
-  logOut
+  logOut,
+  isLogOut
 }) => {
   return (
     <S.HeaderNav>
@@ -22,6 +24,7 @@ const Header: FC<OwnProps> = ({
         isActive={accessToken !== "" ? true : false}
         userName={userName}
         logOut={logOut}
+        isLogOut={isLogOut}
         refreshToken={refreshToken}
       />
     </S.HeaderNav>
