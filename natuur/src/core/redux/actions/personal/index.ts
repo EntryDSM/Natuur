@@ -20,6 +20,7 @@ export const SET_BIRTH_DATE = "SET_BIRTH_DATE";
 export const SET_CLASS = "SET_CLASS";
 export const SET_STUDENT_ID = "SET_STUDENT_ID";
 export const SET_MIDDLE_SCHOOL = "SET_MIDDLE_SCHOOL";
+export const SET_SCHOOL_CODE = "SET_SCHOOL_CODE";
 export const SET_PARENTS_NAME = "SET_PARENTS_NAME";
 export const SET_SCHOOL_CONTACT = "SET_SCHOOL_CONTACT";
 export const SET_PARENTS_CONTACT = "SET_PARENTS_CONTACT";
@@ -58,7 +59,7 @@ export interface SearchSchool {
   payload: {
     accessToken: string;
     school: string;
-    schoolList?: string[];
+    schoolList?: Array<{ name: string; code: string }>;
   };
 }
 
@@ -117,6 +118,10 @@ export interface SetMiddleSchool {
   type: typeof SET_MIDDLE_SCHOOL;
   payload: { school: string };
 }
+export interface SetSchoolCode {
+  type: typeof SET_SCHOOL_CODE;
+  payload: { code: string };
+}
 export interface SetParentsName {
   type: typeof SET_PARENTS_NAME;
   payload: { name: string };
@@ -156,6 +161,7 @@ export type PersonalActionTypes =
   | SetClass
   | SetStudentID
   | SetMiddleSchool
+  | SetSchoolCode
   | SetParentsName
   | SetSchoolContact
   | SetParentsContact
@@ -249,6 +255,13 @@ export const setMiddleSchool = (payload: {
 }): PersonalActionTypes => ({
   payload,
   type: SET_MIDDLE_SCHOOL
+});
+
+export const setSchoolCode = (payload: {
+  code: string;
+}): PersonalActionTypes => ({
+  payload,
+  type: SET_SCHOOL_CODE
 });
 
 export const setParentsName = (payload: {
