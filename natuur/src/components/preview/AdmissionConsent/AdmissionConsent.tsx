@@ -74,7 +74,7 @@ const AdmissionConsent: FC<OwnProps> = ({ isPrint }) => {
             address={address}
             detailedAddress={detailedAddress}
           />
-          <AdmissionBody />
+          <AdmissionBody name={name} parentsName={parentsName} />
         </S.SubContainer>
       </div>
     </S.AdmissionConsent>

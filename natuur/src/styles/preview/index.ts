@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const PreviewWrapper = styled.div`
   width: 1140px;
@@ -6,10 +7,21 @@ export const PreviewWrapper = styled.div`
   margin: 0 auto;
 `;
 
-export const PdfWrapper = styled.div`
+export const PdfWrapper = styled.div<{ isPrint?: boolean }>`
   width: 100%;
   height: 995px;
+  position: relative;
   background-color: #535759;
+
+  ${props =>
+    !props.isPrint &&
+    `&::before {
+    content: "미리보기 단계에서는 내신 성적 점수가 표출되지 않습니다. 이 점에 유의하여 주시기 바랍니다. (단, 최종 제출 이후에는 내신 성적 점수가 정상적으로 표출됩니다.)";
+    position: absolute;
+    top: -40px;
+    color: #ff2525;
+    font-weight: bold;
+  }`}
 `;
 
 export const PdfHeader = styled.div`
@@ -118,13 +130,44 @@ export const ContentsImg = styled.img`
   margin-bottom: 20px;
 `;
 
+export const PaginationWrapper = styled.div`
+  width: 100%;
+  height: 54px;
+  margin-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+`;
+export const ButtonContent = styled.span`
+  font-size: 20px;
+  line-height: 1.05;
+  color: rgba(121, 194, 202, 0.8);
+`;
+
+export const ButtonArrow = styled.img`
+  width: 8px;
+  height: 16px;
+  opacity: 0.8;
+`;
+
+export const Button = styled(Link)`
+  display: block;
+  width: 168px;
+  height: 54px;
+  border-radius: 5px;
+  border: solid 2px rgba(121, 194, 202, 0.5);
+  background-color: rgba(248, 252, 253, 0.3);
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 22px 19px 24px;
+  box-sizing: border-box;
+`;
+
 export const SubmitButton = styled.div<{ isDisable?: boolean }>`
   position: relative;
-  float: right;
   width: 152px;
   height: 54px;
   border-radius: 5px;
-  margin-top: 24px;
   display: flex;
   justify-content: center;
   align-items: center;

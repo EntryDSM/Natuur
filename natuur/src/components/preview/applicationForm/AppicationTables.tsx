@@ -17,13 +17,23 @@ interface OwnProps {
   birthMonth: string;
   birthDate: string;
   userClass: string;
-  middleSchool: string;
+  parentsName: string;
   schoolContact: string;
   parentsContact: string;
   userContact: string;
   address: string;
   detailedAddress: string;
   file: string;
+  schoolCode: string;
+  firstGradeScore: number;
+  secondGradeScores: number;
+  thirdGradeScores: number;
+  conversionScore: number;
+  attendanceScore: number;
+  volunteerTime: number;
+  finalScore: number;
+  volunteerScore: number;
+  isPrint: boolean;
 }
 
 const ApplicationTables: FC<OwnProps> = ({
@@ -41,13 +51,23 @@ const ApplicationTables: FC<OwnProps> = ({
   birthMonth,
   birthDate,
   userClass,
-  middleSchool,
+  parentsName,
   schoolContact,
   parentsContact,
   userContact,
   address,
   detailedAddress,
-  file
+  file,
+  schoolCode,
+  firstGradeScore,
+  secondGradeScores,
+  thirdGradeScores,
+  conversionScore,
+  attendanceScore,
+  volunteerTime,
+  finalScore,
+  volunteerScore,
+  isPrint
 }) => {
   return (
     <>
@@ -64,7 +84,7 @@ const ApplicationTables: FC<OwnProps> = ({
               <p>중학교 코드</p>
             </td>
             <td>
-              <p />
+              <p>{schoolCode}</p>
             </td>
             <td>
               <p>반</p>
@@ -378,25 +398,25 @@ const ApplicationTables: FC<OwnProps> = ({
 
           <tr>
             <td rowSpan={2}>
-              <p />
+              <p>{isPrint && !isGed && firstGradeScore}</p>
             </td>
             <td rowSpan={2}>
-              <p />
+              <p>{isPrint && !isGed && secondGradeScores}</p>
             </td>
             <td rowSpan={2}>
-              <p />
+              <p>{isPrint && !isGed && thirdGradeScores}</p>
             </td>
             <td rowSpan={2}>
-              <p />
+              <p>{isPrint && conversionScore}</p>
             </td>
             <td rowSpan={3}>
-              <p />
+              <p>{isPrint && attendanceScore}</p>
             </td>
             <td rowSpan={3}>
-              <p />
+              <p>{isPrint && isGed ? volunteerScore : volunteerTime}</p>
             </td>
             <td rowSpan={3}>
-              <p />
+              <p>{isPrint && finalScore}</p>
             </td>
           </tr>
           <tr />
@@ -429,10 +449,10 @@ const ApplicationTables: FC<OwnProps> = ({
               </S.marginTopBottomP>
               <S.Signature>
                 <S.SignatureItem>
-                  지원자: <span>(서명)</span>
+                  <span>지원자: {name}</span> <span>(서명)</span>
                 </S.SignatureItem>
                 <S.SignatureItem>
-                  보호자: <span>(서명)</span>
+                  <span>보호자: {parentsName}</span> <span>(서명)</span>
                 </S.SignatureItem>
               </S.Signature>
               <br />
@@ -450,7 +470,7 @@ const ApplicationTables: FC<OwnProps> = ({
                   2019년 10월 <S.Blank widthSize={10} />일
                 </S.marginTopBottomP>
                 <S.Blank widthSize={6} />
-                교사 : <S.Blank>{middleSchool}</S.Blank> (서명)
+                교사 : <S.Blank widthSize={16} /> (서명)
               </div>
             </td>
           </tr>
