@@ -92,6 +92,7 @@ interface SelectorProps {
     tech_and_home: Array<"A" | "B" | "C" | "D" | "E" | "X">;
     english: Array<"A" | "B" | "C" | "D" | "E" | "X">;
   };
+  isGetAction: boolean;
 }
 
 interface OwnProps {
@@ -110,7 +111,8 @@ const PDFcontainer: FC<OwnProps> = ({ isPrint }) => {
     classification,
     personalInformation,
     selfIntroductionAndStudyPlan,
-    schoolGrade
+    schoolGrade,
+    isGetAction
   } = useSelector<AppState, SelectorProps>(state => ({
     name: state.PersonalReducer.name,
     isGed: state.infoReducer.isGed,
@@ -120,16 +122,15 @@ const PDFcontainer: FC<OwnProps> = ({ isPrint }) => {
     selfIntroductionAndStudyPlan:
       state.applicantDocument.self_introduction_and_study_plan,
     schoolGrade: state.applicantDocument.school_grade,
-    caluculatedScoreStatus: state.printReducer.caluculatedScoreStatus
+    caluculatedScoreStatus: state.printReducer.caluculatedScoreStatus,
+    isGetAction: state.applicantDocument.isGetAction
   }));
 
   const [pdfPage, setPdfPage] = useState(1);
   const [maxPage, setMaxPage] = useState(5);
 
   useEffect(() => {
-    if (!didMountRef.current) {
-      didMountRef.current = true;
-
+    if (isGetAction) {
       const {
         apply_type,
         additional_type,
@@ -212,6 +213,12 @@ const PDFcontainer: FC<OwnProps> = ({ isPrint }) => {
         dispatch(setSchoolContact({ contact: school_tel }));
         dispatch(setSchoolCode({ code: school_code }));
       }
+    }
+  },        [isGetAction]);
+
+  useEffect(() => {
+    if (!didMountRef.current) {
+      didMountRef.current = true;
 
       if (applyType === "일반전형") {
         setMaxPage(5);
