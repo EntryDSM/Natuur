@@ -13,11 +13,10 @@ type RootState = {
 const initialstate: RootState = {
   caluculatedScoreStatus: 0,
   first_grade_score: 0,
-  second_grade_scores: 0,
-  third_grade_scores: 0,
+  second_grade_score: 0,
+  third_grade_score: 0,
   conversion_score: 0,
   attendance_score: 0,
-  volunteer_time: 0,
   final_score: 0,
   volunteer_score: 0,
   ged_average_score: 0
@@ -35,11 +34,10 @@ const printReducer = (
     case GET_CALUCULATED_SCORE_SUCCESS: {
       const {
         first_grade_score,
-        second_grade_scores,
-        third_grade_scores,
+        second_grade_score,
+        third_grade_score,
         conversion_score,
         attendance_score,
-        volunteer_time,
         final_score,
         volunteer_score,
         ged_average_score
@@ -48,11 +46,10 @@ const printReducer = (
       return {
         ...state,
         first_grade_score,
-        second_grade_scores,
-        third_grade_scores,
+        second_grade_score,
+        third_grade_score,
         conversion_score,
         attendance_score,
-        volunteer_time,
         final_score,
         volunteer_score,
         ged_average_score,

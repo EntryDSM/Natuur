@@ -169,21 +169,21 @@ export interface GetGEDScoreApiType {
 
 export interface GetGraduatedScoreApiType {
   first_grade_score: number;
-  second_grade_scores: number;
-  third_grade_scores: number;
+  second_grade_score: number;
+  third_grade_score: number;
   conversion_score: number;
   attendance_score: number;
-  volunteer_time: number;
+  volunteer_score: number;
   final_score: number;
 }
 
 export interface GetUngraduatedScoreApiType {
   first_grade_score: number;
-  second_grade_scores: number;
-  third_grade_scores: number;
+  second_grade_score: number;
+  third_grade_score: number;
   conversion_score: number;
   attendance_score: number;
-  volunteer_time: number;
+  volunteer_score: number;
   final_score: number;
 }
 export type GetCalculatedScoreApiType = GetGEDScoreApiType &

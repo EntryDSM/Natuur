@@ -44,7 +44,6 @@ const ApplicationForm: FC<OwnProps> = ({ isPrint }) => {
     thirdGradeScores,
     conversionScore,
     attendanceScore,
-    volunteerTime,
     finalScore,
     volunteerScore
   } = useSelector<AppState, FinalSubmitDependencyState>(state => ({
@@ -72,11 +71,10 @@ const ApplicationForm: FC<OwnProps> = ({ isPrint }) => {
     file: state.PersonalReducer.file,
     schoolCode: state.PersonalReducer.schoolCode,
     firstGradeScore: state.printReducer.first_grade_score,
-    secondGradeScores: state.printReducer.second_grade_scores,
-    thirdGradeScores: state.printReducer.third_grade_scores,
+    secondGradeScores: state.printReducer.second_grade_score,
+    thirdGradeScores: state.printReducer.third_grade_score,
     conversionScore: state.printReducer.conversion_score,
     attendanceScore: state.printReducer.attendance_score,
-    volunteerTime: state.printReducer.volunteer_time,
     finalScore: state.printReducer.final_score,
     volunteerScore: state.printReducer.volunteer_score
   }));
@@ -131,7 +129,6 @@ const ApplicationForm: FC<OwnProps> = ({ isPrint }) => {
             thirdGradeScores={thirdGradeScores}
             conversionScore={conversionScore}
             attendanceScore={attendanceScore}
-            volunteerTime={volunteerTime}
             finalScore={finalScore}
             volunteerScore={volunteerScore}
           />
