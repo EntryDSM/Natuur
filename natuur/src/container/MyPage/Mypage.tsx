@@ -30,6 +30,17 @@ const MyPage: FC<OwnProps> = ({ updateAppClass }) => {
   const state = returnApplicationDocumentState();
   const [isSetedGed, setIsSetedGed] = useState(false);
 
+  const createToastr = useCallback(
+    (message: string, state: "info" | "errorState" | "success" | "warning") => {
+      updateToastr({
+        timer: 5,
+        toastrMessage: message,
+        toastrState: state
+      });
+    },
+    []
+  );
+
   useEffect(() => {
     if (accessToken === "") {
       push("/");
