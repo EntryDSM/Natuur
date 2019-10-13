@@ -1,5 +1,6 @@
 import React, { FC, useRef, useEffect, useCallback, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 import HeadLine from "../../components/default/Common/HeadLine";
 import * as S from "../../styles/mypage";
@@ -13,12 +14,15 @@ import { setIsGed } from "../../core/redux/actions/info";
 import { getApplicantPhoto } from "../../core/redux/actions/personal";
 import { getUserApplicantStatus } from "../../core/redux/actions/main/index";
 import { AppState } from "../../core/redux/store/store";
+import { updateToastr } from "../../core/redux/actions/default";
 
 interface OwnProps {
   updateAppClass: (className: string) => void;
 }
 
 const MyPage: FC<OwnProps> = ({ updateAppClass }) => {
+  const didMountRef = useRef(false);
+  const { push } = useHistory();
   const dispatch = useDispatch();
   const accessToken = useSelector<AppState, string>(
     state => state.userReducer.accessToken
@@ -26,7 +30,6 @@ const MyPage: FC<OwnProps> = ({ updateAppClass }) => {
   const state = returnApplicationDocumentState();
   const [isSetedGed, setIsSetedGed] = useState(false);
 
-  const didMountRef = useRef(false);
   useEffect(() => {
     if (accessToken === "") {
       push("/");
@@ -37,8 +40,8 @@ const MyPage: FC<OwnProps> = ({ updateAppClass }) => {
   useEffect(() => {
     if (!didMountRef.current) {
       didMountRef.current = true;
-
       dispatch(getUserApplicantStatus({ accessToken }));
+      dispatch(getApplicantPhoto({ accessToken }));
       updateAppClass("my-page");
     }
   },        []);

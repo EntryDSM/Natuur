@@ -62,7 +62,6 @@ export interface FinalSubmitDependencyState {
   thirdGradeScores?: number;
   conversionScore?: number;
   attendanceScore?: number;
-  volunteerTime?: number;
   finalScore?: number;
   volunteerScore?: number;
 }
@@ -231,15 +230,7 @@ const FinalSubmitButton: FC = () => {
         <Prev />
       </S.Button>
       <S.SubmitButton
-        isDisable={
-          !(
-            applicantFormDependency &&
-            nonSmokingPledgeDependency &&
-            recommendationLetterDependency &&
-            introduceDependency &&
-            admissionConsentDependency
-          )
-        }
+        isDisable={!isFinalSubmit}
         onClick={() => isFinalSubmit && presentFinalSubmit()}
       >
         최종제출

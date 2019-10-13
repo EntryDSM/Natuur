@@ -22,6 +22,15 @@ export const PdfWrapper = styled.div<{ isPrint?: boolean }>`
     color: #ff2525;
     font-weight: bold;
   }`}
+  ${props =>
+    props.isPrint &&
+    `&::before {
+    content: "수험번호는 비워주시기 바랍니다.";
+    position: absolute;
+    top: -40px;
+    color: #ff2525;
+    font-weight: bold;
+  }`}
 `;
 
 export const PdfHeader = styled.div`

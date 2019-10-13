@@ -13,13 +13,12 @@ import PaginationButton from "./PaginationButton";
 import { prevArrow, nextArrow } from "../../../assets/common";
 import { getApplicationDocument } from "../../../core/redux/actions/applicantDocument";
 import {
-  PaginationStateToProps,
   applyApplicationDocument,
-  putApplicationDocument
+  putApplicationDocument,
+  returnApplicationDocumentState
 } from "./presenter";
 import { setIsGed } from "../../../core/redux/actions/info";
 import { subjectList } from "../../../lib/utils/subjectList";
-import { AppState } from "../../../core/redux/store/store";
 import { updateToastr } from "../../../core/redux/actions/default";
 import { setSubjectScores } from "../../../core/redux/actions/grade";
 
@@ -51,50 +50,7 @@ const Pagination: FC<OwnProps> = ({
   const dispatch = useDispatch();
   const [isSetedGed, setIsSetedGed] = useState(false);
 
-  const state = useSelector<AppState, PaginationStateToProps>(state => ({
-    isGed: state.infoReducer.isGed,
-    applyType: state.infoReducer.applyType,
-    selectRegion: state.infoReducer.selectRegion,
-    graduationClassification: state.infoReducer.graduationClassification,
-    graduationYear: state.infoReducer.graduationYear,
-    remarks: state.infoReducer.remarks,
-    name: state.PersonalReducer.name,
-    gender: state.PersonalReducer.gender,
-    birthYear: state.PersonalReducer.birthYear,
-    birthMonth: state.PersonalReducer.birthMonth,
-    birthDate: state.PersonalReducer.birthDate,
-    userClass: state.PersonalReducer.userClass,
-    studentID: state.PersonalReducer.studentID,
-    middleSchool: state.PersonalReducer.middleSchool,
-    schooleCode: state.PersonalReducer.schoolCode,
-    parentsName: state.PersonalReducer.parentsName,
-    schoolContact: state.PersonalReducer.schoolContact,
-    parentsContact: state.PersonalReducer.parentsContact,
-    userContact: state.PersonalReducer.userContact,
-    address: state.PersonalReducer.address,
-    detailedAddress: state.PersonalReducer.detailedAddress,
-    zipCode: state.PersonalReducer.zipCode,
-    selfIntroduction: state.introReducer.selfIntroduction,
-    studyPlan: state.introReducer.studyPlan,
-    gedAverageScore: state.gradeReducer.gedAverageScore,
-    accessToken: state.userReducer.accessToken,
-    volunteer: state.gradeReducer.volunteer,
-    absent: state.gradeReducer.absent,
-    earlyLeave: state.gradeReducer.earlyLeave,
-    tardy: state.gradeReducer.tardy,
-    missingClass: state.gradeReducer.missingClass,
-    subjectScores: state.gradeReducer.subjectScores,
-    putStatusCode: state.applicantDocument.putStatusCode,
-    isGetAction: state.applicantDocument.isGetAction,
-    isPutAction: state.applicantDocument.isPutAction,
-    classification: state.applicantDocument.classification,
-    personalInformation: state.applicantDocument.personal_information,
-    schoolGrade: state.applicantDocument.school_grade,
-    gedGrade: state.applicantDocument.ged_grade,
-    diligenceGrade: state.applicantDocument.diligence_grade,
-    selfIntroductionAndStudyPlan:
-      state.applicantDocument.self_introduction_and_study_plan
-  }));
+  const state = returnApplicationDocumentState();
 
   const createToastr = useCallback(
     (payload: {
@@ -115,37 +71,41 @@ const Pagination: FC<OwnProps> = ({
   );
 
   useEffect(() => {
-    if (
-      state.isGetAction &&
-      !state.isPutAction &&
-      pathname === "/info-summary" &&
-      didMountRef.current
-    ) {
-      applyApplicationDocument(state, dispatch);
-    }
-  },        [state.isGetAction]);
-
-  useEffect(() => {
-    if (state.isGetAction && state.isPutAction && didMountRef.current) {
-      const { graduated_year } = state.classification;
-      dispatch(setIsGed(!graduated_year && state.schoolGrade === undefined));
-      applyApplicationDocument(state, dispatch);
-    }
-  },        [state.isGetAction]);
-
-  useEffect(() => {
-    if (!didMountRef.current) {
-      didMountRef.current = true;
-    }
-  },        []);
-
-  useEffect(() => {
     const { accessToken } = state;
 
     if (state.isPutAction || pathname === "/info-summary") {
       dispatch(getApplicationDocument({ accessToken }));
     }
   },        [state.isPutAction]);
+
+  useEffect(() => {
+    if (state.isGetAction && pathname === "/info-summary") {
+      const { school_name } = state.personalInformation;
+      const { graduated_year } = state.classification;
+
+      dispatch(
+        setIsGed(graduated_year === undefined && school_name === undefined)
+      );
+      setIsSetedGed(true);
+    }
+  },        [state.isGetAction]);
+
+  useEffect(() => {
+    if (
+      state.isGetAction &&
+      !state.isPutAction &&
+      isSetedGed &&
+      pathname === "/info-summary"
+    ) {
+      applyApplicationDocument(state, dispatch);
+    }
+  },        [isSetedGed, state.isGetAction]);
+
+  useEffect(() => {
+    if (state.isGetAction && state.isPutAction && isSetedGed) {
+      applyApplicationDocument(state, dispatch);
+    }
+  },        [isSetedGed]);
 
   useEffect(() => {
     if (state.putStatusCode) {

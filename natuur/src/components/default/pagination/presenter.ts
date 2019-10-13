@@ -1,18 +1,16 @@
-import React from "react";
 import { Dispatch } from "redux";
 
+import { useSelector } from "react-redux";
 import {
   putGedDocument,
   putGraduaatedDocument,
-  putUnGraduaatedDocument,
-  getApplicationDocument
+  putUnGraduaatedDocument
 } from "../../../core/redux/actions/applicantDocument";
 import {
   convertApplyTypeToKorean,
   convertAdditionalTypeToKorean
 } from "../../../container/Info/presenter";
 import {
-  setIsGed,
   setApplyType,
   setSelectRegion,
   setGraduationClassification,
@@ -50,6 +48,7 @@ import {
   setStudyPlan
 } from "../../../core/redux/actions/intro";
 import { precededByZeroBeforeOneDigitForString } from "../../../lib/utils/date";
+import { AppState } from "../../../core/redux/store/store";
 
 export interface PaginationStateToProps {
   isGed?: boolean;
@@ -344,6 +343,9 @@ export const applyApplicationDocument = (
 };
 
 const ifFalseNull = (value: any) => {
+  if (value === undefined) {
+    return null;
+  }
   if (value !== "") {
     return value;
   }
@@ -542,3 +544,54 @@ export const putApplicationDocument = (
     }
   }
 };
+
+export const returnApplicationDocumentState = () => {
+  const state = useSelector<AppState, PaginationStateToProps>(state => ({
+    isGed: state.infoReducer.isGed,
+    applyType: state.infoReducer.applyType,
+    selectRegion: state.infoReducer.selectRegion,
+    graduationClassification: state.infoReducer.graduationClassification,
+    graduationYear: state.infoReducer.graduationYear,
+    remarks: state.infoReducer.remarks,
+    name: state.PersonalReducer.name,
+    gender: state.PersonalReducer.gender,
+    birthYear: state.PersonalReducer.birthYear,
+    birthMonth: state.PersonalReducer.birthMonth,
+    birthDate: state.PersonalReducer.birthDate,
+    userClass: state.PersonalReducer.userClass,
+    studentID: state.PersonalReducer.studentID,
+    middleSchool: state.PersonalReducer.middleSchool,
+    schooleCode: state.PersonalReducer.schoolCode,
+    parentsName: state.PersonalReducer.parentsName,
+    schoolContact: state.PersonalReducer.schoolContact,
+    parentsContact: state.PersonalReducer.parentsContact,
+    userContact: state.PersonalReducer.userContact,
+    address: state.PersonalReducer.address,
+    detailedAddress: state.PersonalReducer.detailedAddress,
+    zipCode: state.PersonalReducer.zipCode,
+    selfIntroduction: state.introReducer.selfIntroduction,
+    studyPlan: state.introReducer.studyPlan,
+    gedAverageScore: state.gradeReducer.gedAverageScore,
+    accessToken: state.userReducer.accessToken,
+    volunteer: state.gradeReducer.volunteer,
+    absent: state.gradeReducer.absent,
+    earlyLeave: state.gradeReducer.earlyLeave,
+    tardy: state.gradeReducer.tardy,
+    missingClass: state.gradeReducer.missingClass,
+    subjectScores: state.gradeReducer.subjectScores,
+    putStatusCode: state.applicantDocument.putStatusCode,
+    isGetAction: state.applicantDocument.isGetAction,
+    isPutAction: state.applicantDocument.isPutAction,
+    classification: state.applicantDocument.classification,
+    personalInformation: state.applicantDocument.personal_information,
+    schoolGrade: state.applicantDocument.school_grade,
+    gedGrade: state.applicantDocument.ged_grade,
+    diligenceGrade: state.applicantDocument.diligence_grade,
+    selfIntroductionAndStudyPlan:
+      state.applicantDocument.self_introduction_and_study_plan
+  }));
+
+  return state;
+};
+
+export default returnApplicationDocumentState;

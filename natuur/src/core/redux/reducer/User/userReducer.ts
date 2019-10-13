@@ -73,16 +73,16 @@ const userReducer = (
     }
     case LOG_OUT: {
       return {
-        ...state
-      };
-    }
-    case LOG_OUT_SUCCESS: {
-      return {
         ...state,
         accessToken: "",
         refreshToken: "",
         isLogOut: true,
         errorRefreshStatus: 0
+      };
+    }
+    case LOG_OUT_SUCCESS: {
+      return {
+        ...state
       };
     }
     case LOG_OUT_FAILURS: {

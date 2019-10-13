@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 
 import * as S from "../../../styles/preview/applicationForm";
+import { transformHyphenNumber } from "../../../lib/utils/contact";
 
 interface OwnProps {
   isGed: boolean;
@@ -30,7 +31,6 @@ interface OwnProps {
   thirdGradeScores: number;
   conversionScore: number;
   attendanceScore: number;
-  volunteerTime: number;
   finalScore: number;
   volunteerScore: number;
   isPrint: boolean;
@@ -64,7 +64,6 @@ const ApplicationTables: FC<OwnProps> = ({
   thirdGradeScores,
   conversionScore,
   attendanceScore,
-  volunteerTime,
   finalScore,
   volunteerScore,
   isPrint
@@ -161,15 +160,18 @@ const ApplicationTables: FC<OwnProps> = ({
             <td>
               <p>
                 <S.Blank isCenter widthSize={28}>
-                  {parentsContact && parentsContact.slice(0, 3)}
+                  {parentsContact &&
+                    transformHyphenNumber(parentsContact).contactHead}
                 </S.Blank>
                 -
                 <S.Blank isCenter widthSize={28}>
-                  {parentsContact && parentsContact.slice(3, 7)}
+                  {parentsContact &&
+                    transformHyphenNumber(parentsContact).contactBody}
                 </S.Blank>
                 -
                 <S.Blank isCenter widthSize={28}>
-                  {parentsContact && parentsContact.slice(7, 11)}
+                  {parentsContact &&
+                    transformHyphenNumber(parentsContact).contactFoot}
                 </S.Blank>
               </p>
             </td>
@@ -196,15 +198,18 @@ const ApplicationTables: FC<OwnProps> = ({
             <td>
               <p>
                 <S.Blank isCenter widthSize={28}>
-                  {schoolContact && schoolContact.slice(0, 3)}
+                  {schoolContact &&
+                    transformHyphenNumber(schoolContact).contactHead}
                 </S.Blank>
                 -
                 <S.Blank isCenter widthSize={28}>
-                  {schoolContact && schoolContact.slice(3, 7)}
+                  {schoolContact &&
+                    transformHyphenNumber(schoolContact).contactBody}
                 </S.Blank>
                 -
                 <S.Blank isCenter widthSize={28}>
-                  {schoolContact && schoolContact.slice(7, 11)}
+                  {schoolContact &&
+                    transformHyphenNumber(schoolContact).contactFoot}
                 </S.Blank>
               </p>
             </td>
@@ -226,15 +231,18 @@ const ApplicationTables: FC<OwnProps> = ({
             <td>
               <p>
                 <S.Blank isCenter widthSize={28}>
-                  {userContact && userContact.slice(0, 3)}
+                  {userContact &&
+                    transformHyphenNumber(userContact).contactHead}
                 </S.Blank>
                 -
                 <S.Blank isCenter widthSize={28}>
-                  {userContact && userContact.slice(3, 7)}
+                  {userContact &&
+                    transformHyphenNumber(userContact).contactBody}
                 </S.Blank>
                 -
                 <S.Blank isCenter widthSize={28}>
-                  {userContact && userContact.slice(7, 11)}
+                  {userContact &&
+                    transformHyphenNumber(userContact).contactFoot}
                 </S.Blank>
               </p>
             </td>
@@ -413,7 +421,7 @@ const ApplicationTables: FC<OwnProps> = ({
               <p>{isPrint && attendanceScore}</p>
             </td>
             <td rowSpan={3}>
-              <p>{isPrint && isGed ? volunteerScore : volunteerTime}</p>
+              <p>{isPrint && volunteerScore}</p>
             </td>
             <td rowSpan={3}>
               <p>{isPrint && finalScore}</p>
