@@ -3,7 +3,6 @@ import React, {
   memo,
   useCallback,
   useEffect,
-  useRef,
   useState
 } from "react";
 import { useDispatch } from "react-redux";
@@ -49,7 +48,6 @@ const Pagination: FC<OwnProps> = ({
 }) => {
   const { pathname } = useLocation();
   const dispatch = useDispatch();
-  const didMountRef = useRef(false);
   const [isSetedGed, setIsSetedGed] = useState(false);
 
   const state = returnApplicationDocumentState();

@@ -16,7 +16,7 @@ export const PdfWrapper = styled.div<{ isPrint?: boolean }>`
   ${props =>
     !props.isPrint &&
     `&::before {
-    content: "미리보기 단계에서는 (내신 성적 점수와 수험번호)가 표출되지 않습니다. 이 점에 유의하여 주시기 바랍니다. (단, 최종 제출 이후에는 내신 성적 점수가 정상적으로 표출됩니다.)";
+    content: "미리보기 단계에서는 (내신 성적 점수와 수험번호)가 표기되지 않습니다. 이 점에 유의하여 주시기 바랍니다. (단, 최종 제출 이후에는 내신 성적 점수가 정상적으로 표기됩니다.)";
     position: absolute;
     top: -40px;
     color: #ff2525;

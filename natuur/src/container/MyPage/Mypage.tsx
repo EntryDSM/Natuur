@@ -1,4 +1,4 @@
-import React, { FC, useRef, useEffect, useCallback } from "react";
+import React, { FC, useRef, useEffect, useCallback, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
@@ -10,6 +10,7 @@ import {
   returnApplicationDocumentState,
   applyApplicationDocument
 } from "../../components/default/pagination/presenter";
+import { setIsGed } from "../../core/redux/actions/info";
 import { getApplicantPhoto } from "../../core/redux/actions/personal";
 import { getUserApplicantStatus } from "../../core/redux/actions/main/index";
 import { AppState } from "../../core/redux/store/store";
@@ -27,19 +28,7 @@ const MyPage: FC<OwnProps> = ({ updateAppClass }) => {
     state => state.userReducer.accessToken
   );
   const state = returnApplicationDocumentState();
-
-  const createToastr = useCallback(
-    (message: string, state: "info" | "errorState" | "success" | "warning") => {
-      dispatch(
-        updateToastr({
-          timer: 5,
-          toastrMessage: message,
-          toastrState: state
-        })
-      );
-    },
-    []
-  );
+  const [isSetedGed, setIsSetedGed] = useState(false);
 
   useEffect(() => {
     if (accessToken === "") {
@@ -49,12 +38,6 @@ const MyPage: FC<OwnProps> = ({ updateAppClass }) => {
   },        [accessToken]);
 
   useEffect(() => {
-    if (state.isGetAction) {
-      applyApplicationDocument(state, dispatch);
-    }
-  },        [state.isGetAction]);
-
-  useEffect(() => {
     if (!didMountRef.current) {
       didMountRef.current = true;
       dispatch(getUserApplicantStatus({ accessToken }));
@@ -62,6 +45,24 @@ const MyPage: FC<OwnProps> = ({ updateAppClass }) => {
       updateAppClass("my-page");
     }
   },        []);
+
+  useEffect(() => {
+    if (state.isGetAction) {
+      const { school_name } = state.personalInformation;
+      const { graduated_year } = state.classification;
+
+      dispatch(
+        setIsGed(graduated_year === undefined && school_name === undefined)
+      );
+      setIsSetedGed(true);
+    }
+  },        [state.isGetAction]);
+
+  useEffect(() => {
+    if (state.isGetAction && isSetedGed) {
+      applyApplicationDocument(state, dispatch);
+    }
+  },        [isSetedGed, state.isGetAction]);
 
   return (
     <div>
