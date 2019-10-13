@@ -1,5 +1,11 @@
-import React, { FC, memo, useCallback, useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, {
+  FC,
+  memo,
+  useCallback,
+  useEffect,
+  useState
+} from "react";
+import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 
 import * as S from "../../../styles/default/pagination";
@@ -43,7 +49,7 @@ const Pagination: FC<OwnProps> = ({
 }) => {
   const { pathname } = useLocation();
   const dispatch = useDispatch();
-  const didMountRef = useRef(false);
+  const [isSetedGed, setIsSetedGed] = useState(false);
 
   const state = useSelector<AppState, PaginationStateToProps>(state => ({
     isGed: state.infoReducer.isGed,
