@@ -57,7 +57,7 @@ export const sendApplicantPasswordApi = (payload: {
   verify: string;
 }) => {
   return instanceAxios.get(
-    `/applicant/password/reset/${payload.email}/${payload.verify}`
+    `/password/reset/${payload.email}/${payload.verify}`
   );
 };
 
@@ -65,11 +65,11 @@ export const setApplicantPasswordApi = (payload: {
   email: string;
   password: string;
 }) => {
-  return instanceAxios.put(`/applicant/password/reset`, payload);
+  return instanceAxios.put(`/password/reset`, payload);
 };
 
 export const sendVerificationEmailApi = (payload: string) => {
-  return instanceAxios.post("/applicant/password/reset", {
+  return instanceAxios.post("/password/reset", {
     email: payload
   });
 };
