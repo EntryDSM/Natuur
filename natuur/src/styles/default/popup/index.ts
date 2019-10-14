@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-export const PopUpBackground = styled.div`
+export const PopUpBackground = styled.div<{ isPdf?: boolean }>`
   position: fixed;
   display: flex;
   justify-content: center;
@@ -9,6 +9,8 @@ export const PopUpBackground = styled.div`
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.3);
+  left: 0;
+  top: 0;
   z-index: 111300;
 `;
 
@@ -171,4 +173,22 @@ export const TitleCover = styled(ElementCover)`
 export const ButtonCover = styled(ElementCover)<{ isLoginButton?: boolean }>`
   margin-bottom: ${props => (props.isLoginButton ? "25px" : "0px")};
   justify-content: space-between;
+`;
+
+export const PdfPopUp = styled.div`
+  height: 290px;
+
+  h1 {
+    margin-bottom: 20px;
+  }
+
+  p {
+    font-size: 17px;
+    margin-bottom: 12px;
+
+    span {
+      color: red;
+      font-weight: bold;
+    }
+  }
 `;

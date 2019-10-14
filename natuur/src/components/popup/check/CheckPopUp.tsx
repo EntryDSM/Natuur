@@ -4,7 +4,9 @@ import * as S from "../../../styles/default/popup";
 import CompleateCheckIcon from "../../../assets/popup/CompleteCheckIcon.png";
 
 interface OwnProps {
-  updatePopUpCase(popUpCase: "default" | "login" | "set" | "check"): void;
+  updatePopUpCase(
+    popUpCase: "default" | "login" | "set" | "check" | "pdf"
+  ): void;
 }
 
 const CheckPopUp: FC<OwnProps> = ({ updatePopUpCase }) => (

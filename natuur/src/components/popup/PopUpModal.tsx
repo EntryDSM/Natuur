@@ -3,8 +3,9 @@ import React, { FC } from "react";
 import * as S from "../../styles/default/popup";
 import { mapStateToProps } from "../../container/default/popup/PopUp";
 import { CheckPopUp, SetPasswordPopUp } from ".";
+import PdfPopUp from './pdf';
 import Login from "../../container/Authorization/Login/Login";
-import { loginEvent } from "../../lib/utils/modal/login";
+import { updatePopUp } from "../../lib/utils/modal/login";
 
 const handleKeyPress = (
   { key }: React.KeyboardEvent<HTMLInputElement>,
@@ -16,7 +17,9 @@ const handleKeyPress = (
 };
 
 interface OwnProps {
-  updatePopUpCase(popUpCase: "default" | "login" | "set" | "check"): void;
+  updatePopUpCase(
+    popUpCase: "default" | "login" | "set" | "check" | "pdf"
+  ): void;
   getIsUpdatePopUp(): void;
 }
 
@@ -31,7 +34,9 @@ const PopUpModal: FC<Props> = ({
   <>
     {isUpdatePopup && (
       <S.PopUpBackground
-        onClick={() => loginEvent(getIsUpdatePopUp, updatePopUpCase, "default")}
+        onClick={() =>
+          updatePopUp(getIsUpdatePopUp, updatePopUpCase, "default")
+        }
       >
         <S.PopUp onClick={e => e.stopPropagation()}>
           <S.ContentCover>
@@ -41,6 +46,9 @@ const PopUpModal: FC<Props> = ({
                 updatePopUpCase={updatePopUpCase}
                 getIsUpdatePopUp={getIsUpdatePopUp}
               />
+            )}
+            {itIsUpdatePopUpCase === "pdf" && (
+              <PdfPopUp />
             )}
             {itIsUpdatePopUpCase === "set" && (
               <SetPasswordPopUp

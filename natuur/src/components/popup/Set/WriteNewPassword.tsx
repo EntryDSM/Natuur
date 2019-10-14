@@ -13,7 +13,7 @@ interface OwnProps {
     { key }: React.KeyboardEvent<HTMLInputElement>,
     handleEvent: () => void
   ) => void;
-  updatePopUpCase(popUpCase: "default" | "login" | "set" | "check"): void;
+  updatePopUpCase(popUpCase: "default" | "login" | "set" | "check" | "pdf"): void;
 }
 
 type Props = ReturnType<typeof mapStateToProps> &

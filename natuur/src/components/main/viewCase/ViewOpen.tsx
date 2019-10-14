@@ -3,7 +3,7 @@ import { withRouter, RouteComponentProps } from "react-router-dom";
 import { History } from "history";
 
 import { ContentsSorter } from "../../../styles/Main";
-import { loginEvent } from "../../../lib/utils/modal/login";
+import { updatePopUp } from "../../../lib/utils/modal/login";
 import {
   MainProgress,
   MainTitles,
@@ -80,7 +80,7 @@ const ViewOpen: FC<Props> = ({
         //   : accessToken !== ""
         accessToken !== ""
           ? () => history.push("/info-summary")
-          : () => loginEvent(getIsUpdatePopUp, updatePopUpCase, "login")
+          : () => updatePopUp(getIsUpdatePopUp, updatePopUpCase, "login")
       }
     />
   </ContentsSorter>

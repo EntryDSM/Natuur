@@ -1,7 +1,9 @@
-export function loginEvent(
+export function updatePopUp(
   getIsUpdatePopUp: () => void,
-  updatePopUpCase: (popUpCase: "default" | "login" | "set" | "check") => void,
-  popUpCase: "default" | "login" | "set" | "check"
+  updatePopUpCase: (
+    popUpCase: "default" | "login" | "set" | "check" | "pdf"
+  ) => void,
+  popUpCase: "default" | "login" | "set" | "check" | "pdf"
 ): void {
   getIsUpdatePopUp();
   updatePopUpCase(popUpCase);

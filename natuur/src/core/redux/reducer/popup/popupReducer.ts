@@ -1,12 +1,13 @@
 import {
   GET_IS_UPDATE_POPUP,
   UPDATE_POPUP_CASE,
+  SHOW_POPUP,
   PopUpActionTypes
 } from "../../actions/popup";
 
 export interface RootState {
   isUpdatePopup: boolean;
-  itIsUpdatePopUpCase: "default" | "login" | "set" | "check";
+  itIsUpdatePopUpCase: "default" | "login" | "set" | "check" | "pdf";
 }
 
 const initialState: RootState = {
@@ -29,6 +30,12 @@ const popUpReducer = (
       return {
         ...state,
         itIsUpdatePopUpCase: action.payload
+      };
+    }
+    case SHOW_POPUP: {
+      return {
+        ...state,
+        isUpdatePopup: action.payload
       };
     }
     default:
