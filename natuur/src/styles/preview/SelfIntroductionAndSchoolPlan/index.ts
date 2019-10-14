@@ -110,4 +110,6 @@ export const TextArea = styled.pre`
   white-space: pre-line;
   margin-top: 5px;
   font-family: "NanumSquare", sans-serif;
+  word-break: break-all;
+  word-wrap: break-word;
 `;
