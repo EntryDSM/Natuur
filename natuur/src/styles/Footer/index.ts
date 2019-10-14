@@ -40,6 +40,17 @@ export const FooterExplain = styled.p`
   & span {
     padding-left: 16px;
   }
+
+  a {
+    color: #fff;
+
+    &:link {
+      color: #fff;
+    }
+    &:visited {
+      color: #fff;
+    }
+  }
 `;
 
 export const FooterCoverNav = styled.div`
