@@ -35,7 +35,13 @@ const FooterContent: FC<Props> = ({ footerNavigationIsActive }) => {
       <FooterCopyright>{FOOTER_COPYLIGHT}</FooterCopyright>
 
       <FooterExplain>
-        {FOOTER_TITLE}
+        <a href="http://dsmhs.djsch.kr/privacy.do" target="_blank">
+          개인정보 처리방침
+        </a>
+        {" | "}
+        <a href="http://dsmhs.djsch.kr/policy.do" target="_blank">
+          이용약관
+        </a>
         <br />
         {FOOTER_ADDRESS}
         <br />

@@ -220,7 +220,7 @@ const FinalSubmitButton: FC = () => {
 
   const presentFinalSubmit = useCallback(() => {
     dispatch(patchFinalSubmit({ accessToken }));
-    push("/");
+    push("/mypage");
     createToastr();
   },                                     [dispatch]);
 

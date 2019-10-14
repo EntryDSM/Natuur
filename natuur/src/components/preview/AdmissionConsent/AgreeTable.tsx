@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 
 import * as S from "../../../styles/preview/admissionConsent";
+import { transformHyphenNumber } from "../../../lib/utils/contact";
 
 interface OwnProps {
   name: string;
@@ -54,7 +55,10 @@ const AgreeTable: FC<OwnProps> = ({
         <td>집전화</td>
         <td colSpan={4} />
         <td colSpan={2}>핸드폰</td>
-        <td colSpan={3}>{userContact}</td>
+        <td colSpan={3}>{`${userContact &&
+          transformHyphenNumber(userContact).contactHead}-${userContact &&
+          transformHyphenNumber(userContact).contactBody}-${userContact &&
+          transformHyphenNumber(userContact).contactFoot}`}</td>
       </tr>
 
       <tr>
@@ -76,7 +80,10 @@ const AgreeTable: FC<OwnProps> = ({
         <td>집전화</td>
         <td colSpan={4} />
         <td colSpan={2}>핸드폰</td>
-        <td colSpan={3}>{parentsContact}</td>
+        <td colSpan={3}>{`${parentsContact &&
+          transformHyphenNumber(parentsContact).contactHead}-${parentsContact &&
+          transformHyphenNumber(parentsContact).contactBody}-${parentsContact &&
+          transformHyphenNumber(parentsContact).contactFoot}`}</td>
       </tr>
     </tbody>
   </table>

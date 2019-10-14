@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 
 import * as S from "../../../styles/preview/nonSmokingPledge";
+import { transformHyphenNumber } from "../../../lib/utils/contact";
 
 interface OwnProps {
   receiptCode: number;
@@ -45,7 +46,10 @@ const InformationTable: FC<OwnProps> = ({
           <p>연락처</p>
         </td>
         <td>
-          <p>{userContact}</p>
+          <p>{`${userContact &&
+            transformHyphenNumber(userContact).contactHead}-${userContact &&
+            transformHyphenNumber(userContact).contactBody}-${userContact &&
+            transformHyphenNumber(userContact).contactFoot}`}</p>
         </td>
         <td>
           <p>출신 중학교</p>

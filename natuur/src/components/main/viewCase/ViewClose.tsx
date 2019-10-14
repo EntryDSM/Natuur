@@ -3,7 +3,7 @@ import React, { FC, useEffect, useRef } from "react";
 import * as S from "../../../styles/Main";
 import MainButton from "../viewCase/button/MainButton";
 import ViewCloseContentCover from "./ViewCloseContentCover";
-import { loginEvent } from "../../../lib/utils/modal/login";
+import { updatePopUp } from "../../../lib/utils/modal/login";
 import {
   getIsWaitingPeriod,
   getWaitingPeriodConfirmedLetter
@@ -75,7 +75,7 @@ const ViewClose: FC<Props> = ({
         clickEvent={
           isSettingCookie(accessToken)
             ? () => setIsOpenView(true)
-            : () => loginEvent(getIsUpdatePopUp, updatePopUpCase, "login")
+            : () => updatePopUp(getIsUpdatePopUp, updatePopUpCase, "login")
         }
         isWaitingPeriod={isWaitingPeriod}
       />
