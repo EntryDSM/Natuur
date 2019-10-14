@@ -61,7 +61,7 @@ const AcceptButton: FC<Props> = ({
   const createFailursToastr = useCallback(() => {
     updateToastr({
       timer: 5,
-      toastrMessage: "개인정보를 입력해주세요.",
+      toastrMessage: "입력한 정보를 확인해주세요.",
       toastrState: "warning"
     });
   },                                      []);

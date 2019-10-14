@@ -53,24 +53,28 @@ const InformationInputBox: FC<Props> = ({
   const [isPasswordClose, setIsPasswordClose] = useState(true);
   const [userVerify, setUserVerify] = useState("");
 
-  const createErrorToastr = useCallback(() => {
-    updateToastr({
-      timer: 5,
-      toastrMessage: "이미 가입된 계정입니다.",
-      toastrState: "errorState"
-    });
-  },                                    []);
+  const createToastr = useCallback(
+    (message: string, state: "info" | "errorState" | "success" | "warning") => {
+      updateToastr({
+        timer: 5,
+        toastrMessage: message,
+        toastrState: state
+      });
+    },
+    []
+  );
 
   useEffect(() => {
     if (isSignUpSuccess) {
+      createToastr("인증메일이 발송되었습니다.", "success");
       setIsCertification(true);
-    } else if(!isSignUpSuccess) {
+    } else if (!isSignUpSuccess) {
       setIsCertification(false);
     }
 
     if (isGetSuccess) {
       setIsPasswordClose(false);
-    } else if(!isGetSuccess) {
+    } else if (!isGetSuccess) {
       setIsPasswordClose(true);
     }
 
@@ -82,7 +86,7 @@ const InformationInputBox: FC<Props> = ({
 
   useEffect(() => {
     if (isSignUpError) {
-      createErrorToastr();
+      createToastr("이미 가입된 계정입니다.", "errorState");
     }
   },        [isSignUpError]);
 
