@@ -35,7 +35,8 @@ export type AppState = ReturnType<typeof reducer>;
 export const store = createStore(
   reducer,
   persistedState,
-  composeWithDevTools(applyMiddleware(sagaMiddleWare))
+  applyMiddleware(sagaMiddleWare)
+  // composeWithDevTools(applyMiddleware(sagaMiddleWare))
 );
 
 store.subscribe(() => {
