@@ -33,8 +33,9 @@ const mapStateToProps = (state: AppState) => ({
 
 const mapDispatchToProps = dispatch => ({
   getIsUpdatePopUp: () => dispatch(getIsUpdatePopUp()),
-  updatePopUpCase: (popUpCase: "default" | "login" | "set" | "check") =>
-    dispatch(updatePopUpCase(popUpCase)),
+  updatePopUpCase: (
+    popUpCase: "default" | "login" | "set" | "check" | "pdf" | "finalSubmit"
+  ) => dispatch(updatePopUpCase(popUpCase)),
   getUserApplicantStatus: (payload: { accessToken: string }) =>
     dispatch(getUserApplicantStatus(payload)),
   resetStatus: () => dispatch(resetStatus())

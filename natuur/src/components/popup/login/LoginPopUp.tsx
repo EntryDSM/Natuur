@@ -9,7 +9,7 @@ import {
 } from "../../../container/Authorization/Login/Login";
 
 interface OwnProps {
-  updatePopUpCase(popUpCase: "default" | "login" | "set" | "check" | "pdf"): void;
+  updatePopUpCase(popUpCase: "default" | "login" | "set" | "check" | "pdf" | "finalSubmit"): void;
   getIsUpdatePopUp(): void;
   handleKeyPress(
     { key }: React.KeyboardEvent<HTMLInputElement>,

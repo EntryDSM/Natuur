@@ -3,7 +3,8 @@ import React, { FC } from "react";
 import * as S from "../../styles/default/popup";
 import { mapStateToProps } from "../../container/default/popup/PopUp";
 import { CheckPopUp, SetPasswordPopUp } from ".";
-import PdfPopUp from './pdf';
+import PdfPopUp from "./pdf";
+import FianlSubmitPopUp from "./finalSubmit";
 import Login from "../../container/Authorization/Login/Login";
 import { updatePopUp } from "../../lib/utils/modal/login";
 
@@ -17,8 +18,16 @@ const handleKeyPress = (
 };
 
 interface OwnProps {
+  presentFinalSubmit?: () => void;
   updatePopUpCase(
-    popUpCase: "default" | "login" | "set" | "check" | "pdf"
+    popUpCase:
+      | "default"
+      | "login"
+      | "set"
+      | "check"
+      | "pdf"
+      | "finalSubmit"
+      | "test"
   ): void;
   getIsUpdatePopUp(): void;
 }
@@ -29,7 +38,8 @@ const PopUpModal: FC<Props> = ({
   isUpdatePopup,
   itIsUpdatePopUpCase,
   updatePopUpCase,
-  getIsUpdatePopUp
+  getIsUpdatePopUp,
+  presentFinalSubmit
 }) => (
   <>
     {isUpdatePopup && (
@@ -47,8 +57,12 @@ const PopUpModal: FC<Props> = ({
                 getIsUpdatePopUp={getIsUpdatePopUp}
               />
             )}
-            {itIsUpdatePopUpCase === "pdf" && (
-              <PdfPopUp />
+            {itIsUpdatePopUpCase === "pdf" && <PdfPopUp />}
+            {itIsUpdatePopUpCase === "finalSubmit" && (
+              <FianlSubmitPopUp
+                presentFinalSubmit={presentFinalSubmit}
+                getIsUpdatePopUp={getIsUpdatePopUp}
+              />
             )}
             {itIsUpdatePopUpCase === "set" && (
               <SetPasswordPopUp

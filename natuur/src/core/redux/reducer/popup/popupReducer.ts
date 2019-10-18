@@ -7,7 +7,13 @@ import {
 
 export interface RootState {
   isUpdatePopup: boolean;
-  itIsUpdatePopUpCase: "default" | "login" | "set" | "check" | "pdf";
+  itIsUpdatePopUpCase:
+    | "default"
+    | "login"
+    | "set"
+    | "check"
+    | "pdf"
+    | "finalSubmit";
 }
 
 const initialState: RootState = {
