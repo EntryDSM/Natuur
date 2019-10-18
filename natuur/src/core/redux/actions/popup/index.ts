@@ -7,7 +7,7 @@ interface GetIsUpdatePopUp {
 }
 interface UpdatePopUpCase {
   type: typeof UPDATE_POPUP_CASE;
-  payload: "default" | "login" | "set" | "check" | "pdf";
+  payload: "default" | "login" | "set" | "check" | "pdf" | "finalSubmit";
 }
 
 interface ShowPopUpCase {
@@ -26,7 +26,7 @@ export const getIsUpdatePopUp = (): PopUpActionTypes => ({
 });
 
 export const updatePopUpCase = (
-  payload: "default" | "login" | "set" | "check" | "pdf"
+  payload: "default" | "login" | "set" | "check" | "pdf" | "finalSubmit"
 ): UpdatePopUpCase => ({
   payload,
   type: UPDATE_POPUP_CASE

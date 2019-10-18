@@ -17,7 +17,7 @@ interface OwnProps {
     { key }: React.KeyboardEvent<HTMLInputElement>,
     handleEvent: () => void
   ) => void;
-  updatePopUpCase(popUpCase: "default" | "login" | "set" | "check" | "pdf"): void;
+  updatePopUpCase(popUpCase: "default" | "login" | "set" | "check" | "pdf" | "finalSubmit"): void;
 }
 
 const SetPasswordPopUp: FC<OwnProps> = ({

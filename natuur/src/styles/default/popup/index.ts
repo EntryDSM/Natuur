@@ -178,7 +178,8 @@ export const ButtonCover = styled(ElementCover)<{ isLoginButton?: boolean }>`
 export const PdfPopUp = styled.div`
   height: 290px;
 
-  h1 {
+  h1,
+  h2 {
     margin-bottom: 20px;
   }
 
@@ -189,6 +190,49 @@ export const PdfPopUp = styled.div`
     span {
       color: red;
       font-weight: bold;
+    }
+  }
+`;
+
+export const FianlSubmitPopUp = styled.div`
+  width: 300px;
+
+  h1,
+  h2 {
+    margin-bottom: 26px;
+  }
+
+  p {
+    font-size: 20px;
+    margin-bottom: 40px;
+
+    span {
+      color: red;
+      font-weight: bold;
+    }
+  }
+
+  div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    button {
+      all: unset;
+      cursor: pointer;
+      width: 80px;
+      height: 40px;
+      text-align: center;
+      line-height: 20px;
+      background: #ddf5f9;
+      color: #76c6d0;
+
+      &:hover {
+        background: #e2f6f9;
+      }
+      &:active {
+        background: #ebf7f9;
+      }
     }
   }
 `;

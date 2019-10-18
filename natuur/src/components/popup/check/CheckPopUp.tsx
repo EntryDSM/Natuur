@@ -5,7 +5,7 @@ import CompleateCheckIcon from "../../../assets/popup/CompleteCheckIcon.png";
 
 interface OwnProps {
   updatePopUpCase(
-    popUpCase: "default" | "login" | "set" | "check" | "pdf"
+    popUpCase: "default" | "login" | "set" | "check" | "pdf" | "finalSubmit"
   ): void;
 }
 
