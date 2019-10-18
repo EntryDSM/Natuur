@@ -68,7 +68,7 @@ const CertificationInputRaw: FC<OwnProps> = ({
   signUp
 }) => {
   const didMountRef = useRef(false);
-  const [verbleibendeZeit, setVerbleibendeZeit] = useState("03:00");
+  const [verbleibendeZeit, setVerbleibendeZeit] = useState("10:00");
   const [isOpenTextBox, setIsOpenTextBox] = useState(false);
   const [isResend, setIsResend] = useState(false);
 
@@ -76,7 +76,7 @@ const CertificationInputRaw: FC<OwnProps> = ({
     if (!didMountRef.current) {
       didMountRef.current = true;
 
-      const timer = useTimer(180, setVerbleibendeZeit, setIsResend);
+      const timer = useTimer(600, setVerbleibendeZeit, setIsResend);
 
       return () => clearInterval(timer);
     }
@@ -84,7 +84,7 @@ const CertificationInputRaw: FC<OwnProps> = ({
 
   useEffect(() => {
     if (isSignUpWaiting) {
-      setVerbleibendeZeit("03:00");
+      setVerbleibendeZeit("10:00");
       useTimer(180, setVerbleibendeZeit, setIsResend);
     }
   },        [isSignUpWaiting]);
