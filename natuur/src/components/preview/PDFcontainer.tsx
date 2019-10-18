@@ -127,7 +127,7 @@ const PDFcontainer: FC<OwnProps> = ({ isPrint }) => {
   }));
 
   const [pdfPage, setPdfPage] = useState(1);
-  const [maxPage, setMaxPage] = useState(5);
+  const [maxPage, setMaxPage] = useState(4);
 
   useEffect(() => {
     if (isGetAction) {
@@ -221,9 +221,9 @@ const PDFcontainer: FC<OwnProps> = ({ isPrint }) => {
       didMountRef.current = true;
 
       if (applyType === "일반전형") {
-        setMaxPage(5);
+        setMaxPage(4);
       } else {
-        setMaxPage(6);
+        setMaxPage(5);
       }
     }
   },        []);

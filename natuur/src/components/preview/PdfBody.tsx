@@ -34,12 +34,12 @@ class PdfBody extends Component<OwnProps, {}> {
             <RecommendationLetter isPrint={isPrint} />
           </S.PdfContent>
         )}
-        <S.PdfContent id="nonSmokingPledge">
+        <S.PdfContent id="nonSmokingPledge" isLast>
           <NonSmokingPledge isPrint={isPrint} />
         </S.PdfContent>
-        <S.PdfContent id="admissionConsent" isLast>
+        {/* <S.PdfContent id="admissionConsent" isLast>
           <AdmissionConsent isPrint={isPrint} />
-        </S.PdfContent>
+        </S.PdfContent> */}
       </S.PdfTarget>
     );
   }

@@ -2,18 +2,19 @@ import React, {
   FC,
   useState,
   useEffect,
-  useRef,
   useCallback,
+  useRef,
   memo
 } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
 
-import { patchFinalSubmit } from "../../core/redux/actions/main";
-import { updateToastr } from "../../core/redux/actions/default";
 import * as S from "../../styles/preview";
 import { AppState } from "../../core/redux/store/store";
 import prevArrow from "../../assets/common/prevArrow.png";
+import {
+  getIsUpdatePopUp,
+  updatePopUpCase
+} from "../../core/redux/actions/popup";
 
 export interface FinalSubmitDependencyState {
   isGed?: boolean;
@@ -74,10 +75,9 @@ const Prev: FC = memo(() => (
 ));
 
 const FinalSubmitButton: FC = () => {
-  const dispatch = useDispatch();
   const [isFinalSubmit, setIsFinalSubmit] = useState(false);
+  const dispatch = useDispatch();
   const didMountRef = useRef(false);
-  const { push } = useHistory();
 
   const {
     isGed,
@@ -101,7 +101,6 @@ const FinalSubmitButton: FC = () => {
     file,
     selfIntroduction,
     studyPlan,
-    accessToken,
     gedAverageScore,
     subjectScores
   } = useSelector<AppState, FinalSubmitDependencyState>(state => ({
@@ -208,21 +207,10 @@ const FinalSubmitButton: FC = () => {
     }
   },        []);
 
-  const createToastr = useCallback(() => {
-    dispatch(
-      updateToastr({
-        timer: 5,
-        toastrMessage: "제출이 완료되었습니다.",
-        toastrState: "success"
-      })
-    );
-  },                               []);
-
-  const presentFinalSubmit = useCallback(() => {
-    dispatch(patchFinalSubmit({ accessToken }));
-    push("/mypage");
-    createToastr();
-  },                                     [dispatch]);
+  const openFinalSubmitPopUp = useCallback(() => {
+    dispatch(getIsUpdatePopUp());
+    dispatch(updatePopUpCase("finalSubmit"));
+  },                                       [dispatch]);
 
   return (
     <S.PaginationWrapper>
@@ -231,7 +219,7 @@ const FinalSubmitButton: FC = () => {
       </S.Button>
       <S.SubmitButton
         isDisable={!isFinalSubmit}
-        onClick={() => isFinalSubmit && presentFinalSubmit()}
+        onClick={() => isFinalSubmit && openFinalSubmitPopUp()}
       >
         최종제출
       </S.SubmitButton>
