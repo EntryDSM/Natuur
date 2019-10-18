@@ -18,7 +18,7 @@ const GedScoreTable: FC<OwnProps> = ({
       <table>
         <tbody>
           <S.Tr>
-            <S.TdTitle>총점</S.TdTitle>
+            <S.TdTitle>평균점수</S.TdTitle>
             <S.Td>
               <S.Div marginLeft={28}>
                 <S.InputCover>
