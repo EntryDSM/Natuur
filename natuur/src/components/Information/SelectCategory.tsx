@@ -65,7 +65,7 @@ const SelectCategory: FC<OwnProps> = ({
     />
     <S.GradationHorizon />
 
-    <RemarksRow radioType={remarks} setRadioType={setRemark} />
+    <RemarksRow applyType={applyType} radioType={remarks} setRadioType={setRemark} />
   </S.CategoryList>
 );
 
