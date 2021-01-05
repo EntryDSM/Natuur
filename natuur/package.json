@@ -6,7 +6,7 @@
   "author": "junukim.dev@gmail.com",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "npm": "^6.11.3",
     "react": "^16.10.1",
     "react-dom": "^16.10.1",
